@@ -312,20 +312,19 @@ const Basicplan = () => {
           <div className="container"></div>
         </section>
         <section
-          className="shop-area pt-5 pb-5 p-relative bg-dark text-white"
-          style={{ background: "white" }}
+          className="shop-area pt-5 pb-5 p-relative lighter-back"
         >
           <div className="container">
             <button
               type="button"
-              className="btn mb-3 main-booknow"
+              className="btn mb-3 light-back shadow-lg text-light"
               onClick={handleBackClick}
             >
               <i className="far fa-arrow-alt-circle-left"></i> Back
             </button>
             <div className="row">
               <div className="col-8">
-                <div className="bg-light-grey p-2 rounded w-100 mx-auto gradient-border">
+                <div className="bg-white p-2 rounded w-100 mx-auto shadow-lg">
                   <div className="row">
                     <div className="col-12">
                       <h4>Overview</h4>
@@ -355,7 +354,7 @@ const Basicplan = () => {
             <div className="container mt-4">
               <form onSubmit={handleSubmit}>
                 <div className="row mb-4">
-                  <div className="col-md-8 bg-light-grey gradient-border">
+                  <div className="col-md-8 bg-white shadow-sm rounded">
                     <div className="mb-3 mt-4">
                       <div className="">
                         <h5 className="card-title">Booking Details</h5>
@@ -510,9 +509,9 @@ const Basicplan = () => {
 
                   <div className="col-lg-4 col-md-5">
                     <div className="position-sticky" style={{ top: "20px" }}>
-                      <div className="bg-light-grey mb-3">
+                      <div className="lightdark-back mb-3">
                         <div className="card-body mt-3">
-                          <div className="d-flex justify-content-between align-items-center shadow-none p-3 mb-2 rounded gradient-border">
+                          <div className="d-flex justify-content-between align-items-center shadow-none p-3 mb-2 rounded">
                             <div>Total:</div>
                             <div>
                               {couponData.couponCode === "FLAT700COMBO" ? (
@@ -726,8 +725,8 @@ const Basicplan = () => {
     }
 
     .coupon-box.selected {
-      border-color: var(--gold);
-      background: var(--gold-gradient);
+      border-color: #C69FF4;
+      background: linear-gradient(to right, #9D4DFF, #C69FF4)!important;
 
     .coupon-header {
       font-weight: 700;

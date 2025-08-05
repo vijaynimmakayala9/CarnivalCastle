@@ -26,16 +26,16 @@ function Theaters() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [selectedSlot, setSelectedSlot] = useState({});
   const [modalPop, setModalPop] = useState(false);
-  
-  const getTodayDateString = () => {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
-  const day = String(today.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
 
-  
+  const getTodayDateString = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+
   const [date, setDate] = useState(getTodayDateString());
   const [activeshow, setActiveshow] = useState([]);
   const [activeSlot, setActiveSlot] = useState(null);
@@ -61,107 +61,120 @@ function Theaters() {
 
   const formattedDateString = formatDate(date);
 
+  // Also update the handleLocationSelect function to pass the current date
   const handleLocationSelect = async (address) => {
+    console.log("Book Now clicked:", address);
     setLocation(address);
     if (address._id) {
       setLocationModalOpen(false);
-      await fetchTheatersByAddressId(address._id);
+      // Pass the current date state
+      await fetchTheatersByAddressId(address._id, date);
     } else {
       setLocationModalOpen(false);
       setComingSoonModalOpen(true);
     }
   };
 
-  const fetchTheatersByAddressId = async (addressId) => {
-  setIsLoading(true);
-  try {
-    if (!addressId) {
-      console.warn("No addressId provided. Skipping theater filtering.");
+  // Update the fetchTheatersByAddressId function to accept selectedDate parameter
+  const fetchTheatersByAddressId = async (addressId, selectedDate = date) => {
+    setIsLoading(true);
+    try {
+      if (!addressId) {
+        console.warn("No addressId provided. Skipping theater filtering.");
+        setTheaters([]);
+        return;
+      }
+
+      // Use the selectedDate parameter to format the date for API call
+      const formattedDate = formatDate(selectedDate);
+
+      const res = await axios.post(
+        "https://api.carnivalcastle.com/v1/carnivalApi/web/getalltheatres/forweb",
+        { slotDate: formattedDate }
+      );
+      console.log(res.data)
+
+      if (res.data && res.data.success) {
+        // Filter theaters by matching addressId
+        const filteredTheaters = res.data.theatres.filter(theater => {
+          const theaterAddressId = typeof theater.address === 'string'
+            ? theater.address
+            : theater.address?._id;
+
+          return theaterAddressId?.toString() === addressId?.toString();
+        });
+
+        const now = new Date();
+
+        const processedTheaters = filteredTheaters.map(theater => {
+          const processedSlots = (theater.availableSlots || []).map(slot => {
+            const [slotHours, slotMinutes] = slot.fromTime.split(':').map(Number);
+            const [endHours, endMinutes] = slot.toTime.split(':').map(Number);
+
+            // Convert slot times to full DateTime objects using selectedDate
+            const slotStart = new Date(selectedDate);
+            slotStart.setHours(slotHours, slotMinutes, 0, 0);
+
+            const slotEnd = new Date(selectedDate);
+            slotEnd.setHours(endHours, endMinutes, 0, 0);
+
+            const currentSelectedDate = new Date(selectedDate);
+
+            const isToday =
+              currentSelectedDate.getFullYear() === now.getFullYear() &&
+              currentSelectedDate.getMonth() === now.getMonth() &&
+              currentSelectedDate.getDate() === now.getDate();
+
+            const isBooked = slot.isBooked || false;
+
+            // Calculate past/disable only if it's today
+            const isPast = isToday && now > slotEnd;
+            const isAlmostOver = isToday && !isPast && (slotEnd - now <= 10 * 60 * 1000);
+            const isDisabled = isBooked || isPast || isAlmostOver;
+
+            return {
+              ...slot,
+              isBooked,
+              isPast,
+              isAlmostOver,
+              isDisabled
+            };
+          });
+
+          return {
+            ...theater,
+            availableSlots: processedSlots,
+            // availableSlotsCount: processedSlots.filter(s => !s.isDisabled).length            
+          };
+        });
+
+        setTheaters(processedTheaters);
+
+        // Set carousel indices
+        const initialIndices = {};
+        processedTheaters.forEach((_, index) => {
+          initialIndices[index] = 0;
+        });
+        setActiveIndices(initialIndices);
+      } else {
+        setTheaters([]);
+      }
+    } catch (error) {
+      console.error("Error fetching theaters:", error);
       setTheaters([]);
-      return;
+      toast.error("Failed to fetch theaters. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
-
-    const res = await axios.post(
-      "https://api.carnivalcastle.com/v1/carnivalApi/web/getalltheatres/forweb",
-      { slotDate: formattedDateString }
-    );
-
-    if (res.data && res.data.success) {
-      // Filter theaters by matching addressId
-      const filteredTheaters = res.data.theatres.filter(theater => {
-        const theaterAddressId = typeof theater.address === 'string'
-          ? theater.address
-          : theater.address?._id;
-
-        return theaterAddressId?.toString() === addressId?.toString();
-      });
-
-      const now = new Date();
-
-      const processedTheaters = filteredTheaters.map(theater => {
-  const processedSlots = (theater.availableSlots || []).map(slot => {
-    const [slotHours, slotMinutes] = slot.fromTime.split(':').map(Number);
-    const [endHours, endMinutes] = slot.toTime.split(':').map(Number);
-
-    // Convert slot times to full DateTime objects
-    const slotStart = new Date(date);
-    slotStart.setHours(slotHours, slotMinutes, 0, 0);
-
-    const slotEnd = new Date(date);
-    slotEnd.setHours(endHours, endMinutes, 0, 0);
-
-    const now = new Date();
-    const selectedDate = new Date(date);
-
-    const isToday =
-      selectedDate.getFullYear() === now.getFullYear() &&
-      selectedDate.getMonth() === now.getMonth() &&
-      selectedDate.getDate() === now.getDate();
-
-    const isBooked = slot.isBooked || false;
-
-    // Calculate past/disable only if it's today
-    const isPast = isToday && now > slotEnd;
-    const isAlmostOver = isToday && !isPast && (slotEnd - now <= 10 * 60 * 1000);
-    const isDisabled = isBooked || isPast || isAlmostOver;
-
-    return {
-      ...slot,
-      isBooked,
-      isPast,
-      isAlmostOver,
-      isDisabled
-    };
-  });
-
-  return {
-    ...theater,
-    availableSlots: processedSlots,
-    availableSlotsCount: processedSlots.filter(s => !s.isDisabled).length
   };
-});
 
-      setTheaters(processedTheaters);
 
-      // Set carousel indices
-      const initialIndices = {};
-      processedTheaters.forEach((_, index) => {
-        initialIndices[index] = 0;
-      });
-      setActiveIndices(initialIndices);
-    } else {
-      setTheaters([]);
-    }
-  } catch (error) {
-    console.error("Error fetching theaters:", error);
-    setTheaters([]);
-    toast.error("Failed to fetch theaters. Please try again.");
-  } finally {
-    setIsLoading(false);
-  }
-};
-
-  
+  const handleCarouselSelect = (selectedIndex, theaterIndex) => {
+    setActiveIndices(prev => ({
+      ...prev,
+      [theaterIndex]: selectedIndex
+    }));
+  };
 
 
   const closeComingSoonModal = () => {
@@ -186,7 +199,7 @@ function Theaters() {
     // Always use today's date when component mounts
     setDate(getTodayDateString());
     fetchAddresses();
-    
+
     // Clean up session storage
     const itemsToRemove = [
       "bookingid", "specialPersonName", "TotalPrice", "TotalPrice2", "addons",
@@ -247,13 +260,14 @@ function Theaters() {
 
   const [isDisabled, setIsDisabled] = useState(false);
 
+  // Update the handleDateChange function to pass the selectedDate
   const handleDateChange = async (e) => {
     const selectedDate = e.target.value;
     if (!selectedDate) {
       console.error("No date selected");
       return;
     }
-    
+
     // Don't allow dates before today
     const selectedDateObj = new Date(selectedDate);
     const today = new Date();
@@ -262,15 +276,17 @@ function Theaters() {
       toast.error("Please select today's or a future date");
       return;
     }
-    
+
     setDate(selectedDate);
     const formattedDate = formatDate(selectedDate);
     sessionStorage.setItem("date", formattedDate);
-    
+
     if (location && location._id) {
-      await fetchTheatersByAddressId(location._id);
+      // Pass the selectedDate as the second parameter
+      await fetchTheatersByAddressId(location._id, selectedDate);
     }
   };
+
 
   const EnquiryNow = () => {
     const dataArray = {
@@ -356,7 +372,7 @@ function Theaters() {
     setnintymin(durationInMinutes || 0);
     sessionStorage.setItem("nintymin", durationInMinutes || 0);
     if (durationInMinutes === 90) {
-      setModalPop(true);
+      setModalPop(false);
     }
   };
 
@@ -438,14 +454,50 @@ function Theaters() {
             <div
               className="modal fade show"
               tabIndex="-1"
-              style={{ display: "block", backgroundColor: "rgba(0,0,0,0.7)" }}
+              style={{
+                display: "block",
+                backgroundColor: "white",
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                zIndex: 1050
+              }}
               aria-modal="true"
               role="dialog"
             >
+              {/* Back Button - Added at top left */}
+              <button
+                className="btn position-absolute d-flex align-items-center justify-content-center"
+                style={{
+                  top: "16px",
+                  left: "16px",
+                  zIndex: 1060,
+                  borderRadius: "8px",
+                  padding: "6px 12px",
+                  fontSize: "14px",
+                  backgroundColor: "#E9DCFF", // Semi-transparent light background
+                  color: "#000",
+                  boxShadow: "0 2px 6px rgba(0, 0, 0, 0.2)",
+                  border: "none"
+                }}
+                onClick={() => navigate(-1)}
+              >
+                <i className="fas fa-arrow-left me-2"></i>
+                <span className="d-none d-sm-inline">Back</span>
+              </button>
+              <div className="text-center d-flex justify-content-center align-items-center mt-5">
+                <div>
+                  <h2 className="dark-text">Choose your nearest location</h2>
+                  <p className="light-text"><i>We’ve got the vibe, you bring the party.</i></p>
+                </div>
+              </div>
+
               <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div
-                  className="modal-content p-3 p-md-4 bg-light-grey text-white"
-                  style={{ border: "2px solid white", borderRadius: "12px" }}
+                  className="modal-content p-3 p-md-4 lighter-back"
+                  style={{ border: "2px solid #E9DCFF", borderRadius: "12px" }}
                 >
                   <h5 className="text-center mb-3 mb-md-4 fs-5 fs-md-4">Select Your Location</h5>
                   <div className="row">
@@ -453,12 +505,12 @@ function Theaters() {
                       addresses.map((address, index) => (
                         <div className="col-12 col-md-6 mb-4" key={index}>
                           <div
-                            className="card h-100 text-white shadow-sm"
+                            className="card h-100 text-black shadow-lg gradient135"
                             style={{
-                              backgroundColor: "#2c2c2c",
+                              backgroundColor: "#E9DCFF",
                               borderRadius: "1rem",
                               overflow: "hidden",
-                              border: "2px solid white",
+                              border: "2px solid #E9DCFF",
                             }}
                           >
                             {address.image ? (<>
@@ -507,25 +559,25 @@ function Theaters() {
                                   fontSize: "3rem",
                                 }}
                               >
-                                <i className="bi bi-image text-white"></i>
+                                <i className="bi bi-image text-dark"></i>
                               </div>
                             )}
 
                             <div className="card-body d-flex flex-column justify-content-between p-3">
                               <div>
-                                <h5 className="card-title fw-semibold mb-1 text-white">
-                                  <i className="fa-solid fa-map-location-dot me-2" style={{ color: "green" }}></i>
+                                <h5 className="card-title fw-semibold mb-1 text-dark">
+                                  <i className="fa-solid fa-map-location-dot me-2" style={{ color: "#000" }}></i>
                                   {address.name}, {address.city}
                                 </h5>
                                 {address.landmark && (
-                                  <p className="mb-0 text-white" style={{ fontSize: "0.9rem" }}>
-                                    <i className="fa-solid fa-location-dot me-2" style={{ color: "#ccc" }}></i>
+                                  <p className="mb-0 text-dark" style={{ fontSize: "0.9rem" }}>
+                                    <i className="fa-solid fa-location-dot me-2" style={{ color: "#000" }}></i>
                                     {address.landmark}
                                   </p>
                                 )}
                               </div>
                               <button
-                                className="btn btn-light text-dark w-100 mt-3"
+                                className="btn light-back text-white w-100 mt-3"
                                 onClick={() => handleLocationSelect(address)}
                               >
                                 Book Now
@@ -551,7 +603,7 @@ function Theaters() {
               tabIndex="-1"
               style={{
                 display: "block",
-                backgroundColor: "rgba(0,0,0,0.7)",
+                backgroundColor: "#E9DCFF",
               }}
               aria-modal="true"
               role="dialog"
@@ -561,9 +613,9 @@ function Theaters() {
                 role="document"
               >
                 <div
-                  className="modal-content p-4 bg-light-grey text-white"
+                  className="modal-content p-4 lighter-back"
                   style={{
-                    border: "2px solid white",
+                    border: "2px solid #E9DCFF",
                     borderRadius: "12px",
                   }}
                 >
@@ -589,24 +641,25 @@ function Theaters() {
               <main className="main-wrapper">
                 <section
                   id="parallax"
-                  className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix bg-dark border-gradient border-gradient-gold only-bottom-border"
+                  className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lighter-back"
                 >
                   <div className="container">
                     <div className="row">
                       <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                         <div className="breadcrumb-wrap text-center">
-                          <div className="breadcrumb-title mb-30">
-                            <h1 style={{ color: "white", marginTop: "20px" }}>
-                              Theaters in {location.city}
+                          <div className="breadcrumb-title mb-30 dark-text">
+                            <h1 style={{ marginTop: "20px" }}>
+                              Choose your dream theatre setup in {location.city}
                             </h1>
                           </div>
+                          <p className="light-text"><i>From royal vibes to romantic corners - pick your perfect match!</i></p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </section>
                 <section
-                  className="shop-area pt-5 pb-5 p-relative bg-dark"
+                  className="shop-area pt-5 pb-5 p-relative lighter-back"
                   style={{ background: "#F8EBFF" }}
                 >
                   <div className="container-md">
@@ -614,8 +667,8 @@ function Theaters() {
                       <div className="col-12">
                         <div style={{ display: "flex", justifyContent: "center" }}>
                           <div className="text-center">
-                            <label className="mb-2 servicesLink bright-all-links">
-                              Check Slot Availability
+                            <label className="mb-2 text-dark fw-bold fs-4">
+                              Select your Date
                             </label>
                             <br />
                             <input
@@ -631,16 +684,18 @@ function Theaters() {
                             />
                           </div>
                         </div>
-                        <hr />
+
                       </div>
                     </div>
-                    <hr />
+
 
                     <div className="container">
                       <div className="row">
                         {theaters && theaters.length > 0 ? (
                           theaters.map((data, i) => {
                             const isBookNowActive = selectedSlot[i] !== undefined;
+                            const colors = ["danger", "success", "warning", "primary"];
+                            const bgColor = colors[i % colors.length];
 
                             return (
                               <div
@@ -648,7 +703,7 @@ function Theaters() {
                                 key={i}
                               >
                                 <div
-                                  className="card rounded bg-light-grey text-white flex-fill"
+                                  className="card rounded gradient135 text-dark flex-fill"
                                   style={{
                                     minHeight: "820px",
                                     overflow: "hidden",
@@ -666,42 +721,77 @@ function Theaters() {
                                         <Carousel
                                           interval={3000}
                                           controls={false}
+                                          activeIndex={activeIndices[i] || 0}
+                                          onSelect={(selectedIndex) => handleCarouselSelect(selectedIndex, i)}
                                         >
                                           {data.image &&
                                             data.image.map((img, idx) => (
                                               <Carousel.Item key={idx}>
-                                                <img
-                                                  src={BaseUrl + img}
-                                                  alt=""
-                                                  className="img-fluid"
+                                                <div style={{ position: "relative" }}>
+                                                  <span
+                                                    className={`badge bg-${bgColor} text-white`}
+                                                    style={{
+                                                      position: "absolute",
+                                                      top: "10px",
+                                                      right: "10px",
+                                                      zIndex: 2,
+                                                      fontSize: "0.75rem",
+                                                    }}
+                                                  >
+                                                    {data.availableSlotsCount > 0
+                                                      ? `${data.availableSlotsCount} slots available`
+                                                      : "0 slots available"}
+                                                  </span>
+                                                  <img
+                                                    src={BaseUrl + img}
+                                                    alt=""
+                                                    className="img-fluid"
+                                                    style={{
+                                                      height: "250px",
+                                                      borderRadius: "10px",
+                                                      width: "100%",
+                                                      cursor: "pointer",
+                                                      objectFit: "cover",
+                                                    }}
+                                                  />
+                                                </div>
+                                              </Carousel.Item>
+                                            ))}
+
+                                          {data.video && (
+                                            <Carousel.Item>
+                                              <div style={{ position: "relative" }}>
+                                                <span
+                                                  className={`badge bg-${bgColor} text-white`}
+                                                  style={{
+                                                    position: "absolute",
+                                                    top: "10px",
+                                                    right: "10px",
+                                                    zIndex: 2,
+                                                    fontSize: "0.75rem",
+                                                  }}
+                                                >
+                                                  {data.availableSlotsCount > 0
+                                                    ? `${data.availableSlotsCount} slots available`
+                                                    : "0 slots available"}
+                                                </span>
+                                                <video
+                                                  src={URLS.Base + data.video}
+                                                  className="img-fluid video-mobile"
                                                   style={{
                                                     height: "250px",
                                                     borderRadius: "10px",
                                                     width: "100%",
                                                     cursor: "pointer",
+                                                    display: "block",
                                                     objectFit: "cover",
                                                   }}
+                                                  autoPlay
+                                                  loop
+                                                  muted
+                                                  preload="auto"
                                                 />
-                                              </Carousel.Item>
-                                            ))}
-                                          {data.video && (
-                                            <Carousel.Item>
-                                              <video
-                                                src={URLS.Base + data.video}
-                                                className="img-fluid video-mobile"
-                                                style={{
-                                                  height: "250px",
-                                                  borderRadius: "10px",
-                                                  width: "100%",
-                                                  cursor: "pointer",
-                                                  display: "block",
-                                                  objectFit: "cover",
-                                                }}
-                                                autoPlay
-                                                loop
-                                                muted
-                                                preload="auto"
-                                              />
+                                              </div>
                                             </Carousel.Item>
                                           )}
                                         </Carousel>
@@ -713,41 +803,36 @@ function Theaters() {
                                     <div>
                                       <div className="d-flex justify-content-between align-items-center mb-2">
                                         <h5
-                                          className="card-title m-0"
-                                          style={{ fontSize: "1.05rem" }}
+                                          className="card-title m-0 dark-text"
+                                          style={{ fontSize: "1.25rem", fontWeight: "600" }}
                                         >
                                           {data.name}
                                         </h5>
-                                        <span
-                                          className="badge bg-danger text-white"
-                                          style={{ fontSize: "0.75rem" }}
+
+                                        <p
+                                          className="card-price mb-2 dark-text"
+
                                         >
-                                          {data.availableSlotsCount > 0
-                                            ? `${data.availableSlotsCount} slots available`
-                                            : "0 slots available"}
-                                        </span>
+                                          <span style={{ fontSize: "1rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}> ₹ {data.offerPrice}/-{" "}</span>
+                                          <br />
+                                          <span style={{ fontSize: "0.87rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}><del> ₹ {data.price}/-{" "}</del></span>
+                                        </p>
                                       </div>
-                                      <p
-                                        className="card-price mb-2"
-                                        style={{ fontSize: "0.875rem" }}
-                                      >
-                                        ₹ <del>{data.price}</del> {data.offerPrice}{" "}
-                                        /-
-                                      </p>
+
                                       <div className="row mb-2">
                                         <div className="col-6">
                                           <p
-                                            className="card-details mb-2"
+                                            className="card-details mb-2 light-text"
                                             style={{ fontSize: "0.75rem" }}
                                           >
                                             <i className="bi bi-currency-exchange"></i>{" "}
                                             Extra Person Price:{" "}
-                                            {data.extraPersonprice}
+                                            ₹{data.extraPersonprice}/-
                                           </p>
                                         </div>
                                         <div className="col-6">
                                           <p
-                                            className="card-details mb-2"
+                                            className="card-details mb-2 light-text"
                                             style={{ fontSize: "0.75rem" }}
                                           >
                                             <i className="bi bi-person"></i> Max
@@ -756,7 +841,7 @@ function Theaters() {
                                         </div>
                                       </div>
                                       <p
-                                        className="card-details mb-2"
+                                        className="card-details mb-2 light-text"
                                         style={{ fontSize: "0.75rem" }}
                                       >
                                         <i className="bi bi-tv"></i> Features
@@ -776,7 +861,7 @@ function Theaters() {
                                             onClick={toggleView}
                                             style={{
                                               cursor: "pointer",
-                                              color: "white",
+                                              color: "#40008C",
                                               textDecoration: "underline",
                                               fontSize: "0.75rem",
                                             }}
@@ -786,7 +871,7 @@ function Theaters() {
                                         </ul>
                                       </p>
                                       <p
-                                        className="card-details mb-2"
+                                        className="card-details mb-2 light-text"
                                         style={{ fontSize: "0.75rem" }}
                                       >
                                         <i className="bi bi-info-circle"></i>{" "}
@@ -813,48 +898,49 @@ function Theaters() {
                                     <div>
                                       <div className="slot-selection mb-3">
                                         <p
-                                          className="slot-title mb-2"
+                                          className="slot-title mb-2 dark-text"
                                           style={{ fontSize: "0.875rem" }}
                                         >
                                           Choose Your Slot:
                                         </p>
                                         <div className="row">
-                                          {data.availableSlots.map((slot, index) => {
-                                          const fromTime12 = convertTo12HourFormat(slot.fromTime);
-                                          const toTime12 = convertTo12HourFormat(slot.toTime);
+                                          {data.availableSlots && data.availableSlots.map(
+                                            (slot, index) => {
+                                              const fromTime12 = convertTo12HourFormat(slot.fromTime);
+                                              const toTime12 = convertTo12HourFormat(slot.toTime);
 
-                                          return (
-                                            <div className="col-6 mb-2" key={index}>
-                                              <button
-                                                className={`btn w-100 ${slot.isBooked
-                                                  ? "btn-secondary"
-                                                  : slot.isPast
-                                                    ? "btn-light"
-                                                    : "btn-light"
-                                                  } ${selectedSlot[i] === slot ? "selectedbtns" : ""}`}
-                                                onClick={(e) => !slot.isDisabled && handleSlot(e, slot, i)}
-                                                style={{
-                                                  textDecoration: slot.isBooked ? "line-through" : "none",
-                                                  fontSize: "0.8rem",
-                                                  padding: "5px",
-                                                  opacity: slot.isDisabled ? 0.7 : 1,
-                                                  cursor: slot.isDisabled ? "not-allowed" : "pointer"
-                                                }}
-                                                disabled={slot.isDisabled}
-                                                title={slot.isBooked
-                                                  ? "This slot is already booked"
-                                                  : slot.isPast
-                                                    ? "This slot has already passed"
-                                                    : "Available slot"}
-                                              >
-                                                {fromTime12} - {toTime12}
-                                                {slot.isPast && !slot.isBooked && (
-                                                  <span className="ms-1">(Passed)</span>
-                                                )}
-                                              </button>
-                                            </div>
-                                          );
-                                        })}
+                                              return (
+                                                <div className="col-6 mb-2" key={index}>
+                                                  <button
+                                                    className={`btn w-100 `}
+                                                    onClick={(e) => handleSlot(e, slot, i)}
+                                                    style={{
+                                                      backgroundColor: slot.isBooked
+                                                        ? "#757575 "
+                                                        : selectedSlot[i] === slot
+                                                          ? "#330C5F"
+                                                          : "#A05DF1",
+                                                      borderColor: slot.isBooked ? "" : "",
+                                                      color: slot.isBooked
+                                                        ? "white"
+                                                        : selectedSlot[i] === slot
+                                                          ? "white"
+                                                          : "white",
+                                                      textDecoration: slot.isBooked
+                                                        ? "line-through"
+                                                        : "none",
+                                                      fontSize: "0.8rem",
+                                                      padding: "5px",
+                                                    }}
+                                                    disabled={slot.isBooked}
+                                                    value={`${fromTime12} / ${toTime12}`}
+                                                  >
+                                                    {fromTime12} - {toTime12}
+                                                  </button>
+                                                </div>
+                                              );
+                                            }
+                                          )}
                                         </div>
                                       </div>
 
@@ -862,12 +948,13 @@ function Theaters() {
                                         <button
                                           disabled={!isBookNowActive}
                                           onClick={() => handleBasicPlan(data, i)}
-                                          className="btn main-booknow"
+                                          className="btn"
                                           style={{
                                             width: "100%",
-                                            color: "black",
+                                            color: "white",
                                             border: "none",
                                             boxShadow: "none",
+                                            backgroundColor: isBookNowActive ? "#40008C" : "#A88FC7"
                                           }}
                                         >
                                           Book Now
@@ -889,6 +976,41 @@ function Theaters() {
                   </div>
                 </section>
               </main>
+
+              <section className="p-5 px-2 px-md-4 d-flex justify-content-center lighter-back">
+                <div
+                  className="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 p-4 lightdark-back shadow-lg"
+                  style={{
+                    borderRadius: '12px'
+                  }}
+                >
+                  {/* Text Section */}
+                  <div>
+                    <h5 className="fw-bold mb-1 text-dark">
+                      Hurry! Slots get booked fast.
+                    </h5>
+                    <p className="fst-italic text-secondary m-0">
+                      Extra charges apply if guests exceed max limit.
+                    </p>
+                  </div>
+
+                  {/* Button Section */}
+                  <div>
+                    <a
+                      href="#"
+                      className="btn text-white fw-semibold"
+                      style={{
+                        backgroundColor: '#a341e0',
+                        padding: '10px 24px',
+                        borderRadius: '12px',
+                        fontSize: '16px',
+                      }}
+                    >
+                      Book Your Experience Now
+                    </a>
+                  </div>
+                </div>
+              </section>
 
               <Modal
                 size="md"
@@ -1033,7 +1155,7 @@ function Theaters() {
                       </div>
                     </div>
                   </div>
-                </Modal.Body>
+                </Modal.Body>border
               </Modal>
 
               <Modal
@@ -1045,18 +1167,18 @@ function Theaters() {
               >
                 <Modal.Header
                   closeButton
-                  className=" gradient-border bg-light-grey"
+                  className="lighter-back"
                 >
                   <Modal.Title
                     id="example-modal-sizes-title-lg gradient-border"
                     style={{ textAlign: "center" }}
                   >
-                    <span className="text-gold-gradient"> Note : </span>
+                    <span className="light-text"> Note : </span>
                   </Modal.Title>
                 </Modal.Header>
-                <Modal.Body className="bg-dark gradient-border">
-                  <div className="row justify-content-md-center text-white">
-                    <div className="col-lg-12 mt-40 gradient-border bg-dark">
+                <Modal.Body className="lighter-back ">
+                  <div className="row justify-content-md-center text-dark">
+                    <div className="col-lg-12 mt-40  lighter-back">
                       <h6 className="p-4 text-center">
                         You have selected a slot with 1.5 hours duration and will
                         be charged accordingly. Proceed further if you are okay
@@ -1066,7 +1188,7 @@ function Theaters() {
                         <button
                           onClick={() => handleclose()}
                           type="button"
-                          className="btn course-btn mb-4 text-center btn-outline text-white"
+                          className="btn light-back text-light mb-4 text-center"
                         >
                           okay !
                         </button>

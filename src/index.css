@@ -11,3 +11,46 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+/* Bingenjoy new color codes */
+.lighter-back {
+  background-color: #E9DCFF!important;
+}
+
+.dark-back {
+  background-color: #4000BC !important;
+}
+
+.light-back {
+  background-color: #9D4DFF !important;
+}
+
+.lightdark-back {
+  background-color: #C69FF4;
+}
+
+.gradient45 {
+  background: linear-gradient(45deg, #FFFAFB, #C69FF4)!important;
+}
+
+.gradient135 {
+  background: linear-gradient(45deg, #C69FF4, #FFFAFB)!important;
+}
+
+.gradientright {
+  background: linear-gradient(to right, #FFFAFB, #C69FF4)!important;
+}
+
+.gradientleft {
+  background: linear-gradient(to left, #FFFAFB, #C69FF4)!important;
+}
+
+.dark-text {
+  color: #330C5F!important;
+}
+
+.light-text {
+  color: #40008C!important;
+}
+

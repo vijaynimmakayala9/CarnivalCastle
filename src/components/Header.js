@@ -282,7 +282,7 @@ function Header() {
                 {/* <a href="/theaters" className="btn main-booknow"> */}
                 <a
                   href="/theaters"
-                  className="btn btn-dark header-btn"
+                  className="btn dark-back text-white"
                   style={{ backgroundColor: "#242724", color: "#f5e7b6" }}
                 >
                   {/* <i className="fas fa-ticket-alt" /> */}

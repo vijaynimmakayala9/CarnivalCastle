@@ -31,6 +31,28 @@ function About() {
       }
     });
   };
+  const BaseUrl = "https://api.carnivalcastle.com/v1/carnivalApi/";
+    const ImageBase = "https://api.carnivalcastle.com/";
+  
+    const [addresses, setAddresses] = useState([]);
+  
+    useEffect(() => {
+      const fetchAddresses = async () => {
+        try {
+          const res = await axios.get(`${BaseUrl}admin/address/alladdress`);
+          if (res.data && res.data.success) {
+            setAddresses(res.data.data || []);
+          } else {
+            setAddresses([]);
+          }
+        } catch (error) {
+          console.error("Error fetching addresses:", error);
+          setAddresses([]);
+        }
+      };
+      fetchAddresses();
+    }, []);
+  
 
   return (
     <>
@@ -73,7 +95,7 @@ function About() {
               <Header  />
               <section
                 id="parallax"
-                className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix bg-dark border-gradient border-gradient-gold only-bottom-border"
+                className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lighter-back"
                 // style={{ backgroundImage: "url(img/bgss.jpg)" }}
                 // style={{background: 'linear-gradient(329deg, rgba(191, 63, 249, 1) 0%, rgba(113, 51, 210, 1) 100%)'}}
               >
@@ -81,8 +103,8 @@ function About() {
                   <div className="row">
                     <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                       <div className="breadcrumb-wrap text-center">
-                        <div className="breadcrumb-title mb-30">
-                          <h1 style={{ color: "white",marginTop: "20px"  }}>About Us</h1>
+                        <div className="breadcrumb-title mb-30 dark-text">
+                          <h1 style={{ marginTop: "20px"  }}>About Us</h1>
                         </div>
                         {/* <nav aria-label="breadcrumb">
                           <ol className="breadcrumb">
@@ -102,10 +124,20 @@ function About() {
                   </div>
                 </div>
               </section>
-              <section className="pt-4 pb-4 p-relative bg-dark">
+              <section className="pt-4 pb-4 p-relative lighter-back">
               {/* <section className="pt-4 pb-4 p-relative mt-4"> */}
                 <div className="container-md">
-                  <div className="row align-items-center">
+                  <div className="row align-items-center">                    
+                    <div className="col-lg-6">
+                      <div className="">
+                        <h3 className="dark-text">
+                          <b> {About.title}</b>
+                        </h3>
+                      </div>
+                      <p className="light-text pt-3">
+                        {About.description}
+                      </p>
+                    </div>
                     <div className="col-lg-6">
                       <div>
                         <img
@@ -119,65 +151,59 @@ function About() {
                         />
                       </div>
                     </div>
-                    <div className="col-lg-6">
-                      <div className="">
-                        <h3 className="text-white">
-                          <b> {About.title}</b>
-                        </h3>
-                      </div>
-                      <p className="text-white pt-3">
-                        {About.description}
-                      </p>
-                    </div>
                   </div>
                 </div>
               </section>
-              <section
-                className="blog-wrapper bg-dark"
-                style={{ background: "#F8EBFF" }}
-              >
-                <div className="container-md">
-                  <div className="row justify-content-center">
-                    <div className="col-xl-6 col-lg-8">
-                      <div className="section-title text-center mb-5 pt-3">
-                        <h2 className="text-gold-gradient">Our Features</h2>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="row blog-grid-row">
-                    {AboutFeatures.map((data, i) => {
-                      return (
-                        <div className="col-md-6 col-lg-4 col-sm-12" key={i}>
-                          <div className="content-wrapper">
-                            <div className="blog-image">
-                              <a href="/theaters">
-                                <img
-                                  className="img-fluid"
-                                  src={URLS.Base + data.image}
-                                  alt="Post Image"
-                                />
-                              </a>
-                            </div>
-                            <div className="blog-content">
+              <section className="bg-white" >
+                  <div className="container-fluid text-center py-5 lighter-back">
+                    <h2 className="fw-bold mb-5 dark-text">Our Branches</h2>
+
+                    <div className="row justify-content-center">
+                      {addresses.map((addr, idx) => (
+                        <div className="col-md-6 col-lg-5 mb-4" key={idx}>
+                          <div
+                            className="p-4 shadow-lg lighter-back h-100"
+                            style={{
+                              borderRadius: "2rem",
+                              transition: "0.3s",
+                            }}
+                          >
+                            <h4 className="fw-bold text-center mb-3" style={{ color: "#5b179b" }}>
+                              {addr.name}
+                            </h4>
+                            <p
+                              className="text-muted mb-3 text-center"
+                              style={{ fontStyle: "italic", fontSize: "0.95rem" }}
+                            >
+                              {addr.addressLine1}, {addr.addressLine2}
+                            </p>
+
+                            <div className="text-center">
                               <a
-                                href="javascript:void(0);"
-                                className="post-date"
+                                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                                  `${addr.addressLine1}, ${addr.addressLine2}`
+                                )}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-decoration-none fw-semibold"
+                                style={{ color: "#6d28d9" }}
                               >
-                                <span className="btn bg-sunray">
-                                  <a href="/theaters">
-                                  <b className="title-name">{data.name}</b>
-                                  </a>
-                                </span>
+                                <i className="bi bi-geo-alt-fill me-2 light-text"></i>See on map
                               </a>
-                              <p className="mb-3 text-white">{data.description}</p>
                             </div>
                           </div>
                         </div>
-                      );
-                    })}
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </section>
+
+
+                  <style jsx>{`
+                  .text-purple {
+                   color: #5b179b;
+                    }
+                 `}</style>
+                </section>
             </main>
             <Footer />
           </div>

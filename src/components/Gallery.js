@@ -87,7 +87,7 @@ function Gallery() {
             <main class="main-wrapper">
               <section
                 id="parallax"
-                className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix bg-dark border-gradient border-gradient-gold only-bottom-border"
+                className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lighter-back"
                 // style={{ backgroundImage: "url(img/bgss.jpg)" }}
                 style={{backgroundColor:"#AD3DF0"}}
               >
@@ -95,8 +95,8 @@ function Gallery() {
                   <div className="row">
                     <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                       <div className="breadcrumb-wrap text-center">
-                        <div className="breadcrumb-title mb-30">
-                          <h1 style={{ color: "white", marginTop: "20px"   }}>Gallery</h1>
+                        <div className="breadcrumb-title mb-30 dark-text">
+                          <h1 style={{ marginTop: "20px"   }}>Gallery</h1>
                         </div>
                         {/* <nav aria-label="breadcrumb">
                           <ol className="breadcrumb">
@@ -119,7 +119,7 @@ function Gallery() {
                 </div>
               </section>
               <section
-                className="shop-area pt-2 pb-2 p-relative wow fadeInUp animated bg-dark"
+                className="shop-area pt-2 pb-2 p-relative wow fadeInUp animated lighter-back"
                 // className="shop-area pt-5 pb-2 p-relative wow fadeInUp animated"
                 data-animation="fadeInUp animated"
                 data-delay=".2s"

@@ -123,7 +123,7 @@ function Enquiry() {
             <main class="main-wrapper">
               <section
                 id="parallax"
-                className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix bg-dark border-gradient border-gradient-gold only-bottom-border"
+                className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lighter-back"
                 // style={{ backgroundImage: "url(img/bgss.jpg)" }}
                 style={{ backgroundColor: "#AD3DF0" }}
               >
@@ -156,31 +156,29 @@ function Enquiry() {
                   </div>
                 </div>
               </section>
-              <section className="  pb-3 p-relative bg-dark">
+              <section className="  pb-3 p-relative lighter-back">
                 <div className="container">
                   <div className="row align-items-center">
                     <div className="col-lg-12">
                       <div className=" pl-30">
-                        <hr></hr>
                         <div>
                           <h3
                             // style={{ color: "#54127B" }}
-                            className="wow fadeInUp animated text-center text-gold-gradient"
+                            className="wow fadeInUp animated text-center dark-text py-3"
                             data-animation="fadeInUp animated"
                             data-delay=".3s"
                           >
                             Enquiry Now
                           </h3>
                         </div>
-                        <hr></hr>
                       </div>
                     </div>
                   </div>
                   <div className="row justify-content-md-center mt-3">
-                    <div className="col-lg-8 mt-40 gradient-border">
+                    <div className="col-lg-8 mt-40  rounded" style={{ border: "1px solid #9D4DFF"}}>
                       <div className="row">
                         <div className="col-lg-6 ">
-                          <div className="contactsops bg-light-grey">
+                          <div className="contactsops bg-dark">
                             <img
                               src={logo}
                               alt="logo"
@@ -289,7 +287,7 @@ function Enquiry() {
 
                               <button
                                 type="submit"
-                                className="btn course-btn mb-2 main-booknow"
+                                className="btn  mb-2 dark-back text-light"
                                 style={{ float: "right" }}
                               >
                                 Submit
@@ -303,16 +301,15 @@ function Enquiry() {
                 </div>
               </section>
 
-              <section className="bg-dark">
+              <section className="lighter-back">
                 <h3
                   // style={{ color: "#54127B" }}
-                  className="wow fadeInUp animated text-center text-gold-gradient "
+                  className="wow fadeInUp animated text-center dark-text py-3"
                   data-animation="fadeInUp animated"
                   data-delay=".3s"
                 >
                   Our Address
                 </h3>
-                <hr></hr>
                 <div className="container">
                   <div className="row justify-content-center">
                     <div className="col-lg-12 mt-0 ">

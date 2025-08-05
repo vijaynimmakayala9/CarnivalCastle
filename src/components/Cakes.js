@@ -44,10 +44,10 @@ function Enquiry() {
 
   return (
     <>
-          <Helmet>
+      <Helmet>
         <meta charSet="utf-8" />
         <title>
-        Birthday celebration places in Hyderabad | Carnival Castle
+          Birthday celebration places in Hyderabad | Carnival Castle
         </title>
         <meta
           name="description"
@@ -86,16 +86,15 @@ function Enquiry() {
             <main class="main-wrapper">
               <section
                 id="parallax"
-                className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix  bg-dark border-gradient border-gradient-gold only-bottom-border"
-                // style={{ backgroundImage: "url(img/bgss.jpg)" }}
-                style={{ backgroundColor: "#AD3DF0" }}
+                className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lighter-back"
+              // style={{ backgroundImage: "url(img/bgss.jpg)" }}
               >
                 <div className="container">
                   <div className="row">
                     <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                       <div className="breadcrumb-wrap text-center">
-                        <div className="breadcrumb-title mb-30">
-                          <h1 style={{ color: "white", marginTop: "20px" }}>
+                        <div className="breadcrumb-title mb-30 dark-text">
+                          <h1 style={{ marginTop: "20px" }}>
                             {" "}
                             Cakes
                           </h1>
@@ -118,12 +117,12 @@ function Enquiry() {
                   </div>
                 </div>
               </section>
-              <section className="pb-3 pb-3 bg-dark">
+              <section className="pb-3 pb-3 lighter-back border">
                 <div className="container">
                   <div className="row">
                     <div className="col-6">
                       <div className="section-title mb-2 pt-4">
-                        <h2 className="text-gold-gradient">
+                        <h2 className="light-text">
                           {isChecked ? "Eggless" : "Egg"}
                         </h2>
                       </div>
@@ -133,7 +132,7 @@ function Enquiry() {
                         className="section-title mb-2 pt-4"
                         style={{ float: "right", position: "relative" }}
                       >
-                        <div className="custom-switch-wrapper">
+                        <div className="custom-switch-wrapper light-text">
                           <Form.Check
                             type="switch"
                             id="custom-switch"
@@ -143,7 +142,7 @@ function Enquiry() {
                             onChange={handleSwitchChange}
                           />
                           {/* <span className="hover-text">Switch to</span> */}
-                          <span className="hover-text">
+                          <span className="hover-text light-text bg-light">
                             {isChecked ? "Eggless" : "Egg"}
                           </span>
                         </div>
@@ -173,7 +172,7 @@ function Enquiry() {
                               md={12}
                               style={{
                                 backgroundColor: "#595B56",
-                                border: "1px dashed gold",
+                                border: "1px dashed #C69FF4",
                               }}
                             >
                               <div
@@ -181,7 +180,7 @@ function Enquiry() {
                                   padding: "5px",
                                   background: "#A020F0",
                                 }}
-                                className="mt-2 mb-3 bg-dark"
+                                className="mt-2 mb-3 lighter-back"
                               >
                                 <div className="row">
                                   <div className="col">
@@ -248,11 +247,11 @@ function Enquiry() {
                                     </div>
                                   );
                                 })}
-                               <div className="text-white">
-                                <b className="text-danger">Note: </b><br/>
-                               <span>Customized cakes must be ordered 3days Prior..</span><br/>
-                               <span> For customized cakes plz contact us...</span>
-                               </div>
+                                <div className="text-white">
+                                  <b className="text-danger">Note: </b><br />
+                                  <span>Customized cakes must be ordered 3days Prior..</span><br />
+                                  <span> For customized cakes plz contact us...</span>
+                                </div>
                               </Row>
                             </Col>
                           </Row>
@@ -265,13 +264,13 @@ function Enquiry() {
                           <Row>
                             <Col
                               md={12}
+                              className="lighter-back shadow-lg rounded"
                               style={{
                                 // borderRight: "1px dashed #A020F0",
                                 // borderBottom: "1px dashed #A020F0",
                                 // borderLeft: "1px dashed #A020F0",
                                 // background: "#F8EBFF",
-                                backgroundColor: "#595B56",
-                                border: "1px dashed gold",
+                                border: "1px solid #C69FF4",
                               }}
                             >
                               <div
@@ -279,11 +278,11 @@ function Enquiry() {
                                   padding: "5px",
                                   background: "#A020F0",
                                 }}
-                                className="mt-2 mb-3 bg-dark"
+                                className="mt-2 mb-3 lighter-back"
                               >
                                 <div className="row">
                                   <div className="col">
-                                    <h5 className="text-gold-gradient">
+                                    <h5 className="dark-text">
                                       Normal Cakes
                                     </h5>
                                   </div>
@@ -304,7 +303,7 @@ function Enquiry() {
                                         id="bgshadow"
                                       >
                                         <div
-                                          className="food-category item"
+                                          className="food-category item shadow-md"
                                           data-type="occasions"
                                           data-id={8}
                                           data-name="Anniversary"
@@ -318,8 +317,8 @@ function Enquiry() {
                                               alt=""
                                             />
                                           </div>
-                                          <div className="food-desc bg-dark ">
-                                            <p className="fd-title text-gold-gradient">
+                                          <div className="food-desc bg-light ">
+                                            <p className="fd-title dark-text">
                                               {data.name}
                                             </p>
 
@@ -332,11 +331,11 @@ function Enquiry() {
                                                 paddingBottom: "3px",
                                               }}
                                             >
-                                              <small className="text-gold-gradient">
+                                              <small className="light-text">
                                                 {" "}
                                                 ₹{" "}
                                               </small>
-                                              <b className="text-gold-gradient">
+                                              <b className="light-text">
                                                 {data.price} /-
                                               </b>
                                             </p>

@@ -64,7 +64,7 @@ function Enquiry() {
             <main class="main-wrapper">
               <section
                 id="parallax"
-                className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix bg-dark border-gradient border-gradient-gold only-bottom-border"
+                className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lighter-back"
                 // style={{ backgroundImage: "url(img/bgss.jpg)" }}
                 style={{backgroundColor:"#AD3DF0"}}
               >
@@ -72,8 +72,8 @@ function Enquiry() {
                   <div className="row">
                     <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                       <div className="breadcrumb-wrap text-center">
-                        <div className="breadcrumb-title mb-30">
-                          <h1 style={{ color: "white", marginTop: "20px"   }}> Faq's</h1>
+                        <div className="breadcrumb-title mb-30 dark-text">
+                          <h1 style={{ marginTop: "20px"   }}> Faq's</h1>
                         </div>
                         {/* <nav aria-label="breadcrumb">
                           <ol className="breadcrumb">
@@ -93,13 +93,13 @@ function Enquiry() {
                   </div>
                 </div>
               </section>
-              <section style={{ background: "#F8EBFF" }} className="pb-3 pb-3 bg-dark">
+              <section className="pb-3 pb-3 lighter-back">
                 <div className="container">
                   <div className="section-wraper row d-flex align-items-center">
                     <div className="row justify-content-center">
                       <div className="col-xl-6 col-lg-8">
                         <div className="section-title text-center mb-2 pt-4">
-                          <h2 className="text-gold-gradient">
+                          <h2 className="light-text">
                             ​​​​​​​Frequently Asked Questions
                           </h2>
                         </div>
