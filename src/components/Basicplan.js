@@ -490,9 +490,9 @@ const Basicplan = () => {
                               <button
                                 className="btn btn-outline-primary w-100 d-flex align-items-center justify-content-center"
                                 style={{
-                                  background: isCouponApplied ? "var(--gold-gradient)" : "var(--gold-gradient)",
+                                  background: isCouponApplied ? "#330C5F" : "#330C5F",
                                   border: "none",
-                                  color: "black",
+                                  color: "white",
                                   fontWeight: "600",
                                 }}
                                 type="submit"
@@ -509,7 +509,7 @@ const Basicplan = () => {
 
                   <div className="col-lg-4 col-md-5">
                     <div className="position-sticky" style={{ top: "20px" }}>
-                      <div className="lightdark-back mb-3">
+                      <div className="bg-white mb-3">
                         <div className="card-body mt-3">
                           <div className="d-flex justify-content-between align-items-center shadow-none p-3 mb-2 rounded">
                             <div>Total:</div>
@@ -731,20 +731,20 @@ const Basicplan = () => {
     .coupon-header {
       font-weight: 700;
       font-size: 1.2rem;
-      color: black;
+      color: white;
       margin-bottom: 10px;
       text-transform: uppercase;
     }
 
     .coupon-details {
       font-size: 1rem;
-      color: #000;
+      color: #fff;
       margin-bottom: 8px;
     }
 
     .coupon-code {
       font-size: 0.85rem;
-      color: #000;
+      color: #fff;
       margin-bottom: 6px;
     }
 

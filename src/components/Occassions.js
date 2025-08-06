@@ -125,21 +125,21 @@ const Occassions = () => {
   };
 
   const handleSubmit = () => {
-    
+
     sessionStorage.setItem("occasionName", selectedOccasion.name);
 
-    sessionStorage.setItem( "selectedOccasion", JSON.stringify(selectedOccasion)); // Save to localStorage
+    sessionStorage.setItem("selectedOccasion", JSON.stringify(selectedOccasion)); // Save to localStorage
 
     sessionStorage.setItem(
       "subtotal",
       parseFloat(sessionStorage.getItem("subtotal")) +
-        parseFloat(selectedOccasion?.price || 0) - parseFloat(sessionStorage.getItem("occprice"))
+      parseFloat(selectedOccasion?.price || 0) - parseFloat(sessionStorage.getItem("occprice"))
     );
 
     sessionStorage.setItem(
       "TotalPrice",
       parseFloat(sessionStorage.getItem("TotalPrice")) +
-        parseFloat(selectedOccasion?.price || 0) - parseFloat(sessionStorage.getItem("occprice"))
+      parseFloat(selectedOccasion?.price || 0) - parseFloat(sessionStorage.getItem("occprice"))
     );
 
     sessionStorage.setItem("occprice", selectedOccasion.price);
@@ -224,23 +224,29 @@ const Occassions = () => {
               <div className="container"></div>
             </section>
             <section
-              className="shop-area pt-5 pb-5 p-relative bg-dark text-white"
-              style={{ background: "white" }}
+              className="shop-area pt-5 pb-5 p-relative lightest-back"
             >
               <div className="container">
                 <button
                   type="button"
-                  className="btn main-booknow"
+                  className="btn light-back shadow-lg text-light"
                   onClick={handleClick}
                 >
                   {" "}
                   <i className="far fa-arrow-alt-circle-left"></i> Back
                 </button>
+
+                <div className="d-flex justify-content-center align-items-center flex-column text-center my-4">
+                  <h2 className="dark-text">What’s the celebration?</h2>
+                  <p className="light-text">Choose the occasion so we can set the perfect mood!</p>
+                </div>
+
+
                 <div className="container mt-4">
                   <div className="row mb-4">
                     {/* Occasions */}
                     {/* <div className="col-md-8 shadow-lg"> */}
-                    <div className="col-md-8 bg-light-grey gradient-border">
+                    <div className="col-md-8 lighter-back shadow-lg rounded">
                       <h3 className="mt-3">Select Occasion</h3>
                       <div className="row">
                         {Occation.map((ele, ind) => (
@@ -248,17 +254,18 @@ const Occassions = () => {
                             className="col-6 col-md-3 mb-3  text-center"
                             key={ind}
                             onClick={() => handleImageClick(ele)}
-                          
+
                           >
-                            <div 
+                            <div
+                              className={`${selectedOccasion?._id === ele?._id ? "shadow-lg" : "shadow-lg"}`}
                               style={{
                                 cursor: "pointer",
-                                border:"2px solid #E9BE5F",
-                                margin:"1px",
+                                border: "2px solid #C69FF4",
+                                margin: "1px",
                                 background:
                                   selectedOccasion?._id === ele?._id
-                                    ? "var(--gold-gradient)"
-                                    : "transparent",
+                                    ? "linear-gradient(45deg, #FFFAFB, #C69FF4)"
+                                    : "linear-gradient(45deg, #FFFAFB, #BEBEBE)",
                                 color:
                                   selectedOccasion?._id === ele?._id
                                     ? "black"
@@ -273,14 +280,14 @@ const Occassions = () => {
                                 src={URLS.Base + ele.image}
                                 alt="occasions images"
                                 // className="rounded-circle img-fluid"
-                                className="img-fluid"
+                                className="img-fluid rounded-pill"
                                 style={{
                                   height: "150px",
                                   width: "150px",
                                   objectFit: "cover",
                                 }}
                               />
-                            <h6 className="mt-2">{ele.name}</h6>
+                              <h6 className="mt-2">{ele.name}</h6>
                             </div>
                           </div>
                         ))}
@@ -321,9 +328,9 @@ const Occassions = () => {
                     {/* Booking Summary */}
                     <div className="col-lg-4 col-md-5">
                       <div className="position-sticky" style={{ top: "20px" }}>
-                        <div className="bg-light-grey mb-3">
+                        <div className="lighter-back mb-3">
                           <div className="card-body mt-3">
-                            <div className="d-flex justify-content-between align-items-center shadow-none p-3 mb-2 rounded gradient-border">
+                            <div className="d-flex justify-content-between align-items-center shadow-none p-3 mb-2 rounded">
                               <div>Total:</div>
                               <div>
                                 ₹
@@ -355,9 +362,8 @@ const Occassions = () => {
                                 </h2>
                                 <div
                                   id="collapseOne"
-                                  className={`accordion-collapse collapse ${
-                                    isOpen ? "show" : ""
-                                  }`}
+                                  className={`accordion-collapse collapse ${isOpen ? "show" : ""
+                                    }`}
                                   aria-labelledby="headingOne"
                                   data-bs-parent="#accordionExample"
                                 >
@@ -414,19 +420,19 @@ const Occassions = () => {
                                         </div>
                                       </div>
                                       <hr />
-                                        <div
-                                          style={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                          }}
-                                        >
-                                          <div>Cake</div>
-                                          <div>
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "space-between",
+                                        }}
+                                      >
+                                        <div>Cake</div>
+                                        <div>
                                           ₹
-                                            {sessionStorage.getItem("cakeprice") ||
-                                              0}
-                                          </div>
+                                          {sessionStorage.getItem("cakeprice") ||
+                                            0}
                                         </div>
+                                      </div>
                                       <hr />
                                       <div
                                         style={{
@@ -465,7 +471,7 @@ const Occassions = () => {
                                         <div>Sub Total</div>
                                         <div>
                                           ₹
-                                          {parseFloat(sessionStorage.getItem("theaterPrice") || 0) + parseFloat(sessionStorage.getItem("couponAmount") || 0) + parseFloat(sessionStorage.getItem("addons")|| 0) + parseFloat(sessionStorage.getItem("cakeprice") || 0) + parseFloat(selectedOccasion?.price || 0) - parseFloat(sessionStorage.getItem("occprice") || 0)}
+                                          {parseFloat(sessionStorage.getItem("theaterPrice") || 0) + parseFloat(sessionStorage.getItem("couponAmount") || 0) + parseFloat(sessionStorage.getItem("addons") || 0) + parseFloat(sessionStorage.getItem("cakeprice") || 0) + parseFloat(selectedOccasion?.price || 0) - parseFloat(sessionStorage.getItem("occprice") || 0)}
                                         </div>
                                       </div>
                                       <hr />
@@ -507,7 +513,7 @@ const Occassions = () => {
                         <button
                           type="submit"
                           onClick={() => handleSubmit()}
-                          className="btn btn-success w-100 mt-2 main-booknow"
+                          className="btn  w-100 mt-2 dark-back text-white"
                           style={{
                             // backgroundColor: "#a020f0",
                             boxShadow: "none",

@@ -441,13 +441,13 @@ const CakesComponent = () => {
               <div className="container"></div>
             </section>
             <section
-              className="shop-area pt-5 pb-5 p-relative bg-dark text-white"
+              className="shop-area pt-5 pb-5 p-relative lightest-back"
               style={{ background: "white" }}
             >
               <div className="container">
                 <button
                   type="button"
-                  className="btn main-booknow"
+                  className="btn light-back shadow-lg text-light"
                   onClick={handleClick}
                 >
                   {" "}
@@ -478,7 +478,7 @@ const CakesComponent = () => {
                   </div>
 
                   {/* Cakes Display */}
-                  <div className="col-lg-8 col-md-6 mx-auto gradient-border bg-light-grey ">
+                  <div className="col-lg-8 col-md-6 mx-auto lighter-back rounded shadow-sm">
                     <div className="alert alert-warning m-3">
                       <i
                         className="fa fa-exclamation-triangle me-2"
@@ -508,7 +508,7 @@ const CakesComponent = () => {
                               position: "relative",
                               marginBottom: "12px",
                               cursor: "pointer",
-                              border: "2px solid #F5E7B6",
+                              border: "2px solid #C69FF4",
                             }}
                             onClick={() => handleImageClick(cake, index)}
                           >
@@ -527,8 +527,8 @@ const CakesComponent = () => {
                                   (cake2) =>
                                     String(cake2._id) === String(cake._id)
                                 )
-                                  ? "card-body bg-dark text-white cakebackground"
-                                  : "card-body bg-dark text-white"
+                                  ? "card-body text-black lightdark-back"
+                                  : "card-body text-black"
                               }
                               // className="card-body bg-dark text-white "
                               // style={{
@@ -640,9 +640,9 @@ const CakesComponent = () => {
                   {/* Summary Section */}
                   <div className="col-lg-4 col-md-5">
                     <div className="position-sticky" style={{ top: "20px" }}>
-                      <div className="bg-light-grey mb-3">
+                      <div className="lighter-back mb-3 rounded shadow-sm">
                         <div className="card-body mt-3">
-                          <div className="d-flex justify-content-between align-items-center shadow-none p-3 mb-2 rounded gradient-border">
+                          <div className="d-flex justify-content-between align-items-center shadow-none p-3 mb-2 rounded">
                             <div>Total:</div>
                             <div>
                               ₹
@@ -822,7 +822,7 @@ const CakesComponent = () => {
                       <button
                         type="submit"
                         onClick={handleSubmit}
-                        className="btn btn-success w-100 mt-2 main-booknow"
+                        className="btn dark-back text-white w-100 mt-2 "
                         style={{
                           // backgroundColor: "#a020f0",
                           boxShadow: "none",

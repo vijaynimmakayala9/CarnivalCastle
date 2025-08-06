@@ -187,13 +187,13 @@ const ComboOccassions = () => {
               <div className="container"></div>
             </section>
             <section
-              className="shop-area pt-5 pb-5 p-relative bg-dark text-white"
+              className="shop-area pt-5 pb-5 p-relative lightest-back"
               style={{ background: "white" }}
             >
               <div className="container">
                 <button
                   type="button"
-                  className="btn main-booknow"
+                  className="btn light-back shadow-lg text-light"
                   onClick={handleClick}
                 >
                   {" "}

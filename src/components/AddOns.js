@@ -370,13 +370,13 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
               <div className="container"></div>
             </section>
             <section
-              className="shop-area pt-5 pb-5 p-relative bg-dark text-white "
+              className="shop-area pt-5 pb-5 p-relative lightest-back"
               style={{ background: "white" }}
             >
               <div className="container">
                 <button
                   type="button"
-                  class="btn main-booknow"
+                  class="btn light-back shadow-lg text-light"
                   onClick={handleClick}
                 >
                   <i className="far fa-arrow-alt-circle-left"></i> Back
@@ -385,7 +385,7 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                   <div className="row mb-4">
                     {/* Occasions */}
                     {/* <div className="col-md-8 shadow-lg"> */}
-                    <div className="col-md-8 bg-light-grey gradient-border">
+                    <div className="col-md-8 lighter-back rounded shadow-sm">
                       {addOns.map((data, key) => (
                         <div key={key}>
                           <div className="row">
@@ -409,14 +409,14 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                                     className="d-flex flex-column justify-content-between align-items-center w-100"
                                     style={{
                                       padding: "10px",
-                                      border:"2px solid #E9BE5F",
+                                      border:"2px solid #C69FF4",
                                       borderRadius: "10px",
                                       background: selectedOccasions?.some(
                                         (addIds) =>
                                           addIds._id === String(ele._id)
                                       )
-                                        ? "var(--gold-gradient)"
-                                        : "transparent",
+                                        ? " #C69FF4"
+                                        : "linear-gradient(45deg, #FFFAFB, #BEBEBE)",
                                       color: selectedOccasions?.some(
                                         (addIds) =>
                                           addIds._id === String(ele._id)
@@ -430,7 +430,7 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                                         src={URLS.Base + ele.image}
                                         alt="occasions images"
                                         // className="rounded-circle img-fluid"
-                                          className="img-fluid"
+                                          className="img-fluid rounded-pill"
                                         style={{
                                           height: "150px",
                                           width: "150px",
@@ -470,9 +470,9 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                     {/* Booking Summary */}
                     <div className="col-lg-4 col-md-5">
                       <div className="position-sticky" style={{ top: "20px" }}>
-                        <div className="bg-light-grey mb-3">
+                        <div className="lighter-back rounded shadow-sm mb-3">
                           <div className="card-body mt-3">
-                            <div className="d-flex justify-content-between align-items-center shadow-none p-3 mb-2 rounded gradient-border">
+                            <div className="d-flex justify-content-between align-items-center shadow-none p-3 mb-2 rounded">
                               <div>Total:</div>
                               <div>₹
 
@@ -739,7 +739,7 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                         <button
                           type="submit"
                           onClick={handleSubmit}
-                          className="btn btn-success w-100 mt-2 main-booknow"
+                          className="btn  dark-back text-white w-100 mt-2 "
                           style={{
                             boxShadow: "none",
                             color: "black",
