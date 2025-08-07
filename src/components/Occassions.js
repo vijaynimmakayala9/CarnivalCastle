@@ -246,7 +246,7 @@ const Occassions = () => {
                   <div className="row mb-4">
                     {/* Occasions */}
                     {/* <div className="col-md-8 shadow-lg"> */}
-                    <div className="col-md-8 lighter-back shadow-lg rounded">
+                    <div className="col-md-8 lighter-back shadow-sm rounded">
                       <h3 className="mt-3">Select Occasion</h3>
                       <div className="row">
                         {Occation.map((ele, ind) => (
@@ -257,14 +257,14 @@ const Occassions = () => {
 
                           >
                             <div
-                              className={`${selectedOccasion?._id === ele?._id ? "shadow-lg" : "shadow-lg"}`}
+                              className={`${selectedOccasion?._id === ele?._id ? "shadow-lg" : "shadow-sm"}`}
                               style={{
                                 cursor: "pointer",
                                 border: "2px solid #C69FF4",
                                 margin: "1px",
                                 background:
                                   selectedOccasion?._id === ele?._id
-                                    ? "linear-gradient(45deg, #FFFAFB, #C69FF4)"
+                                    ? "#C69FF4"
                                     : "linear-gradient(45deg, #FFFAFB, #BEBEBE)",
                                 color:
                                   selectedOccasion?._id === ele?._id

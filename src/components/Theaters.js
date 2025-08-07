@@ -641,7 +641,7 @@ function Theaters() {
               <main className="main-wrapper">
                 <section
                   id="parallax"
-                  className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lighter-back"
+                  className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lightest-back"
                 >
                   <div className="container">
                     <div className="row">
@@ -659,7 +659,7 @@ function Theaters() {
                   </div>
                 </section>
                 <section
-                  className="shop-area pt-5 pb-5 p-relative lighter-back"
+                  className="shop-area pt-5 pb-5 p-relative lightest-back"
                   style={{ background: "#F8EBFF" }}
                 >
                   <div className="container-md">
@@ -703,11 +703,11 @@ function Theaters() {
                                 key={i}
                               >
                                 <div
-                                  className="card rounded gradient135 text-dark flex-fill"
+                                  className="card rounded gradientright shadow-lg text-dark flex-fill"
                                   style={{
                                     minHeight: "820px",
                                     overflow: "hidden",
-                                    border: "2px solid white",
+                                    //border: "2px solid #C69FF4",
                                   }}
                                 >
                                   <div style={cardHeaderStyle}>
@@ -741,6 +741,24 @@ function Theaters() {
                                                     {data.availableSlotsCount > 0
                                                       ? `${data.availableSlotsCount} slots available`
                                                       : "0 slots available"}
+                                                  </span>
+                                                  <span
+                                                    style={{
+                                                      position: "absolute",
+                                                      bottom: "10px",
+                                                      left: "10px",
+                                                      zIndex: 2,
+                                                      fontSize: "0.75rem",
+                                                    }}
+                                                  >
+                                                    <a
+                                                      href={data.link}
+                                                      target="_blank"
+                                                      rel="noopener noreferrer"
+                                                      className="btn btn-sm btn-danger ms-2"
+                                                    >
+                                                      Watch Now
+                                                    </a>
                                                   </span>
                                                   <img
                                                     src={BaseUrl + img}
@@ -802,21 +820,32 @@ function Theaters() {
                                   <div className="card-body d-flex flex-column justify-content-between">
                                     <div>
                                       <div className="d-flex justify-content-between align-items-center mb-2">
-                                        <h5
-                                          className="card-title m-0 dark-text"
-                                          style={{ fontSize: "1.25rem", fontWeight: "600" }}
-                                        >
-                                          {data.name}
-                                        </h5>
+                                        <div>
+                                          <h5
+                                            className="card-title m-0 dark-text"
+                                            style={{ fontSize: "1.25rem", fontWeight: "700" }}
+                                          >
+                                            {data.name}
+                                          </h5>
+                                          {location && (
+                                            <p className="fs-7 ">
+                                              <strong>
+                                                <i className="fa-solid fa-location-dot " style={{ color: "#000" }}></i>{location.name}, {location.city}
+                                              </strong>
+                                            </p>
+                                          )}
+                                        </div>
 
-                                        <p
-                                          className="card-price mb-2 dark-text"
+                                        <div>
+                                          <p
+                                            className="card-price mb-2 dark-text"
 
-                                        >
-                                          <span style={{ fontSize: "1rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}> ₹ {data.offerPrice}/-{" "}</span>
-                                          <br />
-                                          <span style={{ fontSize: "0.87rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}><del> ₹ {data.price}/-{" "}</del></span>
-                                        </p>
+                                          >
+                                            <span style={{ fontSize: "1rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}> ₹ {data.offerPrice}/-{" "}</span>
+                                            <br />
+                                            <span style={{ fontSize: "0.87rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}><del> ₹ {data.price}/-{" "}</del></span>
+                                          </p>
+                                        </div>
                                       </div>
 
                                       <div className="row mb-2">
@@ -826,7 +855,7 @@ function Theaters() {
                                             style={{ fontSize: "0.75rem" }}
                                           >
                                             <i className="bi bi-currency-exchange"></i>{" "}
-                                            Extra Person Price:{" "}
+                                            <span className="fw-bold">Extra Person Price:</span>{" "}
                                             ₹{data.extraPersonprice}/-
                                           </p>
                                         </div>
@@ -835,8 +864,8 @@ function Theaters() {
                                             className="card-details mb-2 light-text"
                                             style={{ fontSize: "0.75rem" }}
                                           >
-                                            <i className="bi bi-person"></i> Max
-                                            People: {data.maxPeople}
+                                            <i className="bi bi-person-fill"></i>
+                                            <span className="fw-bold">Max People: </span>{data.maxPeople}
                                           </p>
                                         </div>
                                       </div>
@@ -844,7 +873,7 @@ function Theaters() {
                                         className="card-details mb-2 light-text"
                                         style={{ fontSize: "0.75rem" }}
                                       >
-                                        <i className="bi bi-tv"></i> Features
+                                        <span className="fw-bold"><i className="bi bi-tv-fill"></i> Features</span>
                                         <ul style={{ paddingLeft: "1.5rem" }}>
                                           {isExpanded
                                             ? data.features.map(
@@ -874,8 +903,8 @@ function Theaters() {
                                         className="card-details mb-2 light-text"
                                         style={{ fontSize: "0.75rem" }}
                                       >
-                                        <i className="bi bi-info-circle"></i>{" "}
-                                        Description:{" "}
+                                        <i className="bi bi-info-circle-fill"></i>{" "}
+                                        <span className="fw-bold">Description:</span>{" "}
                                         {data.description
                                           .split(" ")
                                           .slice(0, 15)
@@ -883,52 +912,37 @@ function Theaters() {
                                         {data.description.split(" ").length > 25 &&
                                           "..."}
                                       </p>
-                                      <p>
-                                        <a
-                                          href={data.link}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="btn btn-sm btn-danger ms-2"
-                                        >
-                                          Watch Now
-                                        </a>
-                                      </p>
                                     </div>
 
                                     <div>
                                       <div className="slot-selection mb-3">
-                                        <p
-                                          className="slot-title mb-2 dark-text"
-                                          style={{ fontSize: "0.875rem" }}
-                                        >
-                                          Choose Your Slot:
+                                        <p className="slot-title mb-2 dark-text" style={{ fontSize: "0.875rem" }}>
+                                          <span className="fw-bold">Choose Your Slot:</span>
                                         </p>
                                         <div className="row">
-                                          {data.availableSlots && data.availableSlots.map(
-                                            (slot, index) => {
+                                          {data.availableSlots &&
+                                            data.availableSlots.map((slot, index) => {
                                               const fromTime12 = convertTo12HourFormat(slot.fromTime);
                                               const toTime12 = convertTo12HourFormat(slot.toTime);
 
                                               return (
                                                 <div className="col-6 mb-2" key={index}>
                                                   <button
-                                                    className={`btn w-100 `}
+                                                    className={`btn w-100`}
                                                     onClick={(e) => handleSlot(e, slot, i)}
                                                     style={{
                                                       backgroundColor: slot.isBooked
-                                                        ? "#757575 "
+                                                        ? "#757575"
                                                         : selectedSlot[i] === slot
-                                                          ? "#330C5F"
-                                                          : "#A05DF1",
+                                                          ? "#A05DF1"
+                                                          : "#fff",
                                                       borderColor: slot.isBooked ? "" : "",
                                                       color: slot.isBooked
                                                         ? "white"
                                                         : selectedSlot[i] === slot
                                                           ? "white"
-                                                          : "white",
-                                                      textDecoration: slot.isBooked
-                                                        ? "line-through"
-                                                        : "none",
+                                                          : "black",
+                                                      textDecoration: slot.isBooked ? "line-through" : "none",
                                                       fontSize: "0.8rem",
                                                       padding: "5px",
                                                     }}
@@ -939,10 +953,49 @@ function Theaters() {
                                                   </button>
                                                 </div>
                                               );
-                                            }
-                                          )}
+                                            })}
                                         </div>
                                       </div>
+
+                                      {/* ✅ Price shown only when a slot is selected */}
+                                      {selectedSlot[i] ? (
+                                        <p className="card-price mb-0 dark-text">
+                                          <span
+                                            style={{
+                                              fontSize: "1rem",
+                                              fontWeight: "600",
+                                              fontFamily: "'Fraunces', serif",
+                                            }}
+                                          >
+                                            ₹ {data.offerPrice}/-
+                                          </span>
+                                          <br />
+                                          <span
+                                            style={{
+                                              fontSize: "0.87rem",
+                                              fontWeight: "600",
+                                              fontFamily: "'Fraunces', serif",
+                                            }}
+                                          >
+                                            <del>₹ {data.price}/-</del>
+                                          </span>
+                                        </p>
+
+                                      ) : (
+                                        <div className="col-12 text-center mb-3">
+                                          <p className="card-price mb-0 dark-text">
+                                            <span
+                                              style={{
+                                                fontSize: "1rem",
+                                                fontWeight: "600",
+                                                fontFamily: "'Fraunces', serif",
+                                              }}
+                                            >
+                                              ₹ {data.offerPrice}/-
+                                            </span>
+                                          </p>
+                                        </div>
+                                      )}
 
                                       <div className="col-12 mt-3">
                                         <button
@@ -954,13 +1007,14 @@ function Theaters() {
                                             color: "white",
                                             border: "none",
                                             boxShadow: "none",
-                                            backgroundColor: isBookNowActive ? "#40008C" : "#A88FC7"
+                                            backgroundColor: isBookNowActive ? "#40008C" : "#A88FC7",
                                           }}
                                         >
                                           Book Now
                                         </button>
                                       </div>
                                     </div>
+
                                   </div>
                                 </div>
                               </div>
@@ -977,9 +1031,9 @@ function Theaters() {
                 </section>
               </main>
 
-              <section className="p-5 px-2 px-md-4 d-flex justify-content-center lighter-back">
+              <section className="p-5 px-2 px-md-4 d-flex justify-content-center lightest-back">
                 <div
-                  className="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 p-4 lightdark-back shadow-lg"
+                  className="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3 p-4 lighter-back shadow-lg"
                   style={{
                     borderRadius: '12px'
                   }}
