@@ -376,7 +376,7 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
               <div className="container">
                 <button
                   type="button"
-                  class="btn light-back shadow-lg text-light"
+                  className="btn light-back shadow-lg text-light"
                   onClick={handleClick}
                 >
                   <i className="far fa-arrow-alt-circle-left"></i> Back

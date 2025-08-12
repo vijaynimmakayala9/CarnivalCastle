@@ -46,7 +46,7 @@ function Enquiry() {
       ) : (
         <div className="home-page indexsix">
           <Header />
-          <main className="main-wrapper bg-dark text-white">
+          <main className="main-wrapper lightest-back text-black">
             <section
               id="parallax"
               className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix"

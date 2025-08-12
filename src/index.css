@@ -32,7 +32,7 @@ code {
 }
 
 .lightdark-back {
-  background-color: #C69FF4;
+  background: linear-gradient(45deg, #C69FF4, #C69FF4)!important;
 }
 
 .gradient45 {
@@ -49,6 +49,10 @@ code {
 
 .gradientleft {
   background: linear-gradient(to left, #FFFAFB, #C69FF4)!important;
+}
+
+.gradientdark {
+  background: linear-gradient(to right, #FFFAFB, #BEBEBE)!important;
 }
 
 .dark-text {

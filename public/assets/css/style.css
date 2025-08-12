@@ -28661,7 +28661,7 @@ h2.footer-title:after {
 
 .footerfive .social-icon ul li .icon:hover,
 .footerfive .social-icon ul li .icon:focus {
-  background: #a270c0;
+  background: #000;
 }
 
 .footer.footerfive .footer-widget.footer-menu ul {
@@ -28732,7 +28732,7 @@ h2.footer-title:after {
 .footer.footersix {
   /* background: #3e08b9 url(../img/home6/footer-bg.png); */
   background-size: cover;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to right,
     #3c3e38,
     #3e4038,
@@ -28746,7 +28746,7 @@ h2.footer-title:after {
     #404138,
     #3e4038,
     #3c3e38
-  );
+  ); */
   background-position: center;
 }
 
@@ -28841,7 +28841,7 @@ h2.footer-title:after {
 }
 
 .footer.footersix .footer-bottom .copyright-text p a {
-  color: #ef2c96;
+  color: #fff;
   -webkit-transition: all 0.4s ease 0s;
   -o-transition: all 0.4s ease 0s;
   transition: all 0.4s ease 0s;
@@ -28885,7 +28885,7 @@ h2.footer-title:after {
   display: inline-flex;
   font-size: 14px;
   transition: all 0.4s ease 0s;
-  background-color: var(--sunray);
+  background-color: white;
   width: 30px;
   height: 30px;
   -webkit-box-align: center;
@@ -28899,7 +28899,7 @@ h2.footer-title:after {
 }
 
 .footer.footersix .social-icon ul li a:hover {
-  color: orange;
+  color: black;
   background-color: #fff;
 }
 

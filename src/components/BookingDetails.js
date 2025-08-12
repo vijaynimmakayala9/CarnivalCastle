@@ -739,9 +739,9 @@ function Theaters() {
         </>
       ) : (
         <>
-          <div class="home-page indexsix">
+          <div className="home-page indexsix">
             <Header />
-            <main class="main-wrapper">
+            <main className="main-wrapper">
               <section
                 id="parallax"
                 className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix"

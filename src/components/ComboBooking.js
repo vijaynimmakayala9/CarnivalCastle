@@ -264,13 +264,13 @@ const ComboBooking = () => {
               <div className="container"></div>
             </section>
             <section
-              className="shop-area pt-4 pb-5 p-relative bg-dark "
+              className="shop-area pt-4 pb-5 p-relative lightest-back "
               style={{ background: "white" }}
             >
               <div className="container mx-auto p-4">
                 <button
                   type="button"
-                  class="btn btn-primary mb-3 main-booknow"
+                  className="btn mb-3 light-back shadow-sm text-light"
                   onClick={handleClick}
                   style={{
                     boxShadow: "none",
@@ -284,7 +284,7 @@ const ComboBooking = () => {
                 <div className="row">
                   <div className="col-12 ">
                     <div
-                      className="shadow-lg bg-light-grey text-white p-4 d-flex flex-column gradient-border"
+                      className="shadow-sm lighter-back text-black p-4 d-flex flex-column"
                       style={{ height: "700px" }}
                     >
                       <div
@@ -328,7 +328,7 @@ const ComboBooking = () => {
                         </button>
                         ):(
 <button
-                          className="btn btn-outline-success main-booknow"
+                          className="btn  dark-back text-white"
                           style={{
                             boxShadow: "none",
                             color: "black",

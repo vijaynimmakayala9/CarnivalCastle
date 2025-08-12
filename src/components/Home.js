@@ -739,8 +739,8 @@ function Home() {
         </>
       ) : (
         <>
-          <div class="home-page indexsix bg-dark">
-            <div class="main-wrapper bg-dark">
+          <div className="home-page indexsix bg-dark">
+            <div className="main-wrapper bg-dark">
               <>
                 <Header />
                 <div className="scrollbar">
@@ -1623,7 +1623,7 @@ function Home() {
                               </div>
                             </div>
                             <div className="col-lg-6">
-                              <div class="booking-form align-items-center justify-content-center">
+                              <div className="booking-form align-items-center justify-content-center">
                                 <form
                                   className="mt-4 mb-3"
                                   onSubmit={(e) => {

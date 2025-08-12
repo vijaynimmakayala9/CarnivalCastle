@@ -40,7 +40,7 @@ function Gallery() {
           >
             <div>
             <img src="assets/img/gipss.gif" style={{ height: "300px", color:"white"}}></img>
-            <h6 style={{ color:"gold"}}>Loading...</h6>
+            <h6 className="light-back" style={{ color:""}}>Loading...</h6>
             </div>
           </div>
         </>
@@ -51,7 +51,7 @@ function Gallery() {
             <main class="main-wrapper">
               <section
                 id="parallax"
-                className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix bg-dark border-gradient border-gradient-gold only-bottom-border"
+                className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lightest-back dark-text"
                 // style={{ backgroundImage: "url(img/bgss.jpg)" }}
                 style={{backgroundColor:"#AD3DF0"}}
               >
@@ -60,7 +60,7 @@ function Gallery() {
                     <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                       <div className="breadcrumb-wrap text-center">
                         <div className="breadcrumb-title mb-30">
-                          <h1 style={{ color: "white", marginTop: "20px"   }}>Terms & Conditions</h1>
+                          <h1 style={{ marginTop: "20px"   }}>Terms & Conditions</h1>
                         </div>
                         {/* <nav aria-label="breadcrumb">
                           <ol className="breadcrumb">
@@ -83,7 +83,7 @@ function Gallery() {
                 </div>
               </section>
               <section
-                className="shop-area pt-1 pb-5 p-relative wow fadeInUp animated bg-dark text-white"
+                className="shop-area pt-1 pb-5 p-relative wow fadeInUp animated lightest-back"
                 data-animation="fadeInUp animated"
                 data-delay=".2s"
                 // style={{ background: "#F8EBFF" }}

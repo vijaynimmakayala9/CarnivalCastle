@@ -68,14 +68,14 @@ function Enquiry() {
       ) : (
         <div className="home-page indexsix">
           <Header />
-          <main className="main-wrapper bg-dark text-white">
+          <main className="main-wrapper lightest-back">
             <section
               id="parallax"
               className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix"
             ></section>
             <div className="container d-flex justify-content-center align-items-center vh-100">
               <div
-                className="bg-light-grey gradient-border p-4 m-3 rounded text-center"
+                className="lighter-back p-4 m-3 rounded text-center"
                 style={{ maxWidth: "100%", width: "100%", maxWidth: "400px" }}
               >
                 <div className="mb-3">
@@ -99,14 +99,14 @@ function Enquiry() {
                 <div className="d-flex flex-column flex-sm-row justify-content-between">
                   <button
                     onClick={handleClick}
-                    className="btn main-booknow mb-2 mb-sm-0"
+                    className="btn light-back shadow-sm text-light mb-2 mb-sm-0"
                     style={{ boxShadow: "none" }}
                   >
                     Go to Home
                   </button>
                   <a
                     href={"https://api.carnivalcastle.com/" + resdata.invoice}
-                    className="btn main-booknow"
+                    className="btn light-back shadow-sm text-light"
                     target="_blank"
                     style={{ boxShadow: "none" }}
                   >

@@ -35,6 +35,14 @@ function Theaters() {
     return `${year}-${month}-${day}`;
   };
 
+  const [expandedCards, setExpandedCards] = useState({});
+  const toggleView1 = (cardIndex) => {
+    setExpandedCards((prev) => ({
+      ...prev,
+      [cardIndex]: !prev[cardIndex], // toggle only this card
+    }));
+  };
+
 
   const [date, setDate] = useState(getTodayDateString());
   const [activeshow, setActiveshow] = useState([]);
@@ -77,7 +85,7 @@ function Theaters() {
 
   // Update the fetchTheatersByAddressId function to accept selectedDate parameter
   const fetchTheatersByAddressId = async (addressId, selectedDate = date) => {
-    setIsLoading(true);
+    setIsLoading(false);
     try {
       if (!addressId) {
         console.warn("No addressId provided. Skipping theater filtering.");
@@ -499,13 +507,13 @@ function Theaters() {
                   className="modal-content p-3 p-md-4 lighter-back"
                   style={{ border: "2px solid #E9DCFF", borderRadius: "12px" }}
                 >
-                  <h5 className="text-center mb-3 mb-md-4 fs-5 fs-md-4">Select Your Location</h5>
+                  <h5 className="text-center mb-3 mb-md-4 fs-5 fs-md-4">Our Theatre Locations</h5>
                   <div className="row">
                     {addresses && addresses.length > 0 ? (
                       addresses.map((address, index) => (
-                        <div className="col-12 col-md-6 mb-4" key={index}>
+                        <div className="col-12 col-md-6 mb-4 d-flex" key={index}>
                           <div
-                            className="card h-100 text-black shadow-lg gradient135"
+                            className="card text-black shadow-lg gradient135 d-flex flex-column w-100"
                             style={{
                               backgroundColor: "#E9DCFF",
                               borderRadius: "1rem",
@@ -513,57 +521,58 @@ function Theaters() {
                               border: "2px solid #E9DCFF",
                             }}
                           >
-                            {address.image ? (<>
-                              <img
-                                src={BaseUrl + address.image}
-                                alt={address.city}
-                                className="img-fluid"
-                                style={{
-                                  width: "100%",
-                                  objectFit: "cover",
-                                  minHeight: "250px",
-                                  maxHeight: "300px",
-                                }}
-                              />
+                            {/* Image Section */}
+                            <div style={{ flexShrink: 0 }}>
+                              {address.image ? (
+                                <>
+                                  <img
+                                    src={BaseUrl + address.image}
+                                    alt={address.city}
+                                    className="img-fluid"
+                                    style={{
+                                      width: "100%",
+                                      objectFit: "cover",
+                                      height: "250px",
+                                    }}
+                                  />
+                                  <a
+                                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                                      `${address.addressLine1}, ${address.addressLine2}`
+                                    )}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    style={{
+                                      position: "absolute",
+                                      bottom: "130px",
+                                      right: "10px",
+                                      borderRadius: "50%",
+                                      zIndex: 10,
+                                    }}
+                                    title="View on Google Maps"
+                                  >
+                                    <img
+                                      src="https://bnbtplstorageaccount.blob.core.windows.net/googleicons/map (1).svg"
+                                      alt="Google Maps"
+                                      style={{ width: "75px", height: "75px" }}
+                                    />
+                                  </a>
+                                </>
+                              ) : (
+                                <div
+                                  className="d-flex align-items-center justify-content-center"
+                                  style={{
+                                    height: "250px",
+                                    backgroundColor: "#444",
+                                    fontSize: "3rem",
+                                  }}
+                                >
+                                  <i className="bi bi-image text-dark"></i>
+                                </div>
+                              )}
+                            </div>
 
-                              <a
-                                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                                  `${address.addressLine1}, ${address.addressLine2}`
-                                )}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{
-                                  position: "absolute",
-                                  bottom: "130px",
-                                  right: "10px",
-                                  borderRadius: "50%",
-                                  padding: "0px",
-                                  zIndex: 10,
-                                }}
-                                title="View on Google Maps"
-                              >
-                                <img
-                                  src="https://bnbtplstorageaccount.blob.core.windows.net/googleicons/map (1).svg"
-                                  alt="Google Maps"
-                                  style={{ width: "75px", height: "75px", display: "block" }}
-                                />
-                              </a>
-                            </>
-                            ) : (
-                              <div
-                                className="d-flex align-items-center justify-content-center"
-                                style={{
-                                  minHeight: "250px",
-                                  width: "100%",
-                                  backgroundColor: "#444",
-                                  fontSize: "3rem",
-                                }}
-                              >
-                                <i className="bi bi-image text-dark"></i>
-                              </div>
-                            )}
-
-                            <div className="card-body d-flex flex-column justify-content-between p-3">
+                            {/* Content Section */}
+                            <div className="card-body d-flex flex-column justify-content-between p-3" style={{ flex: 1 }}>
                               <div>
                                 <h5 className="card-title fw-semibold mb-1 text-dark">
                                   <i className="fa-solid fa-map-location-dot me-2" style={{ color: "#000" }}></i>
@@ -665,28 +674,59 @@ function Theaters() {
                   <div className="container-md">
                     <div className="row mb-3">
                       <div className="col-12">
-                        <div style={{ display: "flex", justifyContent: "center" }}>
-                          <div className="text-center">
-                            <label className="mb-2 text-dark fw-bold fs-4">
-                              Select your Date
-                            </label>
-                            <br />
-                            <input
-                              type="date"
-                              id="buttondisplay"
-                              name="theaterdate"
-                              className={`form-control border-primary ${isDisabled ? "bg-light" : ""
-                                }`}
-                              disabled={isDisabled}
-                              value={date}
-                              min={getTodayDateString()}
-                              onChange={handleDateChange}
-                            />
-                          </div>
-                        </div>
+                        <div
+                          className="p-3 rounded shadow-sm"
+                          style={{
+                            backgroundColor: "#FAF9F7",
+                            border: "1px solid #E0E0E0",
+                            borderRadius: "8px",
+                            maxWidth: "500px",
+                            margin: "0 auto",
+                          }}
+                        >
+                          <label className="fw-bold text-dark mb-2" style={{ fontSize: "18px" }}>
+                            Select Your Date
+                          </label>
 
+                          <div className="d-flex gap-2">
+                            <div className="input-group">
+                              <span className="input-group-text bg-white border-end-0">
+                                <i className="bi bi-calendar-event"></i>
+                              </span>
+                              <input
+                                type="date"
+                                id="buttondisplay"
+                                name="theaterdate"
+                                className={`form-control border-start-0 ${isDisabled ? "bg-light" : ""}`}
+                                style={{ borderLeft: "none" }}
+                                disabled={isDisabled}
+                                value={date}
+                                min={getTodayDateString()}
+                                onChange={handleDateChange}
+                              />
+                            </div>
+
+                            <button
+                              className="btn"
+                              style={{
+                                backgroundColor: "#4B0082",
+                                color: "#fff",
+                                fontWeight: "500",
+                                whiteSpace: "nowrap",
+                              }}
+                            >
+                              Check Slot Availability
+                            </button>
+                          </div>
+
+                          <p className="mt-2 mb-0" style={{ fontStyle: "italic", fontSize: "14px", color: "#555" }}>
+                            Let’s check what’s available on your special day!
+                          </p>
+                        </div>
                       </div>
+
                     </div>
+                    <br />
 
 
                     <div className="container">
@@ -873,32 +913,46 @@ function Theaters() {
                                         className="card-details mb-2 light-text"
                                         style={{ fontSize: "0.75rem" }}
                                       >
-                                        <span className="fw-bold"><i className="bi bi-tv-fill"></i> Features</span>
-                                        <ul style={{ paddingLeft: "1.5rem" }}>
-                                          {isExpanded
-                                            ? data.features.map(
-                                              (feature, index) => (
-                                                <li key={index}>{feature}</li>
-                                              )
+                                        <span className="fw-bold">
+                                          <i className="bi bi-tv-fill"></i> Features
+                                        </span>
+
+                                        <div className="row mt-1">
+                                          {(expandedCards[i] ? data.features : data.features.slice(0, 4)).map(
+                                            (feature, index) => (
+                                              <div key={index} className="col-6 mb-1 d-flex align-items-start">
+                                                <i
+                                                  className="bi bi-star-fill"
+                                                  style={{
+                                                    fontSize: "0.65rem",
+                                                    color: "#40008C",
+                                                    marginRight: "6px",
+                                                    marginTop: "2px",
+                                                  }}
+                                                ></i>
+                                                <span>{feature}</span>
+                                              </div>
                                             )
-                                            : data.features
-                                              .slice(0, 3)
-                                              .map((feature, index) => (
-                                                <li key={index}>{feature}</li>
-                                              ))}
-                                          <span
-                                            onClick={toggleView}
+                                          )}
+                                        </div>
+
+                                        {data.features.length > 4 && (
+                                          <div
+                                            onClick={() => toggleView1(i)}
                                             style={{
                                               cursor: "pointer",
                                               color: "#40008C",
                                               textDecoration: "underline",
                                               fontSize: "0.75rem",
+                                              marginTop: "4px",
                                             }}
                                           >
-                                            {isExpanded ? "View Less" : "View More"}
-                                          </span>
-                                        </ul>
+                                            {expandedCards[i] ? "View Less" : "View More"}
+                                          </div>
+                                        )}
                                       </p>
+
+
                                       <p
                                         className="card-details mb-2 light-text"
                                         style={{ fontSize: "0.75rem" }}
@@ -919,84 +973,95 @@ function Theaters() {
                                         <p className="slot-title mb-2 dark-text" style={{ fontSize: "0.875rem" }}>
                                           <span className="fw-bold">Choose Your Slot:</span>
                                         </p>
-                                        <div className="row">
+
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            flexWrap: "nowrap",
+                                            gap: "0.5rem",
+                                          }}
+                                        >
                                           {data.availableSlots &&
                                             data.availableSlots.map((slot, index) => {
                                               const fromTime12 = convertTo12HourFormat(slot.fromTime);
                                               const toTime12 = convertTo12HourFormat(slot.toTime);
+                                              const isSelected = selectedSlot[i] === slot;
+
+                                              // Calculate discount amount
+                                              const discountAmount = slot.price && slot.offerPrice
+                                                ? slot.price - slot.offerPrice
+                                                : data.price - data.offerPrice;
 
                                               return (
-                                                <div className="col-6 mb-2" key={index}>
+                                                <div
+                                                  key={index}
+                                                  style={{
+                                                    flex: "1",
+                                                    textAlign: "center",
+                                                  }}
+                                                >
                                                   <button
-                                                    className={`btn w-100`}
+                                                    className="btn"
                                                     onClick={(e) => handleSlot(e, slot, i)}
                                                     style={{
+                                                      width: "100%",
                                                       backgroundColor: slot.isBooked
                                                         ? "#757575"
-                                                        : selectedSlot[i] === slot
+                                                        : isSelected
                                                           ? "#A05DF1"
                                                           : "#fff",
-                                                      borderColor: slot.isBooked ? "" : "",
+                                                      borderColor: slot.isBooked ? "" : "#40008C",
                                                       color: slot.isBooked
                                                         ? "white"
-                                                        : selectedSlot[i] === slot
+                                                        : isSelected
                                                           ? "white"
                                                           : "black",
                                                       textDecoration: slot.isBooked ? "line-through" : "none",
-                                                      fontSize: "0.8rem",
-                                                      padding: "5px",
+                                                      fontSize: "0.7rem",
+                                                      padding: "6px 8px",
+                                                      borderRadius: "50px",
                                                     }}
                                                     disabled={slot.isBooked}
                                                     value={`${fromTime12} / ${toTime12}`}
                                                   >
                                                     {fromTime12} - {toTime12}
                                                   </button>
+
+                                                  {/* Discount amount below every slot */}
+                                                  {!slot.isBooked && discountAmount>0 ? (
+                                                    <div style={{ fontSize: "0.65rem", color: "#28a745", fontWeight: "500", marginTop: "2px" }}>
+                                                      Save ₹{discountAmount}
+                                                    </div>
+                                                  ):(<div></div>)}
                                                 </div>
                                               );
                                             })}
                                         </div>
                                       </div>
 
-                                      {/* ✅ Price shown only when a slot is selected */}
+                                      {/* Price shown only when a slot is selected */}
                                       {selectedSlot[i] ? (
-                                        <p className="card-price mb-0 dark-text">
-                                          <span
-                                            style={{
-                                              fontSize: "1rem",
-                                              fontWeight: "600",
-                                              fontFamily: "'Fraunces', serif",
-                                            }}
-                                          >
-                                            ₹ {data.offerPrice}/-
-                                          </span>
-                                          <br />
-                                          <span
-                                            style={{
-                                              fontSize: "0.87rem",
-                                              fontWeight: "600",
-                                              fontFamily: "'Fraunces', serif",
-                                            }}
-                                          >
-                                            <del>₹ {data.price}/-</del>
-                                          </span>
-                                        </p>
-
-                                      ) : (
-                                        <div className="col-12 text-center mb-3">
-                                          <p className="card-price mb-0 dark-text">
-                                            <span
-                                              style={{
-                                                fontSize: "1rem",
-                                                fontWeight: "600",
-                                                fontFamily: "'Fraunces', serif",
-                                              }}
-                                            >
-                                              ₹ {data.offerPrice}/-
-                                            </span>
+                                        <div className="text-center mt-2">
+                                          <div style={{ fontSize: "1rem", fontWeight: "600", color: "#40008C" }}>
+                                            ₹ {selectedSlot[i].offerPrice ?? data.offerPrice}/-
+                                          </div>
+                                          <div style={{ fontSize: "0.85rem", color: "#777" }}>
+                                            <del>₹ {selectedSlot[i].price ?? data.price}/-</del>
+                                          </div>
+                                          {/* ✅ Added people info here */}
+                                          <p className="fw-bold" style={{ fontSize: "0.8rem", marginBottom: "4px", color: "#555" }}>
+                                            For Upto {data.maxPeople} Peoples and Additional ₹{data.extraPersonprice} for extra Person
                                           </p>
+                                        </div>
+                                      ) : (
+                                        <div className="text-center mt-2" style={{ fontSize: "0.8rem", color: "#555" }}>
+                                          Select a slot to check price
                                         </div>
                                       )}
 
+
+                                      {/* Book Now button */}
                                       <div className="col-12 mt-3">
                                         <button
                                           disabled={!isBookNowActive}
@@ -1014,6 +1079,7 @@ function Theaters() {
                                         </button>
                                       </div>
                                     </div>
+
 
                                   </div>
                                 </div>

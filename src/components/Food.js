@@ -65,7 +65,7 @@ function Food() {
           <main className="main-wrapper">
             <section
               id="parallax"
-              className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix bg-dark border-gradient border-gradient-gold only-bottom-border"
+              className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lightest-back dark-text"
               style={{ backgroundColor: "#AD3DF0" }}
             >
               <div className="container">
@@ -73,7 +73,7 @@ function Food() {
                   <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                     <div className="breadcrumb-wrap text-center">
                       <div className="breadcrumb-title mb-30">
-                        <h1 style={{ color: "white", marginTop: "20px" }}>
+                        <h1 style={{ marginTop: "20px" }}>
                           Food
                         </h1>
                       </div>
@@ -82,12 +82,12 @@ function Food() {
                 </div>
               </div>
             </section>
-            <section className="pb-3 bg-dark">
+            <section className="pb-3 lightest-back">
               <div className="container">
                 <div className="row">
                   <div className="col-6">
                     <div className="section-title mb-4 pt-4">
-                      <h2 className="text-gold-gradient">
+                      <h2 className="light-text">
                         {showVeg ? "Veg & Non-veg" : "All Items"}
                       </h2>
                     </div>
@@ -114,12 +114,9 @@ function Food() {
                     <Row>
                       <Col md={12}>
                         <div
-                          style={{
-                            backgroundColor: "#595B56",
-                            border: "1px dashed gold",
-                          }}
+                        className="lighter-back rounded shadow-sm" 
                         >
-                          <h4 className="text-gold-gradient text-center">
+                          <h4 className="light-text text-center">
                             Veg Items
                           </h4>
                           <Row className="p-2">
@@ -168,7 +165,7 @@ function Food() {
                                       />
                                     </div>
                                     <div
-                                      className="food-desc bg-dark"
+                                      className="food-desc lightdark-back"
                                       style={{
                                         flexGrow: 1,
                                         padding: "10px",
@@ -176,7 +173,7 @@ function Food() {
                                       }}
                                     >
                                       <p
-                                        className="fd-title text-gold-gradient"
+                                        className="fd-title dark-text"
                                         style={{ whiteSpace: "normal" }}
                                       >
                                         {item.name}
@@ -194,12 +191,9 @@ function Food() {
                     <Row>
                       <Col md={12}>
                         <div
-                          style={{
-                            backgroundColor: "#595B56",
-                            border: "1px dashed gold",
-                          }}
+                          className="lighter-back rounded shadow-sm"
                         >
-                          <h4 className="text-gold-gradient text-center">
+                          <h4 className="light-text text-center">
                             Non-veg Items
                           </h4>
                           <Row className="p-2">
@@ -248,7 +242,7 @@ function Food() {
                                       />
                                     </div>
                                     <div
-                                      className="food-desc bg-dark"
+                                      className="food-desc lightdark-back"
                                       style={{
                                         flexGrow: 1,
                                         padding: "10px",
@@ -256,7 +250,7 @@ function Food() {
                                       }}
                                     >
                                       <p
-                                        className="fd-title text-gold-gradient"
+                                        className="fd-title darktext"
                                         style={{ whiteSpace: "normal" }}
                                       >
                                         {item.name}
@@ -275,12 +269,9 @@ function Food() {
                   <Row>
                     <Col md={12}>
                       <div
-                        style={{
-                          backgroundColor: "#595B56",
-                          border: "1px dashed gold",
-                        }}
+                      className="lighter-back rounded shadow-sm pt-2"
                       >
-                        <h4 className="text-gold-gradient text-center bg-dark">
+                        <h4 className="light-text text-center">
                           All Food Items
                         </h4>
                         <Row className="p-2 d-flex flex-wrap justify-content-start">
@@ -329,7 +320,7 @@ function Food() {
                                     />
                                   </div>
                                   <div
-                                    className="food-desc bg-dark"
+                                    className="food-desc lightdark-back"
                                     style={{
                                       flexGrow: 1,
                                       padding: "10px",
@@ -337,7 +328,7 @@ function Food() {
                                     }}
                                   >
                                     <p
-                                      className="fd-title text-gold-gradient"
+                                      className="fd-title dark-text"
                                       style={{ whiteSpace: "normal" }}
                                     >
                                       {item.name}

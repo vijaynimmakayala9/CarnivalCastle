@@ -407,7 +407,7 @@ const BookingForm = () => {
               <div className="container mx-auto p-4">
                 <button
                   type="button"
-                  class="btn light-back shadow-sm text-light mb-3"
+                  className="btn light-back shadow-sm text-light mb-3"
                   onClick={handleClick}
                   style={{
                     boxShadow: "none",
@@ -421,7 +421,7 @@ const BookingForm = () => {
                 <div className="row">
                   <div className="col-12 ">
                     <div
-                      className="shadow-lg lighter-back text-black p-4 d-flex flex-column "
+                      className="shadow-sm lighter-back text-black p-4 d-flex flex-column "
                       style={{ height: "700px" }}
                     >
                       <div

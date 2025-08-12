@@ -9,7 +9,7 @@ import { URLS } from "../Url";
 import axios from "axios";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
-import { FaMapMarkerAlt, FaCalendarAlt, FaClock } from "react-icons/fa";
+import { FaMapMarkerAlt, FaCalendarAlt, FaClock, FaLocationArrow, FaMap, FaTheaterMasks } from "react-icons/fa";
 import Modal from 'react-bootstrap/Modal';
 
 const Basicplan = () => {
@@ -329,24 +329,32 @@ const Basicplan = () => {
                     <div className="col-12">
                       <h4>Overview</h4>
                     </div>
-                    <div className="col-12 col-md-4 d-flex align-items-center mb-2">
-                      <FaMapMarkerAlt style={{ color: "var(--gold-gradient)" }} />
-                      <span className="ms-2">
-                        {sessionStorage.getItem("theaterName")}, Hyderabad
-                      </span>
+                    <div className="col-12">
+                      <div className="bg-white p-2 rounded w-100 mx-auto">
+                        <div className="row g-3 align-items-center flex-nowrap flex-wrap justify-content-between">
+                          <div className="col-auto d-flex align-items-center">
+                            <FaTheaterMasks style={{ color: "var(--gold-gradient)" }} />
+                            <span className="ms-2">{sessionStorage.getItem("theaterName")}</span>
+                          </div>
+
+                          <div className="col-auto d-flex align-items-center">
+                            <FaMapMarkerAlt style={{ color: "var(--gold-gradient)" }} />
+                            <span className="ms-2">Hyderabad</span>
+                          </div>
+
+                          <div className="col-auto d-flex align-items-center">
+                            <FaCalendarAlt style={{ color: "var(--gold-gradient)" }} />
+                            <span className="ms-2">{sessionStorage.getItem("date")}</span>
+                          </div>
+
+                          <div className="col-auto d-flex align-items-center">
+                            <FaClock style={{ color: "var(--gold-gradient)" }} />
+                            <span className="ms-2">{sessionStorage.getItem("slot")}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="col-12 col-md-3 d-flex align-items-center mb-2">
-                      <FaCalendarAlt style={{ color: "var(--gold-gradient)" }} />
-                      <span className="ms-2">
-                        {sessionStorage.getItem("date")}
-                      </span>
-                    </div>
-                    <div className="col-12 col-md-5 d-flex align-items-center mb-2">
-                      <FaClock style={{ color: "var(--gold-gradient)" }} />
-                      <span className="ms-2">
-                        {sessionStorage.getItem("slot")}
-                      </span>
-                    </div>
+
                   </div>
                 </div>
               </div>
@@ -461,7 +469,7 @@ const Basicplan = () => {
                                   <div className="coupon-details">Includes Theatre and Decoration</div>
                                   <div className="coupon-details">Add-ons: Cake, Fog Entry, Etc will be in next step</div>
 
-                                  
+
                                   <div className="coupon-minimum">
                                   </div>
                                 </div>
@@ -477,8 +485,8 @@ const Basicplan = () => {
                                   </div>
                                   <div className="coupon-details">Flat 30% Off on Plans</div>
                                   <div className="coupon-details">Starts from ₹4100/</div>
-                                   <div className="coupon-details">Including: Theatre, Decoration, Cake, Photography etc..</div>
-                                    <div className="coupon-details">Total 14 services</div>
+                                  <div className="coupon-details">Including: Theatre, Decoration, Cake, Photography etc..</div>
+                                  <div className="coupon-details">Total 14 services</div>
                                   <div className="coupon-code">
                                   </div>
                                   <div className="coupon-minimum">
@@ -667,7 +675,7 @@ const Basicplan = () => {
                           </div>
                         </div>
                       </div>
-                      
+
                     </div>
                   </div>
                 </div>

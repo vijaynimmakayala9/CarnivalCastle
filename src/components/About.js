@@ -90,8 +90,8 @@ function About() {
         </>
       ) : (
         <>
-          <div class="home-page indexsix">
-            <main class="main-wrapper">
+          <div className="home-page indexsix">
+            <main className="main-wrapper">
               <Header  />
               <section
                 id="parallax"

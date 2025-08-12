@@ -118,9 +118,9 @@ function Enquiry() {
         </>
       ) : (
         <>
-          <div class="home-page indexsix">
+          <div className="home-page indexsix">
             <Header />
-            <main class="main-wrapper">
+            <main className="main-wrapper">
               <section
                 id="parallax"
                 className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lighter-back"
@@ -175,7 +175,7 @@ function Enquiry() {
                     </div>
                   </div>
                   <div className="row justify-content-md-center mt-3">
-                    <div className="col-lg-8 mt-40  rounded" style={{ border: "1px solid #9D4DFF"}}>
+                    <div className="col-lg-8 mt-40  rounded-3" style={{ border: "1px solid #9D4DFF"}}>
                       <div className="row">
                         <div className="col-lg-6 ">
                           <div className="contactsops bg-dark">
@@ -192,7 +192,7 @@ function Enquiry() {
                           </div>
                         </div>
                         <div className="col-lg-6">
-                          <div class="booking-form align-items-center justify-content-center">
+                          <div className="booking-form align-items-center justify-content-center">
                             <form
                               className="mt-5 mb-3"
                               onSubmit={(e) => {
@@ -314,7 +314,7 @@ function Enquiry() {
                   <div className="row justify-content-center">
                     <div className="col-lg-12 mt-0 ">
                       <iframe
-                        className="gradient-border"
+                        className=""
                         src={Contact.map}
                         width="100%"
                         height={480}

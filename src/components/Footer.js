@@ -22,7 +22,7 @@ function Footer() {
   return (
     <div>
       {" "}
-      <footer className="footer footersix">
+      <footer className="footer footersix bg-black">
         <div className="footer-top">
           <div className="container-md">
             <div className="row">
@@ -33,7 +33,7 @@ function Footer() {
                     <img
                       // src={URLS.Base + Contact.logo}
                       // src={footerLogo}
-                     src={logo}
+                      src={logo}
                       alt="logo"
                       style={{ height: "100px" }}
                     />
@@ -98,7 +98,7 @@ function Footer() {
               </div>
               <div className="col-lg-2 col-md-6 ">
                 <div className="footer-widget footer-menu">
-                  <h2 className="footer-title">Quick Links</h2>
+                  <h2 className="footer-title text-white">Quick Links</h2>
                   <ul>
                     <li>
                       <NavLink to="/" style={{ color: "white" }}>
@@ -178,7 +178,7 @@ function Footer() {
               </div>
               <div className="col-lg-5 col-md-6">
                 <div className="footer-widget footer-contact ">
-                  <h2 className="footer-title">Address</h2>
+                  <h2 className="footer-title text-white">Address</h2>
                   <div className="footer-contact-info">
                     <div className="footer-address">
                       <span>
@@ -216,7 +216,7 @@ function Footer() {
               <div className="row">
                 <div className="col-md-7 col-lg-6">
                   <div className="copyright-text">
-                    <ul className="policy-menu text-start">
+                    <ul className="policy-menu text-start d-flex">
                       <li>
                         <NavLink to="/Terms" style={{ color: "white" }}>
                           Terms and Conditions
@@ -259,6 +259,52 @@ function Footer() {
             </div>
           </div>
         </div>
+        {/*
+        <section
+          className="py-4"
+          style={{ backgroundColor: "#8c8c8c", borderRadius: "12px" }}
+        >
+          <div className="container">
+            <div className="row align-items-center">
+
+              
+              <div className="col-md-6 text-white">
+                <h5 className="fw-bold mb-1">Subscribe to Our Newsletter</h5>
+                <p className="mb-0">
+                  Get updates on latest offers and celebration inspiration.
+                </p>
+              </div>
+
+              
+              <div className="col-md-6 mt-3 mt-md-0">
+                <form className="d-flex">
+                  <input
+                    type="email"
+                    className="form-control me-2"
+                    placeholder="Your Email Address"
+                    style={{
+                      backgroundColor: "#777",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "6px",
+                    }}
+                  />
+                  <button
+                    className="btn btn-light fw-bold"
+                    type="submit"
+                    style={{ borderRadius: "6px" }}
+                  >
+                    Subscribe
+                  </button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </section>
+        */}
+
+
       </footer>
     </div>
   );
