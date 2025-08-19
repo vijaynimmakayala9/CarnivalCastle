@@ -881,9 +881,9 @@ function Theaters() {
                                             className="card-price mb-2 dark-text"
 
                                           >
-                                            <span style={{ fontSize: "1rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}> ₹ {data.offerPrice}/-{" "}</span>
+                                            <span style={{ fontSize: "1.4rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}> ₹ {data.offerPrice}/-{" "}</span>
                                             <br />
-                                            <span style={{ fontSize: "0.87rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}><del> ₹ {data.price}/-{" "}</del></span>
+                                            {/* <span style={{ fontSize: "0.87rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}><del> ₹ {data.price}/-{" "}</del></span> */}
                                           </p>
                                         </div>
                                       </div>

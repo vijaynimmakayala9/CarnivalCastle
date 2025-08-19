@@ -835,7 +835,7 @@ function Home() {
                             className="position-relative card border-0 shadow rounded-4 h-100 text-center gradient45"
                           >
                             {/* Ribbon Badge */}
-                            <div
+                            {/* <div
                               className="position-absolute top-0 start-50 translate-middle"
                               style={{
                                 backgroundColor: "#a259ff",
@@ -847,7 +847,7 @@ function Home() {
                               }}
                             >
                               {pkg.badgeText}
-                            </div>
+                            </div> */}
 
                             <div className="card-body d-flex flex-column p-4 mt-4">
                               <h4 className="fw-bold mb-2">{pkg.title}</h4>
