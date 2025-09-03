@@ -585,6 +585,16 @@ function Theaters() {
                                   </p>
                                 )}
                               </div>
+
+                              {/* Static Info Badges */}
+            <div className="d-flex justify-content-center gap-3 mb-3 flex-wrap">
+              <span className="badge light-back px-3 py-2">
+                <i className="bi bi-car-front-fill me-2"></i>Parking Facility
+              </span>
+              <span className="badge light-back px-3 py-2">
+                <i className="bi bi-egg-fried me-2"></i>Food Menu
+              </span>
+            </div>
                               <button
                                 className="btn light-back text-white w-100 mt-3"
                                 onClick={() => handleLocationSelect(address)}

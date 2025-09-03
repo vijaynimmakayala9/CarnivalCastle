@@ -412,18 +412,30 @@ function Home() {
 
 
 
-  // Static data for packages
   const packages = [
     {
       id: 1,
       title: "Basic Plan",
       price: "2000",
       subtitle: "Simple theatre slot, no setup – just celebrate.",
-      features: [
-        "Private Theatre Room",
-        "No Cake / Decor",
-        "Up to 6 Guests"
-      ],
+      detailedFeatures: {
+        "Theatre + Decoration": true,
+        "Fog Entry (1 Pot)": false,
+        "Candle Path": false,
+        "HBD LED": false,
+        "Name with LED (6)": false,
+        "AGE Number LED": false,
+        "HBD with Rose petals": false,
+        "Photo Clipping (10)": false,
+        "Birthday Sash": false,
+        "Birthday Crown, Spects": false,
+        "Rose Bouquet (12 Roses)": false,
+        "Customisation cake (1 kg)": false,
+        "Photography (30 Mins)": false,
+        "Cold fire entry (6 pieces)": false,
+        "Videography(Edited 1 Min Reel)": false,
+        "Hall fog (4 Pots)": false,
+      },
       badgeText: "Saved ₹0",
       buttonText: "Continue with Add-Ons →",
     },
@@ -432,42 +444,80 @@ function Home() {
       title: "Standard Plan",
       price: "3000",
       subtitle: "Includes cake, lights & decor.",
-      features: [
-        "1/2 kg Cake",
-        "LED Decor + Fog",
-        "Photo Session"
-      ],
+      detailedFeatures: {
+        "Theatre + Decoration": true,
+        "Fog Entry (1 Pot)": true,
+        "Candle Path": true,
+        "HBD LED": true,
+        "Name with LED (6)": true,
+        "AGE Number LED": true,
+        "HBD with Rose Petals": true,
+        "Photo Clipping (10)": true,
+        "Birthday Sash": true,
+        "Birthday Crown, Spects": true,
+        "Rose": true,
+        "Regular Cake - 1/2 kg": true,
+        "Photography (15 Mins)": true,
+        "Cold fire entry (6 pieces)": false,
+        "Videography(Edited 1 Min Reel)": false,
+        "Hall fog (4 Pots)": false,
+      },
       badgeText: "Save ₹200",
       buttonText: "Switch to Combo Plans →",
     },
     {
       id: 3,
-      title: "Premium Plan",
-      price: "4000",
-      subtitle: "More guests, more upgrades, more glam.",
-      features: [
-        "Designer Cake",
-        "LED Pathway + Crown",
-        "30-min Photography"
-      ],
-      badgeText: "Save ₹300",
+      title: "Special Plan",
+      price: "5000",
+      subtitle: "Our grandest experience, full royal vibes.",
+      detailedFeatures: {
+        "Theatre + Decoration": true,
+        "Fog Entry (1 Pot)": true,
+        "Candle Path": true,
+        "HBD LED": true,
+        "Name with LED (6)": true,
+        "AGE Number LED": true,
+        "HBD with Rose petals": true,
+        "Photo Clipping (10)": true,
+        "Birthday Sash": true,
+        "Birthday Crown, Spects": true,
+        "Rose Bouquet (6 Roses)": true,
+        "Customisation cake (1 kg)": true,
+        "Photography (30 Mins)": true,
+        "Cold fire entry (4 pieces)": true,
+        "Videography(Edited 1 Min Reel)": false,
+        "Hall fog (4 Pots)": false,
+      },
+      badgeText: "Save ₹400",
       buttonText: "Switch to Combo Plans →",
     },
     {
       id: 4,
-      title: "Special Plan",
-      price: "5000",
-      subtitle: "Our grandest experience, full royal vibes.",
-      features: [
-        "Royal Decor Theme",
-        "Gift Box - Full Lighting",
-        "Cinematic Entry Setup"
-      ],
-      badgeText: "Save ₹400",
+      title: "Premium Plan",
+      price: "4000",
+      subtitle: "More guests, more upgrades, more glam.",
+      detailedFeatures: {
+        "Theatre + Decoration": true,
+        "Fog Entry (1 Pot)": true,
+        "Candle Path": true,
+        "HBD LED": true,
+        "Name with LED (6)": true,
+        "AGE Number LED": true,
+        "HBD with Rose petals": true,
+        "Photo Clipping (10)": true,
+        "Birthday Sash": true,
+        "Birthday Crown, Spects": true,
+        "Rose Bouquet (12 Roses)": true,
+        "Customisation cake (1 kg)": true,
+        "Photography (30 Mins)": true,
+        "Cold fire entry (6 pieces)": true,
+        "Videography(Edited 1 Min Reel)": true,
+        "Hall fog (4 Pots)": true,
+      },
+      badgeText: "Save ₹300",
       buttonText: "Switch to Combo Plans →",
-    }
+    },
   ];
-
 
 
 
@@ -831,34 +881,20 @@ function Home() {
                     <div className="row gy-4 justify-content-center">
                       {packages.map((pkg) => (
                         <div className="col-xl-3 col-lg-4 col-md-6 col-sm-10" key={pkg.id}>
-                          <div
-                            className="position-relative card border-0 shadow rounded-4 h-100 text-center gradient45"
-                          >
-                            {/* Ribbon Badge */}
-                            {/* <div
-                              className="position-absolute top-0 start-50 translate-middle"
-                              style={{
-                                backgroundColor: "#a259ff",
-                                color: "#fff",
-                                padding: "4px 16px",
-                                borderRadius: "10px 10px 0 0",
-                                fontSize: "14px",
-                                fontWeight: "bold"
-                              }}
-                            >
-                              {pkg.badgeText}
-                            </div> */}
-
+                          <div className="position-relative card border-0 shadow rounded-4 h-100 text-center gradient45">
                             <div className="card-body d-flex flex-column p-4 mt-4">
                               <h4 className="fw-bold mb-2">{pkg.title}</h4>
                               <p className="text-muted" style={{ fontStyle: "italic", fontSize: "14px" }}>
                                 {pkg.subtitle}
                               </p>
 
-                              <ul className="list-unstyled text-start my-4 px-3">
-                                {pkg.features.map((feature, index) => (
+                              <ul className="list-unstyled text-start my-3 px-3">
+                                {Object.keys(pkg.detailedFeatures).map((feature, index) => (
                                   <li key={index} className="d-flex align-items-center mb-2">
-                                    <span className="me-2 text-success fw-bold">✔</span> {feature}
+                                    <span className={`me-2 fw-bold ${pkg.detailedFeatures[feature] ? "text-success" : "text-danger"}`} >
+                                      {pkg.detailedFeatures[feature] ? "✅" : "❌"}
+                                    </span>
+                                    {feature}
                                   </li>
                                 ))}
                               </ul>
@@ -866,10 +902,7 @@ function Home() {
                               <p className="fw-semibold mb-4">Starts from ₹{pkg.price}</p>
                               <button
                                 className="btn text-white mt-auto"
-                                style={{
-                                  backgroundColor: "#a259ff",
-                                  borderRadius: "10px"
-                                }}
+                                style={{ backgroundColor: "#a259ff", borderRadius: "10px" }}
                                 onClick={() => navigateTheater('/theaters')}
                               >
                                 {pkg.buttonText}
@@ -962,7 +995,7 @@ function Home() {
                                     <h5 className="card-title" style={{ color: "#681DC0" }}>
                                       {occasion.name}
                                     </h5>
-                                    <p className="card-text fw-semibold mb-1 text-warning">₹{occasion.price}</p>
+
                                     <p className="card-text small">{occasion.description}</p>
                                   </div>
                                 </div>
@@ -1524,210 +1557,73 @@ function Home() {
                     </div>
                   </div>
                 </section>
-                <section className="pt-5 bg-white" >
-                  <div className="container-fluid text-center py-5" style={{ backgroundColor: "#e7d2f3", borderRadius: "2rem 2rem 0 0" }}>
-                    <h2 className="fw-bold mb-5 dark-text">Our Branches</h2>
 
-                    <div className="row justify-content-center">
-                      {addresses.map((addr, idx) => (
-                        <div className="col-md-6 col-lg-5 mb-4" key={idx}>
-                          <div
-                            className="p-4 shadow-sm h-100"
-                            style={{
-                              backgroundColor: "#f5eafc",
-                              borderRadius: "2rem",
-                              transition: "0.3s",
-                            }}
-                          >
-                            <h4 className="fw-bold text-center mb-3" style={{ color: "#5b179b" }}>
-                              {addr.name}
-                            </h4>
-                            <p
-                              className="text-muted mb-3 text-center"
-                              style={{ fontStyle: "italic", fontSize: "0.95rem" }}
-                            >
-                              {addr.addressLine1}, {addr.addressLine2}
-                            </p>
+                <section className="pt-5 bg-white">
+  <div
+    className="container-fluid text-center py-5"
+    style={{ backgroundColor: "#e7d2f3", borderRadius: "2rem 2rem 0 0" }}
+  >
+    <h2 className="fw-bold mb-5 dark-text">Our Branches</h2>
 
-                            <div className="text-center">
-                              <a
-                                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                                  `${addr.addressLine1}, ${addr.addressLine2}`
-                                )}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-decoration-none fw-semibold"
-                                style={{ color: "#6d28d9" }}
-                              >
-                                <i className="bi bi-geo-alt-fill me-2 light-text"></i>See on map
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+    <div className="row justify-content-center">
+      {addresses.map((addr, idx) => (
+        <div className="col-md-6 col-lg-5 mb-4" key={idx}>
+          <div
+            className="p-4 shadow-sm h-100"
+            style={{
+              backgroundColor: "#f5eafc",
+              borderRadius: "2rem",
+              transition: "0.3s",
+            }}
+          >
+            <h4 className="fw-bold text-center mb-3 text-purple">{addr.name}</h4>
+            <p
+              className="text-muted mb-3 text-center"
+              style={{ fontStyle: "italic", fontSize: "0.95rem" }}
+            >
+              {addr.addressLine1}, {addr.addressLine2}
+            </p>
+
+            {/* Static Info Badges */}
+            <div className="d-flex justify-content-center gap-3 mb-3 flex-wrap">
+              <span className="badge light-back px-3 py-2">
+                <i className="bi bi-car-front-fill me-2"></i>Parking Facility
+              </span>
+              <span className="badge light-back px-3 py-2">
+                <i className="bi bi-egg-fried me-2"></i>Food Menu
+              </span>
+            </div>
+
+            <div className="text-center">
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                  `${addr.addressLine1}, ${addr.addressLine2}`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-decoration-none fw-semibold"
+                style={{ color: "#6d28d9" }}
+              >
+                <i className="bi bi-geo-alt-fill me-2 light-text"></i>See on map
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <style jsx>{`
+    .text-purple {
+      color: #5b179b;
+    }
+    .badge i {
+      vertical-align: middle;
+    }
+  `}</style>
+</section>
 
 
-                  <style jsx>{`
-                  .text-purple {
-                   color: #5b179b;
-                    }
-                 `}</style>
-                </section>
-
-                {/*  ENQUIRY
-                <section className="pt-5 pb-5 p-relative bg-light-grey">
-                  <div className="p-3">
-                    <div className="row justify-content-md-center">
-                      <div className=" pl-30">
-                        <div className="row justify-content-center">
-                          <div className="col-xl-6 col-lg-8"></div>
-                        </div>
-                      </div>
-                      <div className="col-lg-6 mt-3">
-                        <iframe
-                          src={Contact.map}
-                          width="100%"
-                          height={480}
-                          style={{ borderRadius: "20px" }}
-                          allowFullScreen=""
-                          loading="lazy"
-                          referrerPolicy="no-referrer-when-downgrade"
-                        />
-                      </div>
-                      <div className="col-lg-6 mt-3">
-                        <div>
-                          <div className="row gradient-border">
-                            <div className="col-lg-6 ">
-                              <div className="contactsops bg-dark">
-                                <img
-                                  
-                                  src={logo}
-                                  alt="logo"
-                                  style={{ height: "85px" }}
-                                />
-                                <p style={{ color: "white" }}>
-                                  Planning a memorable celebration at Carnival
-                                  Castle Private Theatre? We are ready to make
-                                  your vision to reality! Whether it's a
-                                  birthday, anniversary, bride to be, mom to be,
-                                  groom to be, baby shower, private movie
-                                  screening, special surprises or corporate
-                                  event, we offer tailored packages to make each
-                                  occasion special. To enquire, simply contact
-                                  us to discuss your specific needs, from theme
-                                  decor, food options to seating arrangements
-                                  and custom add-ons.
-                                </p>
-                              </div>
-                            </div>
-                            <div className="col-lg-6">
-                              <div className="booking-form align-items-center justify-content-center">
-                                <form
-                                  className="mt-4 mb-3"
-                                  onSubmit={(e) => {
-                                    formsubmit(e);
-                                  }}
-                                >
-                                  <>
-                                    <div className="section-title text-center mb-5">
-                                      <h2 className="title">Enquiry Now</h2>
-                                      <hr className="gradient-border"></hr>
-                                    </div>
-                                    <div className="mb-3 input-group">
-                                      <span className="input-group-text">
-                                        <FontAwesomeIcon icon={faUser} />
-                                      </span>
-                                      <input
-                                        required
-                                        type="text"
-                                        name="name"
-                                        value={form.name}
-                                        onChange={handleChange}
-                                        className="form-control"
-                                        placeholder="Enter Full Name*"
-                                      />
-                                    </div>
-
-                                    <div className="mb-3 input-group">
-                                      <span className="input-group-text">
-                                        <FontAwesomeIcon icon={faPhone} />
-                                      </span>
-                                      <input
-                                        required
-                                        type="text"
-                                        name="mobileNumber"
-                                        onChange={handleChange}
-                                        maxLength="10"
-                                        minLength="10"
-                                        pattern="[0-9]{10}"
-                                        value={form.mobileNumber}
-                                        placeholder="Enter Mobile Number*"
-                                        className="form-control"
-                                      />
-                                    </div>
-
-                                    <div className="mb-3 input-group">
-                                      <span className="input-group-text">
-                                        <FontAwesomeIcon icon={faEnvelope} />
-                                      </span>
-                                      <input
-                                        required
-                                        type="email"
-                                        name="email"
-                                        placeholder="Enter Email*"
-                                        onChange={handleChange}
-                                        value={form.email}
-                                        className="form-control"
-                                      />
-                                    </div>
-
-                                    <div className="mb-3 input-group">
-                                      <span className="input-group-text">
-                                        <FontAwesomeIcon icon={faCalendarAlt} />
-                                      </span>
-                                      <input
-                                        required
-                                        type="text"
-                                        name="eventName"
-                                        placeholder="Enter Event Name*"
-                                        onChange={handleChange}
-                                        value={form.eventName}
-                                        className="form-control"
-                                      />
-                                    </div>
-
-                                    <div className="mb-3 input-group">
-                                      <span className="input-group-text">
-                                        <FontAwesomeIcon icon={faClipboard} />
-                                      </span>
-                                      <input
-                                        type="text"
-                                        name="description"
-                                        required
-                                        onChange={handleChange}
-                                        value={form.description}
-                                        placeholder="Enter Description*"
-                                        className="form-control"
-                                      />
-                                    </div>
-                                    <button
-                                      type="submit"
-                                      className="btn main-booknow mb-3 float-end"
-                                    >
-                                      Submit
-                                    </button>
-                                  </>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section> */}
                 <Modal
                   size="md"
                   show={lgShow}
