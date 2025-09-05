@@ -511,7 +511,7 @@ function Theaters() {
                   <div className="row">
                     {addresses && addresses.length > 0 ? (
                       addresses.map((address, index) => (
-                        <div className="col-12 col-md-6 mb-4 d-flex" key={index}>
+                        <div className="col-12 col-md-6  d-flex" key={index}>
                           <div
                             className="card text-black shadow-lg gradient135 d-flex flex-column w-100"
                             style={{
@@ -587,14 +587,14 @@ function Theaters() {
                               </div>
 
                               {/* Static Info Badges */}
-            <div className="d-flex justify-content-center gap-3 mb-3 flex-wrap">
-              <span className="badge light-back px-3 py-2">
-                <i className="bi bi-car-front-fill me-2"></i>Parking Facility
-              </span>
-              <span className="badge light-back px-3 py-2">
-                <i className="bi bi-egg-fried me-2"></i>Food Menu
-              </span>
-            </div>
+                              <div className="d-flex justify-content-center gap-3 mb-3 flex-wrap mt-2">
+                                <span className="badge rounded-pill light-back px-3 py-3 fw-bold">
+                                  <i className="bi bi-car-front-fill me-2"></i>Parking Facility
+                                </span>
+                                <span className="badge rounded-pill light-back px-3 py-3 fw-bold">
+                                  <i className="bi bi-egg-fried me-2"></i>Food Menu
+                                </span>
+                              </div>
                               <button
                                 className="btn light-back text-white w-100 mt-3"
                                 onClick={() => handleLocationSelect(address)}
@@ -1039,11 +1039,11 @@ function Theaters() {
                                                   </button>
 
                                                   {/* Discount amount below every slot */}
-                                                  {!slot.isBooked && discountAmount>0 ? (
+                                                  {!slot.isBooked && discountAmount > 0 ? (
                                                     <div style={{ fontSize: "0.65rem", color: "#28a745", fontWeight: "500", marginTop: "2px" }}>
                                                       Save ₹{discountAmount}
                                                     </div>
-                                                  ):(<div></div>)}
+                                                  ) : (<div></div>)}
                                                 </div>
                                               );
                                             })}

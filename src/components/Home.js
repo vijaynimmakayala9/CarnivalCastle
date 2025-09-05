@@ -657,34 +657,34 @@ function Home() {
 
   const testimonials = [
     {
-      name: "Aadhya Rao",
-      role: "Digital Marketer",
-      thumbnail: "https://img.youtube.com/vi/ysz5S6PUM-U/mqdefault.jpg",
-      videoId: "ysz5S6PUM-U",
+      name: "Royal Theatre",
+      role: "Hyderabad",
+      thumbnail: "https://api.carnivalcastle.com/uploads/theatreImg/1738844693564-DSC07735.JPG",
+      videoId: "kusm4_IYHOY?si=XGCAMbxsIJ2RE_WN",
     },
     {
-      name: "Suresh Kumar",
-      role: "Tech Lead",
-      thumbnail: "https://img.youtube.com/vi/eVTXPUF4Oz4/mqdefault.jpg",
-      videoId: "eVTXPUF4Oz4",
+      name: "Galaxy Theatre",
+      role: "Hyderabad",
+      thumbnail: "https://api.carnivalcastle.com/uploads/theatreImg/1727807868995-WhatsApp%20Image%202024-07-14%20at%2014.27.54%20(1).jpeg",
+      videoId: "bmzx0dcSZDc?si=MXkJl-Ei2hZ0s051",
     },
     {
-      name: "Devi Sri",
-      role: "Designer",
-      thumbnail: "https://img.youtube.com/vi/ScMzIvxBSi4/mqdefault.jpg",
-      videoId: "ScMzIvxBSi4",
+      name: "Couple Cove Theatre",
+      role: "Hyderabad",
+      thumbnail: "https://api.carnivalcastle.com/uploads/theatreImg/1727168553419-preview%20(1).jpg",
+      videoId: "rLRetba1EQQ?si=vbMY15_9R0Nl52v9",
     },
     {
-      name: "Aditya Varma",
-      role: "Product Manager",
-      thumbnail: "https://img.youtube.com/vi/TcMBFSGVi1c/mqdefault.jpg",
-      videoId: "TcMBFSGVi1c",
+      name: "Premier Theatre",
+      role: "Hyderabad",
+      thumbnail: "https://api.carnivalcastle.com/uploads/theatreImg/1721467185380-WhatsApp%20Image%202024-07-20%20at%202.43.34%20PM.jpeg",
+      videoId: "Avthg38r0DI?si=QYHix5HqXk4tTLFp",
     },
     {
-      name: "Kalyani",
-      role: "Software Engineer",
-      thumbnail: "https://img.youtube.com/vi/M7lc1UVf-VE/mqdefault.jpg",
-      videoId: "M7lc1UVf-VE",
+      name: "Radiant Theatre",
+      role: "Hyderabad",
+      thumbnail: "https://api.carnivalcastle.com/uploads/theatreImg/1747076491299-WhatsApp%20Image%202025-05-13%20at%2000.23.07%20(1).jpeg",
+      videoId: "17AnL3Zrfo0?si=ltGSqPLeEDjYDOg_",
     },
   ];
 
@@ -1414,7 +1414,7 @@ function Home() {
                     <Row className="align-items-center">
                       {/* LEFT SECTION */}
                       <Col lg={3} className="text-center text-lg-start mb-4 mb-lg-0">
-                        <h2 className="fw-bold mt-3 dark-text">Testimonials</h2>
+                        <h2 className="fw-bold mt-3 dark-text">Our Theatres</h2>
                         <p className="light-text fs-6">
                           Real stories. Real celebrations. Real magic at Carnival Castle.
                         </p>
@@ -1559,61 +1559,61 @@ function Home() {
                 </section>
 
                 <section className="pt-5 bg-white">
-  <div
-    className="container-fluid text-center py-5"
-    style={{ backgroundColor: "#e7d2f3", borderRadius: "2rem 2rem 0 0" }}
-  >
-    <h2 className="fw-bold mb-5 dark-text">Our Branches</h2>
+                  <div
+                    className="container-fluid text-center py-5"
+                    style={{ backgroundColor: "#e7d2f3", borderRadius: "2rem 2rem 0 0" }}
+                  >
+                    <h2 className="fw-bold mb-5 dark-text">Our Branches</h2>
 
-    <div className="row justify-content-center">
-      {addresses.map((addr, idx) => (
-        <div className="col-md-6 col-lg-5 mb-4" key={idx}>
-          <div
-            className="p-4 shadow-sm h-100"
-            style={{
-              backgroundColor: "#f5eafc",
-              borderRadius: "2rem",
-              transition: "0.3s",
-            }}
-          >
-            <h4 className="fw-bold text-center mb-3 text-purple">{addr.name}</h4>
-            <p
-              className="text-muted mb-3 text-center"
-              style={{ fontStyle: "italic", fontSize: "0.95rem" }}
-            >
-              {addr.addressLine1}, {addr.addressLine2}
-            </p>
+                    <div className="row justify-content-center">
+                      {addresses.map((addr, idx) => (
+                        <div className="col-md-6 col-lg-5 mb-4" key={idx}>
+                          <div
+                            className="p-4 shadow-sm h-100"
+                            style={{
+                              backgroundColor: "#f5eafc",
+                              borderRadius: "2rem",
+                              transition: "0.3s",
+                            }}
+                          >
+                            <h4 className="fw-bold text-center mb-3 text-purple">{addr.name}</h4>
+                            <p
+                              className="text-muted mb-3 text-center"
+                              style={{ fontStyle: "italic", fontSize: "0.95rem" }}
+                            >
+                              {addr.addressLine1}, {addr.addressLine2}
+                            </p>
 
-            {/* Static Info Badges */}
-            <div className="d-flex justify-content-center gap-3 mb-3 flex-wrap">
-              <span className="badge light-back px-3 py-2">
-                <i className="bi bi-car-front-fill me-2"></i>Parking Facility
-              </span>
-              <span className="badge light-back px-3 py-2">
-                <i className="bi bi-egg-fried me-2"></i>Food Menu
-              </span>
-            </div>
+                            {/* Static Info Badges */}
+                            <div className="d-flex justify-content-center gap-3 mb-3 flex-wrap">
+                              <span className="badge light-back px-3 py-2">
+                                <i className="bi bi-car-front-fill me-2"></i>Parking Facility
+                              </span>
+                              <span className="badge light-back px-3 py-2">
+                                <i className="bi bi-egg-fried me-2"></i>Food Menu
+                              </span>
+                            </div>
 
-            <div className="text-center">
-              <a
-                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-                  `${addr.addressLine1}, ${addr.addressLine2}`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-decoration-none fw-semibold"
-                style={{ color: "#6d28d9" }}
-              >
-                <i className="bi bi-geo-alt-fill me-2 light-text"></i>See on map
-              </a>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
+                            <div className="text-center">
+                              <a
+                                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                                  `${addr.addressLine1}, ${addr.addressLine2}`
+                                )}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-decoration-none fw-semibold"
+                                style={{ color: "#6d28d9" }}
+                              >
+                                <i className="bi bi-geo-alt-fill me-2 light-text"></i>See on map
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
-  <style jsx>{`
+                  <style jsx>{`
     .text-purple {
       color: #5b179b;
     }
@@ -1621,7 +1621,7 @@ function Home() {
       vertical-align: middle;
     }
   `}</style>
-</section>
+                </section>
 
 
                 <Modal
