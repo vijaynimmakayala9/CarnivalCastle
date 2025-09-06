@@ -873,7 +873,7 @@ function Theaters() {
                                         <div>
                                           <h5
                                             className="card-title m-0 dark-text"
-                                            style={{ fontSize: "1.25rem", fontWeight: "700" }}
+                                            style={{ fontSize: "1.35rem", fontWeight: "700" }}
                                           >
                                             {data.name}
                                           </h5>
@@ -902,7 +902,7 @@ function Theaters() {
                                         <div className="col-6">
                                           <p
                                             className="card-details mb-2 light-text"
-                                            style={{ fontSize: "0.75rem" }}
+                                            style={{ fontSize: "0.80rem" }}
                                           >
                                             <i className="bi bi-currency-exchange"></i>{" "}
                                             <span className="fw-bold">Extra Person Price:</span>{" "}
@@ -912,7 +912,7 @@ function Theaters() {
                                         <div className="col-6">
                                           <p
                                             className="card-details mb-2 light-text"
-                                            style={{ fontSize: "0.75rem" }}
+                                            style={{ fontSize: "0.80rem" }}
                                           >
                                             <i className="bi bi-person-fill"></i>
                                             <span className="fw-bold">Max People: </span>{data.maxPeople}
@@ -921,7 +921,7 @@ function Theaters() {
                                       </div>
                                       <p
                                         className="card-details mb-2 light-text"
-                                        style={{ fontSize: "0.75rem" }}
+                                        style={{ fontSize: "0.85rem" }}
                                       >
                                         <span className="fw-bold">
                                           <i className="bi bi-tv-fill"></i> Features
@@ -965,7 +965,7 @@ function Theaters() {
 
                                       <p
                                         className="card-details mb-2 light-text"
-                                        style={{ fontSize: "0.75rem" }}
+                                        style={{ fontSize: "0.85rem" }}
                                       >
                                         <i className="bi bi-info-circle-fill"></i>{" "}
                                         <span className="fw-bold">Description:</span>{" "}

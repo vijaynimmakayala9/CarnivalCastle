@@ -16,7 +16,18 @@ import { useLocation } from "react-router-dom";
 
 function Header() {
 
-  const location = useLocation(); // ❗ Move to top level (outside currentPage function)
+
+  const location = useLocation();
+  const [showMessage, setShowMessage] = useState(false);
+
+  useEffect(() => {
+    // Show only on home page
+    if (location.pathname === "/") {
+      setShowMessage(true);
+      const timer = setTimeout(() => setShowMessage(false), 10000); // hide after 5 sec
+      return () => clearTimeout(timer);
+    }
+  }, [location.pathname]);
 
 
   const scrollToTop = () => {
@@ -308,18 +319,38 @@ function Header() {
             </a>
 
             {/* WhatsApp Icon */}
-            <a
-              href="https://api.whatsapp.com/send/?phone=+918341428342&text=Hi&type=phone_number&app_absent=0"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="sbutton whatsapp"
-              tooltip="WhatsApp"
-              onClick={() =>
-                console.log("Redirecting to WhatsApp number: 8341428342")
-              }
-            >
-              <FaWhatsapp size={28} color="white" />
-            </a>
+            <div>
+              {/* WhatsApp Icon */}
+              <a
+                href="https://api.whatsapp.com/send/?phone=+918341428342&text=Hi&type=phone_number&app_absent=0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sbutton whatsapp"
+                tooltip="WhatsApp"
+              >
+                <FaWhatsapp size={28} color="white" />
+              </a>
+
+              {/* Floating Message */}
+              {showMessage && (
+                <div
+                  style={{
+                    position: "fixed",
+                    bottom: "20px",
+                    right: "100px",
+                    backgroundColor: "#fff",
+                    color: "black",
+                    padding: "10px 15px",
+                    borderRadius: "8px",
+                    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+                    zIndex: 9999,
+                    fontWeight: "bold",
+                  }}
+                >
+                  Contact us here on WhatsApp!
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

@@ -39,14 +39,14 @@ const ComboBooking = () => {
   //   addBooking();
   // };
 
-  const handleSubmit =(e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault();
     // handleSubmitpayment()
     addcombobooking()
   }
-  
+
   const handleSubmitpayment = (e) => {
-    
+
     sessionStorage.setItem("userDetails", JSON.stringify(data));
     // addBooking(); 
     axios
@@ -55,7 +55,7 @@ const ComboBooking = () => {
       )
       .then((response) => {
         // console.log("Transaction status updated:", response.data);
-        window.location.href=response.data.data?.instrumentResponse?.redirectInfo.url;
+        window.location.href = response.data.data?.instrumentResponse?.redirectInfo.url;
         console.log("Transaction status updated:", response.data.instrumentResponse);
       })
       .catch((error) => {
@@ -84,7 +84,7 @@ const ComboBooking = () => {
 
   const mypaymenttypekey = sessionStorage.getItem("paymentkey");
 
-  const addcombobooking = async()=>{
+  const addcombobooking = async () => {
     setIsLoading1(true)
     const extrapersiontheater = parseFloat(sessionStorage.getItem("countPeople"));
     const maxPeopletheater = parseFloat(sessionStorage.getItem("maxPeople"));
@@ -124,7 +124,7 @@ const ComboBooking = () => {
         toast(res.data.message);
         // submitcakesall();
         // navigateHome("/payment-success");
-        window.location.href=res?.data?.data?.instrumentResponse?.redirectInfo?.url
+        window.location.href = res?.data?.data?.instrumentResponse?.redirectInfo?.url
         setIsLoading1(false)
         // sessionStorage.clear();
         // sessionStorage.setItem("invoicePath", res.data.invoicePath);
@@ -200,7 +200,7 @@ const ComboBooking = () => {
   //           }, 2000); 
   //         }
   //       }
-        
+
   //     },
   //     prefill: {
   //       name: sessionStorage.getItem("name"),
@@ -314,33 +314,33 @@ const ComboBooking = () => {
                       </div>
 
                       <div className="d-flex justify-content-end mt-3">
-                        {isLoading1 == true?(
+                        {isLoading1 == true ? (
                           <button
-                          className="btn btn-outline-success main-booknow"
-                          style={{
-                            boxShadow: "none",
-                            color: "black",
-                            border: "none",
-                          }}
-                          disabled
-                        >
+                            className="btn dark-back text-white"
+                            style={{
+                              boxShadow: "none",
+                              color: "black",
+                              border: "none",
+                            }}
+                            disabled
+                          >
                             Your Booking Processing...
-                        </button>
-                        ):(
-<button
-                          className="btn  dark-back text-white"
-                          style={{
-                            boxShadow: "none",
-                            color: "black",
-                            border: "none",
-                          }}
-                          onClick={handleSubmit}
-                          disabled={!isAgreed}
-                        >
-                          Confirm & Pay Advance
-                        </button>
+                          </button>
+                        ) : (
+                          <button
+                            className="btn  dark-back text-white"
+                            style={{
+                              boxShadow: "none",
+                              color: "black",
+                              border: "none",
+                            }}
+                            onClick={handleSubmit}
+                            disabled={!isAgreed}
+                          >
+                            Confirm & Pay ₹750 to Reserve
+                          </button>
                         )}
-                        
+
                       </div>
                     </div>
                   </div>

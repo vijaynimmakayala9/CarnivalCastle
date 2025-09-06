@@ -62,17 +62,17 @@ function Enquiry() {
         <>
           <div className="home-page indexsix">
             <Header />
-            <main className="main-wrapper bg-dark text-white">
+            <main className="main-wrapper lightest-back dark-text">
               <section
                 id="parallax"
                 className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix"
               ></section>
               <div className="container d-flex justify-content-center align-items-center vh-100">
                 <div
-                  className="bg-light-grey gradient-border p-4 m-3 rounded text-center"
+                  className="bg-white p-4 m-3 rounded text-center"
                   style={{ maxWidth: "100%", width: "100%", maxWidth: "400px" }}
                 >
-                  <h3 className="text-danger">Payment Failed</h3>
+                  <h3 className="dark-text">Payment Failed</h3>
                   <p className="text-danger">Please Try Again</p>
                   <img
                     src={error}
@@ -82,7 +82,7 @@ function Enquiry() {
                   <div className="d-flex flex-column flex-sm-row justify-content-between">
                     <button
                       onClick={handleClick}
-                      className="btn main-booknow mb-2 mb-sm-0"
+                      className="btn dark-back text-white mb-2 mb-sm-0"
                       style={{boxShadow:"none"}}
                     >
                       Try Again

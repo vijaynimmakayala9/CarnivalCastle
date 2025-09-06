@@ -453,7 +453,7 @@ const BookingForm = () => {
                       <div className="d-flex justify-content-end mt-3">
                         {isLoading1 == true ? (
                           <button
-                            className="btn btn-outline-success main-booknow"
+                            className="btn dark-back text-white"
                             style={{
                               boxShadow: "none",
                               color: "black",
@@ -474,7 +474,7 @@ const BookingForm = () => {
                             onClick={handleSubmit}
                             disabled={!isAgreed}
                           >
-                            Confirm & Pay Advance
+                            Confirm & Pay ₹750 to Reserve
                           </button>
                         )}
                       </div>

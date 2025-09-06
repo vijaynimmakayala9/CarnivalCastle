@@ -915,112 +915,134 @@ function Home() {
                   </div>
                 </section>
 
-                <section className="occasions-section py-5 text-dark" style={{ backgroundColor: "#fff" }}>
+
+
+                <section
+                  className="occasions-section py-5 text-dark"
+                  style={{ backgroundColor: "#fff" }}
+                >
                   <div className="container">
                     <h2 className="text-center mb-5 light-text">
                       What Can You Celebrate at Carnival Castle?
                     </h2>
 
-                    {(() => {
-                      const modifiedOccasions = occasions.map((occasion) => {
-                        let description = "";
-                        switch (occasion.name) {
-                          case "Anniversary":
-                            description =
-                              "Celebrate your love and commitment in a private, luxurious theatre at Binge N Joy. Enjoy a personalized ambiance, delicious food, and exceptional picture quality.";
-                            break;
-                          case "Bride To Be":
-                            description =
-                              "Celebrate your upcoming wedding with a special private screening. Enjoy a memorable day filled with personalized decor, scrumptious food, and a luxurious theatre experience.";
-                            break;
-                          case "Groom To Be":
-                            description =
-                              "Make the groom’s last night as a bachelor memorable with a private screening and special services. Enjoy delicious food, exceptional sound, and an intimate theatre experience.";
-                            break;
-                          case "Dad To Be":
-                            description =
-                              "Celebrate the soon-to-be father in a private, luxurious setting with custom decor and exceptional service. Enjoy great food, a perfect movie, and a memorable experience.";
-                            break;
-                          case "Mom To Be":
-                            description =
-                              "Celebrate the expecting mother in a private theatre with amazing decor and personalized services. Enjoy a relaxing, unforgettable experience with great food and movies.";
-                            break;
-                          case "Love Proposal":
-                            description =
-                              "Plan the perfect surprise proposal at Binge N Joy Private Theatres. With a magical atmosphere, your proposal will be an unforgettable moment, complete with beautiful decor and food.";
-                            break;
-                          case "Marriage Proposal":
-                            description =
-                              "Propose in the most romantic and unforgettable way at Binge N Joy. Enjoy a private theatre with personalized decor, delicious food, and everything you need for the perfect proposal.";
-                            break;
-                          case "Farewell":
-                            description =
-                              "Bid farewell in style at Binge N Joy Private Theatres. Celebrate the memories with a private screening, delicious food, and the perfect ambiance for your farewell.";
-                            break;
-                          case "Bon voyage":
-                            description =
-                              "Send off a loved one with a special farewell event at Binge N Joy Private Theatres. Enjoy a private screening with gourmet food and personalized decor for the perfect bon voyage.";
-                            break;
-                          default:
-                            description =
-                              "Binge N Joy Private Theatres is the perfect place to celebrate any special occasion. Enjoy an intimate and luxurious setting with exceptional picture and sound quality, delicious food, and attentive staff.";
-                            break;
-                        }
+                    <div
+                      className="card text-white p-4 rounded-4 border-0"
+                      style={{ backgroundColor: "#E9DCFF" }}
+                    >
+                      <Slider
+                        dots={false}
+                        infinite={true}
+                        speed={500}
+                        slidesToShow={3} // default for large screens
+                        slidesToScroll={1} // scroll one card at a time
+                        autoplay={true}
+                        autoplaySpeed={4000}
+                        responsive={[
+                          {
+                            breakpoint: 992, // medium devices
+                            settings: {
+                              slidesToShow: 2,
+                              slidesToScroll: 1,
+                            },
+                          },
+                          {
+                            breakpoint: 768, // small devices
+                            settings: {
+                              slidesToShow: 1,
+                              slidesToScroll: 1,
+                            },
+                          },
+                        ]}
+                      >
+                        {occasions.map((occasion, index) => {
+                          let description = "";
+                          switch (occasion.name) {
+                            case "Anniversary":
+                              description =
+                                "Celebrate your love and commitment in a private, luxurious theatre at Binge N Joy. Enjoy a personalized ambiance, delicious food, and exceptional picture quality.";
+                              break;
+                            case "Bride To Be":
+                              description =
+                                "Celebrate your upcoming wedding with a special private screening. Enjoy a memorable day filled with personalized decor, scrumptious food, and a luxurious theatre experience.";
+                              break;
+                            case "Groom To Be":
+                              description =
+                                "Make the groom’s last night as a bachelor memorable with a private screening and special services. Enjoy delicious food, exceptional sound, and an intimate theatre experience.";
+                              break;
+                            case "Dad To Be":
+                              description =
+                                "Celebrate the soon-to-be father in a private, luxurious setting with custom decor and exceptional service. Enjoy great food, a perfect movie, and a memorable experience.";
+                              break;
+                            case "Mom To Be":
+                              description =
+                                "Celebrate the expecting mother in a private theatre with amazing decor and personalized services. Enjoy a relaxing, unforgettable experience with great food and movies.";
+                              break;
+                            case "Love Proposal":
+                              description =
+                                "Plan the perfect surprise proposal at Binge N Joy Private Theatres. With a magical atmosphere, your proposal will be an unforgettable moment, complete with beautiful decor and food.";
+                              break;
+                            case "Marriage Proposal":
+                              description =
+                                "Propose in the most romantic and unforgettable way at Binge N Joy. Enjoy a private theatre with personalized decor, delicious food, and everything you need for the perfect proposal.";
+                              break;
+                            case "Farewell":
+                              description =
+                                "Bid farewell in style at Binge N Joy Private Theatres. Celebrate the memories with a private screening, delicious food, and the perfect ambiance for your farewell.";
+                              break;
+                            case "Bon voyage":
+                              description =
+                                "Send off a loved one with a special farewell event at Binge N Joy Private Theatres. Enjoy a private screening with gourmet food and personalized decor for the perfect bon voyage.";
+                              break;
+                            default:
+                              description =
+                                "Carnival Castle Private Theatres is the perfect place to celebrate any special occasion. Enjoy an intimate and luxurious setting with exceptional picture and sound quality, delicious food, and attentive staff.";
+                              break;
+                          }
 
-                        return {
-                          ...occasion,
-                          description: description,
-                          name: occasion.name === "Carnival Castle" ? "Binge N Joy" : occasion.name,
-                        };
-                      });
-
-                      return (
-                        <div className="card text-white p-4 rounded-4 border-0" style={{ backgroundColor: "#E9DCFF" }}>
-                          <div className="row g-4">
-                            {modifiedOccasions.map((occasion, index) => (
-                              <div className="col-12 col-md-6 col-lg-4" key={index}>
-                                <div className="card h-100 text-center bg-light rounded-4 gradient45 p-3">
-                                  <div className="card-body d-flex flex-column align-items-center">
-                                    <img
-                                      src={URLS.Base + occasion.image}
-                                      alt={occasion.name}
-                                      className="rounded-circle mb-3"
-                                      style={{
-                                        height: "100px",
-                                        width: "100px",
-                                        objectFit: "cover",
-                                        border: "2px solid #E9BE5F",
-                                      }}
-                                    />
-                                    <h5 className="card-title" style={{ color: "#681DC0" }}>
-                                      {occasion.name}
-                                    </h5>
-
-                                    <p className="card-text small">{occasion.description}</p>
-                                  </div>
+                          return (
+                            <div key={index} className="px-2">
+                              <div
+                                className="card h-100 text-center bg-light rounded-4 gradient45 p-4"
+                              >
+                                <div className="card-body d-flex flex-column align-items-center">
+                                  <img
+                                    src={URLS.Base + occasion.image}
+                                    alt={occasion.name}
+                                    className="rounded-circle mb-3"
+                                    style={{
+                                      height: "100px",
+                                      width: "100px",
+                                      objectFit: "cover",
+                                      border: "2px solid #E9BE5F",
+                                    }}
+                                  />
+                                  <h5 className="card-title" style={{ color: "#681DC0" }}>
+                                    {occasion.name === "Carnival Castle"
+                                      ? "Carnival Castle"
+                                      : occasion.name}
+                                  </h5>
+                                  <p className="card-text small">{description}</p>
                                 </div>
                               </div>
-                            ))}
-                          </div>
+                            </div>
+                          );
+                        })}
+                      </Slider>
 
-                          {/* Proceed Button */}
-                          <div className="text-center mt-5">
-                            <button
-                              className="btn px-5 py-2 rounded-3 fw-bold dark-back text-light"
-                              style={{ width: "80%", maxWidth: "500px" }}
-                              onClick={() => navigateTheater('/theatres')}
-                            >
-                              Proceed <i className="bi bi-arrow-right ms-2"></i>
-                            </button>
-                          </div>
-
-                        </div>
-                      );
-                    })()}
+                      {/* Proceed Button */}
+                      <div className="text-center mt-5">
+                        <button
+                          className="btn px-5 py-2 rounded-3 fw-bold dark-back text-light"
+                          style={{ width: "80%", maxWidth: "500px" }}
+                          onClick={() => navigateTheater("/theatres")}
+                        >
+                          Proceed <i className="bi bi-arrow-right ms-2"></i>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </section>
-
-
 
                 <section className="services-section py-5 text-dark bg-white">
                   <div className="container">
