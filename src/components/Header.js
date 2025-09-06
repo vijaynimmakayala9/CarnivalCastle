@@ -24,7 +24,7 @@ function Header() {
     // Show only on home page
     if (location.pathname === "/") {
       setShowMessage(true);
-      const timer = setTimeout(() => setShowMessage(false), 10000); // hide after 5 sec
+      const timer = setTimeout(() => setShowMessage(false), 15000); // hide after 5 sec
       return () => clearTimeout(timer);
     }
   }, [location.pathname]);

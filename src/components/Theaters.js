@@ -176,6 +176,25 @@ function Theaters() {
     }
   };
 
+  const calculateDuration = (fromTime, toTime) => {
+    const [fromH, fromM] = fromTime.split(":").map(Number);
+    const [toH, toM] = toTime.split(":").map(Number);
+
+    let start = fromH * 60 + fromM;
+    let end = toH * 60 + toM;
+
+    // Handle overnight slots (e.g., 22:00 → 00:30)
+    if (end <= start) {
+      end += 24 * 60;
+    }
+
+    const diffMinutes = end - start;
+    const hours = Math.floor(diffMinutes / 60);
+    const minutes = diffMinutes % 60;
+
+    return `${hours}:${minutes === 0 ? "00" : minutes} hr`;
+  };
+
 
   const handleCarouselSelect = (selectedIndex, theaterIndex) => {
     setActiveIndices(prev => ({
@@ -429,7 +448,7 @@ function Theaters() {
         <title>Best Surprise Party Places in Hyderabad | Private Theater</title>
         <meta
           name="description"
-          content="Celebrate at Bing Enjoy Private Theatres in Hyderabad. Perfect for birthdays, anniversaries, & special events with custom decor, food & privacy. Book now!!"
+          content="Celebrate at CarnivalCastle Private Theatres in Hyderabad. Perfect for birthdays, anniversaries, & special events with custom decor, food & privacy. Book now!!"
         />
       </Helmet>
 
@@ -591,9 +610,9 @@ function Theaters() {
                                 <span className="badge rounded-pill light-back px-3 py-3 fw-bold">
                                   <i className="bi bi-car-front-fill me-2"></i>Parking Facility
                                 </span>
-                                <span className="badge rounded-pill light-back px-3 py-3 fw-bold">
+                                {/* <span className="badge rounded-pill light-back px-3 py-3 fw-bold">
                                   <i className="bi bi-egg-fried me-2"></i>Food Menu
-                                </span>
+                                </span> */}
                               </div>
                               <button
                                 className="btn light-back text-white w-100 mt-3"
@@ -980,7 +999,10 @@ function Theaters() {
 
                                     <div>
                                       <div className="slot-selection mb-3">
-                                        <p className="slot-title mb-2 dark-text" style={{ fontSize: "0.875rem" }}>
+                                        <p
+                                          className="slot-title mb-2 dark-text"
+                                          style={{ fontSize: "0.875rem" }}
+                                        >
                                           <span className="fw-bold">Choose Your Slot:</span>
                                         </p>
 
@@ -996,12 +1018,12 @@ function Theaters() {
                                             data.availableSlots.map((slot, index) => {
                                               const fromTime12 = convertTo12HourFormat(slot.fromTime);
                                               const toTime12 = convertTo12HourFormat(slot.toTime);
-                                              const isSelected = selectedSlot[i] === slot;
 
-                                              // Calculate discount amount
-                                              const discountAmount = slot.price && slot.offerPrice
-                                                ? slot.price - slot.offerPrice
-                                                : data.price - data.offerPrice;
+                                              // ⏳ Calculate duration
+                                              const duration = calculateDuration(slot.fromTime, slot.toTime);
+
+                                              const isSelected =
+                                                selectedSlot[i] && selectedSlot[i]._id === slot._id;
 
                                               return (
                                                 <div
@@ -1013,7 +1035,7 @@ function Theaters() {
                                                 >
                                                   <button
                                                     className="btn"
-                                                    onClick={(e) => handleSlot(e, slot, i)}
+                                                    onClick={(e) => handleSlot(e, { ...slot, duration }, i)}
                                                     style={{
                                                       width: "100%",
                                                       backgroundColor: slot.isBooked
@@ -1037,13 +1059,6 @@ function Theaters() {
                                                   >
                                                     {fromTime12} - {toTime12}
                                                   </button>
-
-                                                  {/* Discount amount below every slot */}
-                                                  {!slot.isBooked && discountAmount > 0 ? (
-                                                    <div style={{ fontSize: "0.65rem", color: "#28a745", fontWeight: "500", marginTop: "2px" }}>
-                                                      Save ₹{discountAmount}
-                                                    </div>
-                                                  ) : (<div></div>)}
                                                 </div>
                                               );
                                             })}
@@ -1053,23 +1068,43 @@ function Theaters() {
                                       {/* Price shown only when a slot is selected */}
                                       {selectedSlot[i] ? (
                                         <div className="text-center mt-2">
-                                          <div style={{ fontSize: "1rem", fontWeight: "600", color: "#40008C" }}>
-                                            ₹ {selectedSlot[i].offerPrice ?? data.offerPrice}/-
+                                          <div
+                                            style={{
+                                              fontSize: "1rem",
+                                              fontWeight: "600",
+                                              color: "#40008C",
+                                            }}
+                                          >
+                                            ₹{" "}
+                                            {selectedSlot[i].duration === "1:30 hr"
+                                              ? data.oneandhalfslotPrice
+                                              : selectedSlot[i].offerPrice ?? data.offerPrice}
+                                            /-
                                           </div>
-                                          <div style={{ fontSize: "0.85rem", color: "#777" }}>
-                                            <del>₹ {selectedSlot[i].price ?? data.price}/-</del>
-                                          </div>
-                                          {/* ✅ Added people info here */}
-                                          <p className="fw-bold" style={{ fontSize: "0.8rem", marginBottom: "4px", color: "#555" }}>
-                                            For Upto {data.maxPeople} Peoples and Additional ₹{data.extraPersonprice} for extra Person
+
+                                          <p
+                                            className="fw-bold"
+                                            style={{
+                                              fontSize: "0.8rem",
+                                              marginBottom: "4px",
+                                              color: "#555",
+                                            }}
+                                          >
+                                            For Upto {data.maxPeople} Peoples and Additional ₹
+                                            {selectedSlot[i].duration === "1:30 hr"
+                                              ? data.onehalfanhourExtraPersonPrice
+                                              : data.extraPersonprice}{" "}
+                                            for extra Person
                                           </p>
                                         </div>
                                       ) : (
-                                        <div className="text-center mt-2" style={{ fontSize: "0.8rem", color: "#555" }}>
+                                        <div
+                                          className="text-center mt-2"
+                                          style={{ fontSize: "0.8rem", color: "#555" }}
+                                        >
                                           Select a slot to check price
                                         </div>
                                       )}
-
 
                                       {/* Book Now button */}
                                       <div className="col-12 mt-3">

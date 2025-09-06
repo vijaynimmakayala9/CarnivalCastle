@@ -29,7 +29,7 @@ function Gallery() {
     name: "Priyanka Devasath",
     image: "https://randomuser.me/api/portraits/women/12.jpg",
     rating: 5,
-    description: "We had a very good experience at Bingen & Joy private theatres. Budget friendly, food taste was really awesome. Staff was very good and approached very well. Thank you Bingen & Joy.",
+    description: "We had a very good experience at CarnivalCastle private theatres. Budget friendly, food taste was really awesome. Staff was very good and approached very well. Thank you CarnivalCastle.",
   },
   {
     name: "Santosh Santosh",
@@ -68,7 +68,7 @@ function Gallery() {
         </title>
         <meta
           name="description"
-          content="Looking for a unique celebration venue in Hyderabad? Bing Enjoy offers luxury private theaters with Lavish decor & food options for any special occasion."
+          content="Looking for a unique celebration venue in Hyderabad? CarnivalCastle offers luxury private theaters with Lavish decor & food options for any special occasion."
         />
       </Helmet>
 

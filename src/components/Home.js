@@ -416,10 +416,11 @@ function Home() {
     {
       id: 1,
       title: "Basic Plan",
-      price: "2000",
-      subtitle: "Simple theatre slot, no setup – just celebrate.",
+      price: "2149",
+      subtitle: "Simple theatre slot, no setup",
       detailedFeatures: {
-        "Theatre + Decoration": true,
+        "Theatre Hall": true,
+        "Decoration": true,
         "Fog Entry (1 Pot)": false,
         "Candle Path": false,
         "HBD LED": false,
@@ -437,12 +438,11 @@ function Home() {
         "Hall fog (4 Pots)": false,
       },
       badgeText: "Saved ₹0",
-      buttonText: "Continue with Add-Ons →",
+      buttonText: "Proceed →",
     },
     {
       id: 2,
       title: "Standard Plan",
-      price: "3000",
       subtitle: "Includes cake, lights & decor.",
       detailedFeatures: {
         "Theatre + Decoration": true,
@@ -463,12 +463,11 @@ function Home() {
         "Hall fog (4 Pots)": false,
       },
       badgeText: "Save ₹200",
-      buttonText: "Switch to Combo Plans →",
+      buttonText: "Proceed →",
     },
     {
       id: 3,
       title: "Special Plan",
-      price: "5000",
       subtitle: "Our grandest experience, full royal vibes.",
       detailedFeatures: {
         "Theatre + Decoration": true,
@@ -489,12 +488,11 @@ function Home() {
         "Hall fog (4 Pots)": false,
       },
       badgeText: "Save ₹400",
-      buttonText: "Switch to Combo Plans →",
+      buttonText: "Proceed →",
     },
     {
       id: 4,
       title: "Premium Plan",
-      price: "4000",
       subtitle: "More guests, more upgrades, more glam.",
       detailedFeatures: {
         "Theatre + Decoration": true,
@@ -515,7 +513,7 @@ function Home() {
         "Hall fog (4 Pots)": true,
       },
       badgeText: "Save ₹300",
-      buttonText: "Switch to Combo Plans →",
+      buttonText: "Proceed →",
     },
   ];
 
@@ -616,9 +614,9 @@ function Home() {
   const whyUsSlides = [
     {
       image: URLS?.Base + Highlights?.image, // Replace with dynamic images
-      title: "🎉 Why Choose BingeNJoy Private Theatre?",
+      title: "Why Choose CarnivalCastle Private Theatre?",
       subtitle:
-        "At BingeNJoy, we believe every celebration deserves a cinematic experience — intimate, exclusive and unforgettable. Here’s why our private theatre stands out:",
+        "At CarnivalCastle, we believe every celebration deserves a cinematic experience — intimate, exclusive and unforgettable. Here’s why our private theatre stands out:",
       points: [
         "Perfect for Every Occasion: Themed decorations, cakes, fog effects & photography.",
         "Luxurious Ambience: Recliners, premium sound, elegant decor.",
@@ -629,7 +627,7 @@ function Home() {
     },
     {
       image: "https://api.carnivalcastle.com/uploads/galleryImg/1728132797148-DSC07601.jpg", // Replace with another image
-      title: "🎬 Celebrate Cinematically!",
+      title: "Celebrate Cinematically!",
       subtitle:
         "Experience celebrations like never before in our private theatres — where entertainment meets exclusivity.",
       points: [
@@ -642,7 +640,7 @@ function Home() {
     },
     {
       image: "https://api.carnivalcastle.com/uploads/galleryImg/1728132803817-DSC07593.jpg", // Replace with another image
-      title: "🌈 Make Every Moment Magical",
+      title: "Make Every Moment Magical",
       subtitle:
         "From surprise proposals to baby showers — bring your vision to life in an immersive, themed theatre setting.",
       points: [
@@ -836,7 +834,7 @@ function Home() {
                               <div className="row justify-content-center text-center text-md-start">
                                 <div className="col-lg-10">
                                   <h1 className="display-4 fw-bold text-shadow mb-3">
-                                    <Typer text="Surprise your loved one only at Binge N Joy Private Theaters" typingSpeed={100} />
+                                    <Typer text="Surprise your loved one only at CarnivalCastle Private Theaters" typingSpeed={100} />
                                   </h1>
 
                                   <p className="lead mb-4">{data.description}</p>
@@ -871,6 +869,191 @@ function Home() {
                   </Slider>
                 </div>
 
+                <section
+                  className="py-5 position-relative text-dark"
+                  style={{ backgroundColor: "#E6D8F5" }}
+                >
+                  <Container fluid="lg">
+                    <Row className="align-items-center">
+                      {/* LEFT SECTION */}
+                      <Col lg={3} className="text-center text-lg-start mb-4 mb-lg-0">
+                        <h2 className="fw-bold mt-3 dark-text">Our Theatres</h2>
+                        <p className="light-text fs-6">
+                          Real stories. Real celebrations. Real magic at Carnival Castle.
+                        </p>
+                      </Col>
+
+                      {/* RIGHT SECTION */}
+                      <Col lg={9}>
+                        <div className="theatre-wrapper d-flex flex-lg-row flex-column align-items-center justify-content-center gap-3">
+                          {/* Main Testimonial */}
+                          <div className="main-video-card position-relative rounded shadow overflow-hidden">
+                            <iframe
+                              src={`https://www.youtube.com/embed/${selected.videoId}?autoplay=1&mute=1`}
+                              title={selected.name}
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                            ></iframe>
+
+                            {/* Label */}
+                            <div className="position-absolute bottom-0 start-0 end-0 p-3">
+                              <div className="bg-white d-inline-block px-3 py-2 rounded-4 w-100 shadow-sm">
+                                <strong className="dark-text">{selected.name}</strong>
+                                <br />
+                                <small className="text-dark">{selected.role}</small>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Side Testimonials */}
+                          <div className="side-scroll">
+                            {testimonials
+                              .filter((item) => item.videoId !== selected.videoId)
+                              .map((user, idx) => (
+                                <div
+                                  key={idx}
+                                  className="side-card d-flex align-items-center justify-content-center"
+                                  style={{
+                                    backgroundImage: `url(${user.thumbnail})`,
+                                    backgroundSize: "cover",
+                                    backgroundPosition: "center",
+                                  }}
+                                  onClick={() => setSelected(user)}
+                                >
+                                  <h6 className="vertical-text text-white fw-bold m-0">
+                                    {user.name}
+                                  </h6>
+                                  <div className="overlay"></div>
+                                </div>
+                              ))}
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Container>
+
+                  {/* Styles */}
+                  <style jsx>{`
+    .main-video-card {
+      background: #000;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .main-video-card iframe {
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    .side-scroll {
+      display: flex;
+      gap: 12px;
+    }
+
+    .side-card {
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .side-card:hover {
+      transform: scale(1.05);
+    }
+
+    .vertical-text {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      font-size: 0.9rem;
+      z-index: 2;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 1;
+    }
+
+    /* Large screen: side by side */
+    @media (min-width: 992px) {
+      .main-video-card {
+        width: 60%;
+        height: 420px;
+      }
+      .side-scroll {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        max-width: 40%;
+      }
+      .side-card {
+        width: 120px;
+        height: 180px;
+      }
+    }
+
+    /* Tablet */
+    @media (max-width: 991px) and (min-width: 576px) {
+      .theatre-wrapper {
+        flex-direction: column;
+        text-align: center;
+      }
+      .main-video-card {
+        width: 80%;
+        max-width: 360px;
+        height: 340px;
+        margin-bottom: 15px;
+      }
+      .side-scroll {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        justify-content: center;
+      }
+      .side-card {
+        width: 90px;
+        height: 140px;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 575px) {
+      .theatre-wrapper {
+        flex-direction: column;
+        text-align: center;
+      }
+      .main-video-card {
+        width: 100%;
+        max-width: 320px;
+        height: 280px;
+        margin-bottom: 15px;
+      }
+      .side-scroll {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        justify-content: flex-start;
+        gap: 10px;
+      }
+      .side-card {
+        width: 80px;
+        height: 120px;
+      }
+      .vertical-text {
+        font-size: 0.75rem;
+      }
+    }
+  `}</style>
+                </section>
+
+
                 <section className="py-5 bg-light">
                   <div className="container">
                     <div className="text-center mb-5">
@@ -878,32 +1061,47 @@ function Home() {
                       <p className="fs-5 text-muted"><i>Choose Wisely</i></p>
                     </div>
 
-                    <div className="row gy-4 justify-content-center">
+                    <div className="row g-4 justify-content-center">
                       {packages.map((pkg) => (
                         <div className="col-xl-3 col-lg-4 col-md-6 col-sm-10" key={pkg.id}>
-                          <div className="position-relative card border-0 shadow rounded-4 h-100 text-center gradient45">
-                            <div className="card-body d-flex flex-column p-4 mt-4">
-                              <h4 className="fw-bold mb-2">{pkg.title}</h4>
-                              <p className="text-muted" style={{ fontStyle: "italic", fontSize: "14px" }}>
-                                {pkg.subtitle}
-                              </p>
+                          <div className="card border-0 shadow rounded-4 h-100 text-center gradient45 position-relative">
+                            <div className="card-body d-flex flex-column p-4">
+                              {/* Title + Subtitle */}
+                              <div className="mb-3">
+                                <h4 className="fw-bold mb-1">{pkg.title}</h4>
+                                <p className="text-muted mb-0" style={{ fontStyle: "italic", fontSize: "14px" }}>
+                                  {pkg.subtitle}
+                                </p>
+                              </div>
 
-                              <ul className="list-unstyled text-start my-3 px-3">
+                              {/* Features */}
+                              <ul className="list-unstyled text-start flex-grow-1 mb-1 px-2">
                                 {Object.keys(pkg.detailedFeatures).map((feature, index) => (
                                   <li key={index} className="d-flex align-items-center mb-2">
-                                    <span className={`me-2 fw-bold ${pkg.detailedFeatures[feature] ? "text-success" : "text-danger"}`} >
+                                    <span
+                                      className={`me-2 fw-bold ${pkg.detailedFeatures[feature] ? "text-success" : "text-danger"
+                                        }`}
+                                    >
                                       {pkg.detailedFeatures[feature] ? "✅" : "❌"}
                                     </span>
-                                    {feature}
+                                    <span className="text-dark">{feature}</span>
                                   </li>
                                 ))}
                               </ul>
 
-                              <p className="fw-semibold mb-4">Starts from ₹{pkg.price}</p>
+                              {/* Price */}
+                              {pkg?.price ? (
+                                <p className="fw-semibold mb-4 mt-auto">
+                                  Starts from ₹{pkg.price}
+                                </p>
+                              ) : null}
+
+
+                              {/* Button */}
                               <button
-                                className="btn text-white mt-auto"
+                                className="btn text-white w-100"
                                 style={{ backgroundColor: "#a259ff", borderRadius: "10px" }}
-                                onClick={() => navigateTheater('/theaters')}
+                                onClick={() => navigateTheater("/theaters")}
                               >
                                 {pkg.buttonText}
                               </button>
@@ -912,6 +1110,7 @@ function Home() {
                         </div>
                       ))}
                     </div>
+
                   </div>
                 </section>
 
@@ -960,7 +1159,7 @@ function Home() {
                           switch (occasion.name) {
                             case "Anniversary":
                               description =
-                                "Celebrate your love and commitment in a private, luxurious theatre at Binge N Joy. Enjoy a personalized ambiance, delicious food, and exceptional picture quality.";
+                                "Celebrate your love and commitment in a private, luxurious theatre at CarnivalCastle. Enjoy a personalized ambiance, delicious food, and exceptional picture quality.";
                               break;
                             case "Bride To Be":
                               description =
@@ -980,19 +1179,19 @@ function Home() {
                               break;
                             case "Love Proposal":
                               description =
-                                "Plan the perfect surprise proposal at Binge N Joy Private Theatres. With a magical atmosphere, your proposal will be an unforgettable moment, complete with beautiful decor and food.";
+                                "Plan the perfect surprise proposal at CarnivalCastle Private Theatres. With a magical atmosphere, your proposal will be an unforgettable moment, complete with beautiful decor and food.";
                               break;
                             case "Marriage Proposal":
                               description =
-                                "Propose in the most romantic and unforgettable way at Binge N Joy. Enjoy a private theatre with personalized decor, delicious food, and everything you need for the perfect proposal.";
+                                "Propose in the most romantic and unforgettable way at CarnivalCastle. Enjoy a private theatre with personalized decor, delicious food, and everything you need for the perfect proposal.";
                               break;
                             case "Farewell":
                               description =
-                                "Bid farewell in style at Binge N Joy Private Theatres. Celebrate the memories with a private screening, delicious food, and the perfect ambiance for your farewell.";
+                                "Bid farewell in style at CarnivalCastle Private Theatres. Celebrate the memories with a private screening, delicious food, and the perfect ambiance for your farewell.";
                               break;
                             case "Bon voyage":
                               description =
-                                "Send off a loved one with a special farewell event at Binge N Joy Private Theatres. Enjoy a private screening with gourmet food and personalized decor for the perfect bon voyage.";
+                                "Send off a loved one with a special farewell event at CarnivalCastle Private Theatres. Enjoy a private screening with gourmet food and personalized decor for the perfect bon voyage.";
                               break;
                             default:
                               description =
@@ -1413,7 +1612,7 @@ function Home() {
                       {/* Button Column */}
                       <div className="col-12 col-md-4 text-md-end">
                         <a
-                          href="https://www.instagram.com/bingenjoy.hyd?utm_source=qr&igsh=MTI5bG13aHh4bjdzNg=="
+                          href="https://www.instagram.com/accounts/login/?next=%2Fcarnival_castle_hyderabad%2F&source=omni_redirect"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="d-inline-flex align-items-center gap-2 px-4 py-2 rounded-pill text-decoration-none fw-semibold"
@@ -1423,7 +1622,7 @@ function Home() {
                             boxShadow: "0 4px 10px rgba(0, 0, 0, 0.15)",
                           }}
                         >
-                          <i className="fab fa-instagram"></i> binge_N_joy_hyderabad
+                          <i className="fab fa-instagram"></i> carnival_castle_hyderabad
                         </a>
                       </div>
                     </div>
@@ -1431,10 +1630,10 @@ function Home() {
                 </section>
 
 
-                <section className="py-5 position-relative text-dark" style={{ backgroundColor: "#E6D8F5" }}>
+                {/* <section className="py-5 position-relative text-dark" style={{ backgroundColor: "#E6D8F5" }}>
                   <Container fluid="lg">
                     <Row className="align-items-center">
-                      {/* LEFT SECTION */}
+                      
                       <Col lg={3} className="text-center text-lg-start mb-4 mb-lg-0">
                         <h2 className="fw-bold mt-3 dark-text">Our Theatres</h2>
                         <p className="light-text fs-6">
@@ -1442,10 +1641,10 @@ function Home() {
                         </p>
                       </Col>
 
-                      {/* RIGHT SECTION */}
+            
                       <Col lg={9}>
                         <div className="d-flex align-items-center justify-content-center overflow-auto gap-3">
-                          {/* Side Testimonials */}
+                          
                           {testimonials
                             .filter((item) => item.videoId !== selected.videoId)
                             .map((user, idx) => (
@@ -1468,7 +1667,7 @@ function Home() {
                               </div>
                             ))}
 
-                          {/* Main Testimonial */}
+                        
                           <div
                             className="main-video-card position-relative rounded shadow overflow-hidden"
                             style={{
@@ -1486,7 +1685,7 @@ function Home() {
                               allowFullScreen
                             ></iframe>
 
-                            {/* Label */}
+                            
                             <div className="position-absolute bottom-0 start-0 end-0 p-3">
                               <div className="bg-white d-inline-block px-3 py-2 rounded-4 w-100 shadow-sm">
                                 <strong className="dark-text">{selected.name}</strong><br />
@@ -1499,7 +1698,7 @@ function Home() {
                     </Row>
                   </Container>
 
-                  {/* Styles */}
+                 
                   <style jsx>{`
         .side-card {
           position: relative;
@@ -1528,7 +1727,7 @@ function Home() {
           border: none;
         }
       `}</style>
-                </section>
+                </section> */}
 
                 {/* FAQS */}
                 <section className="pb-3 pb-3 bg-white">
@@ -1611,9 +1810,9 @@ function Home() {
                               <span className="badge light-back px-3 py-2">
                                 <i className="bi bi-car-front-fill me-2"></i>Parking Facility
                               </span>
-                              <span className="badge light-back px-3 py-2">
+                              {/* <span className="badge light-back px-3 py-2">
                                 <i className="bi bi-egg-fried me-2"></i>Food Menu
-                              </span>
+                              </span> */}
                             </div>
 
                             <div className="text-center">
