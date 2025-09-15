@@ -28829,9 +28829,9 @@ h2.footer-title:after {
 .footersix .footer-contact-info p i {
   margin-right: 15px;
 }
-
+/* Bottom Margin-top */
 .footer.footersix .footer-bottom .copyright {
-  border-top: 1px solid var(--sunray);
+  border-top: 1px solid #9D4DFF;
   padding: 25px 0;
 }
 
@@ -32458,7 +32458,7 @@ h2.footer-title:after {
 
   .indexsix .main-menu-wrapper {
     /* background-color: #a020f0; */
-    background-color: #242724;
+    background-color: #a020f0;
   }
 
   .indexsix .main-nav > li.active > a {
@@ -36200,3 +36200,4 @@ footer {
 .sbutton:hover {
   transform: scale(1.05);
 }
+

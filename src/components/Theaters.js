@@ -539,6 +539,7 @@ function Theaters() {
                               overflow: "hidden",
                               border: "2px solid #E9DCFF",
                             }}
+
                           >
                             {/* Image Section */}
                             <div style={{ flexShrink: 0 }}>
@@ -553,6 +554,7 @@ function Theaters() {
                                       objectFit: "cover",
                                       height: "250px",
                                     }}
+                                    onClick={() => handleLocationSelect(address)}
                                   />
                                   <a
                                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
@@ -687,7 +689,7 @@ function Theaters() {
                         <div className="breadcrumb-wrap text-center">
                           <div className="breadcrumb-title mb-30 dark-text">
                             <h1 style={{ marginTop: "20px" }}>
-                              Choose your dream theatre setup in {location.city}
+                              Choose your dream theatre setup in {location.name}
                             </h1>
                           </div>
                           <p className="light-text"><i>From royal vibes to romantic corners - pick your perfect match!</i></p>
@@ -706,53 +708,68 @@ function Theaters() {
                         <div
                           className="p-3 rounded shadow-sm"
                           style={{
-                            backgroundColor: "#FAF9F7",
+                            backgroundColor: "#fff",
                             border: "1px solid #E0E0E0",
                             borderRadius: "8px",
-                            maxWidth: "500px",
+                            maxWidth: "600px", // slightly bigger for larger screens
                             margin: "0 auto",
                           }}
                         >
-                          <label className="fw-bold text-dark mb-2" style={{ fontSize: "18px" }}>
+                          <label
+                            className="fw-bold text-dark mb-3 d-block text-center text-md-start"
+                            style={{ fontSize: "18px" }}
+                          >
                             Select Your Date
                           </label>
 
-                          <div className="d-flex gap-2">
-                            <div className="input-group">
-                              <span className="input-group-text bg-white border-end-0">
-                                <i className="bi bi-calendar-event"></i>
-                              </span>
-                              <input
-                                type="date"
-                                id="buttondisplay"
-                                name="theaterdate"
-                                className={`form-control border-start-0 ${isDisabled ? "bg-light" : ""}`}
-                                style={{ borderLeft: "none" }}
-                                disabled={isDisabled}
-                                value={date}
-                                min={getTodayDateString()}
-                                onChange={handleDateChange}
-                              />
+                          {/* Responsive Wrapper */}
+                          <div className="row g-2 align-items-center">
+                            {/* Date Input */}
+                            <div className="col-12 col-md-7">
+                              <div className="input-group">
+                                <span className="input-group-text bg-white border-end-0">
+                                  <i className="bi bi-calendar-event"></i>
+                                </span>
+                                <input
+                                  type="date"
+                                  id="buttondisplay"
+                                  name="theaterdate"
+                                  className={`form-control border-start-0 ${isDisabled ? "bg-light" : ""}`}
+                                  style={{ borderLeft: "none" }}
+                                  disabled={isDisabled}
+                                  value={date}
+                                  min={getTodayDateString()}
+                                  onChange={handleDateChange}
+                                />
+                              </div>
                             </div>
 
-                            <button
-                              className="btn"
-                              style={{
-                                backgroundColor: "#4B0082",
-                                color: "#fff",
-                                fontWeight: "500",
-                                whiteSpace: "nowrap",
-                              }}
-                            >
-                              Check Slot Availability
-                            </button>
+                            {/* Button */}
+                            <div className="col-12 col-md-5">
+                              <button
+                                className="btn w-100"
+                                style={{
+                                  backgroundColor: "#4B0082",
+                                  color: "#fff",
+                                  fontWeight: "500",
+                                  whiteSpace: "nowrap",
+                                }}
+                              >
+                                Check Slot Availability
+                              </button>
+                            </div>
                           </div>
 
-                          <p className="mt-2 mb-0" style={{ fontStyle: "italic", fontSize: "14px", color: "#555" }}>
+                          {/* Info text */}
+                          <p
+                            className="mt-3 mb-0 text-center text-md-start"
+                            style={{ fontStyle: "italic", fontSize: "14px", color: "#555" }}
+                          >
                             Let’s check what’s available on your special day!
                           </p>
                         </div>
                       </div>
+
 
                     </div>
                     <br />
@@ -765,6 +782,14 @@ function Theaters() {
                             const isBookNowActive = selectedSlot[i] !== undefined;
                             const colors = ["danger", "success", "warning", "primary"];
                             const bgColor = colors[i % colors.length];
+                            // 🎯 Function to decide color by available slots
+                            const getSlotColor = (count) => {
+                              if (count >= 5) return "success";  // Green
+                              if (count >= 3) return "warning";  // Yellow
+                              if (count >= 1) return "danger";   // Red
+                              return "secondary";                // Grey for 0
+                            };
+
 
                             return (
                               <div
@@ -798,7 +823,7 @@ function Theaters() {
                                               <Carousel.Item key={idx}>
                                                 <div style={{ position: "relative" }}>
                                                   <span
-                                                    className={`badge bg-${bgColor} text-white`}
+                                                    className={`badge bg-${getSlotColor(data.availableSlotsCount)} text-white`}
                                                     style={{
                                                       position: "absolute",
                                                       top: "10px",
@@ -811,6 +836,7 @@ function Theaters() {
                                                       ? `${data.availableSlotsCount} slots available`
                                                       : "0 slots available"}
                                                   </span>
+
                                                   <span
                                                     style={{
                                                       position: "absolute",
@@ -849,7 +875,7 @@ function Theaters() {
                                             <Carousel.Item>
                                               <div style={{ position: "relative" }}>
                                                 <span
-                                                  className={`badge bg-${bgColor} text-white`}
+                                                  className={`badge bg-${getSlotColor(data.availableSlotsCount)} text-white`}
                                                   style={{
                                                     position: "absolute",
                                                     top: "10px",
@@ -1025,6 +1051,12 @@ function Theaters() {
                                               const isSelected =
                                                 selectedSlot[i] && selectedSlot[i]._id === slot._id;
 
+                                              // 💰 Calculate discount (only for 1-hour slots)
+                                              let discount = null;
+                                              if (duration === "1:30 hr" && data.offerPrice && data.oneandhalfslotPrice) {
+                                                discount = data.offerPrice - data.oneandhalfslotPrice;
+                                              }
+
                                               return (
                                                 <div
                                                   key={index}
@@ -1059,9 +1091,24 @@ function Theaters() {
                                                   >
                                                     {fromTime12} - {toTime12}
                                                   </button>
+
+                                                  {/* 👇 Show discount if available */}
+                                                  {discount !== null && (
+                                                    <div
+                                                      style={{
+                                                        fontSize: "0.7rem",
+                                                        color: "#28a745",
+                                                        marginTop: "4px",
+                                                        fontWeight: "600",
+                                                      }}
+                                                    >
+                                                      Save ₹{discount}
+                                                    </div>
+                                                  )}
                                                 </div>
                                               );
                                             })}
+
                                         </div>
                                       </div>
 

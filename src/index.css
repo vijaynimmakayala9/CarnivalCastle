@@ -71,3 +71,11 @@ code {
   /* Blue focus ring */
   border-radius: 4px;
 }
+
+html, body {
+  overflow-x: hidden;
+}
+
+.header-nav {
+  width: 100%;
+}

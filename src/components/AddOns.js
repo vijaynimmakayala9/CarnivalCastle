@@ -461,9 +461,9 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                           </div>
                         </div>
                       ))}
-                       <div className="alert alert-warning mt-3">
-                      <i className="fa fa-exclamation-triangle me-2" style={{ color: 'red' }}></i>
-                           <span style={{ color: 'red' }}><b>Note:</b>The timing of the photography sessions is subject to the availability of our photographers. We strive to accommodate your preferred schedule and appreciate your understanding and flexibility. For specific booking inquiries, please contact us directly.</span>
+                       <div className="alert light-back mt-3">
+                      <i className="fa fa-exclamation-triangle me-2" style={{ color: 'white' }}></i>
+                           <span style={{ color: 'white' }}><b>Note:</b>The timing of the photography sessions is subject to the availability of our photographers. We strive to accommodate your preferred schedule and appreciate your understanding and flexibility. For specific booking inquiries, please contact us directly.</span>
                       </div>
                     </div>
 

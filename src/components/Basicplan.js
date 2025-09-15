@@ -330,29 +330,44 @@ const Basicplan = () => {
                       <h4>Overview</h4>
                     </div>
                     <div className="col-12">
-                      <div className="bg-white p-2 rounded w-100 mx-auto">
-                        <div className="row g-3 align-items-center flex-nowrap flex-wrap justify-content-between">
-                          <div className="col-auto d-flex align-items-center">
-                            <FaTheaterMasks style={{ color: "var(--gold-gradient)" }} />
-                            <span className="ms-2">{sessionStorage.getItem("theaterName")}</span>
+                      <div className="bg-white p-3 rounded w-100 mx-auto shadow-sm">
+                        <div className="row g-3 text-center text-sm-start">
+
+                          {/* 🎭 Theater Name */}
+                          <div className="col-12 col-sm-6 col-lg-3">
+                            <div className="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-sm-start gap-1">
+                              <FaTheaterMasks style={{ color: "var(--gold-gradient)", fontSize: "1.3rem" }} />
+                              <span className="fw-semibold small">{sessionStorage.getItem("theaterName")}</span>
+                            </div>
                           </div>
 
-                          <div className="col-auto d-flex align-items-center">
-                            <FaMapMarkerAlt style={{ color: "var(--gold-gradient)" }} />
-                            <span className="ms-2">Hyderabad</span>
+                          {/* 📍 Location */}
+                          <div className="col-12 col-sm-6 col-lg-3">
+                            <div className="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-sm-start gap-1">
+                              <FaMapMarkerAlt style={{ color: "var(--gold-gradient)", fontSize: "1.3rem" }} />
+                              <span className="fw-semibold small">Hyderabad</span>
+                            </div>
                           </div>
 
-                          <div className="col-auto d-flex align-items-center">
-                            <FaCalendarAlt style={{ color: "var(--gold-gradient)" }} />
-                            <span className="ms-2">{sessionStorage.getItem("date")}</span>
+                          {/* 📅 Date */}
+                          <div className="col-12 col-sm-6 col-lg-3">
+                            <div className="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-sm-start gap-1">
+                              <FaCalendarAlt style={{ color: "var(--gold-gradient)", fontSize: "1.3rem" }} />
+                              <span className="fw-semibold small">{sessionStorage.getItem("date")}</span>
+                            </div>
                           </div>
 
-                          <div className="col-auto d-flex align-items-center">
-                            <FaClock style={{ color: "var(--gold-gradient)" }} />
-                            <span className="ms-2">{sessionStorage.getItem("slot")}</span>
+                          {/* ⏰ Slot */}
+                          <div className="col-12 col-sm-6 col-lg-3">
+                            <div className="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-sm-start gap-1">
+                              <FaClock style={{ color: "var(--gold-gradient)", fontSize: "1.3rem" }} />
+                              <span className="fw-semibold small">{sessionStorage.getItem("slot")}</span>
+                            </div>
                           </div>
+
                         </div>
                       </div>
+
                     </div>
 
                   </div>
@@ -410,7 +425,7 @@ const Basicplan = () => {
                         <div className="row mb-3">
                           <div className="col-md-6">
                             <label htmlFor="userPhone" className="form-label">
-                              Mobile Number <span className="text-danger">*</span>
+                              WhatsApp Number <span className="text-danger">*</span>
                             </label>
                             <input
                               type="tel"
@@ -428,7 +443,7 @@ const Basicplan = () => {
                               id="userPhone"
                               name="userPhone"
                               value={data.userPhone}
-                              placeholder="Enter your phone number"
+                              placeholder="Enter your Whatsapp number"
                               onChange={handleChange}
                             />
                           </div>
