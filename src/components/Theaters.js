@@ -789,6 +789,8 @@ function Theaters() {
                               if (count >= 1) return "danger";   // Red
                               return "secondary";                // Grey for 0
                             };
+                            const totalSlides = (data.image?.length || 0) + (data.video ? 1 : 0);
+                            const isScrollable = totalSlides > 1;
 
 
                             return (
@@ -812,31 +814,40 @@ function Theaters() {
                                       style={{ position: "relative" }}
                                     >
                                       <div className="doc-img">
+
+
                                         <Carousel
-                                          interval={3000}
-                                          controls={false}
+                                          interval={isScrollable ? 3000 : null} // disable auto-scroll if only 1
+                                          controls={true}               // hide prev/next if only 1
                                           activeIndex={activeIndices[i] || 0}
                                           onSelect={(selectedIndex) => handleCarouselSelect(selectedIndex, i)}
                                         >
+                                          {/* Slides */}
                                           {data.image &&
                                             data.image.map((img, idx) => (
                                               <Carousel.Item key={idx}>
                                                 <div style={{ position: "relative" }}>
-                                                  <span
-                                                    className={`badge bg-${getSlotColor(data.availableSlotsCount)} text-white`}
+                                                  {/* Slots Button */}
+                                                  <button
+                                                    className={`btn btn-sm btn-${getSlotColor(data.availableSlotsCount)}`}
                                                     style={{
                                                       position: "absolute",
                                                       top: "10px",
                                                       right: "10px",
                                                       zIndex: 2,
                                                       fontSize: "0.75rem",
+                                                      fontWeight: "600",
+                                                      borderRadius: "20px",
+                                                      padding: "4px 10px",
                                                     }}
+                                                    disabled={data.availableSlotsCount === 0}
                                                   >
                                                     {data.availableSlotsCount > 0
                                                       ? `${data.availableSlotsCount} slots available`
                                                       : "0 slots available"}
-                                                  </span>
+                                                  </button>
 
+                                                  {/* Watch Now Button */}
                                                   <span
                                                     style={{
                                                       position: "absolute",
@@ -855,6 +866,25 @@ function Theaters() {
                                                       Watch Now
                                                     </a>
                                                   </span>
+
+                                                  {/* Slide Counter */}
+                                                  <span
+                                                    style={{
+                                                      position: "absolute",
+                                                      bottom: "10px",
+                                                      right: "10px",
+                                                      zIndex: 2,
+                                                      fontSize: "0.75rem",
+                                                      backgroundColor: "rgba(0,0,0,0.5)",
+                                                      color: "white",
+                                                      padding: "2px 6px",
+                                                      borderRadius: "10px",
+                                                    }}
+                                                  >
+                                                    {(activeIndices[i] || 0) + 1}/{totalSlides}
+                                                  </span>
+
+                                                  {/* Image */}
                                                   <img
                                                     src={BaseUrl + img}
                                                     alt=""
@@ -871,9 +901,11 @@ function Theaters() {
                                               </Carousel.Item>
                                             ))}
 
+                                          {/* Video Slide */}
                                           {data.video && (
                                             <Carousel.Item>
                                               <div style={{ position: "relative" }}>
+                                                {/* Slots Badge */}
                                                 <span
                                                   className={`badge bg-${getSlotColor(data.availableSlotsCount)} text-white`}
                                                   style={{
@@ -888,6 +920,24 @@ function Theaters() {
                                                     ? `${data.availableSlotsCount} slots available`
                                                     : "0 slots available"}
                                                 </span>
+
+                                                {/* Slide Counter */}
+                                                <span
+                                                  style={{
+                                                    position: "absolute",
+                                                    bottom: "10px",
+                                                    right: "10px",
+                                                    zIndex: 2,
+                                                    fontSize: "0.75rem",
+                                                    backgroundColor: "rgba(0,0,0,0.5)",
+                                                    color: "white",
+                                                    padding: "2px 6px",
+                                                    borderRadius: "10px",
+                                                  }}
+                                                >
+                                                  {(activeIndices[i] || 0) + 1}/{totalSlides}
+                                                </span>
+
                                                 <video
                                                   src={URLS.Base + data.video}
                                                   className="img-fluid video-mobile"
@@ -907,7 +957,38 @@ function Theaters() {
                                               </div>
                                             </Carousel.Item>
                                           )}
+
+                                          {/* Custom Indicators */}
+                                          {isScrollable && (
+                                            <div
+                                              style={{
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                marginTop: "10px",
+                                              }}
+                                            >
+                                              {Array(totalSlides)
+                                                .fill(0)
+                                                .map((_, idx) => (
+                                                  <span
+                                                    key={idx}
+                                                    onClick={() => handleCarouselSelect(idx, i)}
+                                                    style={{
+                                                      width: "10px",
+                                                      height: "10px",
+                                                      borderRadius: "50%",
+                                                      backgroundColor: (activeIndices[i] || 0) === idx ? "#000" : "#ccc",
+                                                      margin: "0 4px",
+                                                      cursor: "pointer",
+                                                      display: "inline-block",
+                                                    }}
+                                                  />
+                                                ))}
+                                            </div>
+                                          )}
                                         </Carousel>
+
+
                                       </div>
                                     </div>
                                   </div>
@@ -931,16 +1012,33 @@ function Theaters() {
                                           )}
                                         </div>
 
-                                        <div>
-                                          <p
-                                            className="card-price mb-2 dark-text"
+                                        {selectedSlot[i] ? (
+                                          <div>
+                                            <p
+                                              className="card-price mb-2 dark-text"
 
+                                            >
+                                              <span style={{ fontSize: "1.4rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}>
+                                                ₹{" "}
+                                                {selectedSlot[i].duration === "1:30 hr"
+                                                  ? data.oneandhalfslotPrice
+                                                  : selectedSlot[i].offerPrice ?? data.offerPrice}
+                                                /-{" "}
+                                              </span>
+                                              <br />
+                                              {/* <span style={{ fontSize: "0.87rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}><del> ₹ {data.price}/-{" "}</del></span> */}
+                                            </p>
+                                          </div>
+                                        ) : (
+                                          // <span style={{ fontSize: "1.4rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}> ₹ {data.offerPrice}/-{" "}</span>
+                                          <div
+                                            className="my-3"
+                                            style={{ fontSize: "0.8rem", color: "#666" }}
                                           >
-                                            <span style={{ fontSize: "1.4rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}> ₹ {data.offerPrice}/-{" "}</span>
-                                            <br />
-                                            {/* <span style={{ fontSize: "0.87rem", fontWeight: "600", fontFamily: "'Fraunces', serif" }}><del> ₹ {data.price}/-{" "}</del></span> */}
-                                          </p>
-                                        </div>
+                                            Select a slot<br />to check price
+                                          </div>
+                                        )}
+
                                       </div>
 
                                       <div className="row mb-2">
@@ -960,7 +1058,7 @@ function Theaters() {
                                             style={{ fontSize: "0.80rem" }}
                                           >
                                             <i className="bi bi-person-fill"></i>
-                                            <span className="fw-bold">Max People: </span>{data.maxPeople}
+                                            <span className="fw-bold">Max {data.maxPeople} People </span>
                                           </p>
                                         </div>
                                       </div>
@@ -1008,7 +1106,7 @@ function Theaters() {
                                       </p>
 
 
-                                      <p
+                                      {/* <p
                                         className="card-details mb-2 light-text"
                                         style={{ fontSize: "0.85rem" }}
                                       >
@@ -1020,24 +1118,25 @@ function Theaters() {
                                           .join(" ")}
                                         {data.description.split(" ").length > 25 &&
                                           "..."}
-                                      </p>
+                                      </p> */}
                                     </div>
 
                                     <div>
                                       <div className="slot-selection mb-3">
                                         <p
                                           className="slot-title mb-2 dark-text"
-                                          style={{ fontSize: "0.875rem" }}
+                                          style={{ fontSize: "0.9rem", fontWeight: "600" }}
                                         >
-                                          <span className="fw-bold">Choose Your Slot:</span>
+                                          Select Time Slot
                                         </p>
 
+                                        {/* Horizontal Scrollable Row */}
                                         <div
                                           style={{
                                             display: "flex",
-                                            justifyContent: "space-between",
-                                            flexWrap: "nowrap",
-                                            gap: "0.5rem",
+                                            gap: "0.6rem",
+                                            overflowX: "auto",
+                                            paddingBottom: "6px",
                                           }}
                                         >
                                           {data.availableSlots &&
@@ -1045,15 +1144,17 @@ function Theaters() {
                                               const fromTime12 = convertTo12HourFormat(slot.fromTime);
                                               const toTime12 = convertTo12HourFormat(slot.toTime);
 
-                                              // ⏳ Calculate duration
                                               const duration = calculateDuration(slot.fromTime, slot.toTime);
 
                                               const isSelected =
                                                 selectedSlot[i] && selectedSlot[i]._id === slot._id;
 
-                                              // 💰 Calculate discount (only for 1-hour slots)
                                               let discount = null;
-                                              if (duration === "1:30 hr" && data.offerPrice && data.oneandhalfslotPrice) {
+                                              if (
+                                                duration === "1:30 hr" &&
+                                                data.offerPrice &&
+                                                data.oneandhalfslotPrice
+                                              ) {
                                                 discount = data.offerPrice - data.oneandhalfslotPrice;
                                               }
 
@@ -1061,7 +1162,7 @@ function Theaters() {
                                                 <div
                                                   key={index}
                                                   style={{
-                                                    flex: "1",
+                                                    flex: "0 0 auto",
                                                     textAlign: "center",
                                                   }}
                                                 >
@@ -1069,85 +1170,92 @@ function Theaters() {
                                                     className="btn"
                                                     onClick={(e) => handleSlot(e, { ...slot, duration }, i)}
                                                     style={{
-                                                      width: "100%",
+                                                      minWidth: "50px",      // smaller card width
+                                                      height: "60px",        // fixed height to make square-ish
+                                                      padding: "0px 0px",
+                                                      fontSize: "0.7rem",    // smaller text
+                                                      fontWeight: "500",
+                                                      lineHeight: "1.2",
+                                                      borderRadius: "8px",
+                                                      border: isSelected ? "2px solid #40008C" : "1px solid #ccc",
                                                       backgroundColor: slot.isBooked
-                                                        ? "#757575"
+                                                        ? "#f1f1f1"
                                                         : isSelected
-                                                          ? "#A05DF1"
+                                                          ? "#40008C"
                                                           : "#fff",
-                                                      borderColor: slot.isBooked ? "" : "#40008C",
                                                       color: slot.isBooked
-                                                        ? "white"
+                                                        ? "#888"
                                                         : isSelected
-                                                          ? "white"
-                                                          : "black",
+                                                          ? "#fff"
+                                                          : "#000",
                                                       textDecoration: slot.isBooked ? "line-through" : "none",
-                                                      fontSize: "0.7rem",
-                                                      padding: "6px 8px",
-                                                      borderRadius: "50px",
+                                                      cursor: slot.isBooked ? "not-allowed" : "pointer",
+                                                      display: "flex",
+                                                      flexDirection: "column", // stack vertically
+                                                      justifyContent: "center",
+                                                      alignItems: "center",
                                                     }}
                                                     disabled={slot.isBooked}
-                                                    value={`${fromTime12} / ${toTime12}`}
                                                   >
-                                                    {fromTime12} - {toTime12}
+                                                    <span>{fromTime12}</span>-
+
+                                                    <span>{toTime12}</span>
                                                   </button>
 
-                                                  {/* 👇 Show discount if available */}
-                                                  {discount !== null && (
+                                                  {/* Discount Below */}
+                                                  {discount !== null && !slot.isBooked && (
                                                     <div
                                                       style={{
-                                                        fontSize: "0.7rem",
+                                                        fontSize: "0.65rem", // smaller discount text
                                                         color: "#28a745",
                                                         marginTop: "4px",
                                                         fontWeight: "600",
                                                       }}
                                                     >
-                                                      Save ₹{discount}
+                                                      Rs {discount} less
                                                     </div>
                                                   )}
                                                 </div>
+
                                               );
                                             })}
-
                                         </div>
                                       </div>
 
-                                      {/* Price shown only when a slot is selected */}
+                                      {/* Price Section */}
                                       {selectedSlot[i] ? (
-                                        <div className="text-center mt-2">
+                                        <div className="mt-3">
                                           <div
                                             style={{
-                                              fontSize: "1rem",
-                                              fontWeight: "600",
-                                              color: "#40008C",
+                                              fontSize: "1.2rem",
+                                              fontWeight: "700",
+                                              color: "#000",
                                             }}
                                           >
-                                            ₹{" "}
+                                            ₹
                                             {selectedSlot[i].duration === "1:30 hr"
                                               ? data.oneandhalfslotPrice
                                               : selectedSlot[i].offerPrice ?? data.offerPrice}
-                                            /-
+                                            <span style={{ fontSize: "0.85rem", fontWeight: "500" }}>
+                                              {" "}
+                                              for up to {data.maxPeople} people
+                                            </span>
                                           </div>
 
-                                          <p
-                                            className="fw-bold"
+                                          <div
                                             style={{
                                               fontSize: "0.8rem",
-                                              marginBottom: "4px",
-                                              color: "#555",
+                                              color: "#666",
+                                              marginTop: "2px",
                                             }}
                                           >
-                                            For Upto {data.maxPeople} Peoples and Additional ₹
-                                            {selectedSlot[i].duration === "1:30 hr"
-                                              ? data.onehalfanhourExtraPersonPrice
-                                              : data.extraPersonprice}{" "}
-                                            for extra Person
-                                          </p>
+                                            Max {data.maxPeople} people allowed
+                                          </div>
                                         </div>
                                       ) : (
                                         <div
-                                          className="text-center mt-2"
-                                          style={{ fontSize: "0.8rem", color: "#555" }}
+                                          className="mt-3"
+                                          style={{ fontSize: "0.8rem", color: "#666" }}
                                         >
                                           Select a slot to check price
                                         </div>
@@ -1163,7 +1271,9 @@ function Theaters() {
                                             width: "100%",
                                             color: "white",
                                             border: "none",
-                                            boxShadow: "none",
+                                            fontWeight: "600",
+                                            borderRadius: "8px",
+                                            padding: "10px",
                                             backgroundColor: isBookNowActive ? "#40008C" : "#A88FC7",
                                           }}
                                         >
@@ -1171,6 +1281,10 @@ function Theaters() {
                                         </button>
                                       </div>
                                     </div>
+
+
+
+
 
 
                                   </div>

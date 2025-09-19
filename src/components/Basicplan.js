@@ -323,7 +323,7 @@ const Basicplan = () => {
               <i className="far fa-arrow-alt-circle-left"></i> Back
             </button>
             <div className="row">
-              <div className="col-8">
+              <div className="col-12 col-lg-8 col-md-8">
                 <div className="bg-white p-2 rounded w-100 mx-auto shadow-lg">
                   <div className="row">
                     <div className="col-12">
@@ -332,9 +332,8 @@ const Basicplan = () => {
                     <div className="col-12">
                       <div className="bg-white p-3 rounded w-100 mx-auto shadow-sm">
                         <div className="row g-3 text-center text-sm-start">
-
                           {/* 🎭 Theater Name */}
-                          <div className="col-12 col-sm-6 col-lg-3">
+                          <div className="col-6 col-lg-3">
                             <div className="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-sm-start gap-1">
                               <FaTheaterMasks style={{ color: "var(--gold-gradient)", fontSize: "1.3rem" }} />
                               <span className="fw-semibold small">{sessionStorage.getItem("theaterName")}</span>
@@ -342,7 +341,7 @@ const Basicplan = () => {
                           </div>
 
                           {/* 📍 Location */}
-                          <div className="col-12 col-sm-6 col-lg-3">
+                          <div className="col-6 col-lg-3">
                             <div className="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-sm-start gap-1">
                               <FaMapMarkerAlt style={{ color: "var(--gold-gradient)", fontSize: "1.3rem" }} />
                               <span className="fw-semibold small">Hyderabad</span>
@@ -350,7 +349,7 @@ const Basicplan = () => {
                           </div>
 
                           {/* 📅 Date */}
-                          <div className="col-12 col-sm-6 col-lg-3">
+                          <div className="col-6 col-lg-3">
                             <div className="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-sm-start gap-1">
                               <FaCalendarAlt style={{ color: "var(--gold-gradient)", fontSize: "1.3rem" }} />
                               <span className="fw-semibold small">{sessionStorage.getItem("date")}</span>
@@ -358,15 +357,15 @@ const Basicplan = () => {
                           </div>
 
                           {/* ⏰ Slot */}
-                          <div className="col-12 col-sm-6 col-lg-3">
+                          <div className="col-6 col-lg-3">
                             <div className="d-flex flex-column flex-sm-row align-items-center justify-content-center justify-content-sm-start gap-1">
                               <FaClock style={{ color: "var(--gold-gradient)", fontSize: "1.3rem" }} />
                               <span className="fw-semibold small">{sessionStorage.getItem("slot")}</span>
                             </div>
                           </div>
-
                         </div>
                       </div>
+
 
                     </div>
 

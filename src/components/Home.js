@@ -889,11 +889,17 @@ function Home() {
                           {/* Main Testimonial */}
                           <div className="main-video-card position-relative rounded shadow overflow-hidden">
                             <iframe
-                              src={`https://www.youtube.com/embed/${selected.videoId}?autoplay=1&mute=1`}
+                              src={`https://www.youtube.com/embed/${selected.videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&loop=1`}
                               title={selected.name}
-                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                               allowFullScreen
+                              style={{
+                                width: "100%",
+                                height: "100%",
+                                border: "none",
+                              }}
                             ></iframe>
+
 
                             {/* Label */}
                             <div className="position-absolute bottom-0 start-0 end-0 p-3">
