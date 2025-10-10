@@ -526,7 +526,7 @@ function Home() {
       rating: 5,
       description: 'We had the best birthday surprise ever! The theatre was beautifully set up and everything was perfect.',
       occasion: "Daughter’s 1st Birthday",
-      avatar: 'https://i.ibb.co/4Vb94bc/harish-avatar.png',
+      avatar: 'https://cdn-icons-png.freepik.com/512/7718/7718888.png',
       image: 'https://api.carnivalcastle.com/uploads/galleryImg/1728132803817-DSC07593.jpg',
     },
     {

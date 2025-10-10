@@ -32,6 +32,7 @@ import ThankYou from "./components/ThankYou"
 import PaymentFail from "./components/PaymentFail"
 import PaymentProcessing from "./components/PaymentProcessing"
 import Food from "./components/Food"
+import MyProfile from "./components/MyProfile";
 
 
 function App() {
@@ -74,6 +75,8 @@ function App() {
 
            {/* Payment Fial */}
         <Route path="/payment-fail" element={<PaymentFail/>} />
+
+        <Route path="/profile" element={<MyProfile />} />
 
       </Routes>
     </div>
