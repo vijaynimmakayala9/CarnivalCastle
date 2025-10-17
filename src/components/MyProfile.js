@@ -65,28 +65,36 @@ const MyProfile = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleShareReferral = () => {
-    const message = `${user?.name} is celebrating at Carnival Castle 🎉 and invites you to celebrate too! Use their referral ID: ${user?._id}`;
-    const shareData = {
-      title: "Carnival Castle Invitation",
-      text: message,
-      url: "https://carnivalcastle.com",
-    };
-
-    if (navigator.share) {
-      navigator
-        .share(shareData)
-        .then(() => {
-          setShareInfo(`Invitation sent successfully! 🎉`);
-          setTimeout(() => setShareInfo(""), 3000);
-        })
-        .catch((error) => console.error("Error sharing", error));
-    } else {
-      navigator.clipboard.writeText(`${message}\n${shareData.url}`);
-      setShareInfo(`Referral link copied to clipboard! 📋`);
-      setTimeout(() => setShareInfo(""), 3000);
-    }
+ const handleShareReferral = async () => {
+  const message = `${user?.name} is celebrating at Carnival Castle 🎉 and invites you to celebrate too! Use their referral ID: ${user?._id}`;
+  const shareData = {
+    title: "Carnival Castle Invitation",
+    text: message,
+    url: "https://carnivalcastle.com",
   };
+
+  try {
+    if (navigator.share) {
+      // 📱 Native share (mobile/tablet)
+      await navigator.share(shareData);
+      setShareInfo("Invitation sent successfully! 🎉");
+    } else if (navigator.clipboard) {
+      // 💻 Fallback: copy link
+      await navigator.clipboard.writeText(`${message}\n${shareData.url}`);
+      setShareInfo("Referral link copied to clipboard! 📋");
+    } else {
+      // 🧭 Ultimate fallback
+      alert("Sharing is not supported on this browser.");
+    }
+  } catch (error) {
+    console.error("Error sharing:", error);
+    setShareInfo("Something went wrong while sharing.");
+  }
+
+  // 🕒 Auto-clear message after 3 seconds
+  setTimeout(() => setShareInfo(""), 3000);
+};
+
 
   const handleMouseEnter = (e, transform) => {
     e.currentTarget.style.transform = transform;

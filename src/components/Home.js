@@ -657,31 +657,31 @@ function Home() {
     {
       name: "Royal Theatre",
       role: "Hyderabad",
-      thumbnail: "https://api.carnivalcastle.com/uploads/theatreImg/1738844693564-DSC07735.JPG",
+      thumbnail: "",
       videoId: "kusm4_IYHOY?si=XGCAMbxsIJ2RE_WN",
     },
     {
       name: "Galaxy Theatre",
       role: "Hyderabad",
-      thumbnail: "https://api.carnivalcastle.com/uploads/theatreImg/1727807868995-WhatsApp%20Image%202024-07-14%20at%2014.27.54%20(1).jpeg",
+      thumbnail: "",
       videoId: "bmzx0dcSZDc?si=MXkJl-Ei2hZ0s051",
     },
     {
       name: "Couple Cove Theatre",
       role: "Hyderabad",
-      thumbnail: "https://api.carnivalcastle.com/uploads/theatreImg/1727168553419-preview%20(1).jpg",
+      thumbnail: "",
       videoId: "rLRetba1EQQ?si=vbMY15_9R0Nl52v9",
     },
     {
       name: "Premier Theatre",
       role: "Hyderabad",
-      thumbnail: "https://api.carnivalcastle.com/uploads/theatreImg/1721467185380-WhatsApp%20Image%202024-07-20%20at%202.43.34%20PM.jpeg",
+      thumbnail: "",
       videoId: "Avthg38r0DI?si=QYHix5HqXk4tTLFp",
     },
     {
       name: "Radiant Theatre",
       role: "Hyderabad",
-      thumbnail: "https://api.carnivalcastle.com/uploads/theatreImg/1747076491299-WhatsApp%20Image%202025-05-13%20at%2000.23.07%20(1).jpeg",
+      thumbnail: "",
       videoId: "17AnL3Zrfo0?si=ltGSqPLeEDjYDOg_",
     },
   ];
@@ -812,117 +812,73 @@ function Home() {
                           ) : (
                             ""
                           )}
-                          <section
-                            className="banner-section d-flex align-items-center position-relative"
-                            style={{
-                              background: `url(${URLS.Base + data.image}) no-repeat center center/cover`,
-                              minHeight: "100vh",
-                              color: "#fff",
-                            }}
-                          >
-                            {/* Dark Overlay */}
-                            <div
-                              className="position-absolute top-0 start-0 w-100 h-100"
-                              style={{
-                                backgroundColor: "rgba(0, 0, 0, 0.5)",
-                                zIndex: 1,
-                              }}
-                            ></div>
+                          <section className="banner-section d-flex align-items-center position-relative text-white">
+                          <div className="overlay"></div>
+                          <div className="container position-relative h-100" style={{ zIndex: 2 }}>
+                            <div className="row justify-content-center text-center text-md-start h-100">
+                              <div className="col-lg-10 d-flex flex-column justify-content-center h-100">
+                                {/* Optional heading & text */}
+                                {/* <h1 className="display-4 fw-bold text-shadow mb-3">
+                                      <Typer
+                                        text="Surprise your loved one only at Binge N Joy Private Theaters"
+                                        typingSpeed={100}
+                                      />
+                                    </h1>
+                                    <p className="lead mb-4">{data.description}</p> */}
 
-                            {/* Content */}
-                            <div className="container position-relative" style={{ zIndex: 2 }}>
-                              <div className="row justify-content-center text-center text-md-start">
-                                <div className="col-lg-10">
-                                  <h1 className="display-4 fw-bold text-shadow mb-3">
-                                    <Typer text="Surprise your loved one only at CarnivalCastle Private Theaters" typingSpeed={100} />
-                                  </h1>
-
-                                  <p className="lead mb-4">{data.description}</p>
-
-                                  <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-sm-start">
-                                    {/* Navigate to /theaters */}
-                                    <a
-                                      href="/theaters"
-                                      className="btn btn-lg px-4 fw-bold"
-                                      style={{ backgroundColor: "#9D4DFF", color: "#fff" }}
-                                    >
-                                      Book Now
-                                    </a>
-
-                                    {/* Call via phone */}
-                                    <a
-                                      href="tel:8977917555"
-                                      className="btn btn-lg px-4 fw-bold"
-                                      style={{ backgroundColor: "#9D4DFF", color: "#fff" }}
-                                    >
-                                      Book via Call
-                                    </a>
-                                  </div>
-
+                                {/* Buttons Wrapper */}
+                                <div className="banner-buttons d-flex flex-column flex-sm-row gap-3 z-[9999]">
+                                  <a href="/theaters" className="btn btn-lg px-4 fw-bold btn-purple">
+                                    Book Now
+                                  </a>
+                                  <a href="tel:8977917555" className="btn btn-lg px-4 fw-bold btn-purple">
+                                    Book via Call
+                                  </a>
                                 </div>
                               </div>
                             </div>
-                          </section>
+                          </div>
+                        </section>
                         </div>
                       )
                     })}
                   </Slider>
                 </div>
 
-                <section
-                  className="py-5 position-relative text-dark"
-                  style={{ backgroundColor: "#E6D8F5" }}
-                >
-                  <Container fluid="lg">
-                    <Row className="align-items-center">
-                      {/* LEFT SECTION */}
-                      <Col lg={3} className="text-center text-lg-start mb-4 mb-lg-0">
-                        <h2 className="fw-bold mt-3 dark-text">Our Theatres</h2>
-                        <p className="light-text fs-6">
-                          Real stories. Real celebrations. Real magic at Carnival Castle.
-                        </p>
-                      </Col>
+                {testimonials.length > 0 && (
+                  <section
+                    className="py-5 position-relative text-dark"
+                    style={{ backgroundColor: "#E6D8F5" }}
+                  >
+                    <Container fluid="lg">
+                      <Row className="align-items-center">
+                        {/* LEFT SECTION */}
+                        <Col xs={12} lg={3} className="text-center text-lg-start mb-4 mb-lg-0">
+                          <h2 className="fw-bold mt-3 dark-text">Our Theatres</h2>
+                          <p className="light-text fs-6">
+                            Real stories. Real celebrations. Real magic at Carnival Castle.
+                          </p>
+                        </Col>
 
-                      {/* RIGHT SECTION */}
-                      <Col lg={9}>
-                        <div className="theatre-wrapper d-flex flex-lg-row flex-column align-items-center justify-content-center gap-3">
-                          {/* Main Testimonial */}
-                          <div className="main-video-card position-relative rounded shadow overflow-hidden">
-                            <iframe
-                              src={`https://www.youtube.com/embed/${selected.videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&loop=1`}
-                              title={selected.name}
-                              allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                              allowFullScreen
-                              style={{
-                                width: "100%",
-                                height: "100%",
-                                border: "none",
-                              }}
-                            ></iframe>
-
-
-                            {/* Label */}
-                            <div className="position-absolute bottom-0 start-0 end-0 p-3">
-                              <div className="bg-white d-inline-block px-3 py-2 rounded-4 w-100 shadow-sm">
-                                <strong className="dark-text">{selected.name}</strong>
-                                <br />
-                                <small className="text-dark">{selected.role}</small>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Side Testimonials */}
-                          <div className="side-scroll">
+                        {/* RIGHT SECTION */}
+                        <Col xs={12} lg={9}>
+                          {/* Desktop View (side thumbnails) */}
+                          <div className="d-none d-lg-flex flex-wrap flex-lg-nowrap align-items-start justify-content-center gap-3">
+                            {/* Side Thumbnails */}
                             {testimonials
-                              .filter((item) => item.videoId !== selected.videoId)
+                              .filter((item) => selected && item.videoId !== selected.videoId)
                               .map((user, idx) => (
                                 <div
                                   key={idx}
-                                  className="side-card d-flex align-items-center justify-content-center"
+                                  className="side-card d-flex align-items-center justify-content-center rounded shadow"
                                   style={{
-                                    backgroundImage: `url(${user.thumbnail})`,
+                                    width: "70px",
+                                    height: "200px",
+                                    backgroundColor: '#9D4DFF',
                                     backgroundSize: "cover",
                                     backgroundPosition: "center",
+                                    cursor: "pointer",
+                                    position: "relative",
                                   }}
                                   onClick={() => setSelected(user)}
                                 >
@@ -932,133 +888,166 @@ function Home() {
                                   <div className="overlay"></div>
                                 </div>
                               ))}
+
+                            {/* Main Video */}
+                            {selected && (
+                              <div
+                                className="main-video-card position-relative rounded shadow overflow-hidden"
+                                style={{
+                                  width: "100%",
+                                  maxWidth: "400px",
+                                  backgroundColor: "#000",
+                                }}
+                              >
+                                <iframe
+                                  width="100%"
+                                  height="300"
+                                  src={`https://www.youtube.com/embed/${selected.videoId}?autoplay=1&mute=1`}
+                                  title={selected.name}
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                  allowFullScreen
+                                ></iframe>
+
+                                {/* Label BELOW iframe */}
+                                <div className="label-card mt-2">
+                                  <div className="bg-white px-3 py-2 rounded-4 w-100 shadow-sm text-center">
+                                    <strong className="dark-text">{selected.name}</strong>
+                                    <br />
+                                    <small className="text-dark">{selected.role}</small>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
                           </div>
-                        </div>
-                      </Col>
-                    </Row>
-                  </Container>
 
-                  {/* Styles */}
-                  <style jsx>{`
-    .main-video-card {
-      background: #000;
-      border-radius: 16px;
-      overflow: hidden;
-    }
+                          {/* Mobile Carousel */}
+                          <div
+                            id="theatreCarousel"
+                            className="carousel slide d-lg-none"
+                            data-bs-ride="false"
+                          >
+                            <div className="carousel-inner">
+                              {testimonials.map((item, index) => (
+                                <div
+                                  key={index}
+                                  className={`carousel-item ${index === 0 ? "active" : ""}`}
+                                >
+                                  <div className="d-flex flex-column align-items-center">
+                                    <div
+                                      className="main-video-card rounded shadow overflow-hidden"
+                                      style={{
+                                        width: "100%",
+                                        maxWidth: "400px",
+                                        backgroundColor: "#000",
+                                      }}
+                                    >
+                                      <iframe
+                                        width="100%"
+                                        height="220"
+                                        src={`https://www.youtube.com/embed/${item.videoId}?autoplay=0&mute=1`}
+                                        title={item.name}
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                      ></iframe>
+                                    </div>
 
-    .main-video-card iframe {
-      border: none;
-      width: 100%;
-      height: 100%;
-    }
+                                    {/* Label BELOW iframe */}
+                                    <div className="label-card mt-2 text-center">
+                                      <div className="bg-white px-3 py-2 rounded-4 shadow-sm w-100">
+                                        <strong className="dark-text">{item.name}</strong>
+                                        <br />
+                                        <small className="text-dark">{item.role}</small>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
 
-    .side-scroll {
-      display: flex;
-      gap: 12px;
-    }
+                            {/* Manual Controls */}
+                            <button
+                              className="carousel-control-prev"
+                              type="button"
+                              data-bs-target="#theatreCarousel"
+                              data-bs-slide="prev"
+                            >
+                              <span
+                                className="carousel-control-prev-icon bg-dark rounded-circle p-2"
+                                aria-hidden="true"
+                              ></span>
+                            </button>
+                            <button
+                              className="carousel-control-next"
+                              type="button"
+                              data-bs-target="#theatreCarousel"
+                              data-bs-slide="next"
+                            >
+                              <span
+                                className="carousel-control-next-icon bg-dark rounded-circle p-2"
+                                aria-hidden="true"
+                              ></span>
+                            </button>
+                          </div>
+                        </Col>
+                      </Row>
+                    </Container>
 
-    .side-card {
-      position: relative;
-      overflow: hidden;
-      flex-shrink: 0;
-      border-radius: 14px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s ease;
-    }
-
-    .side-card:hover {
-      transform: scale(1.05);
-    }
-
-    .vertical-text {
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      transform: rotate(180deg);
-      font-size: 0.9rem;
-      z-index: 2;
-    }
-
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      z-index: 1;
-      pointer-events: none; /* prevents blocking clicks */
-    }
-
-    /* Large screen: side by side */
-    @media (min-width: 992px) {
-      .main-video-card {
-        width: 60%;
-        height: 420px;
-      }
-      .side-scroll {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: flex-start;
-        max-width: 40%;
-      }
+                    {/* Styles */}
+                    <style jsx>{`
       .side-card {
-        width: 120px;
-        height: 180px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
       }
-    }
 
-    /* Tablet */
-    @media (max-width: 991px) and (min-width: 576px) {
-      .theatre-wrapper {
-        flex-direction: column;
-        text-align: center;
+      .side-card:hover {
+        transform: scale(1.05);
       }
-      .main-video-card {
-        width: 80%;
-        max-width: 360px;
-        height: 340px;
-        margin-bottom: 15px;
-      }
-      .side-scroll {
-        flex-direction: row;
-        overflow-x: auto;
-        padding-bottom: 8px;
-        justify-content: center;
-      }
-      .side-card {
-        width: 90px;
-        height: 140px;
-      }
-    }
 
-    /* Mobile */
-    @media (max-width: 575px) {
-      .theatre-wrapper {
-        flex-direction: column;
-        text-align: center;
-      }
-      .main-video-card {
-        width: 100%;
-        max-width: 320px;
-        height: 280px;
-        margin-bottom: 15px;
-      }
-      .side-scroll {
-        flex-direction: row;
-        overflow-x: auto;
-        padding-bottom: 8px;
-        justify-content: flex-start;
-        gap: 10px;
-      }
-      .side-card {
-        width: 80px;
-        height: 120px;
-      }
       .vertical-text {
-        font-size: 0.75rem;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        transform: rotate(180deg);
+        font-size: 0.85rem;
+        z-index: 2;
+        text-align: center;
       }
-    }
-  `}</style>
-                </section>
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+      }
+
+      .main-video-card iframe {
+        border: none;
+      }
+
+      @media (max-width: 992px) {
+        .side-card {
+          width: 60px;
+          height: 150px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .side-card {
+          width: 50px;
+          height: 120px;
+        }
+
+        .main-video-card {
+          height: 220px;
+        }
+      }
+    `}</style>
+                  </section>
+                )}
+
 
 
                 <section className="py-5 bg-light">
