@@ -27,6 +27,7 @@ import {
 import logo from "../components/carnival_footer_logo-2-removebg-preview.png";
 
 import { Carousel, Card, Container, Row, Col, Button } from "react-bootstrap";
+import CouponSection from "./Coupons";
 
 function Home() {
 
@@ -1734,6 +1735,10 @@ function Home() {
                     </div>
                   </div>
                 </section>
+
+
+
+                <CouponSection/>
 
 
                 {/* <section className="py-5 position-relative text-dark" style={{ backgroundColor: "#E6D8F5" }}>

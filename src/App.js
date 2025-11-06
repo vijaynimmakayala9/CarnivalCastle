@@ -32,7 +32,7 @@ import ThankYou from "./components/ThankYou"
 import PaymentFail from "./components/PaymentFail"
 import PaymentProcessing from "./components/PaymentProcessing"
 import Food from "./components/Food"
-import MyProfile from "./components/MyProfile";
+import MyProfile from "./Profile/MyProfile";
 
 
 function App() {
