@@ -34875,7 +34875,7 @@ h2.footer-title:after {
 /* breadcrumb */
 .breadcrumb-area {
   /*min-height: 600px;*/
-  padding-top: 130px !important;
+  padding-top: 0px !important;
   padding-bottom: 10px; /* updating 100px to 10px */
   background-position: center;
   background-size: cover;
@@ -35781,11 +35781,11 @@ h2.footer-title:after {
 /*  home scroll bar */
 
 .scrollbar {
-  margin-top: 140px;
+  margin-top: 0px;
 }
 @media(max-width:991px){
   .scrollbar{
-    margin-top: 100px !important;
+    margin-top: 0px !important;
   }
 }
 /* @media (max-width: 768px) {
@@ -36003,7 +36003,7 @@ footer {
 }  */
 
 .header.main-header.headersix {
-  position: fixed;
+  position: relative;
   top: 0;
   width: 100%;
   z-index: 1000;

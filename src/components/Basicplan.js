@@ -262,7 +262,7 @@ const Basicplan = () => {
   }, []);
 
   const handleBackClick = () => {
-    navigate("/theaters");
+    navigate(-1);
   };
 
   const SubTotaluserprice = (parseFloat(sessionStorage.getItem("theaterPrice") || 0) +

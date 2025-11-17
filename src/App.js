@@ -33,11 +33,14 @@ import PaymentFail from "./components/PaymentFail"
 import PaymentProcessing from "./components/PaymentProcessing"
 import Food from "./components/Food"
 import MyProfile from "./Profile/MyProfile";
+import LocationSelector from "./components/LocationSelector";
+import ScrollToTop from "./components/ScrollToTop";
 
 
 function App() {
   return (
     <div>
+      <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Terms" element={<Terms />} />
@@ -45,7 +48,8 @@ function App() {
         <Route path="/Reviews" element={<Reviews />} />
         <Route path="/enquiry" element={<Enquiry />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/theaters" element={<Theaters />} />
+        <Route path="/locations" element={<LocationSelector />} />
+        <Route path="/theaters/:slug" element={<Theaters />} />
         <Route path="/booknow" element={<Theaters />} />
         <Route path="/Checkout" element={<Checkout />} />
         <Route path="/RefundPolicy" element={<RefundPolicy />} />

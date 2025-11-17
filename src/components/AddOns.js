@@ -299,7 +299,7 @@ const AddOns = () => {
             toast.error(
               "Access Denied: You do not have permission to view this page."
             );
-            navigate("/theaters");
+            navigate("/locations");
           }
         },
         (error) => {
@@ -310,7 +310,7 @@ const AddOns = () => {
            
             toast.error(error.response.message);
             setTimeout(()=>{
-              navigate("/theaters");
+              navigate("/locations");
             }, 2000)
           }
         }
