@@ -564,7 +564,7 @@ function Theaters() {
                           alt=""
                           className="img-fluid"
                           style={{
-                            height: "200px",
+                            height: "250px",
                             borderRadius: "10px",
                             width: "100%",
                             objectFit: "cover",

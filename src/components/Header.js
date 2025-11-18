@@ -349,7 +349,7 @@ function Header() {
                     fontWeight: "bold",
                   }}
                 >
-                  Contact us here on WhatsApp!
+                  How can i assist you?
                 </div>
               )}
             </div>

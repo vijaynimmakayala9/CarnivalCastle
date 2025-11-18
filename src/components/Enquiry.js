@@ -301,7 +301,7 @@ function Enquiry() {
                 </div>
               </section>
 
-              <section className="lighter-back">
+              {/* <section className="lighter-back">
                 <h3
                   // style={{ color: "#54127B" }}
                   className="wow fadeInUp animated text-center dark-text py-3"
@@ -325,7 +325,7 @@ function Enquiry() {
                     </div>
                   </div>
                 </div>
-              </section>
+              </section> */}
             </main>
             <ToastContainer />
             <Footer />

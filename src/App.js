@@ -35,12 +35,14 @@ import Food from "./components/Food"
 import MyProfile from "./Profile/MyProfile";
 import LocationSelector from "./components/LocationSelector";
 import ScrollToTop from "./components/ScrollToTop";
+import Blogs from "./Blogs/Blogs";
+import BlogDetail from "./Blogs/BlogDetail";
 
 
 function App() {
   return (
     <div>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Terms" element={<Terms />} />
@@ -58,29 +60,31 @@ function App() {
         <Route path="/Faqs" element={<Faqs />} />
         <Route path="/cakes" element={<Cakes />} />
         <Route path="/addons" element={<Cakes />} />
-        <Route path="/Basicplan" element={<Basicplan/>} />
-        <Route path="/Occassions" element={<Occassions/>} />
-        <Route path="/CakesComponent" element={<CakesComponent/>} />
-        <Route path="/AddOnscomponent" element={<AddOns/>} />
-        <Route path="/BookingSummary" element={<BookingSummary/>} />
+        <Route path="/Basicplan" element={<Basicplan />} />
+        <Route path="/Occassions" element={<Occassions />} />
+        <Route path="/CakesComponent" element={<CakesComponent />} />
+        <Route path="/AddOnscomponent" element={<AddOns />} />
+        <Route path="/BookingSummary" element={<BookingSummary />} />
         {/* Combo Plans */}
-        <Route path="/ComboForm" element={<ComboForm/>} />
-        <Route path="/ComboOccassions" element={<ComboOccassions/>} />
-        <Route path="/ComboPlans" element={<ComboPlans/>} />
-        <Route path="/ComboBooking" element={<ComboBooking/>} />
-        <Route path="/Food" element={<Food/>} />
+        <Route path="/ComboForm" element={<ComboForm />} />
+        <Route path="/ComboOccassions" element={<ComboOccassions />} />
+        <Route path="/ComboPlans" element={<ComboPlans />} />
+        <Route path="/ComboBooking" element={<ComboBooking />} />
+        <Route path="/Food" element={<Food />} />
 
         {/* ThankYou Page */}
         {/* <Route path="/ThankYou" element={<ThankYou/>} /> */}
-        <Route path="/payment-success" element={<ThankYou/>} />
-        
-        {/* payment processing */}
-        <Route path="/payment-processing" element={<PaymentProcessing/>} />
+        <Route path="/payment-success" element={<ThankYou />} />
 
-           {/* Payment Fial */}
-        <Route path="/payment-fail" element={<PaymentFail/>} />
+        {/* payment processing */}
+        <Route path="/payment-processing" element={<PaymentProcessing />} />
+
+        {/* Payment Fial */}
+        <Route path="/payment-fail" element={<PaymentFail />} />
 
         <Route path="/profile" element={<MyProfile />} />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/blogs/:slug" element={<BlogDetail />} />
 
       </Routes>
     </div>

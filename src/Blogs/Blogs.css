@@ -1,0 +1,138 @@
+/* Blogs.css */
+
+.blogs-wrapper {
+  background: linear-gradient(135deg, #f9f7fe 0%, #f0ebff 100%);
+  min-height: calc(100vh - 80px);
+  padding-top: 80px;
+}
+
+.title {
+  color: #4b2e83;
+  font-weight: 800;
+}
+
+.subtitle {
+  color: #7e6da8;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Blog Card */
+.blog-card {
+  border: none;
+  border-radius: 18px;
+  overflow: hidden;
+  background: white;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  box-shadow: 0 4px 15px rgba(106, 61, 186, 0.1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(106, 61, 186, 0.25);
+}
+ 
+.blog-image img {
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+  transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-image img {
+  transform: scale(1.03);
+}
+
+.blog-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.meta {
+  font-size: 0.875rem;
+  color: #7e6da8;
+}
+
+.author, .date {
+  color: #7e6da8;
+}
+
+.title-sm {
+  color: #4b2e83;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.excerpt {
+  color: #5a5a72;
+  line-height: 1.7;
+  flex: 1;
+}
+
+/* Purple Button */
+.btn-purple {
+  background: #6a42c2;
+  color: white !important;
+  border: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+  width: fit-content;
+}
+
+.btn-purple:hover {
+  background: #5a36a8;
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(106, 66, 194, 0.3);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .blogs-wrapper {
+    padding-top: 70px;
+  }
+
+  .blog-image img {
+    height: 190px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .blog-image img {
+    height: 180px;
+  }
+
+  .btn-purple {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .blog-image img {
+    height: 160px;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .btn-purple {
+    font-size: 0.9rem;
+    padding: 0.55rem 1.1rem;
+  }
+}
