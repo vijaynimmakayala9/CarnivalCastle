@@ -28,7 +28,7 @@ function Enquiry() {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/");
+    navigate(-1);
     // navigate("/BookingSummary");
   };
 

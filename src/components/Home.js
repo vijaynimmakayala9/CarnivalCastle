@@ -387,7 +387,7 @@ function Home() {
 
   const navigateTheater = useNavigate();
   const handleTheater = () => {
-    navigateTheater("./theaters");
+    navigateTheater("./locations");
   };
 
   const [PopUp1, setPopUp1] = useState([]);
@@ -414,33 +414,33 @@ function Home() {
 
 
   const packages = [
-    {
-      id: 1,
-      title: "Basic Plan",
-      price: "2149",
-      subtitle: "Simple theatre slot, no setup",
-      detailedFeatures: {
-        "Theatre Hall": true,
-        "Decoration": true,
-        "Fog Entry (1 Pot)": false,
-        "Candle Path": false,
-        "HBD LED": false,
-        "Name with LED (6)": false,
-        "AGE Number LED": false,
-        "HBD with Rose petals": false,
-        "Photo Clipping (10)": false,
-        "Birthday Sash": false,
-        "Birthday Crown, Spects": false,
-        "Rose Bouquet (12 Roses)": false,
-        "Customisation cake (1 kg)": false,
-        "Photography (30 Mins)": false,
-        "Cold fire entry (6 pieces)": false,
-        "Videography(Edited 1 Min Reel)": false,
-        "Hall fog (4 Pots)": false,
-      },
-      badgeText: "Saved ₹0",
-      buttonText: "Proceed →",
-    },
+    // {
+    //   id: 1,
+    //   title: "Basic Plan",
+    //   price: "2149",
+    //   subtitle: "Simple theatre slot, no setup",
+    //   detailedFeatures: {
+    //     "Theatre Hall": true,
+    //     "Decoration": true,
+    //     "Fog Entry (1 Pot)": false,
+    //     "Candle Path": false,
+    //     "HBD LED": false,
+    //     "Name with LED (6)": false,
+    //     "AGE Number LED": false,
+    //     "HBD with Rose petals": false,
+    //     "Photo Clipping (10)": false,
+    //     "Birthday Sash": false,
+    //     "Birthday Crown, Spects": false,
+    //     "Rose Bouquet (12 Roses)": false,
+    //     "Customisation cake (1 kg)": false,
+    //     "Photography (30 Mins)": false,
+    //     "Cold fire entry (6 pieces)": false,
+    //     "Videography(Edited 1 Min Reel)": false,
+    //     "Hall fog (4 Pots)": false,
+    //   },
+    //   badgeText: "Saved ₹0",
+    //   buttonText: "Proceed →",
+    // },
     {
       id: 2,
       title: "Standard Plan",
@@ -520,6 +520,7 @@ function Home() {
 
 
 
+  const [showMore, setShowMore] = useState({});
 
 
 
@@ -973,10 +974,10 @@ function Home() {
                                           width: "150px",
                                           height: "200px",
                                           backgroundImage: `url(${testimonials[prevIndex]?.profileImage
-                                              ? testimonials[prevIndex]?.profileImage.replace(/\\/g, "/").startsWith("uploads/")
-                                                ? `https://api.carnivalcastle.com/${testimonials[prevIndex]?.profileImage.replace(/\\/g, "/")}`
-                                                : testimonials[prevIndex]?.profileImage
-                                              : ""
+                                            ? testimonials[prevIndex]?.profileImage.replace(/\\/g, "/").startsWith("uploads/")
+                                              ? `https://api.carnivalcastle.com/${testimonials[prevIndex]?.profileImage.replace(/\\/g, "/")}`
+                                              : testimonials[prevIndex]?.profileImage
+                                            : ""
                                             })`,
 
                                           backgroundSize: "cover",
@@ -1407,9 +1408,12 @@ function Home() {
                               </div>
 
                               {/* Features */}
-                              <ul className="list-unstyled text-start flex-grow-1 mb-1 px-2">
-                                {Object.keys(pkg.detailedFeatures).map((feature, index) => (
-                                  <li key={index} className="d-flex align-items-center mb-2">
+                              <ul className="list-unstyled text-start flex-grow-1 mb-0 px-2">
+                                {(showMore
+                                  ? Object.keys(pkg.detailedFeatures).slice(0, 7)
+                                  : Object.keys(pkg.detailedFeatures)
+                                ).map((feature, idx) => (
+                                  <li key={idx} className="d-flex align-items-center mb-2">
                                     <span
                                       className={`me-2 fw-bold ${pkg.detailedFeatures[feature] ? "text-success" : "text-danger"
                                         }`}
@@ -1420,6 +1424,19 @@ function Home() {
                                   </li>
                                 ))}
                               </ul>
+
+
+                              {Object.keys(pkg.detailedFeatures).length > 7 && (
+                                <button
+                                  className="btn btn-link p-0 my-1 fw-bold"
+                                  onClick={() => setShowMore(!showMore)}
+                                >
+                                  {showMore[pkg.id]
+                                    ? "View Less"
+                                    : `View More`}
+                                </button>
+                              )}
+
 
                               {/* Price */}
                               {pkg?.price ? (
@@ -1432,7 +1449,7 @@ function Home() {
                               <button
                                 className="btn text-white w-100"
                                 style={{ backgroundColor: "#a259ff", borderRadius: "10px" }}
-                                onClick={() => navigateTheater("/theaters")}
+                                onClick={() => navigateTheater("/locations")}
                               >
                                 {pkg.buttonText}
                               </button>
@@ -1514,7 +1531,7 @@ function Home() {
                                     <button
                                       className="btn text-white w-100"
                                       style={{ backgroundColor: "#a259ff", borderRadius: "10px" }}
-                                      onClick={() => navigateTheater("/theaters")}
+                                      onClick={() => navigateTheater("/locations")}
                                     >
                                       {pkg.buttonText}
                                     </button>
@@ -1670,7 +1687,7 @@ function Home() {
                         <button
                           className="btn px-5 py-2 rounded-3 fw-bold dark-back text-light"
                           style={{ width: "80%", maxWidth: "500px" }}
-                          onClick={() => navigateTheater("/theaters")}
+                          onClick={() => navigateTheater("/locations")}
                         >
                           Proceed <i className="bi bi-arrow-right ms-2"></i>
                         </button>
@@ -1834,7 +1851,7 @@ function Home() {
                                   </ul>
                                   <div className="mt-4 text-end">
                                     <Button
-                                      onClick={() => window.location.href = "/theaters"}
+                                      onClick={() => window.location.href = "/locations"}
                                       className="rounded-3 px-4 py-2 fw-semibold dark-back"
                                     >
                                       <i className="fas fa-ticket-alt me-2" />
@@ -2207,7 +2224,7 @@ function Home() {
 
                         <div className="col-md-12 text-center mt-3 mb-4">
                           <a
-                            href="/theaters"
+                            href="/locations"
                             className="btn btn-primary fw-bold dark-back"
                           >
                             Book Now

@@ -286,6 +286,11 @@ function Header() {
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink className="dropdown-item" to="/blogs" style={{ color: currentPage() === "blogs" ? "#800080" : "" }}>
+                    Blogs
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink to="/profile" style={{ color: currentPage() === "profile" ? "#800080" : "", }}>My Profile</NavLink>
                 </li>
               </ul>

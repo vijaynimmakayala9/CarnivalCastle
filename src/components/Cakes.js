@@ -169,9 +169,9 @@ function Enquiry() {
                         <>
                           <Row>
                             <Col
+                            className="lightest-back shadow-lg rounded"
                               md={12}
                               style={{
-                                backgroundColor: "#595B56",
                                 border: "1px dashed #C69FF4",
                               }}
                             >
@@ -180,11 +180,11 @@ function Enquiry() {
                                   padding: "5px",
                                   background: "#A020F0",
                                 }}
-                                className="mt-2 mb-3 lighter-back"
+                                className="mt-2 mb-3 lightest-back"
                               >
                                 <div className="row">
                                   <div className="col">
-                                    <h5 className="text-gold-gradient">
+                                    <h5 className="dark-text">
                                       Premium Cakes
                                     </h5>
                                   </div>
@@ -219,8 +219,8 @@ function Enquiry() {
                                               alt=""
                                             />
                                           </div>
-                                          <div className="food-desc bg-dark">
-                                            <p className="fd-title text-gold-gradient">
+                                          <div className="food-desc bg-white">
+                                            <p className="fd-title light-text">
                                               {data.name}
                                             </p>
 
@@ -247,8 +247,8 @@ function Enquiry() {
                                     </div>
                                   );
                                 })}
-                                <div className="text-white">
-                                  <b className="text-danger">Note: </b><br />
+                                <div className="light-back text-white p-3 rounded">
+                                  <b className="text-white">Note: </b><br />
                                   <span>Customized cakes must be ordered 3days Prior..</span><br />
                                   <span> For customized cakes plz contact us...</span>
                                 </div>
