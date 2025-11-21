@@ -189,7 +189,8 @@ const ComboPlans = () => {
   };
 
   const handleGoToBookingSummary = () => {
-    navigate("/Theaters");
+    const theater = JSON.parse(sessionStorage.getItem("selectedAddress"));
+    navigate(`/Theaters/${theater.name.toLowerCase().replace(/\s+/g, '-')}`);
   };
 
   const handleSubmit = () => {
@@ -263,12 +264,12 @@ const ComboPlans = () => {
               <div className="container"></div>
             </section>
             <section className="shop-area pt-5 pb-5 p-relative lightest-back" style={{ background: "white" }}>
-              <div className="container">
+              <div className="container-fluid px-4">
                 <button type="button" className="btn mb-2 light-back shadow-lg text-light" onClick={handleBack}>
                   <i className="far fa-arrow-alt-circle-left"></i> Back
                 </button>
 
-                <div className="container mt-4">
+                <div className="container-fluid mt-4">
                   <div className="row">
                     {plans.length === 0 ? (
                       <div className="col-md-12 shadow-lg p-4 text-center lighter-back">
@@ -302,7 +303,11 @@ const ComboPlans = () => {
                               <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4" key={index}>
                                 <div
                                   className={`card rounded-5 ${showImages === index ? "gradient45" : "gradientdark"} h-100 plan-card ${showImages === index ? "selected-plan" : ""}`}
-                                  onClick={() => handleChoose(item, index)}
+                                  onClick={() => {                                    
+                                    document.getElementById("cakes")?.scrollIntoView({ behavior: "smooth" });
+                                    handleChoose(item, index);
+                                  }}
+
                                 >
                                   <div className="card-body d-flex flex-column text-center">
                                     {/* Plan Name */}
@@ -377,7 +382,7 @@ const ComboPlans = () => {
 
                           {/* SUMMARY AND PRODUCTS SECTION */}
                           {Object.keys(plansdata).length > 0 && (
-                            <div className="row mt-4">
+                            <div className="row mt-4" id="cakes">
 
 
                               {/* CAKES AND ADD-ONS SECTION - FULL WIDTH ON MOBILE, 8 COLUMNS ON DESKTOP */}

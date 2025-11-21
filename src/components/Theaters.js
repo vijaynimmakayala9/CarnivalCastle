@@ -984,9 +984,9 @@ function Theaters() {
 
                     return (
                       <div key={addrId} className="mb-5">
-                        <h4 className="mb-3" style={{ borderBottom: "2px solid #E9DCFF", paddingBottom: "8px", color: "#40008C" }}>
+                        <h3 className="mb-3 text-center fw-bold" style={{ borderBottom: "2px solid #E9DCFF", paddingBottom: "8px", color: "#40008C" }}>
                           {locationName}
-                        </h4>
+                        </h3>
                         <div className="row">
                           {group.theaters?.map((data, i) => (
                             <TheaterCard

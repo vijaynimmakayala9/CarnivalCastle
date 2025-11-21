@@ -35,6 +35,7 @@ const LocationSelector = () => {
     const handleLocationSelect = (address) => {
         if (address && address._id) {
             const slug = address.name.toLowerCase().replace(/\s+/g, '-');
+            sessionStorage.setItem("selectedAddress", JSON.stringify(address));
             navigate(`/theaters/${slug}`, { state: { address } });
         } else {
             // Handle "Coming Soon" if needed
@@ -105,7 +106,7 @@ const LocationSelector = () => {
                     </section>
 
                     <section className="pb-5" style={{ background: "#C69FF4" }}>
-                        <div className="container">
+                        <div className="container-fluid py-5">
                             <div className="row">
                                 {addresses.length > 0 ? (
                                     addresses.map((address, index) => (

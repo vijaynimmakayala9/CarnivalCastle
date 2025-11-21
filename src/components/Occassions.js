@@ -226,7 +226,7 @@ const Occassions = () => {
             <section
               className="shop-area pt-5 pb-5 p-relative lightest-back"
             >
-              <div className="container">
+              <div className="container-fluid px-4">
                 <button
                   type="button"
                   className="btn light-back shadow-lg text-light"
@@ -242,7 +242,7 @@ const Occassions = () => {
                 </div>
 
 
-                <div className="container mt-4">
+                <div className="container-fluid mt-4">
                   <div className="row mb-4">
                     {/* Occasions */}
                     {/* <div className="col-md-8 shadow-lg"> */}
@@ -326,7 +326,7 @@ const Occassions = () => {
                     </div>
 
                     {/* Booking Summary */}
-                    <div className="col-lg-4 col-md-5">
+                    <div className="col-lg-4 col-md-4 mt-4 mt-md-0">
                       <div className="position-sticky" style={{ top: "20px" }}>
                         <div className="lighter-back mb-3">
                           <div className="card-body mt-3">

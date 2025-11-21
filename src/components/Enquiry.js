@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet";
 import logo from "../components/carnival_footer_logo-2-removebg-preview.png";
+import ThankYouModal from "../Blogs/ThankyouModal";
 function Enquiry() {
   const [form, setform] = useState({
     name: "",
@@ -26,6 +27,7 @@ function Enquiry() {
   const [isLoading, setIsLoading] = useState(false);
 
   const [Contact, setContact] = useState([]);
+  const [thankYouModal, setThankYouModal] = useState(false);
 
   useEffect(() => {
     GetFooterData();
@@ -71,6 +73,7 @@ function Enquiry() {
             description: "",
             eventName: "",
           });
+          setThankYouModal(true); // 🔥 Show thank you modal
         }
       },
       (error) => {
@@ -83,7 +86,7 @@ function Enquiry() {
 
   return (
     <>
-          <Helmet>
+      <Helmet>
         <meta charSet="utf-8" />
         <title>Private Theater in Hyderabad | Carnival Castle</title>
         <meta
@@ -175,7 +178,7 @@ function Enquiry() {
                     </div>
                   </div>
                   <div className="row justify-content-md-center mt-3">
-                    <div className="col-lg-8 mt-40  rounded-3" style={{ border: "1px solid #9D4DFF"}}>
+                    <div className="col-lg-8 mt-40  rounded-3" style={{ border: "1px solid #9D4DFF" }}>
                       <div className="row">
                         <div className="col-lg-6 ">
                           <div className="contactsops bg-dark">
@@ -229,7 +232,7 @@ function Enquiry() {
                                   minLength="10"
                                   pattern="[0-9]{10}"
                                   value={form.mobileNumber}
-                                  placeholder="Enter Mobile Number*"
+                                  placeholder="Enter WhatsApp Number*"
                                   className="form-control"
                                 />
                               </div>
@@ -326,6 +329,11 @@ function Enquiry() {
                   </div>
                 </div>
               </section> */}
+
+              <ThankYouModal
+                show={thankYouModal}
+                onClose={() => setThankYouModal(false)}
+              />
             </main>
             <ToastContainer />
             <Footer />

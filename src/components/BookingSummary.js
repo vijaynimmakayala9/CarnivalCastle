@@ -380,7 +380,7 @@ const BookingForm = () => {
               className="shop-area pt-4 pb-5 p-relative lightest-back "
               style={{ background: "white" }}
             >
-              <div className="container mx-auto p-4">
+              <div className="container-fluid mx-auto p-4">
                 <button
                   type="button"
                   className="btn light-back shadow-sm text-light mb-3"

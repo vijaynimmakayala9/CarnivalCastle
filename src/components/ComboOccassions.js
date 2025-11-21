@@ -190,7 +190,7 @@ const ComboOccassions = () => {
               className="shop-area pt-5 pb-5 p-relative lightest-back"
               style={{ background: "white" }}
             >
-              <div className="container">
+              <div className="container-fluid px-4">
                 <button
                   type="button"
                   className="btn light-back shadow-lg text-light"
@@ -199,7 +199,7 @@ const ComboOccassions = () => {
                   {" "}
                   <i className="far fa-arrow-alt-circle-left "></i> Back
                 </button>
-                <div className="container mt-4">
+                <div className="container-fluid mt-4">
                   <div className="row mb-4">
                     {/* Occasions */}
                     <div className="col-md-8 lighter-back shadow-sm rounded">
@@ -283,7 +283,7 @@ const ComboOccassions = () => {
                     </div>
 
                     {/* Booking Summary */}
-                    <div className="col-lg-4 col-md-5">
+                    <div className="col-lg-4 col-md-4">
                       <div className="position-sticky" style={{ top: "20px" }}>
                         <div className="shadow-lg rounded mb-3">
                           <div className="card-body">

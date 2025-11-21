@@ -444,7 +444,7 @@ const CakesComponent = () => {
               className="shop-area pt-5 pb-5 p-relative lightest-back"
               style={{ background: "white" }}
             >
-              <div className="container">
+              <div className="container-fluid px-4">
                 <button
                   type="button"
                   className="btn light-back shadow-lg text-light"
@@ -478,7 +478,7 @@ const CakesComponent = () => {
                   </div>
 
                   {/* Cakes Display */}
-                  <div className="col-lg-8 col-md-6 mx-auto lighter-back rounded shadow-sm">
+                  <div className="col-lg-8 col-md-8 mx-auto lighter-back rounded shadow-sm">
                     <div className="alert light-back m-3">
                       <i
                         className="fa fa-exclamation-triangle me-2"
@@ -495,7 +495,7 @@ const CakesComponent = () => {
                         <div
                           // className="col-lg-4 col-sm-12 col-12 mb-1 mt-2"
                           // className="col-6 col-md-3 mb-1 mt-3 text-center"
-                          className="col-lg-4 col-sm-6 col-6 mb-1 mt-2"
+                          className="col-lg-4 col-sm-4 col-6 mb-1 mt-2"
                           key={index}
                         >
                           <div
@@ -642,7 +642,7 @@ const CakesComponent = () => {
                   </div>
 
                   {/* Summary Section */}
-                  <div className="col-lg-4 col-md-5">
+                  <div className="col-lg-4 col-md-4 mt-4">
                     <div className="position-sticky" style={{ top: "20px" }}>
                       <div className="lighter-back mb-3 rounded shadow-sm">
                         <div className="card-body mt-3">

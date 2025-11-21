@@ -373,7 +373,7 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
               className="shop-area pt-5 pb-5 p-relative lightest-back"
               style={{ background: "white" }}
             >
-              <div className="container">
+              <div className="container-fluid px-4">
                 <button
                   type="button"
                   className="btn light-back shadow-lg text-light"
@@ -381,7 +381,7 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                 >
                   <i className="far fa-arrow-alt-circle-left"></i> Back
                 </button>
-                <div className="container mt-4">
+                <div className="container-fluid mt-4">
                   <div className="row mb-4">
                     {/* Occasions */}
                     {/* <div className="col-md-8 shadow-lg"> */}
@@ -468,7 +468,7 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                     </div>
 
                     {/* Booking Summary */}
-                    <div className="col-lg-4 col-md-5">
+                    <div className="col-lg-4 col-md-4">
                       <div className="position-sticky" style={{ top: "20px" }}>
                         <div className="lighter-back rounded shadow-sm mb-3">
                           <div className="card-body mt-3">

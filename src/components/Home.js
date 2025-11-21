@@ -812,7 +812,7 @@ function Home() {
           >
             <div>
               <img
-                src="assets/img/gipss.gif"
+                src="assets/img/giff.gif"
                 style={{ height: "300px", color: "white" }}
               ></img>
               <h6 style={{ color: "gold" }}>Loading...</h6>
