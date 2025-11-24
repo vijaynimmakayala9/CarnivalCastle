@@ -28,6 +28,7 @@ import logo from "../components/carnival_footer_logo-2-removebg-preview.png";
 
 import { Carousel, Card, Container, Row, Col, Button } from "react-bootstrap";
 import CouponSection from "./Coupons";
+import Time from "../Blogs/Time";
 
 function Home() {
 
@@ -826,6 +827,7 @@ function Home() {
               <>
                 <Header />
                 <div className="scrollbar">
+                  {/* <Time/> */}
                   <Slider {...settings}>
                     {/* Desktop images ko map karo */}
                     {banner?.desktopImages?.map((desktopImage, index) => (
@@ -846,7 +848,7 @@ function Home() {
                             backgroundSize: "cover",
                             backgroundPosition: "center",
                             backgroundRepeat: "no-repeat",
-                            height: "100vh",
+                            height: "80vh",
                             transition: "background-image 1s ease-in-out",
                           }}
                         >
