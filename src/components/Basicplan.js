@@ -479,9 +479,9 @@ const Basicplan = () => {
                                     <i className="bi bi-gift-fill me-2 text-warning"></i>
                                     BASIC PLAN
                                   </div>
-                                  <div className="coupon-details">Starts from ₹2148</div>
+                                  <div className="coupon-details">Price Starts from 1748/-</div>
                                   <div className="coupon-details">Includes Theatre and Decoration</div>
-                                  <div className="coupon-details">Add-ons: Cake, Fog Entry, Etc will be in next step</div>
+                                  <div className="coupon-details">Add-ons At additional Prices : Cakes , Photography etc</div>
 
 
                                   <div className="coupon-minimum">
@@ -497,10 +497,10 @@ const Basicplan = () => {
                                     <i className="bi bi-gift-fill me-2 text-warning"></i>
                                     COMBO PLAN
                                   </div>
-                                  <div className="coupon-details">Flat 30% Off on Plans</div>
-                                  <div className="coupon-details">Starts from ₹4100/</div>
-                                  <div className="coupon-details">Including: Theatre, Decoration, Cake, Photography etc..</div>
-                                  <div className="coupon-details">Total 14 services</div>
+                                  <div className="coupon-details">10% off on Plans</div>
+                                  <div className="coupon-details">Prices starts from 5999/-</div>
+                                  <div className="coupon-details">Price vary based on Theatre, Number of people..</div>
+                                  <div className="coupon-details">Includes: Cake , photography upto 12-14 Services</div>
                                   <div className="coupon-code">
                                   </div>
                                   <div className="coupon-minimum">
