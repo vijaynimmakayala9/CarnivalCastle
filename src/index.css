@@ -63,6 +63,10 @@ code {
   color: #40008C!important;
 }
 
+.lightest-text {
+  color: #9D4DFF!important;
+}
+
 /* Improve focus styles for accessibility */
 *:focus {
   outline: none !important;

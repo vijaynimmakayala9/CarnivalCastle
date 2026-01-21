@@ -13,7 +13,7 @@ const Blogs = () => {
     const fetchBlogs = async () => {
       try {
         const res = await axios.get(
-          "https://api.carnivalcastle.com/v1/carnivalApi/admin/allpublishedblogs"
+          "https://api.carnivalcastle.com/v1/carnivalApi/admin/allpublishedblogs?type=bingenjoy"
         );
         const data = res.data.blogs || [];
 
