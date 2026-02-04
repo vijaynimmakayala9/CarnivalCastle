@@ -29,6 +29,27 @@ import logo from "../components/carnival_footer_logo-2-removebg-preview.png";
 import { Carousel, Card, Container, Row, Col, Button } from "react-bootstrap";
 import CouponSection from "./Coupons";
 import Time from "../Blogs/Time";
+import PopupModal from "./PopUpModal";
+
+export const fetchPopupImage = async () => {
+  try {
+    const res = await fetch(
+      "https://api.carnivalcastle.com/v1/carnivalApi/admin/popup/getpopupimage?type=Carnivalcastle"
+    );
+
+    const data = await res.json();
+
+    if (data.success && data.data?.length > 0) {
+      return data.data[0]; // return first popup
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Popup fetch error:", error);
+    return null;
+  }
+};
+
 
 function Home() {
 
@@ -130,6 +151,23 @@ function Home() {
       }
     );
   };
+
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupImage, setPopupImage] = useState("");
+
+  useEffect(() => {
+    const loadPopup = async () => {
+      const popup = await fetchPopupImage();
+
+      // ✅ Only open if modalEnabled is true
+      if (popup?.modalEnabled) {
+        setPopupImage(popup.image);
+        setShowPopup(true);
+      }
+    };
+
+    loadPopup();
+  }, []);
 
   const settings = {
     dots: false,
@@ -2302,7 +2340,7 @@ function Home() {
                 </section>
 
 
-                <Modal
+                {/* <Modal
                   size="md"
                   show={lgShow}
                   onHide={handleClose}
@@ -2332,7 +2370,13 @@ function Home() {
                       &times;
                     </button>
                   </div>
-                </Modal>
+                </Modal> */}
+
+                <PopupModal
+                  show={showPopup}
+                  handleClose={() => setShowPopup(false)}
+                  image={popupImage}
+                />
                 <ToastContainer />
                 <Footer />
               </>
