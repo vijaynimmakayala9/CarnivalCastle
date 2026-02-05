@@ -34,7 +34,7 @@ import PopupModal from "./PopUpModal";
 export const fetchPopupImage = async () => {
   try {
     const res = await fetch(
-      "https://api.carnivalcastle.com/v1/carnivalApi/admin/popup/getpopupimage?type=Carnivalcastle"
+      "https://api.carnivalcastle.com/v1/carnivalApi/admin/popup/getpopupimage?type=CarnivalCastle"
     );
 
     const data = await res.json();
