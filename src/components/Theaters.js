@@ -803,7 +803,7 @@ function Theaters() {
         <main className="main-wrapper">
           <section
             id="parallax"
-            className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lightdark-back position-relative"
+            className="slider-area d-flex align-items-center justify-content-center fix lightdark-back position-relative"
             style={{ minHeight: "200px", background: "#C69FF4" }}
           >
             <div className="container-fluid position-relative">

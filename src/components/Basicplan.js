@@ -465,10 +465,23 @@ const Basicplan = () => {
 
                         <div className="row mb-3">
                           <div className="col-md-12 mt-3 mb-5">
-                            <label htmlFor="discountCoupon" className="form-label fw-semibold">
-                              <i className="bi bi-ticket-perforated-fill me-2"></i>
+                            <label
+                              htmlFor="discountCoupon"
+                              className="form-label fw-semibold px-3 py-2 rounded-3 d-inline-flex align-items-center gap-2"
+                              style={{
+                                backgroundColor: "rgba(157,77,255,0.12)",
+                                borderLeft: "5px solid #9D4DFF",
+                                color: "#5a2bbf",
+                              }}
+                            >
+                              <i
+                                className="bi bi-ticket-perforated-fill"
+                                style={{ color: "#9D4DFF" }}
+                              ></i>
+
                               Select Plan <span className="text-danger">*</span>
                             </label>
+
                             <div className="row gx-3 gy-3">
                               <div className="col-md-6">
                                 <div
