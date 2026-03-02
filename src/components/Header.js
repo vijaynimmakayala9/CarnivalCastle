@@ -174,7 +174,7 @@ function Header() {
                 </li>
                 <li className="mobile-contact-item d-md-none">
                   <a
-                    href={`tel:${Contact.phone || "8374777834"}`}
+                    href={`tel:8374777834`}
                     style={{
                       display: "flex",
                       alignItems: "center",
@@ -187,12 +187,12 @@ function Header() {
                     onClick={() => setshow(false)}
                   >
                     <FaPhoneAlt color="#40008C" size={20} />
-                    <span style={{ fontSize: "14px" }}>Call Us: +91 {Contact.phone || "8374777834"}</span>
+                    <span style={{ fontSize: "14px" }}>Call Us: +91 8374777834</span>
                   </a>
                 </li>
                 <li className="mobile-contact-item d-md-none">
                   <a
-                    href={`https://wa.me/${Contact.phone || "918374777834"}`}
+                    href={`https://wa.me/918374777834`}
                     target="_blank"
                     rel="noreferrer"
                     style={{
@@ -224,7 +224,7 @@ function Header() {
                     onClick={() => setshow(false)}
                   >
                     <FaMobileAlt color="#40008C" size={20} />
-                    <span style={{ fontSize: "14px" }}>Mobile: +91 {Contact.mobile || "8374777834"}</span>
+                    <span style={{ fontSize: "14px" }}>Mobile: +91 8374777834</span>
                   </a>
                 </li>
               </ul>
@@ -262,7 +262,7 @@ function Header() {
 
                 {/* PHONE */}
                 <a
-                  href={`tel:${Contact.phone}`}
+                  href={`tel:8341428342`}
                   style={{
                     color: "#fff",
                     textDecoration: "none",
@@ -273,12 +273,12 @@ function Header() {
                   }}
                 >
                   <FaPhoneAlt color="#fff" />
-                  <span>+91 {Contact.phone}</span>
+                  <span>+91 8341428342</span>
                 </a>
 
                 {/* WHATSAPP */}
                 <a
-                  href={`https://wa.me/${Contact.phone || "918374777834"}`}
+                  href={`https://wa.me/918374777834`}
                   target="_blank"
                   rel="noreferrer"
                   style={{
@@ -338,7 +338,7 @@ function Header() {
                 <FaCompress size={20} color="white" />
               )}
             </button>
-            <a href="tel:+918374777834" className="sbutton phone"><FaPhoneAlt size={22} color="white" /></a>
+            <a href="tel:+918341428342" className="sbutton phone"><FaPhoneAlt size={22} color="white" /></a>
             <a href="https://wa.me/918374777834" className="sbutton whatsapp"><FaWhatsapp size={22} color="white" /></a>
             {showMessage && <div className="floating-msg">How can I assist you?</div>}
           </div>

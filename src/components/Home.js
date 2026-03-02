@@ -1140,7 +1140,7 @@ function Home() {
                             </div>
 
                             {/* Desktop Controls */}
-                            <button
+                            {/* <button
                               className="carousel-control-prev d-none d-md-flex"
                               type="button"
                               data-bs-target="#testimonial3DCarousel"
@@ -1163,7 +1163,7 @@ function Home() {
                                 aria-hidden="true"
                               ></span>
                               <span className="visually-hidden">Next</span>
-                            </button>
+                            </button> */}
                           </div>
                         </Col>
                       </Row>
@@ -1584,7 +1584,7 @@ function Home() {
                       </div>
 
                       {/* Controls */}
-                      <button
+                      {/* <button
                         className="carousel-control-prev"
                         type="button"
                         data-bs-target="#packagesCarousel"
@@ -1601,7 +1601,7 @@ function Home() {
                       >
                         <span className="carousel-control-next-icon" aria-hidden="true"></span>
                         <span className="visually-hidden">Next</span>
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </section>
@@ -1729,7 +1729,7 @@ function Home() {
                           style={{ width: "80%", maxWidth: "500px" }}
                           onClick={() => navigateTheater("/locations")}
                         >
-                          Proceed <i className="bi bi-arrow-right ms-2"></i>
+                          Proceed to Book <i className="bi bi-arrow-right ms-2"></i>
                         </button>
                       </div>
                     </div>
@@ -1738,16 +1738,150 @@ function Home() {
 
                 <section className="services-section py-2 text-dark bg-white">
                   <div className="container">
-                    <h2 className="text-center mb-2 dark-text fw-bold">Experiance Our Services</h2>
+                    <h2 className="text-center dark-text fw-bold">Our Services</h2>
 
                     {/* Large Card Wrapper */}
-                    <div className="card text-dark p-4 rounded-4  border-0" style={{ backgroundColor: "#fff" }}>
-                      <div className="row g-4">
+                    <div className="card text-dark p-4 rounded-4 border-0" style={{ backgroundColor: "#fff" }}>
+
+                      {/* Carousel for Mobile/Tablet */}
+                      <div
+                        id="servicesCarousel"
+                        className="carousel slide d-xl-none"
+                        data-bs-ride="carousel"
+                        data-bs-interval="3000"
+                      >
+                        <div className="carousel-inner">
+                          {/* Slide 1 - Food & Beverages */}
+                          <div className="carousel-item active">
+                            <div className="row g-4 justify-content-center">
+                              <div className="col-12 col-md-6">
+                                <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
+                                  <div className="card-body d-flex flex-column align-items-center">
+                                    <img
+                                      src={beverages}
+                                      alt="Food & Beverages"
+                                      className="rounded-circle mb-3"
+                                      style={{
+                                        height: "100px",
+                                        width: "100px",
+                                        objectFit: "cover",
+                                        border: "2px solid #E9BE5F"
+                                      }}
+                                    />
+                                    <h5 className="card-title light-text">Food & Beverages</h5>
+                                    <p className="card-text">Choose the perfect food combo for your celebration.</p>
+                                    <a href="/Food" className="mt-auto light-text">
+                                      View more <i className="fas fa-arrow-right"></i>
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Slide 2 - Screening */}
+                          <div className="carousel-item">
+                            <div className="row g-4 justify-content-center">
+                              <div className="col-12 col-md-6">
+                                <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
+                                  <div className="card-body d-flex flex-column align-items-center">
+                                    <img
+                                      src={screening}
+                                      alt="Screening"
+                                      className="rounded-circle mb-3"
+                                      style={{
+                                        height: "100px",
+                                        width: "100px",
+                                        objectFit: "cover",
+                                        border: "2px solid #E9BE5F"
+                                      }}
+                                    />
+                                    <h5 className="card-title light-text">Screening</h5>
+                                    <p className="card-text">Bring your OTT accounts and relive the theatre magic!</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Slide 3 - Cakes */}
+                          <div className="carousel-item">
+                            <div className="row g-4 justify-content-center">
+                              <div className="col-12 col-md-6">
+                                <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
+                                  <div className="card-body d-flex flex-column align-items-center">
+                                    <img
+                                      src={cake4}
+                                      alt="Cakes"
+                                      className="rounded-circle mb-3"
+                                      style={{
+                                        height: "100px",
+                                        width: "100px",
+                                        objectFit: "cover",
+                                        border: "2px solid #E9BE5F"
+                                      }}
+                                    />
+                                    <h5 className="card-title light-text">Cakes</h5>
+                                    <p className="card-text">Choose the perfect cake for your celebration from our selection.</p>
+                                    <a href="/cakes" className="mt-auto light-text">
+                                      View more <i className="fas fa-arrow-right"></i>
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Slide 4 - Bouquets */}
+                          <div className="carousel-item">
+                            <div className="row g-4 justify-content-center">
+                              <div className="col-12 col-md-6">
+                                <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
+                                  <div className="card-body d-flex flex-column align-items-center">
+                                    <img
+                                      src={roses}
+                                      alt="Bouquets"
+                                      className="rounded-circle mb-3"
+                                      style={{
+                                        height: "100px",
+                                        width: "100px",
+                                        objectFit: "cover",
+                                        border: "2px solid #E9BE5F"
+                                      }}
+                                    />
+                                    <h5 className="card-title light-text">Bouquets</h5>
+                                    <p className="card-text">Add a beautiful rose bouquet to enhance your celebration.</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Carousel Controls */}
+                        <button className="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
+                          <span className="carousel-control-prev-icon" aria-hidden="true" style={{ backgroundColor: '', borderRadius: '50%', padding: '15px' }}></span>
+                          <span className="visually-hidden">Previous</span>
+                        </button>
+                        <button className="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
+                          <span className="carousel-control-next-icon" aria-hidden="true" style={{ backgroundColor: '', borderRadius: '50%', padding: '15px' }}></span>
+                          <span className="visually-hidden">Next</span>
+                        </button>
+
+                        {/* Carousel Indicators */}
+                        <div className="carousel-indicators position-relative mt-3">
+                          <button type="button" data-bs-target="#servicesCarousel" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1" style={{ backgroundColor: '#800080', width: '10px', height: '10px', borderRadius: '50%', margin: '0 5px' }}></button>
+                          <button type="button" data-bs-target="#servicesCarousel" data-bs-slide-to="1" aria-label="Slide 2" style={{ backgroundColor: '#800080', width: '10px', height: '10px', borderRadius: '50%', margin: '0 5px' }}></button>
+                          <button type="button" data-bs-target="#servicesCarousel" data-bs-slide-to="2" aria-label="Slide 3" style={{ backgroundColor: '#800080', width: '10px', height: '10px', borderRadius: '50%', margin: '0 5px' }}></button>
+                          <button type="button" data-bs-target="#servicesCarousel" data-bs-slide-to="3" aria-label="Slide 4" style={{ backgroundColor: '#800080', width: '10px', height: '10px', borderRadius: '50%', margin: '0 5px' }}></button>
+                        </div>
+                      </div>
+
+                      {/* Desktop Grid - 4 cards in a row (Visible only on large screens) */}
+                      <div className="row g-4 d-none d-xl-flex">
                         {/* Service Card 1 */}
                         <div className="col-12 col-sm-6 col-lg-3">
-                          <div
-                            className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45"
-                          >
+                          <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
                             <div className="card-body d-flex flex-column align-items-center">
                               <img
                                 src={beverages}
@@ -1771,9 +1905,7 @@ function Home() {
 
                         {/* Service Card 2 */}
                         <div className="col-12 col-sm-6 col-lg-3">
-                          <div
-                            className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45"
-                          >
+                          <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
                             <div className="card-body d-flex flex-column align-items-center">
                               <img
                                 src={screening}
@@ -1794,9 +1926,7 @@ function Home() {
 
                         {/* Service Card 3 */}
                         <div className="col-12 col-sm-6 col-lg-3">
-                          <div
-                            className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45"
-                          >
+                          <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
                             <div className="card-body d-flex flex-column align-items-center">
                               <img
                                 src={cake4}
@@ -1811,7 +1941,7 @@ function Home() {
                               />
                               <h5 className="card-title light-text">Cakes</h5>
                               <p className="card-text">Choose the perfect cake for your celebration from our selection.</p>
-                              <a href="/cakes" className=" mt-auto light-text">
+                              <a href="/cakes" className="mt-auto light-text">
                                 View more <i className="fas fa-arrow-right"></i>
                               </a>
                             </div>
@@ -1820,9 +1950,7 @@ function Home() {
 
                         {/* Service Card 4 */}
                         <div className="col-12 col-sm-6 col-lg-3">
-                          <div
-                            className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45"
-                          >
+                          <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
                             <div className="card-body d-flex flex-column align-items-center">
                               <img
                                 src={roses}
@@ -1840,15 +1968,142 @@ function Home() {
                             </div>
                           </div>
                         </div>
-
                       </div>
                     </div>
                   </div>
+
+                  <style jsx>{`
+    /* Carousel Styles */
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 40px;
+      height: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 1;
+    }
+
+    .carousel-control-prev {
+      left: -20px;
+    }
+
+    .carousel-control-next {
+      right: -20px;
+    }
+
+    .carousel-indicators {
+      bottom: -30px;
+    }
+
+    .carousel-indicators button {
+      border: none;
+    }
+
+    /* Gradient Background for Cards */
+    .gradient45 {
+      background: linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gradient45:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15) !important;
+    }
+
+    /* Responsive breakpoints */
+    @media (max-width: 575px) {
+      /* Mobile: 1 card */
+      .carousel-control-prev {
+        left: -5px;
+      }
+      .carousel-control-next {
+        right: -5px;
+      }
+      .carousel-control-prev span,
+      .carousel-control-next span {
+        padding: 8px !important;
+      }
+      .col-12 {
+        max-width: 100%;
+        flex: 0 0 100%;
+      }
+    }
+
+    @media (min-width: 576px) and (max-width: 1199px) {
+      /* Tablet/Medium: 2 cards */
+      .carousel-control-prev {
+        left: -10px;
+      }
+      .carousel-control-next {
+        right: -10px;
+      }
+      .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      /* Large screens: 4 cards */
+      .carousel {
+        display: none !important;
+      }
+      .d-xl-flex {
+        display: flex !important;
+      }
+      .gradient45 {
+        min-height: 350px;
+      }
+    }
+
+    /* Light text color */
+    .light-text {
+      color: #800080;
+      font-weight: 600;
+    }
+
+    .light-text:hover {
+      color: #40008C;
+      text-decoration: underline;
+    }
+
+    /* Dark text color */
+    .dark-text {
+      color: #333;
+    }
+
+    /* Card text styling */
+    .card-text {
+      font-size: 14px;
+      color: #666;
+      margin: 10px 0;
+    }
+
+    .card-title {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    /* Ensure cards have equal height */
+    .card.h-100 {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-body {
+      flex: 1;
+    }
+
+    /* Center content on mobile/tablet */
+    .justify-content-center {
+      justify-content: center !important;
+    }
+  `}</style>
                 </section>
 
 
                 {/* WHY US Section */}
-                <section className="py-5 lighter-back">
+                <section className="py-2 lighter-back">
                   <Container>
                     <div className="position-relative">
                       <Carousel
@@ -1862,6 +2117,7 @@ function Home() {
                       >
                         {whyUsSlides.map((slide, idx) => (
                           <Carousel.Item key={idx}>
+                            <h2 className="mb-3 " style={{ color: "#681DC0" }}>{slide.title}</h2>
                             <Row className="align-items-center g-4 flex-column flex-md-row text-center text-md-start">
                               {/* Left - Image */}
                               <Col md={6}>
@@ -1876,7 +2132,7 @@ function Home() {
                               {/* Right - Text */}
                               <Col md={6}>
                                 <div className="ps-md-4 mt-4 mt-md-0">
-                                  <h2 className="mb-3" style={{ color: "#681DC0" }}>{slide.title}</h2>
+
                                   <h6 className="fw-semibold mb-4">{slide.subtitle}</h6>
                                   <ul className="list-unstyled">
                                     {slide.points.map((point, i) => (
@@ -1889,13 +2145,13 @@ function Home() {
                                       </li>
                                     ))}
                                   </ul>
-                                  <div className="mt-4 text-end">
+                                  <div className="mt-4 text-center text-md-start">
                                     <Button
                                       onClick={() => window.location.href = "/locations"}
                                       className="rounded-3 px-4 py-2 fw-semibold dark-back"
                                     >
                                       <i className="fas fa-ticket-alt me-2" />
-                                      Book Now
+                                      Proceed to Book
                                     </Button>
                                   </div>
                                 </div>
