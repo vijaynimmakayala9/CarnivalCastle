@@ -915,13 +915,13 @@ function Home() {
                                 <div className="banner-buttons d-flex flex-column flex-sm-row gap-3">
                                   <a
                                     href="/locations"
-                                    className="btn btn-lg px-4 fw-bold btn-purple"
+                                    className="btn btn-lg px-4 fw-bold btn-light"
                                   >
                                     Book Now
                                   </a>
                                   <a
                                     href="tel:8977917555"
-                                    className="btn btn-lg px-4 fw-bold btn-purple"
+                                    className="btn btn-lg px-4 fw-bold btn-light"
                                   >
                                     Book via Call
                                   </a>

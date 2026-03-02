@@ -16,128 +16,192 @@ const LoginForm = ({ onLogin }) => {
     if (!success) setLoading(false);
   };
 
-  const handleMouseEffect = (e, scale) => {
-    e.currentTarget.style.transform = `scale(${scale})`;
-  };
-
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "1rem",
-      }}
-    >
-      <div style={{ width: "100%", maxWidth: "28rem" }}>
-        <div
-          style={{
-            backdropFilter: "blur(20px)",
-            backgroundColor: "rgba(255, 255, 255, 0.7)",
-            borderRadius: "1.5rem",
-            boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-            padding: "2rem",
-            border: "1px solid rgba(255, 255, 255, 0.2)",
-          }}
-        >
-          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "4rem",
-                height: "4rem",
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, #9333ea 0%, #ec4899 100%)",
-                marginBottom: "1rem",
-              }}
-            >
-              <Sparkles color="white" size={32} />
-            </div>
-            <h2
-              style={{
-                fontSize: "1.875rem",
-                fontWeight: "700",
-                background: "linear-gradient(to right, #9333ea, #ec4899)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Welcome Back
-            </h2>
-            <p style={{ color: "#4b5563", marginTop: "0.5rem" }}>Sign in to your profile</p>
+    <div className="light-wrapper">
+      <div className="light-card">
+
+        {/* ICON */}
+        <div className="icon-wrapper">
+          <Sparkles size={30} />
+        </div>
+
+        <h2 className="title">Welcome Back</h2>
+        <p className="subtitle">Sign in to your account</p>
+
+        <form onSubmit={handleSubmit} className="form-area">
+
+          <div className="input-group">
+            <label>Phone Number</label>
+            <input
+              type="text"
+              required
+              placeholder="Enter your phone"
+              value={formData.phone}
+              onChange={(e) =>
+                setFormData({ ...formData, phone: e.target.value })
+              }
+            />
           </div>
 
-          <form onSubmit={handleSubmit}>
-            <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-              <div>
-                <label style={{ display: "block", fontSize: "0.875rem", fontWeight: "600", color: "#374151", marginBottom: "0.5rem" }}>
-                  Phone Number
-                </label>
-                <input
-                  type="text"
-                  required
-                  style={{ width: "100%", padding: "0.75rem 1rem", borderRadius: "0.75rem", backgroundColor: "rgba(255, 255, 255, 0.5)", border: "1px solid #e5e7eb", outline: "none" }}
-                  placeholder="Enter your phone"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                />
-              </div>
-              <div>
-                <label style={{ display: "block", fontSize: "0.875rem", fontWeight: "600", color: "#374151", marginBottom: "0.5rem" }}>
-                  Password
-                </label>
-                <input
-                  type="password"
-                  required
-                  style={{ width: "100%", padding: "0.75rem 1rem", borderRadius: "0.75rem", backgroundColor: "rgba(255, 255, 255, 0.5)", border: "1px solid #e5e7eb", outline: "none" }}
-                  placeholder="Enter your password"
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={loading}
-                style={{
-                  width: "100%",
-                  padding: "0.75rem",
-                  borderRadius: "0.75rem",
-                  background: "linear-gradient(to right, #9333ea, #ec4899)",
-                  color: "white",
-                  fontWeight: "600",
-                  border: "none",
-                  cursor: loading ? "not-allowed" : "pointer",
-                  opacity: loading ? 0.5 : 1,
-                }}
-                onMouseEnter={(e) => !loading && handleMouseEffect(e, 1.05)}
-                onMouseLeave={(e) => !loading && handleMouseEffect(e, 1)}
-              >
-                {loading ? "Signing in..." : "Sign In"}
-              </button>
-            </div>
-          </form>
+          <div className="input-group">
+            <label>Password</label>
+            <input
+              type="password"
+              required
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+            />
+            <small className="password-note">
+              Hint: Use your phone number as password.
+            </small>
+          </div>
 
-          <button
-            style={{
-              width: "100%",
-              marginTop: "1rem",
-              padding: "0.75rem",
-              borderRadius: "0.75rem",
-              border: "2px solid #d1d5db",
-              backgroundColor: "transparent",
-              color: "#374151",
-              fontWeight: "600",
-              cursor: "pointer",
-            }}
-            onClick={() => (window.location.href = "/")}
-          >
-            ← Back to Home
+          <button type="submit" disabled={loading} className="login-btn">
+            {loading ? "Signing in..." : "Sign In"}
           </button>
-        </div>
+
+        </form>
+
+        <button
+          className="back-btn"
+          onClick={() => (window.location.href = "/")}
+        >
+          ← Back to Home
+        </button>
+
       </div>
+
+      <style jsx>{`
+        .light-wrapper {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1rem;
+          background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+        }
+
+        .light-card {
+          width: 100%;
+          max-width: 420px;
+          padding: 2.5rem;
+          border-radius: 1.8rem;
+          background: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(15px);
+          border: 1px solid rgba(0,0,0,0.05);
+          box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+          text-align: center;
+        }
+
+        .icon-wrapper {
+          width: 65px;
+          height: 65px;
+          margin: 0 auto 1rem;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: linear-gradient(135deg, #9D4DFF, #EC4899);
+          color: white;
+          box-shadow: 0 8px 20px rgba(157, 77, 255, 0.3);
+        }
+
+        .title {
+          font-size: 1.8rem;
+          font-weight: 700;
+          background: linear-gradient(to right, #9D4DFF, #EC4899);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+          color: #6b7280;
+          font-size: 0.9rem;
+          margin-bottom: 2rem;
+        }
+
+        .form-area {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .input-group {
+          text-align: left;
+        }
+
+        .input-group label {
+          font-size: 0.85rem;
+          font-weight: 600;
+          margin-bottom: 0.4rem;
+          display: block;
+          color: #374151;
+        }
+
+        .input-group input {
+          width: 100%;
+          padding: 0.85rem 1rem;
+          border-radius: 0.9rem;
+          border: 1px solid #e5e7eb;
+          background: white;
+          font-size: 0.9rem;
+          outline: none;
+          transition: 0.3s;
+        }
+
+        .input-group input:focus {
+          border-color: #9D4DFF;
+          box-shadow: 0 0 0 3px rgba(157, 77, 255, 0.2);
+        }
+
+        .password-note {
+          font-size: 0.7rem;
+          color: #6b7280;
+          margin-top: 0.4rem;
+          display: block;
+        }
+
+        .login-btn {
+          padding: 0.9rem;
+          border-radius: 0.9rem;
+          border: none;
+          background: linear-gradient(90deg, #9D4DFF, #EC4899);
+          color: white;
+          font-weight: 600;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        .login-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(157, 77, 255, 0.4);
+        }
+
+        .back-btn {
+          margin-top: 1.5rem;
+          padding: 0.8rem;
+          width: 100%;
+          border-radius: 0.9rem;
+          border: 1px solid #d1d5db;
+          background: transparent;
+          color: #374151;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        .back-btn:hover {
+          background: #f3f4f6;
+        }
+
+        @media (max-width: 480px) {
+          .light-card {
+            padding: 2rem 1.5rem;
+          }
+        }
+      `}</style>
     </div>
   );
 };

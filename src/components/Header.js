@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { URLS } from "../Url";
 import axios from "axios";
-import logo from "./logo.png";
+import logo from "./logo1.png";
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -103,12 +103,12 @@ function Header() {
                     <FaInstagram size={18} color="#E1306C" />
                   </a>
 
-                  <a href={`https://wa.me/${Contact.phone || "918341428342"}`} target="_blank" rel="noreferrer">
-                    <FaWhatsapp size={18} color="#25D366" />
-                  </a>
-
                   <a href={`tel:${Contact.phone}`}>
                     <FaPhoneAlt size={18} color="#800080" />
+                  </a>
+
+                  <a href="/profile">
+                    <FaUser size={18} color="#831cd2" />
                   </a>
                 </div>
 
