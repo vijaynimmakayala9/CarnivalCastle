@@ -934,17 +934,17 @@ const CakesComponent = () => {
   // Filter cakes based on selected type (standard/premium) and egg/eggless
   const getFilteredCakes = () => {
     let filteredCakes = [];
-    
+
     if (selectedCakeType === "standard") {
-      filteredCakes = normalCakes.filter(cake => 
+      filteredCakes = normalCakes.filter(cake =>
         isEggless ? cake.cakeType === "eggless" : cake.cakeType === "egg"
       );
     } else {
-      filteredCakes = premiumCakes.filter(cake => 
+      filteredCakes = premiumCakes.filter(cake =>
         isEggless ? cake.cakeType === "eggless" : cake.cakeType === "egg"
       );
     }
-    
+
     return filteredCakes;
   };
 
@@ -1034,7 +1034,7 @@ const CakesComponent = () => {
     }
 
     var cakes = JSON.parse(sessionStorage.getItem("cartCakes"));
-    
+
     setCartCakes((cakes) =>
       cakes.map((item) =>
         item.id === cake._id.toString()
@@ -1047,7 +1047,7 @@ const CakesComponent = () => {
         ? { ...item, quantity: selectedWeight, price: newPrice }
         : item
     );
-    
+
     setSelectedCakesupdate(updatedCakes);
   };
 
@@ -1132,17 +1132,17 @@ const CakesComponent = () => {
                         <div className="btn-group" role="group" aria-label="Cake type selection">
                           <button
                             type="button"
-                            className={`btn ${selectedCakeType === "standard" ? "btn-primary" : "btn-outline-primary"}`}
-                            onClick={() => setSelectedCakeType("standard")}
-                          >
-                            Standard
-                          </button>
-                          <button
-                            type="button"
                             className={`btn ${selectedCakeType === "premium" ? "btn-primary" : "btn-outline-primary"}`}
                             onClick={() => setSelectedCakeType("premium")}
                           >
                             Premium
+                          </button>
+                          <button
+                            type="button"
+                            className={`btn ${selectedCakeType === "standard" ? "btn-primary" : "btn-outline-primary"}`}
+                            onClick={() => setSelectedCakeType("standard")}
+                          >
+                            Standard
                           </button>
                         </div>
                       </div>
@@ -1371,7 +1371,7 @@ const CakesComponent = () => {
                                       }}
                                     >
                                       <div>
-                                        Occasions (
+                                        Decorations (
                                         {sessionStorage.getItem("occasionName")}
                                         )
                                       </div>

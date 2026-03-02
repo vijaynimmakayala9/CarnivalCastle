@@ -1,54 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-// import Sidebar from "./SideBar";
+import { NavLink, useLocation } from "react-router-dom";
 import { URLS } from "../Url";
 import axios from "axios";
-// import logo from "../components/logo.png";
-// import logo from "../components/carnival_footer_logo-2-removebg-preview.png";
 import logo from "./logo.png";
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
-
-
-
-import { useLocation } from "react-router-dom";
+import {
+  FaPhoneAlt,
+  FaWhatsapp,
+  FaMobileAlt,
+  FaInstagram,
+  FaHome,
+  FaMapMarkerAlt,
+  FaBirthdayCake,
+  FaUser,
+  FaBars,
+  FaCompress,
+  FaExpand
+} from "react-icons/fa";
 
 function Header() {
-
-
   const location = useLocation();
   const [showMessage, setShowMessage] = useState(false);
+  const [show, setshow] = useState(false);
+  const [Contact, setContact] = useState([]);
+  const [PopUp, setPopUp] = useState([]);
+
+  const shows = show === true ? "menu-opened" : "";
 
   useEffect(() => {
-    // Show only on home page
+    // Show message only on home page
     if (location.pathname === "/") {
       setShowMessage(true);
-      const timer = setTimeout(() => setShowMessage(false), 15000); // hide after 5 sec
+      const timer = setTimeout(() => setShowMessage(false), 15000);
       return () => clearTimeout(timer);
     }
   }, [location.pathname]);
 
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   useEffect(() => {
-    scrollToTop();
-  }, []);
-
-
-  const [show, setshow] = useState(false);
-
-  const shows = show === true ? "menu-opened" : "";
-
-  const [Contact, setContact] = useState([]);
-
-  const [PopUp, setPopUp] = useState([]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.pathname]);
 
   useEffect(() => {
     GetFooterData();
@@ -60,311 +51,412 @@ function Header() {
         setContact(res.data.contactus);
         setPopUp(res.data.popup[0]);
       }
-      console.log(res.data.contactus);
     });
   };
+
   const currentPage = () => {
-    const pageName =
-      location.pathname === "/" ? "Home" : location.pathname.slice(1);
-    return pageName;
+    const path = location.pathname === "/" ? "Home" : location.pathname.slice(1);
+    return path;
   };
 
-  // console.log(currentPage());
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+      setIsFullScreen(true);
+    } else {
+      document.exitFullscreen();
+      setIsFullScreen(false);
+    }
+  };
+
   return (
     <>
-      {/* {currentPage() !== "Home" && (
-        <style>
-          {`
-            .headersix .main-nav li a {
-              color: #fff !important;
-            }
-          `}
-        </style>
-      )} */}
-
       <div className={shows}>
         <header className="header main-header headersix">
-          {/* <div className="top-header">
-            <div className="container-fluid">
-              <div className="row justify-content-between align-items-center">
-                <div className="col-12 col-md-10">
-                  <div className="header-top-left">
-                    <div className="social-icon">
-                      <ul>
-                        <li>
-                          <a
-                            href={`https://www.google.com/maps/place/Flat+No.401,+4th+floor,+Carnival+Castle,+Garden+View+Enclave,+Plot+No.16,+behind+Pista+House,+Ashok+Nagar,+Golden+Habitat,+Whitefields,+Kondapur,+Hyderabad,+Telangana+500084/data=!4m2!3m1!1s0x3bcb9331d3353e77:0x1a56f2c3d5cbcdee?utm_source=mstt_1&entry=gps&coh=192488&g_ep=CAESCjExLjEwNy4xMDEYACDXggMqGzQ3MDY4NjE1LCw5NDIwMDUzMSw0NzA3NTkxNUICSU4%3D`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="d-flex align-items-center"
-                          >
-                            <i className="fas fa-map-marker-alt" />
-                            <span
-                              className="text-white ms-2 location"
-                              style={{ fontWeight: "bold" }}
-                            >
-                              Carnival Castle Hyderabad
-                            </span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  {PopUp.modalEnabled == true? (
-                    <h3
-                      className="offer-text"
-                      style={{ paddingLeft: "25%", marginTop: "8px" }}
-                    >
-                      {PopUp.title}
-                    </h3>
-                  ) : (
-                    ""
-                  )}
-                </div>
-                <div className="col-12 col-md-2">
-                  <div className="header-top-right">
-                    <div className="social-icon">
-                      <ul>
-                        <li>
-                          <a
-                            href={`https://wa.me/`}
-                            href={`https://api.whatsapp.com/send/?phone=+91${Contact.phone}&text=Hi&type=phone_number&app_absent=0`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="d-flex align-items-center"
-                          >
-                            <i className="fab fa-whatsapp" />
-                            <span
-                              className="text-white ms-2 header-contact"
-                              style={{ fontWeight: "bold" }}
-                            >
-                              {Contact.phone}
-                            </span>
-                          </a>
-                        </li>
+          <nav className="navbar navbar-expand-lg header-nav" style={{ backgroundColor: "#fff" }}>
+            <div className="navbar-header">
+              <a href="/" className="navbar-brand logo ms-1">
+                <img src={logo} className="img-fluid" alt="Logo" style={{ height: "80px", marginRight: "10px" }} />
+              </a>
+              {/* RIGHT — MOBILE BOOK + ICONS */}
+              <div className="d-flex d-md-none flex-column align-items-end">
 
-                        <li>
-                          <a
-                            href="https://www.facebook.com/carnivalcastlehyderabad?_rdr"
-                            target="_blank"
-                          >
-                            <i className="fab fa-facebook-f" />
-                          </a>
-                        </li> */}
-          {/* <li
-                          style={{
-                            background: "#595b56",
-                            borderRadius: "50%",
-                            marginLeft: "5px",
-                          }}
-                        >
-                          <a target="_blank" className="twitter-header">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 512 512"
-                              height="14px"
-                              className="custom-svg"
-                            >
-                              <path
-                                fill="white"
-                                d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
-                              ></path>
-                            </svg>
-                          </a>
-                        </li> */}
+                {/* BOOK NOW */}
+                <a
+                  href="/locations"
+                  className="btn text-white book1-btn"
+                  style={{
+                    padding: "6px 14px",
+                    fontSize: "13px",
+                    borderRadius: "10px",
+                    fontWeight: "600"
+                  }}
+                >
+                  Book Now
+                </a>
 
-          {/* <li>
-                          <a
-                            href="https://www.youtube.com/@Carnival_Castle"
-                            target="_blank"
-                          >
-                            <i className="fab fa-youtube" />
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="https://www.instagram.com/carnival_castle_hyderabad/"
-                            target="_blank"
-                          >
-                            <i className="fab fa-instagram" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                {/* ICON ROW */}
+                <div className="d-flex gap-3 mt-2">
+                  <a href={Contact.instagram || "#"} target="_blank" rel="noreferrer">
+                    <FaInstagram size={18} color="#E1306C" />
+                  </a>
+
+                  <a href={`https://wa.me/${Contact.phone || "918341428342"}`} target="_blank" rel="noreferrer">
+                    <FaWhatsapp size={18} color="#25D366" />
+                  </a>
+
+                  <a href={`tel:${Contact.phone}`}>
+                    <FaPhoneAlt size={18} color="#800080" />
+                  </a>
                 </div>
+
               </div>
             </div>
-          </div> */}
-          <nav
-            className="navbar navbar-expand-lg header-nav"
-            // style={{
-            //   backgroundColor: currentPage() === "Home" ? "#F5E7B6" : "",
 
-            //   height: "90px",
-            // }}
-            style={{ backgroundColor: "#fff", fontSize: "60px" }}
-          >
-            <div className="navbar-header">
-              <a
-                id="mobile_btn"
-                onClick={() => {
-                  setshow(!show);
-                }}
-              >
-                <span className="bar-icon">
-                  <span />
-                  <span />
-                  <span />
-                </span>
-              </a>
-              <a href="/" className="navbar-brand logo ms-1">
-                <img
-                  src={logo}
-                  className="img-fluid"
-                  alt="Logo"
-                  style={{ height: "100px ", marginRight: "30px" }}
-                />
-              </a>
-            </div>
             <div className="main-menu-wrapper">
               <div className="menu-header">
                 <a href="/" className="menu-logo">
                   <img src={logo} className="img-fluid" alt="Logo" />
                 </a>
-                <a
-                  id="menu_close"
-                  className="menu-close"
-                  onClick={() => {
-                    setshow(false);
-                  }}
-                >
+                <a id="menu_close" className="menu-close" onClick={() => setshow(false)}>
                   <i className="fas fa-times" />
                 </a>
               </div>
-              <ul className="main-nav" >
-                <li>
-                  <NavLink
-                    to="/"
+              <ul className="main-nav">
+                <li><NavLink to="/" style={{ color: currentPage() === "Home" ? "#800080" : "" }}>Home</NavLink></li>
+                <li><NavLink to="/about" style={{ color: currentPage() === "about" ? "#800080" : "" }}>About Us</NavLink></li>
+                <li><NavLink to="/locations" style={{ color: currentPage() === "locations" ? "#800080" : "" }}>THEATRES</NavLink></li>
+                <li><NavLink to="/cakes" style={{ color: currentPage() === "cakes" ? "#800080" : "" }}>Cakes</NavLink></li>
+                <li><NavLink to="/enquiry" style={{ color: currentPage() === "enquiry" ? "#800080" : "" }}>GET QUOTE</NavLink></li>
+                <li><NavLink to="/Reviews" style={{ color: currentPage() === "Reviews" ? "#800080" : "" }}>Testimonials</NavLink></li>
+                <li><NavLink to="/gallery" style={{ color: currentPage() === "gallery" ? "#800080" : "" }}>Gallery</NavLink></li>
+                <li><NavLink to="/blogs" style={{ color: currentPage() === "blogs" ? "#800080" : "" }}>Blogs</NavLink></li>
+                <li><NavLink to="/profile" style={{ color: currentPage() === "profile" ? "#800080" : "" }}>My Profile</NavLink></li>
+
+                {/* Mobile Contact Icons - Only visible in mobile menu */}
+                <li className="mobile-contact-header d-md-none" style={{
+                  borderTop: '1px solid #e0e0e0',
+                  marginTop: '15px',
+                  paddingTop: '15px'
+                }}>
+                  <div style={{
+                    color: '#666',
+                    fontSize: '13px',
+                    fontWeight: 'bold',
+                    textTransform: 'uppercase',
+                    marginBottom: '10px',
+                    paddingLeft: '15px'
+                  }}>
+                    Connect With Us
+                  </div>
+                </li>
+                <li className="mobile-contact-item d-md-none">
+                  <a
+                    href="https://www.instagram.com/carnival_castle_hyderabad/?hl=en"
+                    target="_blank"
+                    rel="noreferrer"
                     style={{
-                      color:
-                        currentPage() === "Home" ? "#800080" : "",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                      padding: "12px 15px",
+                      color: "#333",
+                      textDecoration: "none",
+                      borderBottom: "1px solid #f0f0f0"
                     }}
+                    onClick={() => setshow(false)}
                   >
-                    Home
-                  </NavLink>
+                    <FaInstagram color="#E1306C" size={20} />
+                    <span style={{ fontSize: "14px" }}>Instagram</span>
+                  </a>
                 </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/about" style={{ color: currentPage() === "about" ? "#800080" : "" }}>
-                    About Us
-                  </NavLink>
+                <li className="mobile-contact-item d-md-none">
+                  <a
+                    href={`tel:${Contact.phone || "8374777834"}`}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                      padding: "12px 15px",
+                      color: "#333",
+                      textDecoration: "none",
+                      borderBottom: "1px solid #f0f0f0"
+                    }}
+                    onClick={() => setshow(false)}
+                  >
+                    <FaPhoneAlt color="#40008C" size={20} />
+                    <span style={{ fontSize: "14px" }}>Call Us: +91 {Contact.phone || "8374777834"}</span>
+                  </a>
                 </li>
-                <li>
-                  <NavLink to="/locations" style={{ color: currentPage() === "theaters" ? "#800080" : "", }}>THEATRE'S</NavLink>
+                <li className="mobile-contact-item d-md-none">
+                  <a
+                    href={`https://wa.me/${Contact.phone || "918374777834"}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                      padding: "12px 15px",
+                      color: "#333",
+                      textDecoration: "none",
+                      borderBottom: "1px solid #f0f0f0"
+                    }}
+                    onClick={() => setshow(false)}
+                  >
+                    <FaWhatsapp color="#25D366" size={20} />
+                    <span style={{ fontSize: "14px" }}>WhatsApp: +91 8374777834</span>
+                  </a>
                 </li>
-                <li>
-                  <NavLink to="/cakes" style={{ color: currentPage() === "cakes" ? "#800080" : "", }}>Cakes</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/enquiry" style={{ color: currentPage() === "enquiry" ? "#800080" : "", }}>GET QUOTE</NavLink>
-                </li>
-
-
-                {/* <li>
-                  <NavLink className="dropdown-item" to="/Faqs" style={{ color: currentPage() === "Faqs" ? "#800080" : "" }}>
-                    FAQ's
-                  </NavLink>
-                </li> */}
-                <li>
-                  <NavLink className="dropdown-item" to="/Reviews" style={{ color: currentPage() === "Reviews" ? "#800080" : "" }}>
-                    Testimonial
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/gallery" style={{ color: currentPage() === "gallery" ? "#800080" : "" }}>
-                    Gallery
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="/blogs" style={{ color: currentPage() === "blogs" ? "#800080" : "" }}>
-                    Blogs
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/profile" style={{ color: currentPage() === "profile" ? "#800080" : "", }}>My Profile</NavLink>
+                <li className="mobile-contact-item d-md-none">
+                  <a
+                    href={`tel:${Contact.mobile || "8374777834"}`}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                      padding: "12px 15px",
+                      color: "#333",
+                      textDecoration: "none"
+                    }}
+                    onClick={() => setshow(false)}
+                  >
+                    <FaMobileAlt color="#40008C" size={20} />
+                    <span style={{ fontSize: "14px" }}>Mobile: +91 {Contact.mobile || "8374777834"}</span>
+                  </a>
                 </li>
               </ul>
-            </div>
-            <ul className="nav header-navbar-rht book-now-btn">
-              <li className="nav-item contact-item">
-                {/* <a href="/locations" className="btn main-booknow"> */}
+
+              {/* Desktop Contact Details */}
+              <div
+                className="desktop-contact-details d-none d-lg-flex"
+                style={{
+                  justifyContent: "center",
+                  gap: "30px",
+                  marginTop: "10px",
+                  padding: "10px 0",
+                  backgroundColor: "#9D4DFF",
+                  fontSize: "14px",
+                  borderRadius: "20px"
+                }}
+              >
+                {/* INSTAGRAM */}
                 <a
-                  href="/locations"
-                  className="btn dark-back text-white"
-                  style={{ backgroundColor: "#242724", color: "#f5e7b6" }}
+                  href="https://www.instagram.com/carnival_castle_hyderabad/?hl=en"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    color: "#fff",
+                    textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    fontWeight: "500"
+                  }}
                 >
-                  {/* <i className="fas fa-ticket-alt" /> */}
-                  Book Now
+                  <FaInstagram color="#fff" />
+                  <span>carnival_castle_hyderabad</span>
                 </a>
+
+                {/* PHONE */}
+                <a
+                  href={`tel:${Contact.phone}`}
+                  style={{
+                    color: "#fff",
+                    textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    fontWeight: "500"
+                  }}
+                >
+                  <FaPhoneAlt color="#fff" />
+                  <span>+91 {Contact.phone}</span>
+                </a>
+
+                {/* WHATSAPP */}
+                <a
+                  href={`https://wa.me/${Contact.phone || "918374777834"}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    color: "#fff",
+                    textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    fontWeight: "500"
+                  }}
+                >
+                  <FaWhatsapp color="#fff" />
+                  <span>+91 8374777834</span>
+                </a>
+              </div>
+            </div>
+
+            <ul className="nav header-navbar-rht book-now-btn d-none d-lg-block">
+              <li className="nav-item contact-item">
+                <a href="/locations" className="btn text-white book1-btn">Book Now</a>
               </li>
             </ul>
           </nav>
         </header>
 
-
-
-        <div className="cp-floating-area d-block zi-1100 p-relative">
-          <div className="cp-floating-action cp-bg-move-y">
-            {/* Phone Icon */}
-            <a
-              href="tel:+918341428342"
-              className="sbutton phone"
-              tooltip="Call Now"
-              onClick={() => console.log("Calling: 8341428342")}
-            >
-              <FaPhoneAlt size={28} color="white" />
-            </a>
-
-            {/* WhatsApp Icon */}
-            <div>
-              {/* WhatsApp Icon */}
-              <a
-                href="https://api.whatsapp.com/send/?phone=+918341428342&text=Hi&type=phone_number&app_absent=0"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sbutton whatsapp"
-                tooltip="WhatsApp"
-              >
-                <FaWhatsapp size={28} color="white" />
-              </a>
-
-              {/* Floating Message */}
-              {showMessage && (
-                <div
-                  style={{
-                    position: "fixed",
-                    bottom: "20px",
-                    right: "100px",
-                    backgroundColor: "#fff",
-                    color: "black",
-                    padding: "10px 15px",
-                    borderRadius: "8px",
-                    boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-                    zIndex: 9999,
-                    fontWeight: "bold",
-                  }}
-                >
-                  How can i assist you?
-                </div>
-              )}
-            </div>
+        {/* --- MOBILE BOTTOM NAVIGATION --- */}
+        <div className="mobile-bottom-nav d-lg-none">
+          <NavLink to="/" className="nav-item">
+            <FaHome size={20} />
+            <span>Home</span>
+          </NavLink>
+          <NavLink to="/locations" className="nav-item">
+            <FaMapMarkerAlt size={20} />
+            <span>Theatres</span>
+          </NavLink>
+          <div className="nav-item book-special" onClick={() => window.location.href = '/locations'}>
+            <div className="inner-book">Book</div>
+          </div>
+          <NavLink to="/cakes" className="nav-item">
+            <FaBirthdayCake size={20} />
+            <span>Cakes</span>
+          </NavLink>
+          <div className="nav-item" onClick={() => setshow(true)}>
+            <FaBars size={20} />
+            <span>Menu</span>
           </div>
         </div>
 
-
+        {/* Floating Actions */}
+        <div className="cp-floating-area">
+          <div className="cp-floating-action">
+            {/* FULLSCREEN TOGGLE */}
+            <button onClick={toggleFullScreen} className="sbutton fullscreen">
+              {isFullScreen ? (
+                <FaExpand size={20} color="white" />
+              ) : (
+                <FaCompress size={20} color="white" />
+              )}
+            </button>
+            <a href="tel:+918374777834" className="sbutton phone"><FaPhoneAlt size={22} color="white" /></a>
+            <a href="https://wa.me/918374777834" className="sbutton whatsapp"><FaWhatsapp size={22} color="white" /></a>
+            {showMessage && <div className="floating-msg">How can I assist you?</div>}
+          </div>
+        </div>
       </div>
+
+      <style jsx>{`
+        /* Mobile Bottom Nav Styles */
+
+        .book1-btn {
+  background-color: #9D4DFF;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.book1-btn:hover {
+  background-color: #7a2df5;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(157, 77, 255, 0.35);
+}
+        .mobile-bottom-nav {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 65px;
+          background: #fff;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+          z-index: 1000;
+          padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .mobile-bottom-nav .nav-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          color: #666;
+          text-decoration: none;
+          font-size: 11px;
+          font-weight: 500;
+        }
+
+        .mobile-bottom-nav .nav-item.active {
+          color: #800080;
+        }
+
+        .book-special {
+          margin-top: -30px;
+        }
+
+        .inner-book {
+          background: #800080;
+          color: white;
+          width: 55px;
+          height: 55px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          box-shadow: 0 4px 10px rgba(128, 0, 128, 0.4);
+          border: 4px solid #fff;
+        }
+
+        /* Adjustments for Floating Area so it doesn't overlap bottom nav */
+        .cp-floating-area {
+          position: fixed;
+          bottom: 80px; /* Moved up to clear bottom bar */
+          right: 20px;
+          z-index: 999;
+        }
+
+        .sbutton {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 10px;
+          text-decoration: none;
+        }
+        .phone { background: #242724; }
+        .whatsapp { background: #25D366; }
+        .fullscreen { background: #924ae9; }
+
+        .floating-msg {
+          position: absolute;
+          right: 60px;
+          bottom: 10px;
+          background: white;
+          padding: 8px 15px;
+          border-radius: 8px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          white-space: nowrap;
+          font-size: 13px;
+        }
+
+        /* Mobile Contact Items Hover Effect */
+        .mobile-contact-item a:hover {
+          background-color: #f8f8f8;
+        }
+
+        @media (max-width: 991px) {
+          body { padding-bottom: 70px; } /* Prevent content being hidden behind bar */
+          .header-nav { padding: 10px 0; }
+          
+          /* Ensure main-nav has proper spacing for contact items */
+          .main-nav {
+            padding-bottom: 20px;
+          }
+        }
+      `}</style>
     </>
   );
 }
 
-export default Header;
+export default Header;  

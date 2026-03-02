@@ -610,7 +610,7 @@ const Basicplan = () => {
                                           }}
                                         >
                                           <div>
-                                            Occasions (
+                                            Decorations (
                                             {sessionStorage.getItem("occasionName")}
                                             )
                                           </div>

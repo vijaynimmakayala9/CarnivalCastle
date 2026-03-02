@@ -872,7 +872,7 @@ function Home() {
                       <div key={index}>
                         <div className="mt-0">
                           {PopUp1.modalEnabled && (
-                            <div style={{ backgroundColor: "#fa462af2" }} className="text-center py-2">
+                            <div style={{ backgroundColor: "#9D4DFF" }} className="text-center py-2">
                               <marquee className="text-white fw-bold">
                                 LAST MINUTE OFFER: {PopUp1.title}
                               </marquee>
@@ -908,7 +908,7 @@ function Home() {
                                 <h1 className="fw-bold mb-3 animate__animated animate__fadeInDown">
                                   {banner.title}
                                 </h1>
-                                <p className="lead mb-4 animate__animated animate__fadeInUp">
+                                <p className="lead mt-2 mb-4 animate__animated animate__fadeInUp">
                                   {banner.description}
                                 </p>
 
@@ -1502,7 +1502,7 @@ function Home() {
                     {/* ✅ Carousel for mobile only */}
                     <div
                       id="packagesCarousel"
-                      className="carousel slide d-block d-md-none"
+                      className=" slide d-block d-md-none"
                       data-bs-ride="carousel"
                       data-bs-interval="3000"
                       data-bs-wrap="true"
@@ -1736,9 +1736,9 @@ function Home() {
                   </div>
                 </section>
 
-                <section className="services-section py-5 text-dark bg-white">
+                <section className="services-section py-2 text-dark bg-white">
                   <div className="container">
-                    <h2 className="text-center mb-5 dark-text fw-bold">Experiance Our Services</h2>
+                    <h2 className="text-center mb-2 dark-text fw-bold">Experiance Our Services</h2>
 
                     {/* Large Card Wrapper */}
                     <div className="card text-dark p-4 rounded-4  border-0" style={{ backgroundColor: "#fff" }}>

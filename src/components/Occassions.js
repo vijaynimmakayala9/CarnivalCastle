@@ -409,7 +409,7 @@ const Occassions = () => {
                                         }}
                                       >
                                         <div>
-                                          Occasions (
+                                          Decorations (
                                           {sessionStorage.getItem(
                                             "occasionName"
                                           )}
