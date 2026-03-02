@@ -874,7 +874,7 @@ function Home() {
                           {PopUp1.modalEnabled && (
                             <div style={{ backgroundColor: "#9D4DFF" }} className="text-center py-2">
                               <marquee className="text-white fw-bold">
-                                LAST MINUTE OFFER: {PopUp1.title}
+                                {PopUp1.title}
                               </marquee>
                             </div>
                           )}
