@@ -16,7 +16,11 @@ import {
   FaUser,
   FaBars,
   FaCompress,
-  FaExpand
+  FaExpand,
+  FaImage,
+  FaDollarSign,
+  FaCrown,
+  FaTicketAlt
 } from "react-icons/fa";
 
 function Header() {
@@ -77,42 +81,53 @@ function Header() {
         <header className="header main-header headersix">
           <nav className="navbar navbar-expand-lg header-nav" style={{ backgroundColor: "#fff" }}>
             <div className="navbar-header">
-              <a href="/" className="navbar-brand logo ms-1">
-                <img src={logo} className="img-fluid" alt="Logo" style={{ height: "80px", marginRight: "10px" }} />
-              </a>
-              {/* RIGHT — MOBILE BOOK + ICONS */}
-              <div className="d-flex d-md-none flex-column align-items-end">
 
-                {/* BOOK NOW */}
-                <a
-                  href="/locations"
-                  className="btn text-white book1-btn"
-                  style={{
-                    padding: "6px 14px",
-                    fontSize: "13px",
-                    borderRadius: "10px",
-                    fontWeight: "600"
-                  }}
-                >
-                  Book Now
-                </a>
+              {/* MOBILE ONLY: Hamburger + Logo + Book/Icons row */}
+              <div className="d-flex d-md-none align-items-center justify-content-between w-100">
 
-                {/* ICON ROW */}
-                <div className="d-flex gap-3 mt-2">
-                  <a href={Contact.instagram || "#"} target="_blank" rel="noreferrer">
-                    <FaInstagram size={18} color="#E1306C" />
-                  </a>
-
-                  <a href={`tel:${Contact.phone}`}>
-                    <FaPhoneAlt size={18} color="#800080" />
-                  </a>
-
-                  <a href="/profile">
-                    <FaUser size={18} color="#831cd2" />
+                {/* LEFT: Hamburger + Logo */}
+                <div className="d-flex align-items-center gap-2">
+                  <button
+                    className="border-0 bg-transparent p-1"
+                    onClick={() => setshow(true)}
+                    aria-label="Open menu"
+                    style={{ lineHeight: 1 }}
+                  >
+                    <FaBars size={22} color="#800080" />
+                  </button>
+                  <a href="/" className="navbar-brand logo mb-0">
+                    <img src={logo} className="img-fluid" alt="Logo" style={{ height: "80px" }} />
                   </a>
                 </div>
 
+                {/* RIGHT: Book Now + Icons */}
+                <div className="d-flex flex-column align-items-end">
+                  <a
+                    href="/locations"
+                    className="btn text-white book1-btn"
+                    style={{ padding: "6px 14px", fontSize: "13px", borderRadius: "10px", fontWeight: "600" }}
+                  >
+                    Book Now
+                  </a>
+                  <div className="d-flex gap-3 mt-2">
+                    <a href={Contact.instagram || "#"} target="_blank" rel="noreferrer">
+                      <FaInstagram size={18} color="#E1306C" />
+                    </a>
+                    <a href={`tel:${Contact.phone}`}>
+                      <FaPhoneAlt size={18} color="#800080" />
+                    </a>
+                    <a href="/profile">
+                      <FaUser size={18} color="#831cd2" />
+                    </a>
+                  </div>
+                </div>
               </div>
+
+              {/* DESKTOP ONLY: Just the logo */}
+              <a href="/" className="navbar-brand logo ms-1 d-none d-md-block">
+                <img src={logo} className="img-fluid" alt="Logo" style={{ height: "80px", marginRight: "10px" }} />
+              </a>
+
             </div>
 
             <div className="main-menu-wrapper">
@@ -142,7 +157,7 @@ function Header() {
                   paddingTop: '15px'
                 }}>
                   <div style={{
-                    color: '#666',
+                    color: '#fff',
                     fontSize: '13px',
                     fontWeight: 'bold',
                     textTransform: 'uppercase',
@@ -234,7 +249,7 @@ function Header() {
                 className="desktop-contact-details d-none d-lg-flex"
                 style={{
                   justifyContent: "center",
-                  gap: "30px",
+                  gap: "40px",
                   marginTop: "10px",
                   padding: "10px 0",
                   backgroundColor: "#9D4DFF",
@@ -242,6 +257,7 @@ function Header() {
                   borderRadius: "20px"
                 }}
               >
+
                 {/* INSTAGRAM */}
                 <a
                   href="https://www.instagram.com/carnival_castle_hyderabad/?hl=en"
@@ -252,33 +268,57 @@ function Header() {
                     textDecoration: "none",
                     display: "flex",
                     alignItems: "center",
-                    gap: "6px",
-                    fontWeight: "500"
+                    gap: "8px",
+                    fontWeight: "700"
                   }}
                 >
-                  <FaInstagram color="#fff" />
+                  <span
+                    style={{
+                      background: "#fff",
+                      borderRadius: "50%",
+                      width: "30px",
+                      height: "30px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center"
+                    }}
+                  >
+                    <FaInstagram color="#dc2743" size={16} />
+                  </span>
                   <span>carnival_castle_hyderabad</span>
                 </a>
 
                 {/* PHONE */}
                 <a
-                  href={`tel:8341428342`}
+                  href="tel:8341428342"
                   style={{
                     color: "#fff",
                     textDecoration: "none",
                     display: "flex",
                     alignItems: "center",
-                    gap: "6px",
-                    fontWeight: "500"
+                    gap: "8px",
+                    fontWeight: "700"
                   }}
                 >
-                  <FaPhoneAlt color="#fff" />
+                  <span
+                    style={{
+                      background: "#fff",
+                      borderRadius: "50%",
+                      width: "30px",
+                      height: "30px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center"
+                    }}
+                  >
+                    <FaPhoneAlt color="#4b50f2" size={14} />
+                  </span>
                   <span>+91 8341428342</span>
                 </a>
 
                 {/* WHATSAPP */}
                 <a
-                  href={`https://wa.me/918374777834`}
+                  href="https://wa.me/918374777834"
                   target="_blank"
                   rel="noreferrer"
                   style={{
@@ -286,13 +326,26 @@ function Header() {
                     textDecoration: "none",
                     display: "flex",
                     alignItems: "center",
-                    gap: "6px",
-                    fontWeight: "500"
+                    gap: "8px",
+                    fontWeight: "700"
                   }}
                 >
-                  <FaWhatsapp color="#fff" />
+                  <span
+                    style={{
+                      background: "#fff",
+                      borderRadius: "50%",
+                      width: "30px",
+                      height: "30px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center"
+                    }}
+                  >
+                    <FaWhatsapp color="#2cde5b" size={16} />
+                  </span>
                   <span>+91 8374777834</span>
                 </a>
+
               </div>
             </div>
 
@@ -310,21 +363,24 @@ function Header() {
             <FaHome size={20} />
             <span>Home</span>
           </NavLink>
-          <NavLink to="/locations" className="nav-item">
-            <FaMapMarkerAlt size={20} />
-            <span>Theatres</span>
+          <NavLink to="/gallery" className="nav-item">
+            <FaImage size={20} />
+            <span>Gallery</span>
           </NavLink>
           <div className="nav-item book-special" onClick={() => window.location.href = '/locations'}>
-            <div className="inner-book">Book</div>
+            <div className="inner-book">
+              <FaTicketAlt size={20} color="#fff" />
+            </div>
+            <span style={{ fontSize: "10px", fontWeight: 600, color: "#800080", marginTop: "2px" }}>Book Now</span>
           </div>
           <NavLink to="/cakes" className="nav-item">
             <FaBirthdayCake size={20} />
-            <span>Cakes</span>
+            <span>Addons</span>
           </NavLink>
-          <div className="nav-item" onClick={() => setshow(true)}>
-            <FaBars size={20} />
-            <span>Menu</span>
-          </div>
+          <NavLink to="/ComboPlans" className="nav-item">
+            <FaCrown size={20} />
+            <span>Plans</span>
+          </NavLink>
         </div>
 
         {/* Floating Actions */}

@@ -96,7 +96,7 @@ function Gallery() {
                     <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                       <div className="breadcrumb-wrap text-center">
                         <div className="breadcrumb-title mb-30 dark-text">
-                          <h1 style={{ marginTop: "20px"   }}>Gallery</h1>
+                          <h1 style={{ marginTop: "5px"   }}>Gallery</h1>
                         </div>
                         {/* <nav aria-label="breadcrumb">
                           <ol className="breadcrumb">

@@ -2535,63 +2535,76 @@ function Home() {
                 <section className="pt-5 bg-white">
                   <div
                     className="container-fluid text-center py-5"
-                    style={{ backgroundColor: "#e7d2f3", borderRadius: "2rem 2rem 0 0" }}
+                    style={{ backgroundColor: "#e7d2f3" }}
                   >
                     <h2 className="fw-bold mb-5 dark-text">Our Branches</h2>
 
-                    <div className="row justify-content-center">
+                    <div className="d-flex flex-wrap justify-content-center gap-3">
                       {addresses.map((addr, idx) => (
-                        <div className="col-md-6 col-lg-5 mb-4" key={idx}>
-                          <div
-                            className="p-4 shadow-sm h-100"
-                            style={{
-                              backgroundColor: "#f5eafc",
-                              borderRadius: "2rem",
-                              transition: "0.3s",
-                            }}
-                          >
-                            <h4 className="fw-bold text-center mb-3 text-purple">{addr.name}</h4>
-                            <p
-                              className="text-muted mb-3 text-center"
-                              style={{ fontStyle: "italic", fontSize: "0.95rem" }}
-                            >
-                              {addr.addressLine1}, {addr.addressLine2}
-                            </p>
+                        <a
+                          key={idx}
+                          href={addr.addressLine2}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: "10px",
+                            background: "#fff",
+                            border: "1.5px solid rgba(109,40,217,0.15)",
+                            borderRadius: "999px",
+                            padding: "10px 20px 10px 12px",
+                            textDecoration: "none",
+                            boxShadow: "0 4px 16px rgba(109,40,217,0.12), 0 1px 4px rgba(0,0,0,0.05)",
+                            transition: "all 0.2s ease",
+                            cursor: "pointer",
+                          }}
+                          onMouseEnter={e => {
+                            e.currentTarget.style.transform = "translateY(-2px)";
+                            e.currentTarget.style.boxShadow = "0 8px 24px rgba(109,40,217,0.22), 0 2px 6px rgba(0,0,0,0.06)";
+                            e.currentTarget.style.borderColor = "rgba(109,40,217,0.35)";
+                          }}
+                          onMouseLeave={e => {
+                            e.currentTarget.style.transform = "translateY(0)";
+                            e.currentTarget.style.boxShadow = "0 4px 16px rgba(109,40,217,0.12), 0 1px 4px rgba(0,0,0,0.05)";
+                            e.currentTarget.style.borderColor = "rgba(109,40,217,0.15)";
+                          }}
+                        >
+                          {/* Icon bubble */}
+                          <span style={{
+                            width: "34px", height: "34px",
+                            borderRadius: "999px",
+                            background: "linear-gradient(135deg,#6d28d9,#a855f7)",
+                            display: "flex", alignItems: "center", justifyContent: "center",
+                            flexShrink: 0,
+                            boxShadow: "0 2px 8px rgba(109,40,217,0.3)",
+                          }}>
+                            <i className="bi bi-geo-alt-fill" style={{ color: "#fff", fontSize: "14px" }} />
+                          </span>
 
-                            {/* Static Info Badges */}
-                            <div className="d-flex justify-content-center gap-3 mb-3 flex-wrap">
-                              <span className="badge light-back px-3 py-2">
-                                <i className="bi bi-car-front-fill me-2"></i>Parking Facility
-                              </span>
-                              {/* <span className="badge light-back px-3 py-2">
-                                <i className="bi bi-egg-fried me-2"></i>Food Menu
-                              </span> */}
-                            </div>
+                          {/* Text */}
+                          <span style={{ textAlign: "left" }}>
+                            <span style={{
+                              display: "block",
+                              fontWeight: 700,
+                              fontSize: "13px",
+                              color: "#1a1a2e",
+                              lineHeight: 1.3,
+                            }}>
+                              {addr.name}
+                            </span>
 
-                            <div className="text-center">
-                              <a
-                                href={addr.addressLine2}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-decoration-none fw-semibold"
-                                style={{ color: "#6d28d9" }}
-                              >
-                                <i className="bi bi-geo-alt-fill me-2 light-text"></i>See on map
-                              </a>
-                            </div>
-                          </div>
-                        </div>
+                          </span>
+
+                          {/* Arrow */}
+                          <span style={{ color: "#a855f7", fontSize: "12px", marginLeft: "4px" }}>↗</span>
+                        </a>
                       ))}
                     </div>
                   </div>
 
                   <style jsx>{`
-    .text-purple {
-      color: #5b179b;
-    }
-    .badge i {
-      vertical-align: middle;
-    }
+    .text-purple { color: #5b179b; }
   `}</style>
                 </section>
 

@@ -22,7 +22,7 @@ function Enquiry() {
 
   const loadCakes = async () => {
     try {
-      setLoading(true);
+      setLoading(false);
       const res = await axios.post(API_URL);
       if (res.data.success) {
         setPremiumCakes(res.data.premiumCakes || []);
@@ -52,118 +52,120 @@ function Enquiry() {
           <p className="text-warning mt-2">Loading cakes...</p>
         </div>
       ) : (
-        <div className="cakes-page">
+        <div className="home-page indexsix">
           <Header />
+          <div className="">
 
-          <main>
-            {/* Title */}
-            <section className="cakes-hero">
-              <h1>Cakes Collection</h1>
-              <p>Premium & Standard cakes for every celebration</p>
-            </section>
+            <main className="main-wrapper">
+              {/* Title */}
+              <section className="cakes-hero">
+                <h1>Cakes Collection</h1>
+                <p>Premium & Standard cakes for every celebration</p>
+              </section>
 
-            {/* Controls */}
-            <section className="cakes-controls">
-              <div className="container">
-                <Row className="align-items-center">
-                  <Col md={6}>
-                    <Nav
-                      variant="pills"
-                      activeKey={activeTab}
-                      onSelect={(k) => setActiveTab(k)}
-                      className="cakes-tabs"
-                    >                      
-                      <Nav.Item>
-                        <Nav.Link eventKey="premium">
-                          Premium Cakes
-                        </Nav.Link>
-                      </Nav.Item>
-                      <Nav.Item>
-                        <Nav.Link eventKey="normal">
-                          Standard Cakes
-                        </Nav.Link>
-                      </Nav.Item>
-                    </Nav>
-                  </Col>
-
-                  {/* TOGGLE AT END */}
-                  <Col
-                    md={6}
-                    className="d-flex justify-content-md-end justify-content-start mt-3 mt-md-0"
-                  >
-                    <div className="d-flex align-items-center gap-2 cake-toggle">
-                      <span className={cakeType === "egg" ? "fw-bold lightest-text" : ""}>
-                        Egg
-                      </span>
-
-                      <Form.Check
-                        type="switch"
-                        id="cake-type"
-                        checked={cakeType === "eggless"}
-                        onChange={() =>
-                          setCakeType(cakeType === "egg" ? "eggless" : "egg")
-                        }
-                      />
-
-                      <span
-                        className={cakeType === "eggless" ? "fw-bold lightest-text" : ""}
+              {/* Controls */}
+              <section className="cakes-controls">
+                <div className="container">
+                  <Row className="align-items-center">
+                    <Col md={6}>
+                      <Nav
+                        variant="pills"
+                        activeKey={activeTab}
+                        onSelect={(k) => setActiveTab(k)}
+                        className="cakes-tabs"
                       >
-                        Eggless
-                      </span>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            </section>
+                        <Nav.Item>
+                          <Nav.Link eventKey="premium">
+                            Premium Cakes
+                          </Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                          <Nav.Link eventKey="normal">
+                            Standard Cakes
+                          </Nav.Link>
+                        </Nav.Item>
+                      </Nav>
+                    </Col>
 
-            {/* Cakes */}
-            <section className="cakes-grid">
-              <div className="container">
-                {cakesToShow.length === 0 ? (
-                  <div className="text-center py-5 text-muted">
-                    No cakes available
-                  </div>
-                ) : (
-                  <Row>
-                    {cakesToShow.map((cake, i) => (
-                      <Col
-                        key={i}
-                        xl={2}
-                        lg={3}
-                        md={4}
-                        sm={6}
-                        xs={6}
-                        className="mb-4"
-                      >
-                        <Card className="cake-card">
-                          <div className="cake-image">
-                            <img
-                              src={BASE_URL + cake.image}
-                              alt={cake.name}
-                            />
-                          </div>
+                    {/* TOGGLE AT END */}
+                    <Col
+                      md={6}
+                      className="d-flex justify-content-md-end justify-content-start mt-3 mt-md-0"
+                    >
+                      <div className="d-flex align-items-center gap-2 cake-toggle">
+                        <span className={cakeType === "egg" ? "fw-bold lightest-text" : ""}>
+                          Egg
+                        </span>
 
-                          <Card.Body className="text-center">
-                            <h6 className="cake-name">{cake.name}</h6>
-                            <div className="cake-price">
-                              ₹ {cake.price}
-                            </div>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    ))}
+                        <Form.Check
+                          type="switch"
+                          id="cake-type"
+                          checked={cakeType === "eggless"}
+                          onChange={() =>
+                            setCakeType(cakeType === "egg" ? "eggless" : "egg")
+                          }
+                        />
 
-                    {activeTab === "premium" && (
-                      <div className="premium-note">
-                        <b>Note:</b> Customized premium cakes must be ordered
-                        at least <b>3 days in advance</b>.
+                        <span
+                          className={cakeType === "eggless" ? "fw-bold lightest-text" : ""}
+                        >
+                          Eggless
+                        </span>
                       </div>
-                    )}
+                    </Col>
                   </Row>
-                )}
-              </div>
-            </section>
-          </main>
+                </div>
+              </section>
+
+              {/* Cakes */}
+              <section className="cakes-grid">
+                <div className="container">
+                  {cakesToShow.length === 0 ? (
+                    <div className="text-center py-5 text-muted">
+                      No cakes available
+                    </div>
+                  ) : (
+                    <Row>
+                      {cakesToShow.map((cake, i) => (
+                        <Col
+                          key={i}
+                          xl={2}
+                          lg={3}
+                          md={4}
+                          sm={6}
+                          xs={6}
+                          className="mb-4"
+                        >
+                          <Card className="cake-card">
+                            <div className="cake-image">
+                              <img
+                                src={BASE_URL + cake.image}
+                                alt={cake.name}
+                              />
+                            </div>
+
+                            <Card.Body className="text-center">
+                              <h6 className="cake-name">{cake.name}</h6>
+                              <div className="cake-price">
+                                ₹ {cake.price}
+                              </div>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      ))}
+
+                      {activeTab === "premium" && (
+                        <div className="premium-note">
+                          <b>Note:</b> Customized premium cakes must be ordered
+                          at least <b>3 days in advance</b>.
+                        </div>
+                      )}
+                    </Row>
+                  )}
+                </div>
+              </section>
+            </main>
+          </div>
 
           <Footer />
         </div>
@@ -179,7 +181,6 @@ function Enquiry() {
         .cakes-hero {
           background: linear-gradient(135deg, #ffffff, #f3f4ff);
           text-align: center;
-          padding: 60px 15px 40px;
         }
 
         .cakes-controls {

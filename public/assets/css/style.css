@@ -34046,7 +34046,7 @@ h2.footer-title:after {
 
   .navbar-brand.logo {
     /* width: 100%; */
-    text-align: center;
+    text-align: end;
     margin-right: auto !important;
   }
 

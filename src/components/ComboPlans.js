@@ -260,10 +260,10 @@ const ComboPlans = () => {
         <div className="home-page indexsix">
           <Header />
           <main className="main-wrapper">
-            <section className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix">
+            {/* <section className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix">
               <div className="container"></div>
-            </section>
-            <section className="shop-area pt-5 pb-5 p-relative lightest-back" style={{ background: "white" }}>
+            </section> */}
+            <section className="shop-area pt-2 pb-5 p-relative lightest-back" style={{ background: "white" }}>
               <div className="container-fluid px-4">
                 <button type="button" className="btn mb-2 light-back shadow-lg text-light" onClick={handleBack}>
                   <i className="far fa-arrow-alt-circle-left"></i> Back
