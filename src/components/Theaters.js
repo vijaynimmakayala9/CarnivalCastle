@@ -779,7 +779,7 @@ function Theaters() {
                     backgroundColor: isBookNowActive ? "#40008C" : "#A88FC7",
                   }}
                 >
-                  Proceed to Book
+                  Proceed
                 </button>
               </div>
             </div>

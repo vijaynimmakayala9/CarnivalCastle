@@ -37,6 +37,7 @@ import LocationSelector from "./components/LocationSelector";
 import ScrollToTop from "./components/ScrollToTop";
 import Blogs from "./Blogs/Blogs";
 import BlogDetail from "./Blogs/BlogDetail";
+import PackagesSection from "./components/PackagePage";
 
 
 function App() {
@@ -85,6 +86,8 @@ function App() {
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blogs/:slug" element={<BlogDetail />} />
+
+        <Route path="/packages" element={<PackagesSection />} />
 
       </Routes>
     </div>

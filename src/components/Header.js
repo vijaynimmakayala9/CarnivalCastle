@@ -377,7 +377,7 @@ function Header() {
             <FaBirthdayCake size={20} />
             <span>Addons</span>
           </NavLink>
-          <NavLink to="/ComboPlans" className="nav-item">
+          <NavLink to="/packages" className="nav-item">
             <FaCrown size={20} />
             <span>Plans</span>
           </NavLink>

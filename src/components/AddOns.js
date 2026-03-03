@@ -389,7 +389,7 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                       {addOns.map((data, key) => (
                         <div key={key}>
                           <div className="row">
-                            <h4 className="mt-1">{data.name}</h4>
+                            <h4 className="mt-1 text-center fw-bold dark-text">{data.name}</h4>
                             <div className="d-flex flex-wrap">
                               {data?.products.map((ele, ind) => (
                                 <div
@@ -430,10 +430,10 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                                         src={URLS.Base + ele.image}
                                         alt="occasions images"
                                         // className="rounded-circle img-fluid"
-                                          className="img-fluid rounded-pill"
+                                          className="img-fluid rounded-2"
                                         style={{
                                           height: "150px",
-                                          width: "150px",
+                                          width: "200px",
                                           objectFit: "cover",
                                         }}
                                       />

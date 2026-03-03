@@ -877,7 +877,7 @@ const CakesComponent = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [normalCakes, setNormalCakes] = useState([]); // EGG
   const [premiumCakes, setPremiumCakes] = useState([]); // EGGLESS
-  const [isEggless, setIsEggless] = useState(false); // Toggleeeee
+  const [isEggless, setIsEggless] = useState(true); // Toggleeeee
 
   const [selectedCakesupdate, setSelectedCakesupdate] = useState([]); // Select Cakes
   console.log(selectedCakes);
@@ -895,7 +895,7 @@ const CakesComponent = () => {
   const navigate = useNavigate();
 
   // Add new state for cake type selection
-  const [selectedCakeType, setSelectedCakeType] = useState("standard"); // "standard" or "premium"
+  const [selectedCakeType, setSelectedCakeType] = useState("premium"); // "standard" or "premium"
 
   useEffect(() => {
     GetAllCakes();
@@ -1127,22 +1127,22 @@ const CakesComponent = () => {
                   {/* Cakes Selection */}
                   <div className="col-md-8">
                     <div className="d-flex align-items-center justify-content-between m-3">
-                      <div className="d-flex align-items-center">
-                        <h5 style={{ marginRight: "20px" }}>Select Cake</h5>
+                      <div className="d-flex align-items-center mb-3">
+                        <h5 className=" pe-5" style={{ marginRight: "20px" }}>Select Cake</h5>
                         <div className="btn-group" role="group" aria-label="Cake type selection">
                           <button
                             type="button"
                             className={`btn ${selectedCakeType === "premium" ? "btn-primary" : "btn-outline-primary"}`}
                             onClick={() => setSelectedCakeType("premium")}
                           >
-                            Premium
+                            Customized cakes
                           </button>
                           <button
                             type="button"
                             className={`btn ${selectedCakeType === "standard" ? "btn-primary" : "btn-outline-primary"}`}
                             onClick={() => setSelectedCakeType("standard")}
                           >
-                            Standard
+                            Regular cakes
                           </button>
                         </div>
                       </div>
@@ -1153,12 +1153,13 @@ const CakesComponent = () => {
                           id="egglessSwitch"
                           checked={isEggless}
                           onChange={() => setIsEggless(!isEggless)}
+                          style={{ width: "3rem", height: "1.6rem" }}
                         />
                         <label
-                          className="form-check-label ms-2"
+                          className="form-check-label ms-2 fw-bold fs-5"
                           htmlFor="egglessSwitch"
                         >
-                          {isEggless ? "Egg" : "Eggless"}
+                          {isEggless ? "Eggless" : "Egg"}
                         </label>
                       </div>
                     </div>
@@ -1202,7 +1203,7 @@ const CakesComponent = () => {
                                   className="card-img-top"
                                   alt={cake.name}
                                   style={{
-                                    height: "150px",
+                                    height: "200px",
                                     objectFit: "cover",
                                   }}
                                 />
@@ -1227,7 +1228,7 @@ const CakesComponent = () => {
                                           right: "10px",
                                         }}
                                       >
-                                        Premium
+
                                       </span>
                                     )}
                                     {cake.cakeType === "eggless" && (

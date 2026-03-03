@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { FaBirthdayCake, FaCar, FaPhone, FaMapMarkerAlt, FaChevronDown } from "react-icons/fa";
+import { FaBirthdayCake, FaCar, FaPhone, FaMapMarkerAlt, FaChevronDown, FaStar, FaUtensils } from "react-icons/fa";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -132,7 +132,7 @@ const LocationSelector = () => {
                             cursor: !selectedCity ? "not-allowed" : "pointer",
                           }}
                         >
-                          <option value="">Select a branch...</option>
+                          <option value="">Select Nearest branch...</option>
                           {filteredAddresses.map((a) => <option key={a._id} value={a._id}>{a.name}</option>)}
                         </select>
                         <FaChevronDown style={chevronStyle} />
@@ -188,12 +188,12 @@ const LocationSelector = () => {
                         />
                         <span style={{
                           position: "absolute", top: "10px", left: "10px",
-                          background: "linear-gradient(135deg,#6d28d9,#a855f7)",
-                          color: "#fff", borderRadius: "999px",
+                          background: "#000000",
+                          color: "#ffffff", borderRadius: "999px",
                           padding: "3px 11px", fontSize: "11px", fontWeight: 700,
                           boxShadow: "0 2px 8px rgba(109,40,217,0.4)",
                         }}>
-                          {selectedLocation.city}
+                          4.9 <FaStar color="#fff703"/>
                         </span>
                       </div>
 
@@ -213,10 +213,10 @@ const LocationSelector = () => {
                             {selectedLocation.name}
                           </h5>
 
-                          <div className="d-flex align-items-start gap-2 mb-2" style={{ fontSize: "13px", color: "#555" }}>
+                          {/* <div className="d-flex align-items-start gap-2 mb-2" style={{ fontSize: "13px", color: "#555" }}>
                             <FaMapMarkerAlt color="#a855f7" style={{ marginTop: "2px", flexShrink: 0 }} />
                             <span><strong>Address:</strong> {selectedLocation.addressLine1}</span>
-                          </div>
+                          </div> */}
                           <div className="d-flex align-items-start gap-2 mb-3" style={{ fontSize: "13px", color: "#555" }}>
                             <span style={{ color: "#a855f7", flexShrink: 0 }}>🏁</span>
                             <span><strong>Landmark:</strong> {selectedLocation.landmark}</span>
@@ -226,6 +226,7 @@ const LocationSelector = () => {
                             {[
                               { icon: <FaBirthdayCake size={10} />, label: "Cakes" },
                               { icon: <FaCar size={10} />, label: "Parking" },
+                              { icon: <FaUtensils size={10} />, label: "food" },
                             ].map(({ icon, label }) => (
                               <span key={label} style={{
                                 display: "inline-flex", alignItems: "center", gap: "5px",
@@ -255,7 +256,7 @@ const LocationSelector = () => {
                               onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 20px rgba(109,40,217,0.4)"; }}
                               onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 14px rgba(109,40,217,0.35)"; }}
                             >
-                              Proceed to Book
+                              Proceed
                             </button>
                             <a
                               href={`tel:+91${selectedLocation.phone}`}

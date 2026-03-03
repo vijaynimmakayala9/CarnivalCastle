@@ -33,13 +33,13 @@ const BookingForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Validate required fields
     if (!heardFrom) {
       toast.error("Please select how you heard about us");
       return;
     }
-    
+
     sessionStorage.setItem("userDetails", JSON.stringify(data));
     addbasicbooking();
   };
@@ -149,17 +149,17 @@ const BookingForm = () => {
 
       // If all validations pass, apply the coupon
       setAppliedCoupon(foundCoupon);
-      
+
       // Get coupon amount from response (use value or amount field)
       const couponAmount = foundCoupon.value || foundCoupon.amount;
-      
+
       // Store coupon details in sessionStorage
       sessionStorage.setItem("coupon_Id", foundCoupon._id);
       sessionStorage.setItem("coupondis", couponAmount);
       sessionStorage.setItem("couponCode", foundCoupon.couponCode);
-      
+
       toast.success(`Coupon applied successfully! Discount: ₹${couponAmount}`);
-      
+
     } catch (error) {
       console.error("Error applying coupon:", error);
       toast.error("Error applying coupon");
@@ -199,15 +199,15 @@ const BookingForm = () => {
 
   // Calculate total price with coupon discount
   const calculateTotalPrice = () => {
-    const basePrice = 
+    const basePrice =
       parseFloat(sessionStorage.getItem("theaterPrice") || 0) +
       parseFloat(sessionStorage.getItem("cakeprice") || 0) +
       parseFloat(sessionStorage.getItem("occprice") || 0) +
       (parseFloat(sessionStorage.getItem("addons")) || 0);
-    
-    const couponDiscount = appliedCoupon ? 
+
+    const couponDiscount = appliedCoupon ?
       parseFloat(appliedCoupon.value || appliedCoupon.amount || 0) : 0;
-    
+
     return basePrice - couponDiscount;
   };
 
@@ -232,8 +232,8 @@ const BookingForm = () => {
         price: e.price,
         quantity: parseFloat(
           allcakeslength[e._id] == undefined ||
-          allcakeslength[e._id] == "500" ||
-          allcakeslength[e._id] == null
+            allcakeslength[e._id] == "500" ||
+            allcakeslength[e._id] == null
             ? "500"
             : allcakeslength[e._id]
         ),
@@ -272,8 +272,8 @@ const BookingForm = () => {
     const token = sessionStorage.getItem("token");
 
     // Get coupon amount from applied coupon (use value or amount field from response)
-    const couponAmountValue = appliedCoupon ? 
-      (appliedCoupon.value || appliedCoupon.amount) : 
+    const couponAmountValue = appliedCoupon ?
+      (appliedCoupon.value || appliedCoupon.amount) :
       sessionStorage.getItem("coupondis");
 
     const dataArray = {
@@ -293,11 +293,11 @@ const BookingForm = () => {
       status: "booking-confirmed",
       heardFrom: heardFrom,
     };
-    
+
     if (extrapersiontheater > maxPeopletheater) {
       dataArray.extraPersonPrice = sessionStorage.getItem("extraPersonperprice") || 0;
     }
-    
+
     try {
       const res = await axios.post(
         "https://api.carnivalcastle.com/v1/carnivalApi/web/booking/new/updatebookingforPayment",
@@ -418,7 +418,7 @@ const BookingForm = () => {
                     </select>
                     <div className="form-text">Please select how you found out about us</div>
                   </div>
-                  
+
                   <div className="col-md-6 mb-3">
                     <label htmlFor="couponCode" className="form-label fw-bold">
                       Coupon Code
@@ -459,7 +459,7 @@ const BookingForm = () => {
                         </button>
                       )}
                     </div>
-                    
+
                     {/* Applied Coupon Display */}
                     {appliedCoupon && (
                       <div className="alert alert-success mt-2 p-2">
@@ -469,18 +469,18 @@ const BookingForm = () => {
                             <br />
                             <small>Discount: ₹{getCouponDiscount()}</small>
                           </div>
-                          <button 
-                            type="button" 
-                            className="btn-close" 
+                          <button
+                            type="button"
+                            className="btn-close"
                             onClick={handleRemoveCoupon}
                             aria-label="Remove coupon"
                           />
                         </div>
                       </div>
                     )}
-                    
+
                     <div className="form-text">
-                      {appliedCoupon 
+                      {appliedCoupon
                         ? `You saved ₹${getCouponDiscount()} with this coupon!`
                         : "Enter your coupon code and click Apply"
                       }
@@ -495,7 +495,7 @@ const BookingForm = () => {
                       style={{ height: "700px" }}
                     >
                       <div
-                        className="mt-2 flex-grow-1"
+                        className="mt-2 flex-grow-1 p-3 rounded lighter-back overflow-auto"
                         style={{
                           overflowY: "auto",
                           paddingRight: "10px",
@@ -511,6 +511,7 @@ const BookingForm = () => {
                           className="form-check-input me-2"
                           id="agreeCheckbox"
                           onChange={handleAgree}
+                          style={{ width: "1rem", height: "1rem" }}
                         />
                         <label
                           className="form-check-label"
