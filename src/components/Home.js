@@ -30,6 +30,7 @@ import { Carousel, Card, Container, Row, Col, Button } from "react-bootstrap";
 import CouponSection from "./Coupons";
 import Time from "../Blogs/Time";
 import PopupModal from "./PopUpModal";
+import HomePackagesSection from "./PackageSection";
 
 export const fetchPopupImage = async () => {
   try {
@@ -85,6 +86,8 @@ function Home() {
   const [services, setservices] = useState([]);
 
   const [Contact, setContact] = useState([]);
+
+  const navigate = useNavigate();
 
   const [PopUp, setPopUp] = useState([]);
 
@@ -1423,190 +1426,6 @@ function Home() {
 
 
 
-                <section className="py-5 bg-light">
-                  <div className="container">
-                    <div className="text-center mb-5">
-                      <h2 className="display-5 fw-bold dark-text">Our Packages</h2>
-                      <p className="fs-5 light-text">
-                        <i>Choose Wisely</i>
-                      </p>
-                    </div>
-
-                    {/* ✅ Grid for md & larger devices */}
-                    <div className="row g-4 justify-content-center d-none d-md-flex">
-                      {packages.map((pkg) => (
-                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-10" key={pkg.id}>
-                          <div className="card border-0 shadow rounded-4 h-100 text-center gradient45 position-relative">
-                            <div className="card-body d-flex flex-column p-4">
-                              {/* Title + Subtitle */}
-                              <div className="mb-3">
-                                <h4 className="fw-bold mb-1">{pkg.title}</h4>
-                                <p
-                                  className="text-muted mb-0"
-                                  style={{ fontStyle: "italic", fontSize: "14px" }}
-                                >
-                                  {pkg.subtitle}
-                                </p>
-                              </div>
-
-                              {/* Features */}
-                              <ul className="list-unstyled text-start flex-grow-1 mb-0 px-2">
-                                {(showMore
-                                  ? Object.keys(pkg.detailedFeatures).slice(0, 7)
-                                  : Object.keys(pkg.detailedFeatures)
-                                ).map((feature, idx) => (
-                                  <li key={idx} className="d-flex align-items-center mb-2">
-                                    <span
-                                      className={`me-2 fw-bold ${pkg.detailedFeatures[feature] ? "text-success" : "text-danger"
-                                        }`}
-                                    >
-                                      {pkg.detailedFeatures[feature] ? "✅" : "❌"}
-                                    </span>
-                                    <span className="text-dark">{feature}</span>
-                                  </li>
-                                ))}
-                              </ul>
-
-
-                              {Object.keys(pkg.detailedFeatures).length > 7 && (
-                                <button
-                                  className="btn btn-link p-0 my-1 fw-bold"
-                                  onClick={() => setShowMore(!showMore)}
-                                >
-                                  {showMore[pkg.id]
-                                    ? "View Less"
-                                    : `View More`}
-                                </button>
-                              )}
-
-
-                              {/* Price */}
-                              {pkg?.price ? (
-                                <p className="fw-semibold mb-4 mt-auto">
-                                  Starts from ₹{pkg.price}
-                                </p>
-                              ) : null}
-
-                              {/* Button */}
-                              <button
-                                className="btn text-white w-100"
-                                style={{ backgroundColor: "#a259ff", borderRadius: "10px" }}
-                                onClick={() => navigateTheater("/locations")}
-                              >
-                                {pkg.buttonText}
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* ✅ Carousel for mobile only */}
-                    <div
-                      id="packagesCarousel"
-                      className=" slide d-block d-md-none"
-                      data-bs-ride="carousel"
-                      data-bs-interval="3000"
-                      data-bs-wrap="true"
-                      data-bs-pause="false"
-                    >
-                      {/* Indicators */}
-                      <div className="carousel-indicators">
-                        {packages.map((_, index) => (
-                          <button
-                            key={index}
-                            type="button"
-                            data-bs-target="#packagesCarousel"
-                            data-bs-slide-to={index}
-                            className={index === 0 ? "active" : ""}
-                            aria-current={index === 0 ? "true" : "false"}
-                            aria-label={`Slide ${index + 1}`}
-                          ></button>
-                        ))}
-                      </div>
-
-                      {/* Carousel Items */}
-                      <div className="carousel-inner">
-                        {packages.map((pkg, index) => (
-                          <div
-                            className={`carousel-item ${index === 0 ? "active" : ""}`}
-                            key={pkg.id}
-                          >
-                            <div className="d-flex justify-content-center">
-                              <div className="col-10">
-                                <div className="card border-0 shadow rounded-4 text-center gradient45">
-                                  <div className="card-body d-flex flex-column p-4">
-                                    {/* Title + Subtitle */}
-                                    <div className="mb-3">
-                                      <h4 className="fw-bold mb-1">{pkg.title}</h4>
-                                      <p
-                                        className="text-muted mb-0"
-                                        style={{ fontStyle: "italic", fontSize: "14px" }}
-                                      >
-                                        {pkg.subtitle}
-                                      </p>
-                                    </div>
-
-                                    {/* Features */}
-                                    <ul className="list-unstyled text-start flex-grow-1 mb-1 px-2">
-                                      {Object.keys(pkg.detailedFeatures).map((feature, idx) => (
-                                        <li key={idx} className="d-flex align-items-center mb-2">
-                                          <span
-                                            className={`me-2 fw-bold ${pkg.detailedFeatures[feature] ? "text-success" : "text-danger"
-                                              }`}
-                                          >
-                                            {pkg.detailedFeatures[feature] ? "✅" : "❌"}
-                                          </span>
-                                          <span className="text-dark">{feature}</span>
-                                        </li>
-                                      ))}
-                                    </ul>
-
-                                    {/* Price */}
-                                    {pkg?.price ? (
-                                      <p className="fw-semibold mb-4 mt-auto">
-                                        Starts from ₹{pkg.price}
-                                      </p>
-                                    ) : null}
-
-                                    {/* Button */}
-                                    <button
-                                      className="btn text-white w-100"
-                                      style={{ backgroundColor: "#a259ff", borderRadius: "10px" }}
-                                      onClick={() => navigateTheater("/locations")}
-                                    >
-                                      {pkg.buttonText}
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Controls */}
-                      {/* <button
-                        className="carousel-control-prev"
-                        type="button"
-                        data-bs-target="#packagesCarousel"
-                        data-bs-slide="prev"
-                      >
-                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Previous</span>
-                      </button>
-                      <button
-                        className="carousel-control-next"
-                        type="button"
-                        data-bs-target="#packagesCarousel"
-                        data-bs-slide="next"
-                      >
-                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span className="visually-hidden">Next</span>
-                      </button> */}
-                    </div>
-                  </div>
-                </section>
 
 
 
@@ -2710,6 +2529,194 @@ function Home() {
                     </div>
                   </div>
                 </section>
+
+                
+                {/* <section className="py-5 bg-light">
+                  <div className="container">
+                    <div className="text-center mb-5">
+                      <h2 className="display-5 fw-bold dark-text">Our Packages</h2>
+                      <p className="fs-5 light-text">
+                        <i>Choose Wisely</i>
+                      </p>
+                    </div>
+
+                    
+                    <div className="row g-4 justify-content-center d-none d-md-flex">
+                      {packages.map((pkg) => (
+                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-10" key={pkg.id}>
+                          <div className="card border-0 shadow rounded-4 h-100 text-center gradient45 position-relative">
+                            <div className="card-body d-flex flex-column p-4">
+                             
+                              <div className="mb-3">
+                                <h4 className="fw-bold mb-1">{pkg.title}</h4>
+                                <p
+                                  className="text-muted mb-0"
+                                  style={{ fontStyle: "italic", fontSize: "14px" }}
+                                >
+                                  {pkg.subtitle}
+                                </p>
+                              </div>
+
+                             
+                              <ul className="list-unstyled text-start flex-grow-1 mb-0 px-2">
+                                {(showMore
+                                  ? Object.keys(pkg.detailedFeatures).slice(0, 7)
+                                  : Object.keys(pkg.detailedFeatures)
+                                ).map((feature, idx) => (
+                                  <li key={idx} className="d-flex align-items-center mb-2">
+                                    <span
+                                      className={`me-2 fw-bold ${pkg.detailedFeatures[feature] ? "text-success" : "text-danger"
+                                        }`}
+                                    >
+                                      {pkg.detailedFeatures[feature] ? "✅" : "❌"}
+                                    </span>
+                                    <span className="text-dark">{feature}</span>
+                                  </li>
+                                ))}
+                              </ul>
+
+
+                              {Object.keys(pkg.detailedFeatures).length > 7 && (
+                                <button
+                                  className="btn btn-link p-0 my-1 fw-bold"
+                                  onClick={() => setShowMore(!showMore)}
+                                >
+                                  {showMore[pkg.id]
+                                    ? "View Less"
+                                    : `View More`}
+                                </button>
+                              )}
+
+
+                       
+                              {pkg?.price ? (
+                                <p className="fw-semibold mb-4 mt-auto">
+                                  Starts from ₹{pkg.price}
+                                </p>
+                              ) : null}
+
+                         
+                              <button
+                                className="btn text-white w-100"
+                                style={{ backgroundColor: "#a259ff", borderRadius: "10px" }}
+                                onClick={() => navigateTheater("/locations")}
+                              >
+                                {pkg.buttonText}
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    
+                    <div
+                      id="packagesCarousel"
+                      className=" slide d-block d-md-none"
+                      data-bs-ride="carousel"
+                      data-bs-interval="3000"
+                      data-bs-wrap="true"
+                      data-bs-pause="false"
+                    >
+                     
+                      <div className="carousel-indicators">
+                        {packages.map((_, index) => (
+                          <button
+                            key={index}
+                            type="button"
+                            data-bs-target="#packagesCarousel"
+                            data-bs-slide-to={index}
+                            className={index === 0 ? "active" : ""}
+                            aria-current={index === 0 ? "true" : "false"}
+                            aria-label={`Slide ${index + 1}`}
+                          ></button>
+                        ))}
+                      </div>
+
+               
+                      <div className="carousel-inner">
+                        {packages.map((pkg, index) => (
+                          <div
+                            className={`carousel-item ${index === 0 ? "active" : ""}`}
+                            key={pkg.id}
+                          >
+                            <div className="d-flex justify-content-center">
+                              <div className="col-10">
+                                <div className="card border-0 shadow rounded-4 text-center gradient45">
+                                  <div className="card-body d-flex flex-column p-4">
+                     
+                                    <div className="mb-3">
+                                      <h4 className="fw-bold mb-1">{pkg.title}</h4>
+                                      <p
+                                        className="text-muted mb-0"
+                                        style={{ fontStyle: "italic", fontSize: "14px" }}
+                                      >
+                                        {pkg.subtitle}
+                                      </p>
+                                    </div>
+
+                          
+                                    <ul className="list-unstyled text-start flex-grow-1 mb-1 px-2">
+                                      {Object.keys(pkg.detailedFeatures).map((feature, idx) => (
+                                        <li key={idx} className="d-flex align-items-center mb-2">
+                                          <span
+                                            className={`me-2 fw-bold ${pkg.detailedFeatures[feature] ? "text-success" : "text-danger"
+                                              }`}
+                                          >
+                                            {pkg.detailedFeatures[feature] ? "✅" : "❌"}
+                                          </span>
+                                          <span className="text-dark">{feature}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+
+                         
+                                    {pkg?.price ? (
+                                      <p className="fw-semibold mb-4 mt-auto">
+                                        Starts from ₹{pkg.price}
+                                      </p>
+                                    ) : null}
+
+                         
+                                    <button
+                                      className="btn text-white w-100"
+                                      style={{ backgroundColor: "#a259ff", borderRadius: "10px" }}
+                                      onClick={() => navigateTheater("/locations")}
+                                    >
+                                      {pkg.buttonText}
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                   
+                      <button
+                        className="carousel-control-prev"
+                        type="button"
+                        data-bs-target="#packagesCarousel"
+                        data-bs-slide="prev"
+                      >
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Previous</span>
+                      </button>
+                      <button
+                        className="carousel-control-next"
+                        type="button"
+                        data-bs-target="#packagesCarousel"
+                        data-bs-slide="next"
+                      >
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Next</span>
+                      </button>
+                    </div>
+                  </div>
+                </section> */}
+
+                <HomePackagesSection navigateTheater={navigate}/>
 
 
 

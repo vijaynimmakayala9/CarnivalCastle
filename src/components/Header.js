@@ -109,7 +109,25 @@ function Header() {
                   >
                     Book Now
                   </a>
-                  <div className="d-flex gap-3 mt-2">
+                  {/* Rewards Button */}
+                  <a
+                    href="/rewards"
+                    className="d-flex align-items-center justify-content-center mt-2 text-decoration-none"
+                    style={{
+                      border: "2px solid #681DC0",
+                      borderRadius: "20px",
+                      padding: "5px 12px",
+                      background: "#F3E8FF",
+                      color: "#681DC0",
+                      fontSize: "13px",
+                      fontWeight: "600",
+                      gap: "6px",
+                    }}
+                  >
+                    <i className="bi bi-gift-fill"></i>
+                    Rewards
+                  </a>
+                  {/* <div className="d-flex gap-3 mt-2">
                     <a href={Contact.instagram || "#"} target="_blank" rel="noreferrer">
                       <FaInstagram size={18} color="#E1306C" />
                     </a>
@@ -119,7 +137,7 @@ function Header() {
                     <a href="/profile">
                       <FaUser size={18} color="#831cd2" />
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 

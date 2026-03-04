@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 
@@ -229,13 +229,13 @@ function Card({ p, mobRole }) {
     const isM = mobRole != null;
 
     return (
-        <div className="cc-card gradient45" style={{ "--g": grad }}>
+        <div className="cc-card" style={{ "--g": grad }}>
             <div className="cc-stripe" />
             <div className="cc-tier">{p.tier}</div>
             <div className="cc-body">
                 <span className="cc-badge">{p.badge}</span>
                 <h5 className="cc-name">{p.title}</h5>
-                <p className="cc-tag text-white">{p.tag}</p>
+                <p className="cc-tag">{p.tag}</p>
                 <div className="cc-div" />
                 <ul className="cc-feats">
                     {shown.map(([k, v], i) => (
@@ -266,6 +266,40 @@ export default function PackagesSection() {
     const [active, setActive] = useState(1);
     const mobX = `calc(${50 - CARD_VW / 2}vw - ${active * (CARD_VW + GAP_VW)}vw)`;
 
+    // Touch swipe state
+    const touchStartX = useRef(null);
+    const touchStartY = useRef(null);
+    const isSwiping = useRef(false);
+
+    const onTouchStart = (e) => {
+        touchStartX.current = e.touches[0].clientX;
+        touchStartY.current = e.touches[0].clientY;
+        isSwiping.current = false;
+    };
+
+    const onTouchMove = (e) => {
+        if (touchStartX.current === null) return;
+        const dx = Math.abs(e.touches[0].clientX - touchStartX.current);
+        const dy = Math.abs(e.touches[0].clientY - touchStartY.current);
+        // If horizontal movement dominates, treat as swipe and block scroll
+        if (dx > dy && dx > 8) {
+            isSwiping.current = true;
+            e.preventDefault();
+        }
+    };
+
+    const onTouchEnd = (e) => {
+        if (touchStartX.current === null) return;
+        const dx = e.changedTouches[0].clientX - touchStartX.current;
+        if (isSwiping.current && Math.abs(dx) > 40) {
+            if (dx < 0) setActive(p => Math.min(PLANS.length - 1, p + 1)); // swipe left → next
+            else setActive(p => Math.max(0, p - 1));                // swipe right → prev
+        }
+        touchStartX.current = null;
+        touchStartY.current = null;
+        isSwiping.current = false;
+    };
+
     const Dots = () => (
         <div className="cc-dots">
             {PLANS.map((_, i) => (
@@ -279,55 +313,57 @@ export default function PackagesSection() {
         <>
             <div className="home-page indexsix">
                 <Header />
-                <main className="main-wrapper">
-                    <style>{css}</style>
-                    <div className="cc">
+                <style>{css}</style>
+                <div className="cc">
 
-                        {/* Heading */}
-                        <div className="cc-head">
-                            <div className="cc-eyebrow">Celebration Packages</div>
-                            <h2 className="cc-title">Choose Your <em>Celebration</em></h2>
-                            <p className="cc-sub">Pick the plan that matches your moment</p>
-                            <div className="cc-rule">
-                                <div className="cc-rl" /><div className="cc-rd" /><div className="cc-rl r" />
-                            </div>
+                    {/* Heading */}
+                    <div className="cc-head">
+                        <div className="cc-eyebrow">Celebration Packages</div>
+                        <h2 className="cc-title">Choose Your <em>Celebration</em></h2>
+                        <p className="cc-sub">Pick the plan that matches your moment</p>
+                        <div className="cc-rule">
+                            <div className="cc-rl" /><div className="cc-rd" /><div className="cc-rl r" />
                         </div>
-
-                        {/* Desktop */}
-                        <div className="d-none d-md-block">
-                            <div className="cc-track">
-                                {PLANS.map((p, i) => (
-                                    <div key={p.id} className={`cc-slot ${i === active ? "center" : "side"}`} onClick={() => setActive(i)}>
-                                        <Card p={p} />
-                                    </div>
-                                ))}
-                            </div>
-                            <Dots />
-                        </div>
-
-                        {/* Mobile */}
-                        <div className="d-md-none cc-mob">
-                            <div className="cc-mob-track" style={{ transform: `translateX(${mobX})` }}>
-                                {PLANS.map((p, i) => (
-                                    <div key={p.id}
-                                        className={`cc-mob-slide ${i === active ? "mc" : "ms"}`}
-                                        style={{ width: `${CARD_VW}vw`, marginLeft: i === 0 ? 0 : `${GAP_VW}vw` }}
-                                        onClick={() => setActive(i)}
-                                    >
-                                        <Card p={p} mobRole={i === active ? "c" : "s"} />
-                                    </div>
-                                ))}
-                            </div>
-                            <Dots />
-                            <div className="cc-nav">
-                                <button className="cc-nav-btn p" disabled={active === 0} onClick={() => setActive(p => p - 1)}>← Prev</button>
-                                <button className="cc-nav-btn n" disabled={active === PLANS.length - 1} onClick={() => setActive(p => p + 1)}>Next →</button>
-                            </div>
-                        </div>
-
                     </div>
-                    <Footer />
-                </main>
+
+                    {/* Desktop */}
+                    <div className="d-none d-md-block">
+                        <div className="cc-track">
+                            {PLANS.map((p, i) => (
+                                <div key={p.id} className={`cc-slot ${i === active ? "center" : "side"}`} onClick={() => setActive(i)}>
+                                    <Card p={p} />
+                                </div>
+                            ))}
+                        </div>
+                        <Dots />
+                    </div>
+
+                    {/* Mobile — touch-enabled */}
+                    <div className="d-md-none cc-mob"
+                        onTouchStart={onTouchStart}
+                        onTouchMove={onTouchMove}
+                        onTouchEnd={onTouchEnd}
+                    >
+                        <div className="cc-mob-track" style={{ transform: `translateX(${mobX})` }}>
+                            {PLANS.map((p, i) => (
+                                <div key={p.id}
+                                    className={`cc-mob-slide ${i === active ? "mc" : "ms"}`}
+                                    style={{ width: `${CARD_VW}vw`, marginLeft: i === 0 ? 0 : `${GAP_VW}vw` }}
+                                    onClick={() => { if (!isSwiping.current) setActive(i); }}
+                                >
+                                    <Card p={p} mobRole={i === active ? "c" : "s"} />
+                                </div>
+                            ))}
+                        </div>
+                        <Dots />
+                        <div className="cc-nav">
+                            <button className="cc-nav-btn p" disabled={active === 0} onClick={() => setActive(p => p - 1)}>← Prev</button>
+                            <button className="cc-nav-btn n" disabled={active === PLANS.length - 1} onClick={() => setActive(p => p + 1)}>Next →</button>
+                        </div>
+                    </div>
+
+                </div>
+                <Footer />
             </div>
         </>
     );
