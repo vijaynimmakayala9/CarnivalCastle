@@ -1736,6 +1736,22 @@ function Home() {
                       </div>
                     </div>
                   </div>
+                  <style jsx>{`
+                  /* slider indicators */
+.slick-dots {
+  bottom: -35px;
+}
+
+.slick-dots li button:before {
+  font-size: 10px;
+  color: #ccc; /* inactive color */
+  opacity: 1;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #681DC0; /* active dot color */
+}
+  `}</style>
                 </section>
 
                 <section className="services-section py-2 text-dark bg-white">

@@ -1104,14 +1104,14 @@ const CakesComponent = () => {
         <div className="home-page indexsix">
           <Header />
           <main className="main-wrapper">
-            <section
+            {/* <section
               id="parallax"
               className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix"
             >
               <div className="container"></div>
-            </section>
+            </section> */}
             <section
-              className="shop-area pt-5 pb-5 p-relative lightest-back"
+              className="shop-area pt-3 pb-5 p-relative lightest-back"
               style={{ background: "white" }}
             >
               <div className="container-fluid px-4">
