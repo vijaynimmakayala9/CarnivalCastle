@@ -152,6 +152,8 @@ function Home() {
     );
   };
 
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
+
   const [showPopup, setShowPopup] = useState(false);
   const [popupImage, setPopupImage] = useState("");
 
@@ -861,7 +863,7 @@ function Home() {
       ) : (
         <>
           <div className="home-page indexsix bg-dark">
-            <div className="main-wrapper bg-dark">
+            <div className="main-wrapper bg-light">
               <>
                 <Header />
                 <div className="scrollbar">
@@ -2101,175 +2103,521 @@ function Home() {
   `}</style>
                 </section>
 
+                {/* WHY US Section - Premium Design */}
+                <section className="why-us-section position-relative" style={{
+                  background: 'linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%)',
+                  padding: '80px 0',
+                  overflow: 'hidden'
+                }}>
+                  {/* Decorative Background Elements */}
+                  <div className="position-absolute" style={{
+                    top: '-50px',
+                    right: '-50px',
+                    width: '200px',
+                    height: '200px',
+                    background: 'radial-gradient(circle, rgba(104,29,192,0.05) 0%, rgba(104,29,192,0) 70%)',
+                    borderRadius: '50%',
+                    zIndex: 0
+                  }}></div>
+                  <div className="position-absolute" style={{
+                    bottom: '-30px',
+                    left: '-30px',
+                    width: '150px',
+                    height: '150px',
+                    background: 'radial-gradient(circle, rgba(255,193,7,0.05) 0%, rgba(255,193,7,0) 70%)',
+                    borderRadius: '50%',
+                    zIndex: 0
+                  }}></div>
 
-                {/* WHY US Section */}
-                <section className="py-2 lighter-back">
-                  <Container>
-                    <div className="position-relative">
-                      <Carousel
-                        activeIndex={index}
-                        onSelect={handleSelect}
-                        controls={false}
-                        indicators={false}
-                        fade={false}
-                        pause={false} // allows auto + manual without stopping on hover
-                        touch={true}
-                      >
-                        {whyUsSlides.map((slide, idx) => (
-                          <Carousel.Item key={idx}>
-                            <h2 className="mb-3 " style={{ color: "#681DC0" }}>{slide.title}</h2>
-                            <Row className="align-items-center g-4 flex-column flex-md-row text-center text-md-start">
-                              {/* Left - Image */}
-                              <Col md={6}>
+                  <Container className="position-relative" style={{ zIndex: 2 }}>
+                    {/* Section Header with Premium Styling */}
+                    <div className="text-center mb-5">
+                      {/* <span className="badge bg-warning bg-opacity-15 text-warning px-4 py-2 mb-3 rounded-pill fw-semibold"
+                        style={{
+                          background: 'rgba(255, 193, 7, 0.15)',
+                          letterSpacing: '1px',
+                          fontSize: '0.9rem'
+                        }}>
+                        WHY CHOOSE US
+                      </span> */}
+                      <h3 className="display-4 fw-bold" style={{
+                        color: '#1a1a1a',
+                        fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                        lineHeight: '1.2'
+                      }}>
+                        Experience The <span style={{ color: '#681DC0' }}>Difference</span>
+                      </h3>
+                      <p className="text-secondary mt-3" style={{
+                        fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+                        maxWidth: '700px',
+                        margin: '0 auto'
+                      }}>
+                        Discover what makes us the preferred choice for unforgettable moments
+                      </p>
+                    </div>
+
+                    {/* Main Content Card with Premium Design */}
+                    <div className="why-us-card position-relative gradient45" style={{
+                      // background: 'rgba(255, 255, 255, 0.95)',
+                      backdropFilter: 'blur(10px)',
+                      borderRadius: '40px',
+                      padding: 'clamp(30px, 5vw, 60px)',
+                      boxShadow: '0 30px 60px rgba(0,0,0,0.1), 0 10px 30px rgba(104,29,192,0.1)',
+                      border: '1px solid rgba(255,255,255,0.5)',
+                      transition: 'all 0.3s ease'
+                    }}>
+
+                      {/* Current Slide Content */}
+                      <div className="slide-content">
+                        <Row className="align-items-center g-5">
+                          {/* Left Side - Image with Premium Effects */}
+                          <Col lg={6} className="text-center text-lg-start">
+                            <div className="position-relative">
+                              {/* Image with gradient overlay */}
+                              <div className="image-wrapper position-relative" style={{
+                                borderRadius: '30px',
+                                overflow: 'hidden',
+                                boxShadow: '0 20px 40px rgba(104,29,192,0.2)',
+                                transform: 'perspective(1000px) rotateY(-2deg)',
+                                transition: 'transform 0.5s ease'
+                              }}>
                                 <img
-                                  src={slide.image}
-                                  alt="Highlight"
-                                  className="img-fluid rounded-4 shadow w-100"
-                                  style={{ maxHeight: "420px", objectFit: "cover" }}
+                                  src={whyUsSlides[index].image}
+                                  alt="Premium Experience"
+                                  className="img-fluid w-100"
+                                  style={{
+                                    height: 'clamp(300px, 40vw, 500px)',
+                                    objectFit: 'cover',
+                                    transition: 'transform 0.5s ease'
+                                  }}
                                 />
-                              </Col>
+                                {/* Gradient Overlay */}
+                                <div className="position-absolute top-0 start-0 w-100 h-100" style={{
+                                  background: 'linear-gradient(45deg, rgba(104,29,192,0.2) 0%, rgba(255,193,7,0.2) 100%)',
+                                  mixBlendMode: 'overlay'
+                                }}></div>
+                              </div>
 
-                              {/* Right - Text */}
-                              <Col md={6}>
-                                <div className="ps-md-4 mt-4 mt-md-0">
+                              {/* Decorative Elements */}
+                              <div className="position-absolute" style={{
+                                bottom: '-20px',
+                                right: '-20px',
+                                width: '80px',
+                                height: '80px',
+                                background: 'linear-gradient(135deg, #681DC0, #ffc107)',
+                                borderRadius: '20px',
+                                transform: 'rotate(45deg)',
+                                zIndex: -1,
+                                opacity: 0.3
+                              }}></div>
+                            </div>
+                          </Col>
 
-                                  <h6 className="fw-semibold mb-4">{slide.subtitle}</h6>
-                                  <ul className="list-unstyled">
-                                    {slide.points.map((point, i) => (
-                                      <li
-                                        key={i}
-                                        className="mb-2 d-flex align-items-start justify-content-center justify-content-md-start"
-                                      >
-                                        <i className="fas fa-check-circle text-warning me-2 mt-1"></i>
-                                        <span className="text-dark">{point}</span>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                  <div className="mt-4 text-center text-md-start">
-                                    <Button
-                                      onClick={() => window.location.href = "/locations"}
-                                      className="rounded-3 px-4 py-2 fw-semibold dark-back"
-                                    >
-                                      <i className="fas fa-ticket-alt me-2" />
-                                      Proceed to Book
-                                    </Button>
-                                  </div>
-                                </div>
-                              </Col>
-                            </Row>
-                          </Carousel.Item>
-                        ))}
-                      </Carousel>
+                          {/* Right Side - Text Content */}
+                          <Col lg={6}>
+                            <div className="ps-lg-4">
+                              {/* Title with Animation */}
+                              <h3 className="fw-bold mb-4" style={{
+                                color: '#4a4242',
+                                position: 'relative',
+                                paddingBottom: '15px'
+                              }}>
+                                {whyUsSlides[index].subtitle}
+                                <span style={{
+                                  position: 'absolute',
+                                  bottom: 0,
+                                  left: 0,
+                                  width: '80px',
+                                  height: '4px',
+                                  background: 'linear-gradient(90deg, #681DC0, #ffc107)',
+                                  borderRadius: '2px'
+                                }}></span>
+                              </h3>
 
-                      {/* Bottom Indicators */}
-                      <div className="d-flex justify-content-center mt-4">
-                        {whyUsSlides.map((_, i) => (
+                              {/* Points with Icons */}
+                              <ul className="list-unstyled mt-4">
+                                {whyUsSlides[index].points.map((point, i) => (
+                                  <li key={i} className="mb-4 d-flex align-items-start">
+                                    <div className="me-3" style={{
+                                      width: '32px',
+                                      height: '32px',
+                                      background: 'linear-gradient(135deg, rgba(104,29,192,0.1), rgba(255,193,7,0.1))',
+                                      borderRadius: '10px',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'center',
+                                      color: '#681DC0'
+                                    }}>
+                                      <i className="fas fa-check-circle" style={{ fontSize: '1.2rem' }}></i>
+                                    </div>
+                                    <div>
+                                      <span style={{
+                                        fontSize: 'clamp(1rem, 2vw, 1.1rem)',
+                                        color: '#4a4a4a',
+                                        lineHeight: '1.6'
+                                      }}>
+                                        {point}
+                                      </span>
+                                    </div>
+                                  </li>
+                                ))}
+                              </ul>
+
+                              {/* CTA Button with Premium Style */}
+                              <div className="mt-5">
+                                <Button
+                                  onClick={() => window.location.href = "/locations"}
+                                  className="position-relative overflow-hidden"
+                                  style={{
+                                    background: 'linear-gradient(135deg, #681DC0, #8a4fe3)',
+                                    border: 'none',
+                                    padding: '16px 40px',
+                                    fontSize: '1.1rem',
+                                    fontWeight: '600',
+                                    borderRadius: '50px',
+                                    color: '#fff',
+                                    boxShadow: '0 10px 20px rgba(104,29,192,0.3)',
+                                    transition: 'all 0.3s ease',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '1px'
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.target.style.transform = 'translateY(-2px)';
+                                    e.target.style.boxShadow = '0 15px 30px rgba(104,29,192,0.4)';
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.target.style.transform = 'translateY(0)';
+                                    e.target.style.boxShadow = '0 10px 20px rgba(104,29,192,0.3)';
+                                  }}
+                                >
+                                  <i className="fas fa-ticket-alt me-2"></i>
+                                  Book Your Experience
+                                </Button>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                      </div>
+
+                      {/* Navigation Controls - Premium Design */}
+                      <div className="navigation-controls d-flex justify-content-between align-items-center mt-5 pt-4">
+                        {/* Arrow Navigation */}
+                        {/* <div className="d-flex gap-3">
                           <button
-                            key={i}
-                            onClick={() => handleSelect(i)}
-                            className={`carousel-indicator mx-1 rounded-circle ${index === i ? 'bg-warning' : 'bg-secondary'}`}
+                            onClick={() => handleSelect(index === 0 ? whyUsSlides.length - 1 : index - 1)}
+                            className="nav-arrow prev-arrow"
                             style={{
-                              width: "12px",
-                              height: "12px",
-                              border: "none",
-                              transition: "0.3s",
+                              width: '50px',
+                              height: '50px',
+                              borderRadius: '15px',
+                              background: '#fff',
+                              border: '1px solid rgba(104,29,192,0.2)',
+                              color: '#681DC0',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontSize: '1.2rem',
+                              cursor: 'pointer',
+                              transition: 'all 0.3s ease',
+                              boxShadow: '0 5px 15px rgba(0,0,0,0.05)'
                             }}
-                          ></button>
-                        ))}
+                            onMouseEnter={(e) => {
+                              e.target.style.background = '#681DC0';
+                              e.target.style.color = '#fff';
+                              e.target.style.transform = 'scale(1.05)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.target.style.background = '#fff';
+                              e.target.style.color = '#681DC0';
+                              e.target.style.transform = 'scale(1)';
+                            }}
+                          >
+                            <i className="fas fa-arrow-left"></i>
+                          </button>
+                          <button
+                            onClick={() => handleSelect(index === whyUsSlides.length - 1 ? 0 : index + 1)}
+                            className="nav-arrow next-arrow"
+                            style={{
+                              width: '50px',
+                              height: '50px',
+                              borderRadius: '15px',
+                              background: '#fff',
+                              border: '1px solid rgba(104,29,192,0.2)',
+                              color: '#681DC0',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontSize: '1.2rem',
+                              cursor: 'pointer',
+                              transition: 'all 0.3s ease',
+                              boxShadow: '0 5px 15px rgba(0,0,0,0.05)'
+                            }}
+                            onMouseEnter={(e) => {
+                              e.target.style.background = '#681DC0';
+                              e.target.style.color = '#fff';
+                              e.target.style.transform = 'scale(1.05)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.target.style.background = '#fff';
+                              e.target.style.color = '#681DC0';
+                              e.target.style.transform = 'scale(1)';
+                            }}
+                          >
+                            <i className="fas fa-arrow-right"></i>
+                          </button>
+                        </div> */}
+
+                        {/* Slide Indicators */}
+                        <div className="d-flex gap-2">
+                          {whyUsSlides.map((_, i) => (
+                            <button
+                              key={i}
+                              onClick={() => handleSelect(i)}
+                              className="slide-indicator"
+                              style={{
+                                width: i === index ? '40px' : '12px',
+                                height: '12px',
+                                borderRadius: '20px',
+                                border: 'none',
+                                background: i === index
+                                  ? 'linear-gradient(90deg, #681DC0, #ffc107)'
+                                  : 'rgba(104,29,192,0.2)',
+                                cursor: 'pointer',
+                                transition: 'all 0.3s ease',
+                                boxShadow: i === index ? '0 5px 15px rgba(104,29,192,0.3)' : 'none'
+                              }}
+                              onMouseEnter={(e) => {
+                                if (i !== index) {
+                                  e.target.style.background = 'rgba(104,29,192,0.4)';
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                if (i !== index) {
+                                  e.target.style.background = 'rgba(104,29,192,0.2)';
+                                }
+                              }}
+                            />
+                          ))}
+                        </div>
+
+                        {/* Slide Counter */}
+                        {/* <div className="slide-counter" style={{
+                          background: 'rgba(104,29,192,0.05)',
+                          padding: '8px 20px',
+                          borderRadius: '50px',
+                          color: '#681DC0',
+                          fontWeight: '600',
+                          fontSize: '1rem',
+                          letterSpacing: '1px'
+                        }}>
+                          <span style={{ fontSize: '1.3rem', fontWeight: '700' }}>{String(index + 1).padStart(2, '0')}</span>
+                          <span style={{ color: '#999', margin: '0 5px' }}>/</span>
+                          <span style={{ color: '#999' }}>{String(whyUsSlides.length).padStart(2, '0')}</span>
+                        </div> */}
                       </div>
                     </div>
                   </Container>
 
+                  {/* Premium Responsive Styles */}
                   <style jsx>{`
-                .carousel-indicator {
-                  opacity: 0.6;
-                  cursor: pointer;
-                }
-                .carousel-indicator.bg-primary {
-                  opacity: 1;
-                }
-              `}</style>
+  .why-us-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Tablet Styles */
+  @media (max-width: 991px) {
+    .why-us-section {
+      padding: 60px 0;
+    }
+
+    .why-us-section .why-us-card {
+      padding: 30px !important;
+    }
+
+    .why-us-section .navigation-controls {
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center !important;
+    }
+
+    .why-us-section .slide-counter {
+      order: 1;
+    }
+
+    .why-us-section .d-flex.gap-3 {
+      order: 2;
+    }
+
+    .why-us-section .d-flex.gap-2 {
+      order: 3;
+    }
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 576px) {
+    .why-us-section {
+      padding: 40px 0;
+    }
+
+    .why-us-section .why-us-card {
+      padding: 20px !important;
+      border-radius: 30px !important;
+    }
+
+    .why-us-section .image-wrapper {
+      transform: none !important;
+      box-shadow: 0 15px 30px rgba(104,29,192,0.15) !important;
+    }
+
+    .why-us-section .nav-arrow {
+      width: 45px !important;
+      height: 45px !important;
+      border-radius: 12px !important;
+    }
+
+    .why-us-section .slide-indicator {
+      height: 10px !important;
+    }
+
+    .why-us-section .slide-indicator[style*="width: 40px"] {
+      width: 30px !important;
+    }
+
+    .why-us-section .badge {
+      font-size: 0.8rem !important;
+      padding: 6px 16px !important;
+    }
+
+    .why-us-section button {
+      width: 100%;
+      padding: 14px 20px !important;
+      font-size: 1rem !important;
+    }
+  }
+
+  /* Small Mobile Styles */
+  @media (max-width: 375px) {
+    .why-us-section .why-us-card {
+      padding: 15px !important;
+    }
+
+    .why-us-section h3 {
+      font-size: 1.3rem !important;
+    }
+
+    .why-us-section .navigation-controls {
+      flex-direction: column;
+    }
+  }
+
+  /* Hover Effects for Desktop */
+  @media (min-width: 992px) {
+    .why-us-section .image-wrapper:hover {
+      transform: perspective(1000px) rotateY(-4deg) scale(1.02) !important;
+    }
+
+    .why-us-section .why-us-card:hover {
+      box-shadow: 0 40px 80px rgba(104,29,192,0.15) !important;
+    }
+  }
+`}</style>
                 </section>
 
+                {slides && slides.length > 0 && (
+                  <section className="py-5 bg-white position-relative">
+                    <Container>
+                      <h2 className="text-center fw-bold mb-3 dark-text">
+                        What Our Customers Say
+                      </h2>
 
-                <section className="py-5 bg-white position-relative">
-                  <Container>
-                    <h2 className="text-center fw-bold mb-3 dark-text">What Our Customers Say</h2>
-                    <p className="text-center mb-5 fs-5 light-text">
-                      Real stories. Real celebrations. Real magic at Carnival Castle.
-                    </p>
+                      <p className="text-center mb-5 fs-5 light-text">
+                        Real stories. Real celebrations. Real magic at Carnival Castle.
+                      </p>
 
-                    <Carousel controls interval={5000} pause="hover" fade={false} wrap>
-                      {slides.map((group, idx) => (
-                        <Carousel.Item key={idx}>
-                          <Row className="g-4 justify-content-center">
-                            {group.map((review, index) => (
-                              <Col lg={4} md={6} sm={12} key={index}>
-                                {/* Added mb-4 class for bottom margin */}
-                                <div className="review-card position-relative rounded-4 overflow-hidden shadow mb-4" style={{ height: '400px' }}>
-                                  <img
-                                    src={review.image}
-                                    alt="Review background"
-                                    className="w-100 h-100 object-fit-cover"
-                                    style={{ filter: 'brightness(70%)' }}
-                                  />
-
-                                  {/* Bottom overlay card */}
+                      <Carousel controls interval={5000} pause="hover" fade={false} wrap>
+                        {slides.map((group, idx) => (
+                          <Carousel.Item key={idx}>
+                            <Row className="g-4 justify-content-center">
+                              {group.map((review, index) => (
+                                <Col lg={4} md={6} sm={12} key={index}>
                                   <div
-                                    className="position-absolute bottom-0 start-50 translate-middle-x p-4 rounded-top-4"
-                                    style={{
-                                      height: 'auto',
-                                      minHeight: '45%',
-                                      width: "90%",
-                                      backgroundColor: 'rgba(233, 220, 255, 0.95)',
-                                      backdropFilter: 'blur(4px)',
-                                    }}
+                                    className="review-card position-relative rounded-4 overflow-hidden shadow mb-4"
+                                    style={{ height: "400px" }}
                                   >
-                                    <div className="d-flex align-items-center mb-3">
-                                      <img
-                                        src={review.avatar}
-                                        alt="avatar"
-                                        className="rounded-circle me-3 border-2 border-light"
-                                        width="60"
-                                        height="60"
-                                      />
-                                      <div>
-                                        <h6 className="mb-0 fw-bold text-dark">{review.name}</h6>
-                                        <small className="text-dark">{review.location}</small>
+                                    <img
+                                      src={review.image}
+                                      alt="Review background"
+                                      className="w-100 h-100 object-fit-cover"
+                                      style={{ filter: "brightness(70%)" }}
+                                    />
+
+                                    {/* Bottom overlay card */}
+                                    <div
+                                      className="position-absolute bottom-0 start-50 translate-middle-x p-4 rounded-top-4"
+                                      style={{
+                                        height: "auto",
+                                        minHeight: "45%",
+                                        width: "90%",
+                                        backgroundColor: "rgba(233, 220, 255, 0.95)",
+                                        backdropFilter: "blur(4px)",
+                                      }}
+                                    >
+                                      <div className="d-flex align-items-center mb-3">
+                                        <img
+                                          src={review.avatar}
+                                          alt="avatar"
+                                          className="rounded-circle me-3 border-2 border-light"
+                                          width="60"
+                                          height="60"
+                                        />
+                                        <div>
+                                          <h6 className="mb-0 fw-bold text-dark">
+                                            {review.name}
+                                          </h6>
+                                          <small className="text-dark">
+                                            {review.location}
+                                          </small>
+                                        </div>
                                       </div>
-                                    </div>
-                                    <div className="text-warning mb-2 fs-5">
-                                      {'★'.repeat(review.rating)}
-                                      {'☆'.repeat(5 - review.rating)}
-                                    </div>
-                                    <p className="mb-2 text-dark" style={{ fontSize: '0.9rem' }}>
-                                      {review.description}
-                                    </p>
-                                    {review.occasion && (
-                                      <p className="mb-0 text-dark" style={{ fontSize: '0.85rem' }}>
-                                        <strong>Occasion:</strong> {review.occasion}
+
+                                      <div className="text-warning mb-2 fs-5">
+                                        {"★".repeat(review.rating)}
+                                        {"☆".repeat(5 - review.rating)}
+                                      </div>
+
+                                      <p
+                                        className="mb-2 text-dark"
+                                        style={{ fontSize: "0.9rem" }}
+                                      >
+                                        {review.description}
                                       </p>
-                                    )}
+
+                                      {review.occasion && (
+                                        <p
+                                          className="mb-0 text-dark"
+                                          style={{ fontSize: "0.85rem" }}
+                                        >
+                                          <strong>Occasion:</strong> {review.occasion}
+                                        </p>
+                                      )}
+                                    </div>
                                   </div>
-                                </div>
-                              </Col>
-                            ))}
-                          </Row>
-                        </Carousel.Item>
-                      ))}
-                    </Carousel>
-                  </Container>
-                  <style jsx>{`
-                    .carousel-indicators {
-                    display: none !important;
-                   }
-                  `}</style>
-                </section>
+                                </Col>
+                              ))}
+                            </Row>
+                          </Carousel.Item>
+                        ))}
+                      </Carousel>
+                    </Container>
+                  </section>
+                )}
 
 
 
                 {/* Gallery */}
-                <section className="pb-3 lighter-back">
+                <section className="pb-3 gradient45">
                   <div className="container-md">
                     <div className="section-wraper row d-flex align-items-center">
                       <div className="col-md-12 section-header mb-0 mt-3">
@@ -2482,10 +2830,13 @@ function Home() {
       `}</style>
                 </section> */}
 
+
+
                 {/* FAQS */}
-                <section className="pb-3 pb-3 bg-white">
+                <section className="pb-3 bg-white">
                   <div className="container">
                     <div className="section-wraper row d-flex align-items-center">
+
                       <div className="row justify-content-center">
                         <div className="col-xl-6 col-lg-8">
                           <div className="section-title text-center mb-5 pt-3">
@@ -2495,38 +2846,54 @@ function Home() {
                           </div>
                         </div>
                       </div>
+
                       <div className="row justify-content-center">
                         <div className="col-md-8">
+
                           <Accordion defaultActiveKey="0">
-                            {Faqs?.map((data, i) => {
-                              return (
-                                <Accordion.Item
-                                  className="mt-3"
-                                  eventKey={i.toString()}
-                                  key={i}
-                                  style={{ background: "white" }}
-                                >
-                                  <Accordion.Header>
-                                    <b>
-                                      {i + 1}.{data.question}
-                                    </b>
-                                  </Accordion.Header>
-                                  <Accordion.Body>{data.answer}</Accordion.Body>
-                                </Accordion.Item>
-                              );
-                            })}
+                            {(showAllFaqs ? Faqs : Faqs?.slice(0, 4))?.map((data, i) => (
+                              <Accordion.Item
+                                className="mt-3"
+                                eventKey={i.toString()}
+                                key={i}
+                                style={{ background: "white" }}
+                              >
+                                <Accordion.Header>
+                                  <b>
+                                    {i + 1}. {data.question}
+                                  </b>
+                                </Accordion.Header>
+
+                                <Accordion.Body>
+                                  {data.answer}
+                                </Accordion.Body>
+                              </Accordion.Item>
+                            ))}
                           </Accordion>
+
+                          {/* View More Button */}
+                          {Faqs?.length > 4 && (
+                            <div className="text-center mt-4">
+                              <button
+                                className="btn btn-outline-dark fw-semibold"
+                                onClick={() => setShowAllFaqs(!showAllFaqs)}
+                              >
+                                {showAllFaqs ? "View Less" : "View More"}
+                              </button>
+                            </div>
+                          )}
+
                         </div>
 
-                        <div className="col-md-12 text-center mt-3 mb-4">
-                          <a
-                            href="/locations"
-                            className="btn btn-primary fw-bold dark-back"
-                          >
-                            Book Now
+                        {/* <div className="col-md-12 text-center mt-3 mb-4">
+          <a
+            href="/locations"
+            className="btn btn-primary fw-bold dark-back"
+          >
+            Book Now
+          </a>
+        </div> */}
 
-                          </a>
-                        </div>
                       </div>
                     </div>
                   </div>
