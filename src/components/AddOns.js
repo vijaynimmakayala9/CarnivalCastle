@@ -9,44 +9,71 @@ import { URLS } from "../Url";
 import axios from "axios";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
+
 var IDSvar = sessionStorage.getItem("IDSvar")
   ? JSON.parse(sessionStorage.getItem("IDSvar"))
   : [];
 
 const AddOns = () => {
-
-  const [isOpen, setIsOpen] = useState(window.innerWidth > 768); // Open on desktop by default
-
+  const [isOpen, setIsOpen] = useState(window.innerWidth > 768);
   const [isLoading, setIsLoading] = useState(false);
-  
   const [addOns, setAddOns] = useState([]);
   const [IDS, setIDS] = useState([]);
-  const [totalAmountOption, setTotalAmountOption] = useState({
-    amountOption: "partialpayment", // Set this to "partialpayment" by default
-  });
-
-  const addonsprice = IDS.map((data) => data.price);
-  const addonsvalue = addonsprice.reduce((acc, curr) => acc + curr, 0);
-
-
-
-  const [onlines, setOnline] = useState("online");
-  console.log(onlines);
-
-  const [selectedOccasions, setSelectedOccasions] = useState(JSON.parse(sessionStorage.getItem("addonsData")) || []);
-  // JSON.parse(sessionStorage.getItem("adonsJSON")) ||
-  console.log(selectedOccasions);
-
-  // const additionalImagesRef = useRef(null);
-
-
-
+  
+  // GST is always ON
+  const [gstPercentage, setGstPercentage] = useState(18);
+  
+  // Payment states - sirf advance payment, hamesha online
+  const [advanceAmount, setAdvanceAmount] = useState(0);
+  
+  const [selectedOccasions, setSelectedOccasions] = useState(
+    JSON.parse(sessionStorage.getItem("addonsData")) || []
+  );
+  
   const navigate = useNavigate();
 
-  useEffect(() => {
+  // Get all stored values
+  const theaterPrice = parseFloat(sessionStorage.getItem("theaterPrice")) || 0;
+  const cakePrice = parseFloat(sessionStorage.getItem("cakeprice")) || 0;
+  const occasionPrice = parseFloat(sessionStorage.getItem("occprice")) || 0;
+  const couponDiscount = parseFloat(sessionStorage.getItem("couponAmount")) || 0;
   
+  // Calculate addons total
+  const addonsTotal = selectedOccasions.reduce(
+    (total, item) => total + item.price,
+    0
+  );
+  
+  // Base subtotal (before any discounts)
+  const baseSubtotal = theaterPrice + cakePrice + occasionPrice + addonsTotal;
+  
+  // Apply coupon discount first
+  const subtotalAfterCoupon = baseSubtotal - couponDiscount;
+  
+  // GST calculation on subtotal after coupon
+  const gstAmount = (subtotalAfterCoupon * gstPercentage) / 100;
+  
+  // CGST and SGST (half each)
+  const cgstAmount = gstAmount / 2;
+  const sgstAmount = gstAmount / 2;
+  
+  // Final total with GST
+  const finalTotal = subtotalAfterCoupon + gstAmount;
+  
+  // Display total
+  const displayTotal = finalTotal;
+  
+  // Sirf advance payment - remaining amount hamesha calculate hoga
+  const remainingAmount = displayTotal - advanceAmount;
+
+  useEffect(() => {
+    // Set payment type to online hamesha
+    sessionStorage.setItem("payType", "online");
+    
     GetTheatersData();
     GetAddOns();
+    getGstPercentage();
+    
     axios
       .post(
         "https://api.carnivalcastle.com/v1/carnivalApi/web/bookings/getallbookings",
@@ -55,18 +82,14 @@ const AddOns = () => {
       .then((res) => {
         console.log(res);
         setIDS(res?.data?.booking?.addons || []);
-
+        
         const sum = res?.data?.booking?.addons?.reduce(
           (total, obj) => total + Number(obj.price),
           0
         );
-
-        // sessionStorage.setItem("addons", sum);
-        sessionStorage.setItem("paymentkey", "partialpayment");     // updated
-        //console.log(IDSvar, "IDS load124578");
+        
+        sessionStorage.setItem("paymentkey", "partialpayment");
       });
-    //  sessionStorage.getItem("IDSvar")?JSON.parse(sessionStorage.getItem("IDSvar")):[];
-    // console.log(IDSvar, "IDS load");
   }, []);
 
   const GetTheatersData = () => {
@@ -77,13 +100,30 @@ const AddOns = () => {
     });
   };
 
+  const getGstPercentage = async () => {
+    try {
+      const res = await axios.post(URLS.GetCharges, {});
+      if (res.status === 200) {
+        console.log(res.data.charges, "response");
+        setGstPercentage(Number(res.data.charges.bookingGst) || 18);
+        setAdvanceAmount(Number(res.data.charges.advancePayment));
+        sessionStorage.setItem(
+          "advancePayment",
+          res.data.charges.advancePayment
+        );
+        sessionStorage.setItem("gstPercentage", res.data.charges.bookingGst || 18);
+      }
+    } catch (error) {
+      console.error("Error fetching GST:", error);
+    }
+  };
+
   useEffect(() => {
     const handleResize = () => {
-      setIsOpen(window.innerWidth > 768); // 768 mobile siz
+      setIsOpen(window.innerWidth > 768);
     };
 
     window.addEventListener("resize", handleResize);
-
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -109,91 +149,21 @@ const AddOns = () => {
       );
   };
 
-  const [advanceAmount, setAdvanceAmount] = useState(0);
-  console.log(advanceAmount);
-  useEffect(() => {
-    getOneGst();
-  }, []);
-
-  const getOneGst = async () => {
-    try {
-      const res = await axios.post(URLS.GetCharges, {});
-      if (res.status === 200) {
-        console.log(res.data.charges.advancePayment,"response");
-        // setGst(Number(res.data.charges.bookingGst));
-        setAdvanceAmount(Number(res.data.charges.advancePayment));
-         sessionStorage.setItem('advancePayment',res.data.charges.advancePayment);
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        // setGst(0);
-      }
-    }
-  }; 
-
-  const handleCashOptionClick = (e) => {
-    setOnline(e.target.value);
-    //toast("Payment received via cash.")
-    //history.push("/PendingBookings")
-  };
-
-  // const [totalAmountOption, setTotalAmountOption] = useState("fullpayment");
-
-
-  const [totalAmountOption1, setTotalAmountOption1] = useState("");
-
-  // const slecthandleChange = (e) => {
-  //   const myChange = { ...totalAmountOption };
-  //   myChange[e.target.name] = e.target.value;
-  //   sessionStorage.setItem("paymentkey", e.target.value);
-  //   setTotalAmountOption(myChange);
-  //   if (e.target.value == "partialpayment") {
-  //     const advanceamountkey =
-  //       parseFloat(sessionStorage.getItem("TotalPrice")) -
-  //       parseFloat(advanceAmount);
-  //     setTotalAmountOption1(advanceamountkey);
-  //     // sessionStorage.setItem("TotalPrice2", advanceamountkey);
-  //     sessionStorage.setItem("advancePayment", parseFloat(advanceAmount));
-  //   } else {
-  //     const advanceamountkey = parseFloat(sessionStorage.getItem("TotalPrice"));
-  //     setTotalAmountOption1(advanceamountkey);
-  //     // sessionStorage.setItem("TotalPrice2", advanceamountkey);
-  //   }
-  // };
-
-  // Conditional total amount calculation
-  const remainingAmount =
-    totalAmountOption === "fullpayment"
-      ? 0
-      : sessionStorage.getItem("TotalPrice") - advanceAmount;
-
-  const totalAmount = Number(sessionStorage.getItem("TotalPrice"));
-  const remainingAmountFixed = remainingAmount.toFixed(2);
-  const totalAmountFixed = totalAmount.toFixed(2);
-  const displayedAdvanceAmount =
-    totalAmountOption === "fullpayment" ? 0 : advanceAmount;
-
   const handleImageClick = (occasion) => {
     console.log(occasion.price);
-    var addons = sessionStorage.getItem("addons");
     var TotalPrice = sessionStorage.getItem("TotalPrice");
-
-    // totalAmountOption !== "fullpayment"
-    //   ? remainingAmountFixed
-    //   : totalAmountFixed;
-
     var subtotal = sessionStorage.getItem("subtotal");
 
     setSelectedOccasions((prevSelected) => {
+      const isSelected = prevSelected.some(
+        (soccasion) => occasion._id === soccasion._id
+      );
 
-      const isSelected = prevSelected.some(soccasion=>occasion._id===soccasion._id);
-
-      console.log(isSelected,"isSelectednoone");
-      console.log(occasion,"occasion");
-      console.log(prevSelected,"prevSelected");
+      console.log(isSelected, "isSelectednoone");
+      console.log(occasion, "occasion");
+      console.log(prevSelected, "prevSelected");
 
       if (isSelected) {
-        // sessionStorage.setItem("addons", parseFloat(addons) - occasion.price);
         TotalPrice = parseFloat(TotalPrice) - occasion.price;
         subtotal = parseFloat(subtotal) - occasion.price;
         var CouponData = JSON.parse(sessionStorage.getItem("CouponData"));
@@ -205,12 +175,10 @@ const AddOns = () => {
             TotalPrice = subtotal - discount;
           }
         }
-        // sessionStorage.setItem("TotalPrice", TotalPrice);
-        // sessionStorage.setItem("subtotal", subtotal);
-        console.log(isSelected);
-        return prevSelected.filter(soccasion=>occasion._id!==soccasion._id);
+        return prevSelected.filter(
+          (soccasion) => occasion._id !== soccasion._id
+        );
       } else {
-        // sessionStorage.setItem("addons", occasion.price + parseFloat(addons));
         TotalPrice = parseFloat(TotalPrice) + occasion.price;
         subtotal = parseFloat(subtotal) + occasion.price;
         var CouponData = JSON.parse(sessionStorage.getItem("CouponData"));
@@ -223,8 +191,6 @@ const AddOns = () => {
           }
         }
         sessionStorage.setItem("subtotal", subtotal);
-      
-        // sessionStorage.setItem("TotalPrice", parseFloat(TotalPrice));
         return [...prevSelected, occasion];
       }
     });
@@ -235,40 +201,25 @@ const AddOns = () => {
       );
 
       if (index !== -1) {
-        // Create a new array without the matched object
         const newIDS = [...IDS.slice(0, index), ...IDS.slice(index + 1)];
-        setIDS(newIDS); // Update state
+        setIDS(newIDS);
       } else {
-        // If not found, push a new object with occasion._id into the existing array
         setIDS([
           ...IDS,
           { id: occasion._id, price: occasion.price, name: occasion.name },
         ]);
       }
     } else {
-      // If IDS is empty, push an object with occasion._id into the array
       setIDS([
         { id: occasion._id, price: occasion.price, name: occasion.name },
       ]);
     }
-
-    console.log(selectedOccasions, "selectedOccasions");
-
-    // sessionStorage.setItem("adonsJSON", JSON.stringify(selectedOccasions));
-    // sessionStorage.setItem("adonsJSON", JSON.stringify([...selectedOccasions, occasion]));
-
-    // setTimeout(() => {
-    //   additionalImagesRef?.current?.scrollIntoView({
-    //     behavior: "smooth",
-    //     block: "start",
-    //   });
-    // }, 200);
   };
 
-  const totalPrice = selectedOccasions.reduce((total, item) => total + item.price, 0);
-
-
+  // HANDLE SUBMIT WITH GST FIELDS ONLY - HAMESHA ONLINE
   const handleSubmit = () => {
+    // No validation needed for payment method - hamesha online
+
     const productMap = selectedOccasions.map((e, i) => {
       return {
         _id: e._id,
@@ -278,13 +229,49 @@ const AddOns = () => {
         quantity: 1,
       };
     });
+
+    // BODY DATA WITH GST FIELDS ONLY - HAMESHA ONLINE
     const bodyData = {
+      // Products and booking info
       products: productMap,
-      // products: JSON.stringify(productMap),
       addons: JSON.stringify(IDS),
-      subTotal: sessionStorage.getItem("subtotal"),
       bookingId: sessionStorage.getItem("bookingid"),
+      
+      // Subtotal after coupon (before GST)
+      subTotal: subtotalAfterCoupon.toFixed(2),
+      
+      // GST FIELDS - SENDING CGST AND SGST
+      gstPercentage: gstPercentage,
+      gstAmount: gstAmount.toFixed(2),
+      cgstAmount: cgstAmount.toFixed(2),
+      sgstAmount: sgstAmount.toFixed(2),
+      
+      // Total price (with GST)
+      totalPrice: displayTotal.toFixed(2),
+      
+      // Coupon discount
+      couponAmount: couponDiscount,
+      
+      // Payment info - HAMESHA ONLINE
+      paymentType: "online", // Fixed to online
+      paymentOption: "partialpayment", // Fixed to partialpayment
+      advanceAmount: advanceAmount,
+      remainingAmount: remainingAmount.toFixed(2),
+      
+      // Theatre info
+      theatrePrice: theaterPrice,
+      extraAddedPersonsForTheatre: sessionStorage.getItem("countPeople"),
+      
+      // Other fields
+      cashType: "online", // Fixed to online
+      create_type: "web",
+      
+      // Extra info
+      baseSubtotal: baseSubtotal.toFixed(2),
     };
+
+    console.log("Submitting data to updateaddons:", bodyData);
+
     axios
       .post(
         "https://api.carnivalcastle.com/v1/carnivalApi/web/booking/new/updateaddons",
@@ -292,8 +279,22 @@ const AddOns = () => {
       )
       .then(
         (res) => {
-          console.log(res.status,"res.status");
+          console.log(res.status, "res.status");
           if (res.status === 200) {
+            // Save all settings to sessionStorage
+            sessionStorage.setItem("addonsData", JSON.stringify(selectedOccasions));
+            sessionStorage.setItem("addons", addonsTotal);
+            
+            // Save GST calculation results to sessionStorage
+            sessionStorage.setItem("baseSubtotal", baseSubtotal.toFixed(2));
+            sessionStorage.setItem("subtotalAfterCoupon", subtotalAfterCoupon.toFixed(2));
+            sessionStorage.setItem("gstPercentage", gstPercentage);
+            sessionStorage.setItem("gstAmount", gstAmount.toFixed(2));
+            sessionStorage.setItem("cgstAmount", cgstAmount.toFixed(2));
+            sessionStorage.setItem("sgstAmount", sgstAmount.toFixed(2));
+            sessionStorage.setItem("finalAmount", displayTotal.toFixed(2));
+            
+            toast.success("Addons updated successfully!");
             navigate("/BookingSummary");
           } else if (res.status === 403) {
             toast.error(
@@ -305,36 +306,27 @@ const AddOns = () => {
         (error) => {
           if (error.response && error.response.status === 400) {
             console.log(error.response);
-            toast.error(error.response.message)
+            toast.error(error.response.data?.message || "Error updating addons");
           } else if (error.response && error.response.status === 406) {
-           
-            toast.error(error.response.message);
-            setTimeout(()=>{
+            toast.error(error.response.data?.message || "Payment required");
+            setTimeout(() => {
               navigate("/locations");
-            }, 2000)
+            }, 2000);
+          } else {
+            toast.error("Something went wrong. Please try again.");
           }
         }
       );
-    sessionStorage.setItem("addonsData", JSON.stringify(selectedOccasions) || []);
-    sessionStorage.setItem("addons", totalPrice)
   };
 
   const navigateCakes = useNavigate();
   const handleClick = () => {
     navigateCakes("/CakesComponent");
-    // window.location.reload();
   };
 
-  const cakecartdata = JSON.parse(sessionStorage.getItem("cartCakes"));
+  const cakecartdata = JSON.parse(sessionStorage.getItem("cartCakes")) || [];
   const cakepricedata = cakecartdata.map((data) => data.price);
   const cakevalue = cakepricedata.reduce((acc, curr) => acc + curr, 0);
-
-  const advanceAmount1 =
-  totalAmountOption.amountOption === "partialpayment"
-    ? displayedAdvanceAmount
-    : 0;
-const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
-
 
   return (
     <>
@@ -363,14 +355,14 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
         <div className="home-page indexsix">
           <Header />
           <main className="main-wrapper">
-            {/* <section
+            <section
               id="parallax"
               className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix "
             >
               <div className="container"></div>
-            </section> */}
+            </section>
             <section
-              className="shop-area pt-3 pb-5 p-relative lightest-back"
+              className="shop-area pt-5 pb-5 p-relative lightest-back"
               style={{ background: "white" }}
             >
               <div className="container-fluid px-4">
@@ -383,13 +375,12 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                 </button>
                 <div className="container-fluid mt-4">
                   <div className="row mb-4">
-                    {/* Occasions */}
-                    {/* <div className="col-md-8 shadow-lg"> */}
+                    {/* Addons Products */}
                     <div className="col-md-8 lighter-back rounded shadow-sm">
                       {addOns.map((data, key) => (
                         <div key={key}>
                           <div className="row">
-                            <h4 className="mt-1 text-center fw-bold dark-text">{data.name}</h4>
+                            <h4 className="mt-1">{data.name}</h4>
                             <div className="d-flex flex-wrap">
                               {data?.products.map((ele, ind) => (
                                 <div
@@ -399,7 +390,6 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                                   style={{
                                     cursor: "pointer",
                                     borderRadius: "0.5rem",
-                                
                                     display: "flex",
                                     padding: "3px",
                                     boxSizing: "border-box",
@@ -409,7 +399,7 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                                     className="d-flex flex-column justify-content-between align-items-center w-100"
                                     style={{
                                       padding: "10px",
-                                      border:"2px solid #C69FF4",
+                                      border: "2px solid #C69FF4",
                                       borderRadius: "10px",
                                       background: selectedOccasions?.some(
                                         (addIds) =>
@@ -429,11 +419,10 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                                       <img
                                         src={URLS.Base + ele.image}
                                         alt="occasions images"
-                                        // className="rounded-circle img-fluid"
-                                          className="img-fluid rounded-2"
+                                        className="img-fluid rounded-pill"
                                         style={{
                                           height: "150px",
-                                          width: "200px",
+                                          width: "150px",
                                           objectFit: "cover",
                                         }}
                                       />
@@ -461,57 +450,95 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                           </div>
                         </div>
                       ))}
-                       <div className="alert light-back mt-3">
-                      <i className="fa fa-exclamation-triangle me-2" style={{ color: 'white' }}></i>
-                           <span style={{ color: 'white' }}><b>Note:</b>The timing of the photography sessions is subject to the availability of our photographers. We strive to accommodate your preferred schedule and appreciate your understanding and flexibility. For specific booking inquiries, please contact us directly.</span>
+                      <div className="alert light-back mt-3">
+                        <i className="fa fa-exclamation-triangle me-2" style={{ color: 'white' }}></i>
+                        <span style={{ color: 'white' }}>
+                          <b>Note:</b> The timing of the photography sessions is subject to the availability of our photographers. We strive to accommodate your preferred schedule and appreciate your understanding and flexibility. For specific booking inquiries, please contact us directly.
+                        </span>
                       </div>
                     </div>
 
                     {/* Booking Summary */}
                     <div className="col-lg-4 col-md-4">
                       <div className="position-sticky" style={{ top: "20px" }}>
+                        {/* Total Display */}
                         <div className="lighter-back rounded shadow-sm mb-3">
                           <div className="card-body mt-3">
                             <div className="d-flex justify-content-between align-items-center shadow-none p-3 mb-2 rounded">
-                              <div>Total:</div>
-                              <div>₹
-
-                              {parseFloat(sessionStorage.getItem("theaterPrice") || 0) + parseFloat(sessionStorage.getItem("cakeprice") || 0) + parseFloat(sessionStorage.getItem("occprice") || 0) + (parseFloat(totalPrice || 0)) - parseFloat(sessionStorage.getItem("couponAmount") || 0)}
-
-                              {/* {(parseFloat(sessionStorage.getItem("theaterPrice")) + parseFloat(sessionStorage.getItem("cakeprice")) + parseFloat(totalPrice)).toFixed(2)} */}
-                                </div>
+                              <div>Total (incl. GST):</div>
+                              <div style={{ fontSize: "20px", fontWeight: "bold", color: "#300843" }}>
+                                ₹ {displayTotal.toFixed(2)}
+                              </div>
+                            </div>
+                            <div className="small text-muted text-end">
+                              ({gstPercentage}% GST included)
                             </div>
                           </div>
                         </div>
 
+                        {/* GST Display with CGST/SGST breakdown */}
+                        <div className="lighter-back rounded shadow-sm mb-3 p-3">
+                          <div>
+                            <span style={{ fontWeight: "bold" }}>GST ({gstPercentage}%)</span>
+                            <div className="small text-muted">
+                              CGST: ₹{cgstAmount.toFixed(2)} | SGST: ₹{sgstAmount.toFixed(2)}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Advance Payment Display */}
+                        <div className="lighter-back rounded shadow-sm mb-3 p-3">
+                          <div className="d-flex justify-content-between align-items-center">
+                            <div>
+                              <span style={{ fontWeight: "bold" }}>Advance Payment (Online)</span>
+                              <div className="small text-muted">
+                                Pay now to confirm booking
+                              </div>
+                            </div>
+                            <div style={{ fontSize: "18px", fontWeight: "bold", color: "#300843" }}>
+                              ₹{advanceAmount}
+                            </div>
+                          </div>
+                          <div className="mt-2 text-muted small">
+                            Remaining: ₹{remainingAmount.toFixed(2)} (pay at venue)
+                          </div>
+                        </div>
+
+                        {/* Payment Method Badge - Sirf online dikhega */}
+                        <div className="lighter-back rounded shadow-sm mb-3 p-3">
+                          <div className="d-flex align-items-center">
+                            <i className="bi bi-credit-card me-2" style={{ fontSize: "1.2rem" }}></i>
+                            <span>Payment Method: <strong>Online Payment</strong></span>
+                          </div>
+                        </div>
+
+                        {/* Summary Details Accordion */}
                         <div className="shadow-lg">
                           <div className="card-body">
                             <div className="accordion" id="accordionExample">
                               <div className="accordion-item">
-                                <h2
-                                  className="accordion-header"
-                                  id="headingOne"
-                                >
+                                <h2 className="accordion-header" id="headingOne">
                                   <button
                                     className="accordion-button"
                                     type="button"
                                     data-bs-toggle="collapse"
                                     data-bs-target="#collapseOne"
-                                    aria-expanded={isOpen ? "true" : "false"} // Controlled by state
-                                      aria-controls="collapseOne"
-                                      onClick={() => setIsOpen(!isOpen)} // Toggle state on click
+                                    aria-expanded={isOpen ? "true" : "false"}
+                                    aria-controls="collapseOne"
+                                    onClick={() => setIsOpen(!isOpen)}
                                   >
                                     Summary Details
                                   </button>
                                 </h2>
                                 <div
                                   id="collapseOne"
-                                  className={`accordion-collapse collapse ${isOpen ? "show" : ""}`} // Conditional class for open state
+                                  className={`accordion-collapse collapse ${isOpen ? "show" : ""}`}
                                   aria-labelledby="headingOne"
                                   data-bs-parent="#accordionExample"
                                 >
                                   <div className="accordion-body">
                                     <div>
+                                      {/* Theatre Price */}
                                       <div
                                         style={{
                                           display: "flex",
@@ -520,15 +547,13 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                                       >
                                         <div>
                                           Theatre Price (
-                                          {sessionStorage.getItem("countPeople")}{" "}
-                                          ppl)
+                                          {sessionStorage.getItem("countPeople")} ppl)
                                         </div>
-                                        <div>
-                                          ₹
-                                          {sessionStorage.getItem("theaterPrice")}
-                                        </div>
+                                        <div>₹{theaterPrice}</div>
                                       </div>
                                       <hr />
+                                      
+                                      {/* Addons */}
                                       <div
                                         style={{
                                           display: "flex",
@@ -552,18 +577,22 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                                         </div>
                                       ))}
 
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          justifyContent: "flex-end",
-                                          marginTop: "8px",
-                                        }}
-                                      >
-                                        ₹ {totalPrice || 0}
-                                        {/* ₹ {addonsvalue || 0} */}
-                                      </div>
+                                      {selectedOccasions.length > 0 && (
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            justifyContent: "flex-end",
+                                            marginTop: "8px",
+                                            fontWeight: "bold",
+                                          }}
+                                        >
+                                          ₹ {addonsTotal}
+                                        </div>
+                                      )}
 
                                       <hr />
+                                      
+                                      {/* Occasion */}
                                       <div
                                         style={{
                                           display: "flex",
@@ -572,163 +601,137 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                                       >
                                         <div>
                                           Occasions (
-                                          {sessionStorage.getItem("occasionName")}
-                                          )
+                                          {sessionStorage.getItem("occasionName")})
                                         </div>
-                                        <div>
-                                          ₹{sessionStorage.getItem("occprice")}
-                                        </div>
+                                        <div>₹{occasionPrice}</div>
                                       </div>
                                       <hr />
+                                      
+                                      {/* Cake */}
                                       <div
                                         style={{
                                           display: "flex",
                                           justifyContent: "space-between",
                                         }}
                                       >
-                                        <div> Cake</div>
-                                        <div>₹ {sessionStorage.getItem(
-                                              "cakeprice"
-                                            ) || 0}</div>
-                                        {/* <div>₹{cakevalue}</div> */}
+                                        <div>Cake</div>
+                                        <div>₹{cakePrice}</div>
                                       </div>
                                       <hr />
+                                      
+                                      {/* Base Subtotal */}
                                       <div
                                         style={{
                                           display: "flex",
                                           justifyContent: "space-between",
                                         }}
                                       >
-                                        <div>Sub Total</div>
-                                        <div>
-                                          ₹ {parseFloat(sessionStorage.getItem("theaterPrice") || 0) + parseFloat(sessionStorage.getItem("cakeprice") || 0) + parseFloat(sessionStorage.getItem("occprice") || 0) + (parseFloat(totalPrice || 0))}
-
-                                          {/* {parseFloat(sessionStorage.getItem("TotalPrice")) + parseFloat(sessionStorage.getItem("cakeprice")) + parseFloat(totalPrice) + parseFloat(sessionStorage.getItem("couponAmount"))} */}
-                                        </div>
+                                        <div>Base Subtotal</div>
+                                        <div>₹{baseSubtotal.toFixed(2)}</div>
                                       </div>
-                                      <hr />
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          justifyContent: "space-between",
-                                        }}
-                                      >
-                                        <div>Coupon Amount</div>
-                                        <div>
-                                          ₹
-                                          {parseFloat(
-                                            sessionStorage.getItem("coupondis")
-                                          ).toFixed(2)}
-                                        </div>
-                                      </div>
-                                      <hr />
-
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          justifyContent: "space-between",
-                                        }}
-                                      >
-                                        <div>Total Amount</div>
-                                        <div>
-                                          ₹ {parseFloat(sessionStorage.getItem("theaterPrice") || 0) + parseFloat(sessionStorage.getItem("cakeprice") || 0) + parseFloat(sessionStorage.getItem("occprice") || 0) + (parseFloat(totalPrice) || 0) - parseFloat(sessionStorage.getItem("couponAmount") || 0)}
-
-                                        </div>
-                                        {/* {totalAmountOption.amountOption ===
-                                        "partialpayment" ? (
-                                          <div>
-                                             ₹{parseFloat(sessionStorage.getItem("TotalPrice")) + parseFloat(sessionStorage.getItem("cakeprice")) + parseFloat(totalPrice)}/-
-                                       
+                                      
+                                      {/* Coupon Discount */}
+                                      {couponDiscount > 0 && (
+                                        <>
+                                          <hr />
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              justifyContent: "space-between",
+                                              color: "#28a745",
+                                            }}
+                                          >
+                                            <div>Coupon Discount</div>
+                                            <div>- ₹{couponDiscount.toFixed(2)}</div>
                                           </div>
-                                        ) : (
-                                          parseFloat(sessionStorage.getItem("TotalPrice"))  + parseFloat(sessionStorage.getItem("cakeprice")) + parseFloat(totalPrice)
-                                        )} */}
-                                      </div>
-                                      <hr />
-
-                                      {/* <div className="row mb-3">
-                                        <div className="col">
-                                          <div className="form-check mt-2">
-                                            <input
-                                              className="form-check-input"
-                                              type="radio"
-                                              name="amountOption"
-                                              id="partialpaymentOption"
-                                              value="partialpayment"
-                                              checked={
-                                                totalAmountOption.amountOption ===
-                                                "partialpayment"
-                                              }
-                                              onChange={(e) =>
-                                                slecthandleChange(e)
-                                              }
-                                             />
-                                            <label
-                                              className="form-check-label"
-                                              htmlFor="partialpaymentOption"
-                                            >
-                                              <small>Advance Amount</small>
-                                            </label>
-                                          </div>
-                                        </div>
-                                        <div className="col pt-0">
-                                          <div className="form-check mt-2">
-                                            <input
-                                              className="form-check-input"
-                                              type="radio"
-                                              name="amountOption"
-                                              id="fullpaymentOption"
-                                              value="fullpayment"
-                                              checked={
-                                                totalAmountOption.amountOption ===
-                                                "fullpayment"
-                                              }
-                                              onChange={(e) =>
-                                                slecthandleChange(e)
-                                              }
-                                            />
-                                            <label
-                                              className="form-check-label"
-                                              htmlFor="fullpaymentOption"
-                                            >
-                                              <small>Full Amount</small>
-                                            </label>
-                                          </div>
-                                        </div>                                      
-                                      </div> */}
-
-                                      {totalAmountOption.amountOption ===
-                                        "partialpayment" && (
-                                        <div
-                                          style={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                          }}
-                                        >
-                                          <div>Advance Amount</div>
-                                          <div>
-                                            ₹{displayedAdvanceAmount}/-
-                                          </div>
-                                        </div>
+                                        </>
                                       )}
-
-                                    </div>
-                                    <hr />
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                      }}
-                                    >
-                                      <div>Remaining Amount</div>
-                                      ₹ {parseFloat(sessionStorage.getItem("theaterPrice") || 0) + parseFloat(sessionStorage.getItem("cakeprice") || 0) + parseFloat(sessionStorage.getItem("occprice")|| 0) + (parseFloat(totalPrice) || 0) - (parseFloat(sessionStorage.getItem("couponAmount") || 0) +  parseFloat(displayedAdvanceAmount || 0))}
-
-                                      {/* {totalAmountOption.amountOption ===
-                                      "partialpayment" ? (
-                                        <div>₹{remainingAmount1}/-</div>
-                                      ) : (
-                                        <div>₹{totalPrice1}/-</div>
-                                      )} */}
+                                      
+                                      <hr />
+                                      
+                                      {/* Subtotal after coupon */}
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "space-between",
+                                          fontWeight: "bold",
+                                          backgroundColor: "#e8f5e9",
+                                          padding: "5px",
+                                          borderRadius: "4px"
+                                        }}
+                                      >
+                                        <div>Subtotal after coupon</div>
+                                        <div>₹{subtotalAfterCoupon.toFixed(2)}</div>
+                                      </div>
+                                      
+                                      {/* GST Breakdown */}
+                                      <hr />
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "space-between",
+                                          color: "#6c757d",
+                                        }}
+                                      >
+                                        <div>CGST (9%)</div>
+                                        <div>+ ₹{cgstAmount.toFixed(2)}</div>
+                                      </div>
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "space-between",
+                                          color: "#6c757d",
+                                        }}
+                                      >
+                                        <div>SGST (9%)</div>
+                                        <div>+ ₹{sgstAmount.toFixed(2)}</div>
+                                      </div>
+                                      
+                                      <hr />
+                                      
+                                      {/* Final Total */}
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "space-between",
+                                          fontSize: "18px",
+                                          fontWeight: "bold",
+                                          color: "#300843",
+                                          backgroundColor: "#f8f9fa",
+                                          padding: "12px",
+                                          borderRadius: "5px",
+                                          marginTop: "10px",
+                                          border: "2px solid #C69FF4"
+                                        }}
+                                      >
+                                        <div>Final Total (incl. GST)</div>
+                                        <div>₹{displayTotal.toFixed(2)}</div>
+                                      </div>
+                                      
+                                      <hr />
+                                      
+                                      {/* Advance & Remaining */}
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "space-between",
+                                          color: "#007bff",
+                                        }}
+                                      >
+                                        <div>Advance Payment (Now - Online)</div>
+                                        <div>₹{advanceAmount}</div>
+                                      </div>
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "space-between",
+                                          color: "#6c757d",
+                                          marginTop: "5px",
+                                        }}
+                                      >
+                                        <div>Remaining (At Venue)</div>
+                                        <div>₹{remainingAmount.toFixed(2)}</div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -736,17 +739,22 @@ const totalPrice1 = parseFloat(sessionStorage.getItem("TotalPrice")) || 0;
                             </div>
                           </div>
                         </div>
+                        
+                        {/* Proceed Button */}
                         <button
                           type="submit"
                           onClick={handleSubmit}
-                          className="btn  dark-back text-white w-100 mt-2 "
+                          className="btn dark-back text-white w-100 mt-2"
                           style={{
                             boxShadow: "none",
                             color: "black",
                             border: "none",
+                            padding: "12px",
+                            fontSize: "16px",
+                            fontWeight: "bold",
                           }}
                         >
-                          Proceed
+                          Pay Advance ₹{advanceAmount} Online & Proceed
                         </button>
                       </div>
                     </div>
