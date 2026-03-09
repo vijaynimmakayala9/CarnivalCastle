@@ -111,7 +111,7 @@ function Header() {
                   </a>*/}
                   {/* Rewards Button */}
                   <a
-                    href="/rewards"
+                    href="/profile"
                     className="d-flex align-items-center justify-content-center mt-2 text-decoration-none"
                     style={{
                       border: "2px solid #681DC0",
