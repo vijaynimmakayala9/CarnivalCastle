@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 
 const C = {
     bg: "#F1E9FE", card: "#FFFAFB", border: "#E9DCFF",
@@ -228,6 +229,8 @@ function Card({ p, mobRole }) {
     const grad = `linear-gradient(135deg,${p.g[0]},${p.g[1]})`;
     const isM = mobRole != null;
 
+    const navigate = useNavigate();
+
     return (
         <div className="cc-card" style={{ "--g": grad }}>
             <div className="cc-stripe" />
@@ -253,7 +256,10 @@ function Card({ p, mobRole }) {
                 <button
                     className={`cc-btn${isM ? (mobRole === "c" ? " active" : " passive") : ""}`}
                     style={{ "--g": grad }}
-                    onClick={e => e.stopPropagation()}
+                    onClick={e => {
+                        e.stopPropagation();
+                        navigate('/locations');
+                    }}
                 >
                     Book This Plan →
                 </button>

@@ -1545,13 +1545,36 @@ function Home() {
 
                       {/* Proceed Button */}
                       <div className="text-center mt-5">
+
+                        {/* Proceed Button */}
                         <button
-                          className="btn px-5 py-2 rounded-3 fw-bold dark-back text-light"
+                          className="btn px-5 py-2 rounded-3 fw-bold dark-back text-light mb-3"
                           style={{ width: "80%", maxWidth: "500px" }}
                           onClick={() => navigateTheater("/locations")}
                         >
                           Proceed to Book <i className="bi bi-arrow-right ms-2"></i>
                         </button>
+
+                        {/* WhatsApp Chat Button */}
+                        <div>
+                          <a
+                            href="https://wa.me/918374777834?text=Hello%2C%20I%20want%20to%20book%20tickets."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn px-5 py-1 rounded-3 fw-bold d-flex align-items-center justify-content-center gap-2"
+                            style={{
+                              width: "80%",
+                              maxWidth: "500px",
+                              background: "#25D366",
+                              color: "#fff",
+                              margin: "0 auto"
+                            }}
+                          >
+                            <i className="bi bi-whatsapp fs-5"></i>
+                            Chat with Us
+                          </a>
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -1623,31 +1646,6 @@ function Home() {
                                 <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
                                   <div className="card-body d-flex flex-column align-items-center">
                                     <img
-                                      src={screening}
-                                      alt="Screening"
-                                      className="rounded-circle mb-3"
-                                      style={{
-                                        height: "100px",
-                                        width: "100px",
-                                        objectFit: "cover",
-                                        border: "2px solid #E9BE5F"
-                                      }}
-                                    />
-                                    <h5 className="card-title light-text">Screening</h5>
-                                    <p className="card-text">Bring your OTT accounts and relive the theatre magic!</p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Slide 3 - Cakes */}
-                          <div className="carousel-item">
-                            <div className="row g-4 justify-content-center">
-                              <div className="col-12 col-md-6">
-                                <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
-                                  <div className="card-body d-flex flex-column align-items-center">
-                                    <img
                                       src={cake4}
                                       alt="Cakes"
                                       className="rounded-circle mb-3"
@@ -1663,6 +1661,31 @@ function Home() {
                                     <a href="/cakes" className="mt-auto light-text">
                                       View more <i className="fas fa-arrow-right"></i>
                                     </a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Slide 3 - Cakes */}
+                          <div className="carousel-item">
+                            <div className="row g-4 justify-content-center">
+                              <div className="col-12 col-md-6">
+                                <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
+                                  <div className="card-body d-flex flex-column align-items-center">
+                                    <img
+                                      src={screening}
+                                      alt="Screening"
+                                      className="rounded-circle mb-3"
+                                      style={{
+                                        height: "100px",
+                                        width: "100px",
+                                        objectFit: "cover",
+                                        border: "2px solid #E9BE5F"
+                                      }}
+                                    />
+                                    <h5 className="card-title light-text">Screening</h5>
+                                    <p className="card-text">Bring your OTT accounts and relive the theatre magic!</p>
                                   </div>
                                 </div>
                               </div>
@@ -1715,7 +1738,7 @@ function Home() {
                       </div>
 
                       {/* Desktop Grid - 4 cards in a row (Visible only on large screens) */}
-                      <div className="row g-4 d-none d-xl-flex">
+                      <div className="row g-4 d-none d-xl-flex gradient45 p-3 rounded-3">
                         {/* Service Card 1 */}
                         <div className="col-12 col-sm-6 col-lg-3">
                           <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
@@ -1745,27 +1768,6 @@ function Home() {
                           <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
                             <div className="card-body d-flex flex-column align-items-center">
                               <img
-                                src={screening}
-                                alt="Screening"
-                                className="rounded-circle mb-3"
-                                style={{
-                                  height: "100px",
-                                  width: "100px",
-                                  objectFit: "cover",
-                                  border: "2px solid #E9BE5F"
-                                }}
-                              />
-                              <h5 className="card-title light-text">Screening</h5>
-                              <p className="card-text">Bring your OTT accounts and relive the theatre magic!</p>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Service Card 3 */}
-                        <div className="col-12 col-sm-6 col-lg-3">
-                          <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
-                            <div className="card-body d-flex flex-column align-items-center">
-                              <img
                                 src={cake4}
                                 alt="Cakes"
                                 className="rounded-circle mb-3"
@@ -1781,6 +1783,27 @@ function Home() {
                               <a href="/cakes" className="mt-auto light-text">
                                 View more <i className="fas fa-arrow-right"></i>
                               </a>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Service Card 3 */}
+                        <div className="col-12 col-sm-6 col-lg-3">
+                          <div className="card h-100 text-center text-dark border-0 rounded-4 shadow-lg p-3 gradient45">
+                            <div className="card-body d-flex flex-column align-items-center">
+                              <img
+                                src={screening}
+                                alt="Screening"
+                                className="rounded-circle mb-3"
+                                style={{
+                                  height: "100px",
+                                  width: "100px",
+                                  objectFit: "cover",
+                                  border: "2px solid #E9BE5F"
+                                }}
+                              />
+                              <h5 className="card-title light-text">Screening</h5>
+                              <p className="card-text">Bring your OTT accounts and relive the theatre magic!</p>
                             </div>
                           </div>
                         </div>
@@ -1807,9 +1830,40 @@ function Home() {
                         </div>
                       </div>
                     </div>
+                    <div className="text-center mt-4">
+                      <a
+                        href="https://wa.me/918374777834?text=Hello%2C%20I%20want%20to%20book%20tickets."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="chat-btn d-inline-flex align-items-center justify-content-center gap-2"
+                      >
+                        <i className="bi bi-whatsapp"></i>
+                        Chat With Us
+                      </a>
+                    </div>
                   </div>
 
                   <style jsx>{`
+
+                  .chat-btn {
+  background: #25D366;
+  color: white;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.chat-btn i {
+  font-size: 18px;
+}
+
+.chat-btn:hover {
+  background: #1ebe5d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
     /* Carousel Styles */
     .carousel-control-prev,
     .carousel-control-next {
@@ -2099,35 +2153,28 @@ function Home() {
                               </ul>
 
                               {/* CTA Button with Premium Style */}
-                              <div className="mt-5">
+                              <div className="mt-5 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 px-3">
+
+                                {/* Book Button */}
                                 <Button
                                   onClick={() => window.location.href = "/locations"}
-                                  className="position-relative overflow-hidden"
-                                  style={{
-                                    background: 'linear-gradient(135deg, #681DC0, #8a4fe3)',
-                                    border: 'none',
-                                    padding: '16px 40px',
-                                    fontSize: '1.1rem',
-                                    fontWeight: '600',
-                                    borderRadius: '50px',
-                                    color: '#fff',
-                                    boxShadow: '0 10px 20px rgba(104,29,192,0.3)',
-                                    transition: 'all 0.3s ease',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '1px'
-                                  }}
-                                  onMouseEnter={(e) => {
-                                    e.target.style.transform = 'translateY(-2px)';
-                                    e.target.style.boxShadow = '0 15px 30px rgba(104,29,192,0.4)';
-                                  }}
-                                  onMouseLeave={(e) => {
-                                    e.target.style.transform = 'translateY(0)';
-                                    e.target.style.boxShadow = '0 10px 20px rgba(104,29,192,0.3)';
-                                  }}
+                                  className="responsive-btn position-relative overflow-hidden"
                                 >
                                   <i className="fas fa-ticket-alt me-2"></i>
                                   Book Your Experience
                                 </Button>
+
+                                {/* WhatsApp Button */}
+                                <a
+                                  href="https://wa.me/918374777834?text=Hello%2C%20I%20want%20to%20book%20tickets."
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="responsive-btn whatsapp-btn text-center text-decoration-none"
+                                >
+                                  <i className="bi bi-whatsapp me-2"></i>
+                                  Chat With Us
+                                </a>
+
                               </div>
                             </div>
                           </Col>
@@ -2255,109 +2302,153 @@ function Home() {
 
                   {/* Premium Responsive Styles */}
                   <style jsx>{`
-  .why-us-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+                      .why-us-section {
+                        min-height: 70vh;
+                        display: flex;
+                        align-items: center;
+                      }
 
-  /* Tablet Styles */
-  @media (max-width: 991px) {
-    .why-us-section {
-      padding: 60px 0;
-    }
+                      /* Tablet Styles */
+                      @media (max-width: 991px) {
+                        .why-us-section {
+                          padding: 60px 0;
+                        }
 
-    .why-us-section .why-us-card {
-      padding: 30px !important;
-    }
+                        .why-us-section .why-us-card {
+                          padding: 30px !important;
+                        }
 
-    .why-us-section .navigation-controls {
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center !important;
-    }
+                        .why-us-section .navigation-controls {
+                          flex-wrap: wrap;
+                          gap: 20px;
+                          justify-content: center !important;
+                        }
 
-    .why-us-section .slide-counter {
-      order: 1;
-    }
+                        .why-us-section .slide-counter {
+                          order: 1;
+                        }
 
-    .why-us-section .d-flex.gap-3 {
-      order: 2;
-    }
+                        .why-us-section .d-flex.gap-3 {
+                          order: 2;
+                        }
 
-    .why-us-section .d-flex.gap-2 {
-      order: 3;
-    }
-  }
+                        .why-us-section .d-flex.gap-2 {
+                          order: 3;
+                        }
+                      }
 
-  /* Mobile Styles */
-  @media (max-width: 576px) {
-    .why-us-section {
-      padding: 40px 0;
-    }
+                      /* Mobile Styles */
+                      @media (max-width: 576px) {
+                        .why-us-section {
+                          padding: 40px 0;
+                        }
 
-    .why-us-section .why-us-card {
-      padding: 20px !important;
-      border-radius: 30px !important;
-    }
+                        .why-us-section .why-us-card {
+                          padding: 20px !important;
+                          border-radius: 30px !important;
+                        }
 
-    .why-us-section .image-wrapper {
-      transform: none !important;
-      box-shadow: 0 15px 30px rgba(104,29,192,0.15) !important;
-    }
+                        .why-us-section .image-wrapper {
+                          transform: none !important;
+                          box-shadow: 0 15px 30px rgba(104,29,192,0.15) !important;
+                        }
 
-    .why-us-section .nav-arrow {
-      width: 45px !important;
-      height: 45px !important;
-      border-radius: 12px !important;
-    }
+                        .why-us-section .nav-arrow {
+                          width: 45px !important;
+                          height: 45px !important;
+                          border-radius: 12px !important;
+                        }
 
-    .why-us-section .slide-indicator {
-      height: 10px !important;
-    }
+                        .why-us-section .slide-indicator {
+                          height: 10px !important;
+                        }
 
-    .why-us-section .slide-indicator[style*="width: 40px"] {
-      width: 30px !important;
-    }
+                        .why-us-section .slide-indicator[style*="width: 40px"] {
+                          width: 30px !important;
+                        }
 
-    .why-us-section .badge {
-      font-size: 0.8rem !important;
-      padding: 6px 16px !important;
-    }
+                        .why-us-section .badge {
+                          font-size: 0.8rem !important;
+                          padding: 6px 16px !important;
+                        }
 
-    .why-us-section button {
-      width: 100%;
-      padding: 14px 20px !important;
-      font-size: 1rem !important;
-    }
-  }
+                        .why-us-section button {
+                          width: 100%;
+                          padding: 14px 20px !important;
+                          font-size: 1rem !important;
+                        }
+                      }
 
-  /* Small Mobile Styles */
-  @media (max-width: 375px) {
-    .why-us-section .why-us-card {
-      padding: 15px !important;
-    }
+                      /* Small Mobile Styles */
+                      @media (max-width: 375px) {
+                        .why-us-section .why-us-card {
+                          padding: 15px !important;
+                        }
 
-    .why-us-section h3 {
-      font-size: 1.3rem !important;
-    }
+                        .why-us-section h3 {
+                          font-size: 1.3rem !important;
+                        }
 
-    .why-us-section .navigation-controls {
-      flex-direction: column;
-    }
-  }
+                        .why-us-section .navigation-controls {
+                          flex-direction: column;
+                        }
+                      }
 
-  /* Hover Effects for Desktop */
-  @media (min-width: 992px) {
-    .why-us-section .image-wrapper:hover {
-      transform: perspective(1000px) rotateY(-4deg) scale(1.02) !important;
-    }
+                      /* Hover Effects for Desktop */
+                      @media (min-width: 992px) {
+                        .why-us-section .image-wrapper:hover {
+                          transform: perspective(1000px) rotateY(-4deg) scale(1.02) !important;
+                        }
 
-    .why-us-section .why-us-card:hover {
-      box-shadow: 0 40px 80px rgba(104,29,192,0.15) !important;
-    }
-  }
-`}</style>
+                        .why-us-section .why-us-card:hover {
+                          box-shadow: 0 40px 80px rgba(104,29,192,0.15) !important;
+                        }
+                      }
+
+                      .responsive-btn {
+                      max-width: 420px;
+                      padding: 16px 28px;
+                      font-size: 1rem;
+                      font-weight: 600;
+                      border-radius: 50px;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      transition: all 0.3s ease;
+                    }
+
+                    /* Book Button */
+                    .responsive-btn.btn {
+                      background: linear-gradient(135deg, #681DC0, #8a4fe3);
+                      border: none;
+                      color: white;
+                      box-shadow: 0 10px 20px rgba(104,29,192,0.3);
+                    }
+
+                    .responsive-btn.btn:hover {
+                      transform: translateY(-2px);
+                      box-shadow: 0 15px 30px rgba(104,29,192,0.4);
+                    }
+
+                    /* WhatsApp Button */
+                    .whatsapp-btn {
+                      background: #25D366;
+                      color: white;
+                      box-shadow: 0 10px 20px rgba(37,211,102,0.35);
+                    }
+
+                    .whatsapp-btn:hover {
+                      transform: translateY(-2px);
+                      box-shadow: 0 15px 30px rgba(37,211,102,0.45);
+                    }
+
+                    /* Mobile */
+                    @media (max-width: 576px) {
+                      .responsive-btn {
+                        font-size: 0.9rem;
+                        padding: 14px 20px;
+                      }
+                    }
+                    `}</style>
                 </section>
 
                 {slides && slides.length > 0 && (
@@ -2517,20 +2608,54 @@ function Home() {
                       </div>
 
                       {/* View All Button - Centered at Bottom */}
-                      <div className="col-md-12 text-center mt-3 mb-4">
+                      <div className="col-md-12 text-center mt-3 mb-4 d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
+
+                        {/* View Gallery Button */}
                         <a
                           href="/gallery"
-                          className="btn btn-primary fw-bold dark-back"
+                          className="btn btn-primary fw-bold dark-back responsive-btn"
                         >
-                          View Gallery<i className="bi bi-arrow-right ms-2"></i>
-
+                          View Gallery <i className="bi bi-arrow-right ms-2"></i>
                         </a>
+
+                        {/* WhatsApp Button */}
+                        <a
+                          href="https://wa.me/918374777834?text=Hello%2C%20I%20want%20to%20book%20tickets."
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn whatsapp-btn fw-bold responsive-btn"
+                        >
+                          <i className="bi bi-whatsapp me-2"></i>
+                          Chat With Us
+                        </a>
+
                       </div>
                     </div>
                   </div>
+                  <style>
+                    {`
+                    .responsive-btn {
+                      padding: 12px 26px;
+                      border-radius: 40px;
+                      font-size: 0.95rem;
+                      letter-spacing: 0.5px;
+                    }
+
+                    .whatsapp-btn {
+                      background: #25D366 !important;
+                      color: #fff;
+                      border: none;
+                    }
+
+                    .whatsapp-btn:hover {
+                      background: #1ebe5d;
+                      color: #fff;
+                    }
+                    `}
+                  </style>
                 </section>
 
-                
+
                 {/* <section className="py-5 bg-light">
                   <div className="container">
                     <div className="text-center mb-5">
@@ -2716,7 +2841,7 @@ function Home() {
                   </div>
                 </section> */}
 
-                <HomePackagesSection navigateTheater={navigate}/>
+                <HomePackagesSection navigateTheater={navigate} />
 
 
 
@@ -2894,15 +3019,30 @@ function Home() {
                             ))}
                           </Accordion>
 
-                          {/* View More Button */}
                           {Faqs?.length > 4 && (
                             <div className="text-center mt-4">
+
+                              {/* View More Button */}
                               <button
-                                className="btn btn-outline-dark fw-semibold"
+                                className="btn btn-outline-dark fw-semibold mb-3"
                                 onClick={() => setShowAllFaqs(!showAllFaqs)}
                               >
                                 {showAllFaqs ? "View Less" : "View More"}
                               </button>
+
+                              {/* WhatsApp Button */}
+                              <div>
+                                <a
+                                  href="https://wa.me/918374777834?text=Hello%2C%20I%20want%20to%20book%20tickets."
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="btn fw-bold whatsapp-btn responsive-btn"
+                                >
+                                  <i className="bi bi-whatsapp me-2"></i>
+                                  Chat With Us
+                                </a>
+                              </div>
+
                             </div>
                           )}
 

@@ -222,8 +222,8 @@ function HpCard({ p, mobRole, onBook }) {
   const [exp, setExp] = useState(false);
   const feats = Object.entries(p.f);
   const shown = exp ? feats : feats.slice(0, HP_PREVIEW);
-  const grad  = `linear-gradient(135deg,${p.g[0]},${p.g[1]})`;
-  const isM   = mobRole != null;
+  const grad = `linear-gradient(135deg,${p.g[0]},${p.g[1]})`;
+  const isM = mobRole != null;
 
   return (
     <div className="hp-card" style={{ "--g": grad }}>
@@ -266,12 +266,12 @@ function HomePackagesSection({ navigateTheater }) {
 
   const touchStartX = useRef(null);
   const touchStartY = useRef(null);
-  const isSwiping   = useRef(false);
+  const isSwiping = useRef(false);
 
   const onTouchStart = e => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
-    isSwiping.current   = false;
+    isSwiping.current = false;
   };
   const onTouchMove = e => {
     if (!touchStartX.current) return;
@@ -344,6 +344,39 @@ function HomePackagesSection({ navigateTheater }) {
           <button className="hp-nav-btn p" disabled={active === 0} onClick={() => setActive(p => p - 1)}>← Prev</button>
           <button className="hp-nav-btn n" disabled={active === HP_PLANS.length - 1} onClick={() => setActive(p => p + 1)}>Next →</button>
         </div>
+      </div>
+      {/* WhatsApp Chat Button */}
+      <div style={{ textAlign: "center", marginTop: "30px" }}>
+        <a
+          href="https://wa.me/918374777834?text=Hello%2C%20I%20want%20to%20book%20tickets."
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            padding: "14px 28px",
+            borderRadius: "50px",
+            fontWeight: "600",
+            fontSize: "14px",
+            background: "#25D366",
+            color: "#fff",
+            textDecoration: "none",
+            boxShadow: "0 6px 18px rgba(37,211,102,0.35)",
+            transition: "all 0.3s ease"
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = "translateY(-2px)";
+            e.target.style.boxShadow = "0 10px 24px rgba(37,211,102,0.45)";
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = "translateY(0)";
+            e.target.style.boxShadow = "0 6px 18px rgba(37,211,102,0.35)";
+          }}
+        >
+          <i className="bi bi-whatsapp"></i>
+          Chat With Us
+        </a>
       </div>
     </section>
   );

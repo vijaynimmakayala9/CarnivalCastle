@@ -83,7 +83,7 @@ function Header() {
             <div className="navbar-header">
 
               {/* MOBILE ONLY: Hamburger + Logo + Book/Icons row */}
-              <div className="d-flex d-md-none align-items-center justify-content-between w-100">
+              <div className="d-flex d-md-none align-items-center justify-content-around w-100">
 
                 {/* LEFT: Hamburger + Logo */}
                 <div className="d-flex align-items-center gap-2">
@@ -102,13 +102,13 @@ function Header() {
 
                 {/* RIGHT: Book Now + Icons */}
                 <div className="d-flex flex-column align-items-end">
-                  <a
+                  {/*<a
                     href="/locations"
                     className="btn text-white book1-btn"
                     style={{ padding: "6px 14px", fontSize: "13px", borderRadius: "10px", fontWeight: "600" }}
                   >
                     Book Now
-                  </a>
+                  </a>*/}
                   {/* Rewards Button */}
                   <a
                     href="/rewards"
