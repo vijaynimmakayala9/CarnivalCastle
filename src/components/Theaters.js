@@ -900,7 +900,7 @@ function Theaters() {
                   {/* CLICKABLE CONTAINER */}
                   <div
                     className="p-3 rounded shadow-sm"
-                    
+
                     style={{
                       backgroundColor: "#FAF9F7",
                       border: "1px solid #E0E0E0",
@@ -916,7 +916,7 @@ function Theaters() {
                       Select Your Date
                     </label>
 
-                    <div className="d-flex gap-2" style={{ cursor: "pointer"}} onClick={openCalendar}>
+                    <div className="d-flex gap-2" style={{ cursor: "pointer" }} onClick={openCalendar}>
                       <div className="input-group">
                         <span className="input-group-text bg-white border-end-0">
                           <i className="bi bi-calendar-event"></i>
@@ -973,7 +973,7 @@ function Theaters() {
 
           {/* Other Locations Section */}
           {Object.keys(allTheatersByLocation).length > 0 && (
-            <section className="shop-area pt-5 pb-5 p-relative" style={{ background: "#E9DCFF" }}>
+            <section className="shop-area pt-5 p-relative" style={{ background: "#E9DCFF" }}>
               <div className="container-fluid">
                 <h3 className="text-center mb-4" style={{ color: "#40008C" }}>Theaters in Other Locations</h3>
                 {Object.entries(allTheatersByLocation)
@@ -983,7 +983,7 @@ function Theaters() {
                     console.log("Rendering location:", locationName, "for ID:", addrId);
 
                     return (
-                      <div key={addrId} className="mb-5">
+                      <div key={addrId} className="">
                         <h3 className="mb-3 text-center fw-bold" style={{ borderBottom: "2px solid #E9DCFF", paddingBottom: "8px", color: "#40008C" }}>
                           {locationName}
                         </h3>

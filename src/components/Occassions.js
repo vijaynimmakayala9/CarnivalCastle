@@ -119,7 +119,8 @@ const Occassions = () => {
     setTimeout(() => {
       additionalImagesRef?.current?.scrollIntoView({
         behavior: "smooth",
-        block: "end",
+        // block: "end",
+        bottom: 0
       });
     }, 200);
   };
@@ -187,6 +188,31 @@ const Occassions = () => {
   const handleClick = () => {
     navigateCakes("/Basicplan");
   };
+
+  const [highlightInput, setHighlightInput] = useState(false);
+
+  useEffect(() => {
+    if (!additionalImagesRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setHighlightInput(true);
+
+            setTimeout(() => {
+              setHighlightInput(false);
+            }, 50000);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(additionalImagesRef.current);
+
+    return () => observer.disconnect();
+  }, [selectedOccasion]);
 
   return (
     <>
@@ -271,7 +297,7 @@ const Occassions = () => {
                                     ? "black"
                                     : "inherit",
                                 borderRadius: "0.5rem",
-                                padding: "1rem",
+                                padding: "0",
                                 transition:
                                   "background 0.3s ease, color 0.3s ease",
                               }}
@@ -280,10 +306,10 @@ const Occassions = () => {
                                 src={URLS.Base + ele.image}
                                 alt="occasions images"
                                 // className="rounded-circle img-fluid"
-                                className="img-fluid rounded-pill"
+                                className="img-fluid rounded"
                                 style={{
                                   height: "150px",
-                                  width: "150px",
+                                  width: "250px",
                                   objectFit: "cover",
                                 }}
                               />
@@ -315,7 +341,7 @@ const Occassions = () => {
                           <div className="m-4 col-md-6">
                             <input
                               type="text"
-                              className="form-control"
+                              className={`form-control ${highlightInput ? "highlight-input" : ""}`}
                               placeholder="Special Person Name"
                               value={textFieldValue}
                               onChange={handleChange}
@@ -323,6 +349,21 @@ const Occassions = () => {
                           </div>
                         </div>
                       )}
+                      <style>
+                        {`
+                        .highlight-input{
+                        border:2px solid #9D4DFF !important;
+                        box-shadow:0 0 15px rgba(157,77,255,0.7);
+                        animation:pulseGlow 1s ease-in-out infinite;
+                      }
+
+                      @keyframes pulseGlow{
+                        0%{box-shadow:0 0 5px rgba(157,77,255,0.4);}
+                        50%{box-shadow:0 0 20px rgba(157,77,255,0.9);}
+                        100%{box-shadow:0 0 5px rgba(157,77,255,0.4);}
+                      }
+                        `}
+                      </style>
                     </div>
 
                     {/* Booking Summary */}

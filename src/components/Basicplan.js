@@ -491,7 +491,7 @@ const Basicplan = () => {
                             >
                               <i className="bi bi-ticket-perforated-fill"></i>
 
-                              Select Plan <span className="text-danger">*</span>
+                              Select Package <span className="text-danger">*</span>
                             </label>
 
                           </div>
@@ -515,12 +515,12 @@ const Basicplan = () => {
                                 <div className="text-center">
                                   <h5 className={`fw-bold mb-2 ${couponData.couponCode === "FLAT400BASIC" ? "text-white" : "dark-text"}`}>
                                     <i className="bi bi-gift-fill me-2 text-warning"></i>
-                                    BASIC PLAN
+                                    BASIC PACKAGE
                                   </h5>
                                 </div>
 
                                 <div className="fs-5 mb-3">
-                                  Starts from  <span className="fs-5 fw-bold text-warning mb-3">₹1,748+</span>
+                                  Starts from  <span className="fs-5 fw-bold text-warning mb-3">₹1,999</span>
                                 </div>
 
                                 <ol className={`ps-3 small ${couponData.couponCode === "FLAT400BASIC" ? "text-white" : "light-text"}`}>
@@ -529,17 +529,17 @@ const Basicplan = () => {
                                     <span className="fw-bold">Includes</span>
                                     <ol type="a" className="ps-3 mt-1">
                                       <li>Theatre Experience</li>
-                                      <li>Decoration Setup</li>
+                                      <li>Decoration</li>
                                     </ol>
                                   </li>
 
                                   <li>
-                                    <span className="fw-bold">Add-ons available</span>
-                                    <ol type="a" className="ps-3 mt-1">
+                                    <span className="fw-bold">Add-ons available on next step</span>
+                                    {/* <ol type="a" className="ps-3 mt-1">
                                       <li>Cakes</li>
                                       <li>Photography</li>
                                       <li>Other services</li>
-                                    </ol>
+                                    </ol> */}
                                   </li>
 
                                 </ol>
@@ -566,12 +566,12 @@ const Basicplan = () => {
                                 <div className="text-center">
                                   <h5 className={`fw-bold mb-2 ${couponData.couponCode === "FLAT700COMBO" ? "text-white" : "dark-text"}`}>
                                     <i className="bi bi-gift-fill me-2 text-warning"></i>
-                                    COMBO PLAN
+                                    COMBO PACKAGE
                                   </h5>
                                 </div>
 
                                 <div className="fs-5 mb-3">
-                                  Starts from  <span className="fs-5 fw-bold text-warning mb-3">₹5,999+</span>
+                                  Starts from  <span className="fs-5 fw-bold text-warning mb-3">₹5,999</span>
                                 </div>
 
                                 <ol className={`ps-3 small ${couponData.couponCode === "FLAT700COMBO" ? "text-white" : "light-text"}`}>
@@ -579,23 +579,23 @@ const Basicplan = () => {
                                   <li className="mb-2">
                                     <span className="fw-bold">Plan Benefits</span>
                                     <ol type="a" className="ps-3 mt-1">
-                                      <li>10% Discount on Plans</li>
                                       <li>Private Theatre Experience</li>
+                                      <li>Decoration</li>
                                       <li>Cake Included</li>
                                       <li>Photography Service</li>
-                                      <li>Price varies by theatre, No of Peoples</li>
+                                      <li>Upto 12-14 services included</li>
                                     </ol>
                                   </li>
 
 
-                                  <li>
+                                  {/* <li>
                                     <span className="fw-bold">Add-ons included</span>
                                     <ol type="a" className="ps-3 mt-1">
                                       <li>Cakes</li>
                                       <li>Photography</li>
                                       <li>Upto 12-14 services</li>
                                     </ol>
-                                  </li>
+                                  </li> */}
 
                                 </ol>
 

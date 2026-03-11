@@ -141,7 +141,8 @@ const ComboOccassions = () => {
     setTimeout(() => {
       additionalImagesRef?.current?.scrollIntoView({
         behavior: "smooth",
-        block: "end",
+        // block: "end",
+        bottom: 0
       });
     }, 200);
   };
@@ -150,6 +151,29 @@ const ComboOccassions = () => {
   const handleClick = () => {
     navigateCakes("/Basicplan");
   };
+
+  const [highlight, setHighlight] = useState(false);
+
+  useEffect(() => {
+    if (!additionalImagesRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setHighlight(true);
+
+          setTimeout(() => {
+            setHighlight(false);
+          }, 50000);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(additionalImagesRef.current);
+
+    return () => observer.disconnect();
+  }, [selectedOccasion]);
 
   return (
     <>
@@ -227,7 +251,7 @@ const ComboOccassions = () => {
                                     ? "black"
                                     : "inherit",
                                 borderRadius: "0.5rem",
-                                padding: "1rem",
+                                padding: "0",
                                 transition:
                                   "background 0.3s ease, color 0.3s ease",
                               }}
@@ -236,10 +260,10 @@ const ComboOccassions = () => {
                                 src={URLS.Base + ele.image}
                                 alt="occasions images"
                                 // className="rounded-circle img-fluid"
-                                className="img-fluid rounded-pill"
+                                className="img-fluid rounded"
                                 style={{
                                   height: "150px",
-                                  width: "150px",
+                                  width: "250px",
                                   objectFit: "cover",
                                 }}
                               />
@@ -272,7 +296,7 @@ const ComboOccassions = () => {
                           <div className="m-4 col-md-6">
                             <input
                               type="text"
-                              className="form-control"
+                              className={`form-control ${highlight ? "highlight-box" : ""}`}
                               placeholder="Special Person Name"
                               value={textFieldValue}
                               onChange={handleChange}
@@ -280,6 +304,21 @@ const ComboOccassions = () => {
                           </div>
                         </div>
                       )}
+                      <style>
+                        {`
+                        .highlight-box{
+  border:2px solid #9D4DFF !important;
+  box-shadow:0 0 15px rgba(157,77,255,0.6);
+  animation:glowPulse 1s infinite;
+}
+
+@keyframes glowPulse{
+  0%{box-shadow:0 0 5px rgba(157,77,255,0.3);}
+  50%{box-shadow:0 0 20px rgba(157,77,255,0.9);}
+  100%{box-shadow:0 0 5px rgba(157,77,255,0.3);}
+}
+                        `}
+                      </style>
                     </div>
 
                     {/* Booking Summary */}
