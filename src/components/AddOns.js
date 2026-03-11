@@ -419,10 +419,10 @@ const AddOns = () => {
                                       <img
                                         src={URLS.Base + ele.image}
                                         alt="occasions images"
-                                        className="img-fluid rounded-pill"
+                                        className="img-fluid rounded"
                                         style={{
                                           height: "150px",
-                                          width: "150px",
+                                          width: "250px",
                                           objectFit: "cover",
                                         }}
                                       />

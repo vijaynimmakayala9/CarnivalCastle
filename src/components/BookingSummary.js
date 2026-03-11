@@ -448,7 +448,7 @@ const BookingForm = () => {
                 <div className="row mb-4">
                   <div className="col-md-6 mb-3">
                     <label htmlFor="heardFrom" className="form-label fw-bold">
-                      How did you hear about us? *
+                      How did you heard about us? *
                     </label>
                     <select
                       className="form-select"
@@ -458,12 +458,12 @@ const BookingForm = () => {
                       required
                     >
                       <option value="">Select an option</option>
-                      <option value="Facebook">Facebook</option>
                       <option value="Instagram">Instagram</option>
                       <option value="Google">Google</option>
-                      <option value="Friend">Friend</option>
-                      <option value="Family">Family</option>
-                      <option value="Advertisement">Advertisement</option>
+                      <option value="FriendsandFamily">Friends & Family</option>
+                      <option value="Facebook">Facebook</option>
+                      <option value="Youtube">Youtube</option>
+                      <option value="Influencer">Influencer</option>
                       <option value="Other">Other</option>
                     </select>
                     <div className="form-text">Please select how you found out about us</div>
@@ -542,7 +542,7 @@ const BookingForm = () => {
                 <div className="row mb-4">
                   <div className="col-12">
                     <div className="card shadow-sm">
-                      <div className="card-header bg-primary text-white">
+                      <div className="card-header light-back text-white">
                         <h5 className="mb-0">Booking Summary (GST Included)</h5>
                       </div>
                       <div className="card-body">
@@ -655,7 +655,7 @@ const BookingForm = () => {
                             onClick={handleSubmit}
                             disabled={!isAgreed || !heardFrom}
                           >
-                            Pay Advance ₹{advancePayment.toFixed(2)} & Confirm Booking
+                            proceed to pay Advance ₹{advancePayment}
                           </button>
                         )}
                       </div>
