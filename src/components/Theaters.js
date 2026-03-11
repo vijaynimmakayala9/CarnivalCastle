@@ -644,8 +644,8 @@ function Theaters() {
               </div>
               <div className="row align-items-center mb-2 text-center text-md-start g-2">
                 <div className="col-6 col-sm-6">
-                  <p className="card-details mb-2 light-text" style={{ fontSize: "0.85rem", display: "flex", justifyContent: "center" }}>
-                    <span className="fw-semibold px-3 py-1 rounded-pill dark-text d-inline-block" style={{ whiteSpace: "nowrap" }}>
+                  <p className="card-details mb-2 light-text" style={{ fontSize: "0.85rem", display: "flex", justifyContent: "start" }}>
+                    <span className="fw-semibold px-1 py-1 rounded-pill dark-text d-inline-block" style={{ whiteSpace: "nowrap" }}>
                       Extra Person: ₹
                       {selectedSlot[i]
                         ? selectedSlot[i].duration === "1:30 hr"
@@ -801,10 +801,17 @@ function Theaters() {
       <div className="home-page indexsix">
         <Header />
         <main className="main-wrapper">
-          <section
+          {/* <section
             id="parallax"
             className="slider-area d-flex align-items-center justify-content-center fix lightdark-back position-relative"
             style={{ minHeight: "200px", background: "#C69FF4" }}
+          >
+            
+          </section> */}
+
+          <section
+            className="shop-area pt-0 pb-5 p-relative"
+            style={{ background: "#C69FF4" }}
           >
             <div className="container-fluid position-relative">
               {/* Back Button */}
@@ -831,12 +838,12 @@ function Theaters() {
                     <div className="breadcrumb-title mb-20 mb-md-30 dark-text">
                       <h1 className="display-5 display-md-4 display-lg-3 display-xl-2 fw-bold"
                         style={{ marginTop: "40px", marginBottom: "15px" }}>
-                        Choose your dream theatre setup in {location.name}
+                        {/* Choose your dream theatre setup in {location.name} */}{location.name}
                       </h1>
                     </div>
-                    <p className="light-text fs-6 fs-md-5 mb-0">
+                    {/* <p className="light-text fs-6 fs-md-5 mb-0">
                       <i>From royal vibes to romantic corners - pick your perfect match!</i>
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
@@ -887,12 +894,6 @@ function Theaters() {
       }
     }
   `}</style>
-          </section>
-
-          <section
-            className="shop-area pt-0 pb-5 p-relative"
-            style={{ background: "#C69FF4" }}
-          >
             <div className="container-fluid">
               <div className="row mb-3">
                 <div className="col-12">
@@ -958,7 +959,7 @@ function Theaters() {
                         key={i}
                         data={data}
                         i={i}
-                        locationName={`${location.name}, ${location.city}`}
+                        locationName={`${location.name}`}
                       />
                     ))
                   ) : (

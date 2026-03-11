@@ -1571,7 +1571,7 @@ function Home() {
                             }}
                           >
                             <i className="bi bi-whatsapp fs-5"></i>
-                            Chat with Us
+                            Chat With Us
                           </a>
                         </div>
 
@@ -1830,7 +1830,7 @@ function Home() {
                         </div>
                       </div>
                     </div>
-                    <div className="text-center mt-4">
+                    <div className="text-center mt-1">
                       <a
                         href="https://wa.me/918374777834?text=Hello%2C%20I%20want%20to%20book%20tickets."
                         target="_blank"
@@ -2034,15 +2034,15 @@ function Home() {
                         fontSize: 'clamp(2rem, 5vw, 3.5rem)',
                         lineHeight: '1.2'
                       }}>
-                        Experience The <span style={{ color: '#681DC0' }}>Difference</span>
+                        Plan a Suprise to your <span style={{ color: '#681DC0' }}>Loved one</span>
                       </h3>
-                      <p className="text-secondary mt-3" style={{
+                      {/* <p className="text-secondary mt-3" style={{
                         fontSize: 'clamp(1rem, 2vw, 1.2rem)',
                         maxWidth: '700px',
                         margin: '0 auto'
                       }}>
                         Discover what makes us the preferred choice for unforgettable moments
-                      </p>
+                      </p> */}
                     </div>
 
                     {/* Main Content Card with Premium Design */}
@@ -2172,7 +2172,7 @@ function Home() {
                                   className="responsive-btn whatsapp-btn text-center text-decoration-none"
                                 >
                                   <i className="bi bi-whatsapp me-2"></i>
-                                  Chat With Us
+                                 Chat With Us
                                 </a>
 
                               </div>
@@ -2623,7 +2623,7 @@ function Home() {
                           className="btn whatsapp-btn fw-bold responsive-btn"
                         >
                           <i className="bi bi-whatsapp me-2"></i>
-                          Chat With Us
+                         Chat With Us
                         </a>
 
                       </div>

@@ -1,10 +1,4 @@
-// ── Drop this section block inside your homepage JSX ──
-// Requires: useState, useRef already imported from React
-// Requires: navigateTheater prop available in parent scope
-
 import { useRef, useState } from "react";
-
-// ── Paste these consts at the top of your component file (outside the component) ──
 
 const HP_C = {
   bg: "#F1E9FE", card: "#FFFAFB", border: "#E9DCFF",
@@ -54,14 +48,14 @@ const HP_PLANS = [
 const HP_PREVIEW = 7;
 const HP_CARD_VW = 68, HP_GAP_VW = 4;
 
-const hpCss = `
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@400;500;600&display=swap');
+const BODY_FONT = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+const HEAD_FONT = "Georgia, 'Times New Roman', Times, serif";
 
+const hpCss = `
 .hp-cc, .hp-cc * { box-sizing:border-box; margin:0; padding:0; }
 .hp-cc {
-  font-family:Outfit,sans-serif;
+  font-family: ${BODY_FONT};
   background:${HP_C.bg};
-  padding:72px 0 88px;
   position:relative; overflow:hidden;
 }
 .hp-cc::before,.hp-cc::after {
@@ -72,7 +66,7 @@ const hpCss = `
 .hp-cc::after  { width:360px;height:360px; background:radial-gradient(circle,${HP_C.border},transparent 70%); bottom:-80px;left:-80px; }
 
 /* heading */
-.hp-head { text-align:center; margin-bottom:52px; position:relative; z-index:2; animation:hp-fadeUp .65s ease both; }
+.hp-head { text-align:center; margin-bottom:0; position:relative; z-index:2; animation:hp-fadeUp .65s ease both; }
 @keyframes hp-fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
 .hp-eyebrow {
   display:inline-flex; align-items:center; gap:7px;
@@ -80,19 +74,20 @@ const hpCss = `
   color:${HP_C.textLight}; background:${HP_C.card}; border:1px solid ${HP_C.border};
   padding:5px 16px; border-radius:999px; margin-bottom:16px;
   box-shadow:0 2px 12px rgba(157,77,255,.1);
+  font-family: ${BODY_FONT};
 }
 .hp-eyebrow::before,.hp-eyebrow::after{content:'✦';font-size:8px;opacity:.55}
 .hp-title {
-  font-family:'Cormorant Garamond',serif;
+  font-family: ${HEAD_FONT};
   font-size:clamp(34px,5vw,54px); font-weight:700;
-  color:${HP_C.textDark}; line-height:1.08; margin-bottom:8px; letter-spacing:-.3px;
+  color:${HP_C.textDark}; line-height:1.1; margin-bottom:8px; letter-spacing:-.2px;
 }
 .hp-title em {
   font-style:italic;
   background:linear-gradient(135deg,${HP_C.textMid},${HP_C.mid});
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
 }
-.hp-sub { color:${HP_C.light}; font-size:13.5px; }
+.hp-sub { color:${HP_C.light}; font-size:13.5px; font-family: ${BODY_FONT}; }
 .hp-rule { display:flex; align-items:center; justify-content:center; gap:10px; margin-top:16px; }
 .hp-rl  { width:44px;height:1px; background:linear-gradient(to right,transparent,${HP_C.light}); }
 .hp-rl.r{ background:linear-gradient(to left,transparent,${HP_C.light}); }
@@ -130,7 +125,8 @@ const hpCss = `
 .hp-stripe { height:4px; background:var(--g); }
 .hp-tier {
   position:absolute; top:14px; right:16px;
-  font-family:'Cormorant Garamond',serif; font-size:48px; font-weight:700;
+  font-family: ${HEAD_FONT};
+  font-size:48px; font-weight:700;
   line-height:1; color:rgba(198,159,244,.18); pointer-events:none; user-select:none; transition:color .35s;
 }
 .hp-slot.center .hp-tier { color:rgba(157,77,255,.1); }
@@ -142,17 +138,22 @@ const hpCss = `
   padding:3px 10px; border-radius:999px; margin-bottom:10px; width:fit-content;
   background:${HP_C.bg}; border:1px solid ${HP_C.border}; color:${HP_C.textLight};
   transition:background .35s,color .35s,box-shadow .35s;
+  font-family: ${BODY_FONT};
 }
 .hp-slot.center .hp-badge { background:var(--g); border:none; color:#fff; box-shadow:0 3px 12px rgba(157,77,255,.28); }
 
-.hp-name { font-family:'Cormorant Garamond',serif; font-size:25px; font-weight:700; color:${HP_C.textDark}; margin-bottom:2px; letter-spacing:-.2px; }
-.hp-tag  { font-size:12px; color:${HP_C.light}; font-style:italic; margin-bottom:13px; }
+.hp-name {
+  font-family: ${HEAD_FONT};
+  font-size:24px; font-weight:700; color:${HP_C.textDark}; margin-bottom:2px; letter-spacing:-.1px;
+}
+.hp-tag  { font-size:12px; color:${HP_C.light}; margin-bottom:13px; font-family: ${BODY_FONT}; }
 .hp-div  { height:1px; background:linear-gradient(to right,${HP_C.border},transparent); margin-bottom:11px; }
 
 .hp-feats { list-style:none; flex:1; }
 .hp-feat  {
   display:flex; align-items:center; gap:8px;
   padding:7px 0; border-bottom:1px solid rgba(198,159,244,.1); font-size:12.5px;
+  font-family: ${BODY_FONT};
 }
 .hp-feat.y { color:${HP_C.textDark}; }
 .hp-feat.n { color:${HP_C.light}; opacity:.58; }
@@ -165,13 +166,16 @@ const hpCss = `
 
 .hp-more {
   background:none;border:none;color:${HP_C.textLight};font-size:11.5px;font-weight:600;
-  cursor:pointer;padding:7px 0 2px;font-family:Outfit,sans-serif;transition:color .2s;
+  cursor:pointer;padding:7px 0 2px;
+  font-family: ${BODY_FONT};
+  transition:color .2s;
 }
 .hp-more:hover{color:${HP_C.textMid}}
 
 .hp-btn {
   width:100%;border:none;border-radius:12px;padding:11.5px 16px;
-  font-family:Outfit,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer;
+  font-family: ${BODY_FONT};
+  font-weight:600;font-size:13.5px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;gap:6px;margin-top:15px;
   transition:transform .18s,box-shadow .18s,background .35s;
 }
@@ -206,7 +210,9 @@ const hpCss = `
 .hp-nav { display:flex;justify-content:center;gap:10px;margin-top:14px; }
 .hp-nav-btn {
   border-radius:12px;padding:8px 22px;font-weight:600;font-size:13px;
-  cursor:pointer;font-family:Outfit,sans-serif;transition:all .2s;border:none;
+  cursor:pointer;
+  font-family: ${BODY_FONT};
+  transition:all .2s;border:none;
 }
 .hp-nav-btn.p { background:${HP_C.card};border:1.5px solid ${HP_C.border};color:${HP_C.textMid};box-shadow:0 2px 8px rgba(157,77,255,.08); }
 .hp-nav-btn.p:hover:not(:disabled){background:${HP_C.bg}}
@@ -217,7 +223,6 @@ const hpCss = `
 @media(max-width:767px){.hp-cc{padding:48px 0 60px}.hp-head{margin-bottom:36px}}
 `;
 
-// ── HpCard (internal, for homepage section only) ──
 function HpCard({ p, mobRole, onBook }) {
   const [exp, setExp] = useState(false);
   const feats = Object.entries(p.f);
@@ -259,7 +264,6 @@ function HpCard({ p, mobRole, onBook }) {
   );
 }
 
-// ── PASTE THIS SECTION BLOCK inside your homepage return() ──
 function HomePackagesSection({ navigateTheater }) {
   const [active, setActive] = useState(1);
   const mobX = `calc(${50 - HP_CARD_VW / 2}vw - ${active * (HP_CARD_VW + HP_GAP_VW)}vw)`;
@@ -284,7 +288,8 @@ function HomePackagesSection({ navigateTheater }) {
     const dx = e.changedTouches[0].clientX - touchStartX.current;
     if (isSwiping.current && Math.abs(dx) > 40)
       setActive(p => dx < 0 ? Math.min(HP_PLANS.length - 1, p + 1) : Math.max(0, p - 1));
-    touchStartX.current = null; isSwiping.current = false;
+    touchStartX.current = null;
+    isSwiping.current = false;
   };
 
   const Dots = () => (
@@ -297,7 +302,7 @@ function HomePackagesSection({ navigateTheater }) {
   );
 
   return (
-    <section className="hp-cc">
+    <section className="hp-cc py-5">
       <style>{hpCss}</style>
 
       {/* Heading */}
@@ -345,6 +350,7 @@ function HomePackagesSection({ navigateTheater }) {
           <button className="hp-nav-btn n" disabled={active === HP_PLANS.length - 1} onClick={() => setActive(p => p + 1)}>Next →</button>
         </div>
       </div>
+
       {/* WhatsApp Chat Button */}
       <div style={{ textAlign: "center", marginTop: "30px" }}>
         <a
@@ -359,19 +365,20 @@ function HomePackagesSection({ navigateTheater }) {
             borderRadius: "50px",
             fontWeight: "600",
             fontSize: "14px",
+            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
             background: "#25D366",
             color: "#fff",
             textDecoration: "none",
             boxShadow: "0 6px 18px rgba(37,211,102,0.35)",
-            transition: "all 0.3s ease"
+            transition: "all 0.3s ease",
           }}
-          onMouseEnter={(e) => {
-            e.target.style.transform = "translateY(-2px)";
-            e.target.style.boxShadow = "0 10px 24px rgba(37,211,102,0.45)";
+          onMouseEnter={e => {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow = "0 10px 24px rgba(37,211,102,0.45)";
           }}
-          onMouseLeave={(e) => {
-            e.target.style.transform = "translateY(0)";
-            e.target.style.boxShadow = "0 6px 18px rgba(37,211,102,0.35)";
+          onMouseLeave={e => {
+            e.currentTarget.style.transform = "translateY(0)";
+            e.currentTarget.style.boxShadow = "0 6px 18px rgba(37,211,102,0.35)";
           }}
         >
           <i className="bi bi-whatsapp"></i>

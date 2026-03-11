@@ -31,13 +31,11 @@ const PREVIEW = 7;
 const CARD_VW = 68, GAP_VW = 4;
 
 const css = `
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Outfit:wght@400;500;600&display=swap');
-
 .cc,
 .cc * { box-sizing: border-box; margin: 0; padding: 0; }
 
 .cc {
-  font-family: Outfit, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: ${C.bg};
   min-height: 100vh;
   padding: 72px 0 88px;
@@ -67,9 +65,9 @@ const css = `
 .cc-eyebrow::before,.cc-eyebrow::after{content:'✦';font-size:8px;opacity:.55}
 
 .cc-title {
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(36px,6vw,58px); font-weight:700;
-  color:${C.textDark}; line-height:1.08; margin-bottom:8px; letter-spacing:-.3px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size:clamp(34px,5.5vw,54px); font-weight:700;
+  color:${C.textDark}; line-height:1.1; margin-bottom:8px; letter-spacing:-.2px;
 }
 .cc-title em {
   font-style:italic;
@@ -119,7 +117,8 @@ const css = `
 .cc-stripe { height:4px; background:var(--g); }
 .cc-tier {
   position:absolute; top:14px; right:16px;
-  font-family:'Cormorant Garamond',serif; font-size:48px; font-weight:700;
+  font-family: Georgia, serif;
+  font-size:48px; font-weight:700;
   line-height:1; color:rgba(198,159,244,.18); pointer-events:none; user-select:none;
   transition: color .35s;
 }
@@ -139,8 +138,11 @@ const css = `
   box-shadow:0 3px 12px rgba(157,77,255,.28);
 }
 
-.cc-name { font-family:'Cormorant Garamond',serif; font-size:25px; font-weight:700; color:${C.textDark}; margin-bottom:2px; letter-spacing:-.2px; }
-.cc-tag  { font-size:12px; color:${C.light}; font-style:italic; margin-bottom:13px; }
+.cc-name {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size:24px; font-weight:700; color:${C.textDark}; margin-bottom:2px; letter-spacing:-.1px;
+}
+.cc-tag  { font-size:12px; color:${C.light}; margin-bottom:13px; }
 .cc-div  { height:1px; background:linear-gradient(to right,${C.border},transparent); margin-bottom:11px; }
 
 .cc-feats { list-style:none; flex:1; }
@@ -159,14 +161,16 @@ const css = `
 
 .cc-more {
   background:none;border:none;color:${C.textLight};font-size:11.5px;font-weight:600;
-  cursor:pointer;padding:7px 0 2px;font-family:Outfit,sans-serif;
+  cursor:pointer;padding:7px 0 2px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: color .2s;
 }
 .cc-more:hover{color:${C.textMid}}
 
 .cc-btn {
   width:100%;border:none;border-radius:12px;padding:11.5px 16px;
-  font-family:Outfit,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight:600;font-size:13.5px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;gap:6px;margin-top:15px;
   transition: transform .18s, box-shadow .18s, background .35s;
 }
@@ -205,7 +209,9 @@ const css = `
 .cc-nav { display:flex;justify-content:center;gap:10px;margin-top:14px; }
 .cc-nav-btn {
   border-radius:12px;padding:8px 22px;font-weight:600;font-size:13px;
-  cursor:pointer;font-family:Outfit,sans-serif;transition:all .2s;border:none;
+  cursor:pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition:all .2s;border:none;
 }
 .cc-nav-btn.p {
   background:${C.card};border:1.5px solid ${C.border};color:${C.textMid};
@@ -249,7 +255,7 @@ function Card({ p, mobRole }) {
                     ))}
                 </ul>
                 {feats.length > PREVIEW && (
-                    <button className="cc-more" onClick={e => { e.stopPropagation(); setExp(x => !x) }}>
+                    <button className="cc-more" onClick={e => { e.stopPropagation(); setExp(x => !x); }}>
                         {exp ? "▲ Show less" : `▼ All ${feats.length} inclusions`}
                     </button>
                 )}
@@ -272,7 +278,6 @@ export default function PackagesSection() {
     const [active, setActive] = useState(1);
     const mobX = `calc(${50 - CARD_VW / 2}vw - ${active * (CARD_VW + GAP_VW)}vw)`;
 
-    // Touch swipe state
     const touchStartX = useRef(null);
     const touchStartY = useRef(null);
     const isSwiping = useRef(false);
@@ -287,7 +292,6 @@ export default function PackagesSection() {
         if (touchStartX.current === null) return;
         const dx = Math.abs(e.touches[0].clientX - touchStartX.current);
         const dy = Math.abs(e.touches[0].clientY - touchStartY.current);
-        // If horizontal movement dominates, treat as swipe and block scroll
         if (dx > dy && dx > 8) {
             isSwiping.current = true;
             e.preventDefault();
@@ -298,8 +302,8 @@ export default function PackagesSection() {
         if (touchStartX.current === null) return;
         const dx = e.changedTouches[0].clientX - touchStartX.current;
         if (isSwiping.current && Math.abs(dx) > 40) {
-            if (dx < 0) setActive(p => Math.min(PLANS.length - 1, p + 1)); // swipe left → next
-            else setActive(p => Math.max(0, p - 1));                // swipe right → prev
+            if (dx < 0) setActive(p => Math.min(PLANS.length - 1, p + 1));
+            else setActive(p => Math.max(0, p - 1));
         }
         touchStartX.current = null;
         touchStartY.current = null;

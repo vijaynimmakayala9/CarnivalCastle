@@ -1868,7 +1868,7 @@ button.bg-danger:hover {
   -ms-flex-pack: space-between;
   position: relative;
   /* height: 75px; */
-  padding: 0 10px 0 0 !important;
+  padding: 0 0 0 0 !important;
   margin-bottom: 0;
   transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;

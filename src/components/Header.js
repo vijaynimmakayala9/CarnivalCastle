@@ -158,15 +158,15 @@ function Header() {
                 </a>
               </div>
               <ul className="main-nav">
-                <li><NavLink to="/" style={{ color: currentPage() === "Home" ? "#800080" : "" }}>Home</NavLink></li>
-                <li><NavLink to="/about" style={{ color: currentPage() === "about" ? "#800080" : "" }}>About Us</NavLink></li>
-                <li><NavLink to="/locations" style={{ color: currentPage() === "locations" ? "#800080" : "" }}>THEATRES</NavLink></li>
-                <li><NavLink to="/gallery" style={{ color: currentPage() === "gallery" ? "#800080" : "" }}>Gallery</NavLink></li>
-                <li><NavLink to="/cakes" style={{ color: currentPage() === "cakes" ? "#800080" : "" }}>Cakes</NavLink></li>
-                <li><NavLink to="/enquiry" style={{ color: currentPage() === "enquiry" ? "#800080" : "" }}>GET QUOTE</NavLink></li>
-                <li><NavLink to="/Reviews" style={{ color: currentPage() === "Reviews" ? "#800080" : "" }}>Testimonials</NavLink></li>                
-                <li><NavLink to="/packages" style={{ color: currentPage() === "Packages" ? "#800080" : "" }}>Plans</NavLink></li>
-                <li><NavLink to="/profile" style={{ color: currentPage() === "profile" ? "#800080" : "" }}>My Profile</NavLink></li>
+                <li><NavLink to="/" style={{ color: currentPage() === "Home" ? "#800080" : "" }} className="fw-bold">Home</NavLink></li>
+                <li><NavLink to="/about" style={{ color: currentPage() === "about" ? "#800080" : "" }} className="fw-bold">About Us</NavLink></li>
+                <li><NavLink to="/locations" style={{ color: currentPage() === "locations" ? "#800080" : "" }} className="fw-bold">THEATRES</NavLink></li>
+                <li><NavLink to="/gallery" style={{ color: currentPage() === "gallery" ? "#800080" : "" }} className="fw-bold">Gallery</NavLink></li>
+                <li><NavLink to="/cakes" style={{ color: currentPage() === "cakes" ? "#800080" : "" }} className="fw-bold">Cakes</NavLink></li>
+                <li><NavLink to="/enquiry" style={{ color: currentPage() === "enquiry" ? "#800080" : "" }} className="fw-bold">GET QUOTE</NavLink></li>
+                <li><NavLink to="/Reviews" style={{ color: currentPage() === "Reviews" ? "#800080" : "" }} className="fw-bold">Testimonials</NavLink></li>
+                <li><NavLink to="/packages" style={{ color: currentPage() === "Packages" ? "#800080" : "" }} className="fw-bold">Plans</NavLink></li>
+                <li><NavLink to="/profile" style={{ color: currentPage() === "profile" ? "#800080" : "" }} className="fw-bold">My Profile</NavLink></li>
 
                 {/* Mobile Contact Icons - Only visible in mobile menu */}
                 <li className="mobile-contact-header d-md-none" style={{
@@ -407,9 +407,9 @@ function Header() {
             {/* FULLSCREEN TOGGLE */}
             <button onClick={toggleFullScreen} className="sbutton fullscreen">
               {isFullScreen ? (
-                <FaExpand size={20} color="white" />
-              ) : (
                 <FaCompress size={20} color="white" />
+              ) : (
+                <FaExpand size={20} color="white" />
               )}
             </button>
             <a href="tel:+918341428342" className="sbutton phone"><FaPhoneAlt size={22} color="white" /></a>
