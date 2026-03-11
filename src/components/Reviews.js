@@ -7,7 +7,7 @@ import { FaStar } from "react-icons/fa";
 import { Helmet } from "react-helmet";
 
 function Gallery() {
-  // const [Testimonial, setTestimonial] = useState([]);
+  const [Testimonial, setTestimonial] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -18,44 +18,44 @@ function Gallery() {
   const GetReviews = () => {
     axios.post(URLS.AllModules, {}, {}).then((res) => {
       if (res.status === 200) {
-        // setTestimonial(res.data.testimonials);
+        setTestimonial(res.data.testimonials);
         setIsLoading(false);
       }
     });
   };
 
-  const Testimonial = [
-  {
-    name: "Priyanka Devasath",
-    image: "https://randomuser.me/api/portraits/women/12.jpg",
-    rating: 5,
-    description: "We had a very good experience at CarnivalCastle private theatres. Budget friendly, food taste was really awesome. Staff was very good and approached very well. Thank you CarnivalCastle.",
-  },
-  {
-    name: "Santosh Santosh",
-    image: "https://randomuser.me/api/portraits/men/25.jpg",
-    rating: 5,
-    description: "Really amazing event! Haven't seen such ambience in any part of Hyderabad. Really worth what we paid. The ambience is truly amazing.",
-  },
-  {
-    name: "Shubham Khirade",
-    image: "https://randomuser.me/api/portraits/men/34.jpg",
-    rating: 5,
-    description: "It was an amazing experience here! Worth every single penny! You guys must visit. They will organize everything! Best place in Hyderabad to surprise your loved ones!",
-  },
-  {
-    name: "Priyanka Chodisetti",
-    image: "https://randomuser.me/api/portraits/women/47.jpg",
-    rating: 4,
-    description: "Nice place to celebrate any occasion.",
-  },
-  {
-    name: "Khadar RGM Basha",
-    image: "https://randomuser.me/api/portraits/men/53.jpg",
-    rating: 5,
-    description: "Celebrated my nephew’s birthday here. It was wonderful — a top-rated place for birthday parties.",
-  },
-];
+//   const Testimonial = [
+//   {
+//     name: "Priyanka Devasath",
+//     image: "https://randomuser.me/api/portraits/women/12.jpg",
+//     rating: 5,
+//     description: "We had a very good experience at CarnivalCastle private theatres. Budget friendly, food taste was really awesome. Staff was very good and approached very well. Thank you CarnivalCastle.",
+//   },
+//   {
+//     name: "Santosh Santosh",
+//     image: "https://randomuser.me/api/portraits/men/25.jpg",
+//     rating: 5,
+//     description: "Really amazing event! Haven't seen such ambience in any part of Hyderabad. Really worth what we paid. The ambience is truly amazing.",
+//   },
+//   {
+//     name: "Shubham Khirade",
+//     image: "https://randomuser.me/api/portraits/men/34.jpg",
+//     rating: 5,
+//     description: "It was an amazing experience here! Worth every single penny! You guys must visit. They will organize everything! Best place in Hyderabad to surprise your loved ones!",
+//   },
+//   {
+//     name: "Priyanka Chodisetti",
+//     image: "https://randomuser.me/api/portraits/women/47.jpg",
+//     rating: 4,
+//     description: "Nice place to celebrate any occasion.",
+//   },
+//   {
+//     name: "Khadar RGM Basha",
+//     image: "https://randomuser.me/api/portraits/men/53.jpg",
+//     rating: 5,
+//     description: "Celebrated my nephew’s birthday here. It was wonderful — a top-rated place for birthday parties.",
+//   },
+// ];
 
 
   return (

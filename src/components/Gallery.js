@@ -5,10 +5,11 @@ import Header from "./Header";
 import { URLS } from "../Url";
 import axios from "axios";
 import { Helmet } from "react-helmet";
-function Gallery() {
-  const [images, setImages] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(false);
+function Gallery() {
+
+  const [images, setImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     GetAllGalleryDate();
@@ -31,7 +32,12 @@ function Gallery() {
       <img
         src={URLS.Base + item.image}
         alt={item.alt}
-        style={{ width: "100%", display: "block" }}
+        style={{
+          width: "100%",
+          height: "auto",
+          maxHeight: "75vh",
+          objectFit: "contain"
+        }}
       />
     );
   };
@@ -46,12 +52,27 @@ function Gallery() {
     );
   };
 
+  const responsiveOptions = [
+    {
+      breakpoint: "1024px",
+      numVisible: 5
+    },
+    {
+      breakpoint: "768px",
+      numVisible: 3
+    },
+    {
+      breakpoint: "560px",
+      numVisible: 1
+    }
+  ];
+
   return (
     <>
-    <Helmet>
+      <Helmet>
         <meta charSet="utf-8" />
         <title>
-        Private Theater for Birthdays & Anniversaries | Carnival Castle
+          Private Theater for Birthdays & Anniversaries | Carnival Castle
         </title>
         <meta
           name="description"
@@ -59,176 +80,181 @@ function Gallery() {
         />
       </Helmet>
 
-      {isLoading == true ? (
-        <>
-          <div
-            className="text-center"
-            style={{
-              // background:
-              //   "linear-gradient(329deg, rgba(191, 63, 249, 1) 0%, rgba(113, 51, 210, 1) 100%)",
-              backgroundColor: 'var(--charcoal-black)',
-                            height: "100vh",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-            }}
-          >
-            <div>
-            <img src="assets/img/gipss.gif" style={{ height: "300px", color:"white"}}></img>
-            <h6 style={{ color:"gold"}}>Loading...</h6>
-            </div>
+      {isLoading ? (
+        <div
+          className="text-center"
+          style={{
+            backgroundColor: "var(--charcoal-black)",
+            height: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
+          <div>
+            <img
+              src="assets/img/gipss.gif"
+              style={{ height: "300px" }}
+              alt="loading"
+            />
+            <h6 style={{ color: "gold" }}>Loading...</h6>
           </div>
-        </>
+        </div>
       ) : (
-        <>
-          <div className="home-page indexsix">
-            <Header />
-            <main className="main-wrapper">
-              <section
-                id="parallax"
-                className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lighter-back"
-                // style={{ backgroundImage: "url(img/bgss.jpg)" }}
-                style={{backgroundColor:"#AD3DF0"}}
-              >
-                <div className="container-md">
-                  <div className="row">
-                    <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
-                      <div className="breadcrumb-wrap text-center">
-                        <div className="breadcrumb-title mb-30 dark-text">
-                          <h1 style={{ marginTop: "5px"   }}>Gallery</h1>
-                        </div>
-                        {/* <nav aria-label="breadcrumb">
-                          <ol className="breadcrumb">
-                            <li className="breadcrumb-item">
-                              <a href="/" style={{ color: "white" }}>
-                                Home
-                              </a>
-                            </li>
-                            <li
-                              className="breadcrumb-item active"
-                              aria-current="page"
-                            >
-                              Gallery
-                            </li>
-                          </ol>
-                        </nav> */}
+        <div className="home-page indexsix">
+
+          <Header />
+
+          <main className="main-wrapper">
+
+            {/* HERO */}
+
+            <section
+              id="parallax"
+              className="slider-area breadcrumb-area d-flex align-items-center justify-content-center fix lighter-back"
+              style={{ backgroundColor: "#AD3DF0" }}
+            >
+              <div className="container-md">
+                <div className="row">
+                  <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+                    <div className="breadcrumb-wrap text-center">
+                      <div className="breadcrumb-title mb-30 dark-text">
+                        <h1 style={{ marginTop: "5px" }}>Gallery</h1>
                       </div>
                     </div>
                   </div>
                 </div>
-              </section>
-              <section
-                className="shop-area pt-2 pb-2 p-relative wow fadeInUp animated lighter-back"
-                // className="shop-area pt-5 pb-2 p-relative wow fadeInUp animated"
-                data-animation="fadeInUp animated"
-                data-delay=".2s"
-              >
-                {/* <div className="container-md">
-                  <div>
-                    <Galleria
-                      ref={galleria}
-                      value={images}
-                      numVisible={7}
-                      style={{ maxWidth: "850px" }}
-                      activeIndex={activeIndex}
-                      onItemChange={(e) => setActiveIndex(e.index)}
-                      circular
-                      fullScreen
-                      showItemNavigators
-                      showThumbnails={false}
-                      item={itemTemplate}
-                      thumbnail={thumbnailTemplate}
-                    />
-                    <div>
-                      <div className="row mb-4">
-                        {images.map((image, index) => {
-                          return (
-                            <div
-                              className="col-lg-4 col-md-4 mt-3 mb-4"
-                              key={index}
-                            >
-                              <img
-                                src={URLS.Base + image.image}
-                                alt={image.alt}
-                                style={{
-                                  cursor: "pointer",
-                                  width: "100%",
-                                  height: "300px",
-                                  borderRadius: "20px",
-                                  border : "1px solid #F5E7B6"
-                                }}
-                                onClick={() => {
-                                  setActiveIndex(index);
-                                  galleria.current.show();
-                                }}
-                              />
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>{" "}
-                </div> */}
-                   <div className="container-md">
-                          <div>
-                            <Galleria
-                              ref={galleria}
-                              value={images}
-                              numVisible={7}
-                              style={{ maxWidth: "850px" }}
-                              activeIndex={activeIndex}
-                              onItemChange={(e) => setActiveIndex(e.index)}
-                              circular
-                              fullScreen
-                              showItemNavigators
-                              showThumbnails={false}
-                              item={itemTemplate}
-                              thumbnail={thumbnailTemplate}
-                            />
-                            <div>
-                              <div className="row mb-4">
-                                {images.map((image, index) => {
-                                  return (
-                                    <div
-                                      className="col-lg-4 col-md-4 mt-3 mb-4"
-                                      key={index}
-                                    >
-                                      <div
-                                        className="zoom-container"
-                                        style={{ cursor: "pointer" }}
-                                        onClick={() => {
-                                          setActiveIndex(index);
-                                          galleria.current.show();
-                                        }}
-                                      >
-                                        <img
-                                          src={URLS.Base + image.image}
-                                          alt={image.alt}
-                                          style={{
-                                            width: "100%",
-                                            height: "300px",
-                                            border: "1px solid #F5E7B6",
-                                          }}
-                                        />
-                                        {/* Zoom  */}
-                                        <span className="zoom-icon">
-                                          <i className="fas fa-search-plus"></i>
-                                        </span>
-                                      </div>
-                                    </div>
-                                  );
-                                })}
-                              </div>
-                            </div>
-                          </div>
+              </div>
+            </section>
+
+            {/* GALLERY */}
+
+            <section
+              className="shop-area pt-3 pb-4 p-relative lighter-back"
+            >
+
+              <div className="container-md">
+
+                <Galleria
+                  ref={galleria}
+                  value={images}
+                  responsiveOptions={responsiveOptions}
+                  numVisible={7}
+                  activeIndex={activeIndex}
+                  onItemChange={(e) => setActiveIndex(e.index)}
+                  circular
+                  fullScreen
+                  showItemNavigators
+                  showThumbnails={false}
+                  item={itemTemplate}
+                  thumbnail={thumbnailTemplate}
+                />
+
+                <div className="row">
+
+                  {images.map((image, index) => (
+
+                    <div
+                      className="col-lg-4 col-md-6 col-sm-12 mb-4"
+                      key={index}
+                    >
+
+                      <div
+                        className="gallery-card"
+                        onClick={() => {
+                          setActiveIndex(index);
+                          galleria.current.show();
+                        }}
+                      >
+
+                        <img
+                          src={URLS.Base + image.image}
+                          alt={image.alt}
+                          className="gallery-img"
+                        />
+
+                        <div className="zoom-overlay">
+                          <i className="fas fa-search-plus"></i>
                         </div>
-              </section>
-            </main>
-            <Footer />
-          </div>{" "}
-        </>
+
+                      </div>
+
+                    </div>
+
+                  ))}
+
+                </div>
+
+              </div>
+
+            </section>
+
+          </main>
+
+          <Footer />
+
+        </div>
       )}
+
+      {/* CSS */}
+
+      <style>{`
+
+      .gallery-card{
+        position:relative;
+        overflow:hidden;
+        border-radius:16px;
+        cursor:pointer;
+        box-shadow:0 8px 25px rgba(0,0,0,0.12);
+        transition:all .3s ease;
+        background:#fff;
+      }
+
+      .gallery-card:hover{
+        transform:translateY(-5px);
+      }
+
+      .gallery-img{
+        width:100%;
+        height:460px;
+        object-fit:cover;
+        transition:transform .4s ease;
+      }
+
+      .gallery-card:hover .gallery-img{
+        transform:scale(1.1);
+      }
+
+      .zoom-overlay{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:rgba(0,0,0,0.35);
+        color:white;
+        font-size:30px;
+        opacity:0;
+        transition:opacity .3s ease;
+      }
+
+      .gallery-card:hover .zoom-overlay{
+        opacity:1;
+      }
+
+      .p-galleria-item img{
+  width:100%;
+  height:auto;
+  max-height:80vh;
+  object-fit:contain;
+}
+
+      `}</style>
+
     </>
   );
 }

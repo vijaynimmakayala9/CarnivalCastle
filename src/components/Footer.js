@@ -156,12 +156,12 @@ function Footer() {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink to="/Reviews" style={{ color: "white" }}>
+                      <NavLink to="/blogs" style={{ color: "white" }}>
                         <i
                           className="fas fa-angle-double-right"
                           style={{ paddingRight: "5px" }}
                         />
-                        Testimonial
+                        Blogs
                       </NavLink>
                     </li>
                     <li>

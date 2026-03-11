@@ -246,7 +246,7 @@ function Theaters() {
   useEffect(() => {
     const itemsToRemove = [
       "bookingid", "specialPersonName", "TotalPrice", "TotalPrice2", "addons",
-      "addonsData", "adonsJSON", "userDetails", "theaterName", "theaterId",
+      "addonsData", "adonsJSON", "theaterName", "theaterId", //userDetails
       "subtotal", "slot", "selectedOccasion", "planType", "paymentkey",
       "orderId", "occprice", "occasionName", "occasion", "invoicePath",
       "extraPersonprice", "extraPersonperprice", "extraAddedPersonsForTheatre",

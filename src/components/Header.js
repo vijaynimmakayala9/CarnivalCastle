@@ -161,11 +161,11 @@ function Header() {
                 <li><NavLink to="/" style={{ color: currentPage() === "Home" ? "#800080" : "" }}>Home</NavLink></li>
                 <li><NavLink to="/about" style={{ color: currentPage() === "about" ? "#800080" : "" }}>About Us</NavLink></li>
                 <li><NavLink to="/locations" style={{ color: currentPage() === "locations" ? "#800080" : "" }}>THEATRES</NavLink></li>
+                <li><NavLink to="/gallery" style={{ color: currentPage() === "gallery" ? "#800080" : "" }}>Gallery</NavLink></li>
                 <li><NavLink to="/cakes" style={{ color: currentPage() === "cakes" ? "#800080" : "" }}>Cakes</NavLink></li>
                 <li><NavLink to="/enquiry" style={{ color: currentPage() === "enquiry" ? "#800080" : "" }}>GET QUOTE</NavLink></li>
-                <li><NavLink to="/Reviews" style={{ color: currentPage() === "Reviews" ? "#800080" : "" }}>Testimonials</NavLink></li>
-                <li><NavLink to="/gallery" style={{ color: currentPage() === "gallery" ? "#800080" : "" }}>Gallery</NavLink></li>
-                <li><NavLink to="/blogs" style={{ color: currentPage() === "blogs" ? "#800080" : "" }}>Blogs</NavLink></li>
+                <li><NavLink to="/Reviews" style={{ color: currentPage() === "Reviews" ? "#800080" : "" }}>Testimonials</NavLink></li>                
+                <li><NavLink to="/packages" style={{ color: currentPage() === "Packages" ? "#800080" : "" }}>Plans</NavLink></li>
                 <li><NavLink to="/profile" style={{ color: currentPage() === "profile" ? "#800080" : "" }}>My Profile</NavLink></li>
 
                 {/* Mobile Contact Icons - Only visible in mobile menu */}

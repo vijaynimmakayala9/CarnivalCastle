@@ -1516,26 +1516,26 @@ function Home() {
                           return (
                             <div key={index} className="px-2">
                               <div
-                                className="card h-100 text-center bg-light rounded-4 gradient45 p-4"
+                                className="card h-100 text-center bg-light rounded-4 gradient45 p-2"
                               >
-                                <div className="card-body d-flex flex-column align-items-center">
+                                <div className="card-body d-flex flex-column align-items-center" onClick={() => navigateTheater("/locations")}>
                                   <img
                                     src={URLS.Base + occasion.image}
                                     alt={occasion.name}
-                                    className="rounded-circle mb-3"
+                                    className="rounded-5 mb-3 img-fluid"
                                     style={{
-                                      height: "100px",
-                                      width: "100px",
+                                      height: "250px",
+                                      width: "100%",
                                       objectFit: "cover",
-                                      border: "2px solid #E9BE5F",
+                                      border: "2px solid #9D4DFF",
                                     }}
                                   />
-                                  <h5 className="card-title" style={{ color: "#681DC0" }}>
+                                  <h2 className="card-title fw-bold" style={{ color: "#681DC0" }}>
                                     {occasion.name === "Carnival Castle"
                                       ? "Carnival Castle"
                                       : occasion.name}
-                                  </h5>
-                                  <p className="card-text small">{description}</p>
+                                  </h2>
+                                  {/* <p className="card-text small">{description}</p> */}
                                 </div>
                               </div>
                             </div>
@@ -1544,11 +1544,11 @@ function Home() {
                       </Slider>
 
                       {/* Proceed Button */}
-                      <div className="text-center mt-5">
+                      <div className="text-center">
 
                         {/* Proceed Button */}
                         <button
-                          className="btn px-5 py-2 rounded-3 fw-bold dark-back text-light mb-3"
+                          className="btn px-5 py-2 rounded-3 fw-bold light-back text-light mb-3"
                           style={{ width: "80%", maxWidth: "500px" }}
                           onClick={() => navigateTheater("/locations")}
                         >
@@ -1620,12 +1620,12 @@ function Home() {
                                     <img
                                       src={beverages}
                                       alt="Food & Beverages"
-                                      className="rounded-circle mb-3"
+                                      className="rounded mb-3"
                                       style={{
-                                        height: "100px",
-                                        width: "100px",
+                                        height: "200px",
+                                        width: "100%",
                                         objectFit: "cover",
-                                        border: "2px solid #E9BE5F"
+                                        border: "2px solid"
                                       }}
                                     />
                                     <h5 className="card-title light-text">Food & Beverages</h5>
@@ -1648,10 +1648,10 @@ function Home() {
                                     <img
                                       src={cake4}
                                       alt="Cakes"
-                                      className="rounded-circle mb-3"
+                                      className="rounded mb-3"
                                       style={{
-                                        height: "100px",
-                                        width: "100px",
+                                        height: "200px",
+                                        width: "100%",
                                         objectFit: "cover",
                                         border: "2px solid #E9BE5F"
                                       }}
@@ -1676,10 +1676,10 @@ function Home() {
                                     <img
                                       src={screening}
                                       alt="Screening"
-                                      className="rounded-circle mb-3"
+                                      className="rounded mb-3"
                                       style={{
-                                        height: "100px",
-                                        width: "100px",
+                                        height: "200px",
+                                        width: "100%",
                                         objectFit: "cover",
                                         border: "2px solid #E9BE5F"
                                       }}
@@ -1701,10 +1701,10 @@ function Home() {
                                     <img
                                       src={roses}
                                       alt="Bouquets"
-                                      className="rounded-circle mb-3"
+                                      className="rounded mb-3"
                                       style={{
-                                        height: "100px",
-                                        width: "100px",
+                                        height: "200px",
+                                        width: "100%",
                                         objectFit: "cover",
                                         border: "2px solid #E9BE5F"
                                       }}
@@ -1746,10 +1746,10 @@ function Home() {
                               <img
                                 src={beverages}
                                 alt="Food & Beverages"
-                                className="rounded-circle mb-3"
+                                className="rounded mb-3"
                                 style={{
-                                  height: "100px",
-                                  width: "100px",
+                                  height: "200px",
+                                  width: "100%",
                                   objectFit: "cover",
                                   border: "2px solid #E9BE5F"
                                 }}
@@ -1770,10 +1770,10 @@ function Home() {
                               <img
                                 src={cake4}
                                 alt="Cakes"
-                                className="rounded-circle mb-3"
+                                className="rounded mb-3"
                                 style={{
-                                  height: "100px",
-                                  width: "100px",
+                                  height: "200px",
+                                  width: "100%",
                                   objectFit: "cover",
                                   border: "2px solid #E9BE5F"
                                 }}
@@ -1794,10 +1794,10 @@ function Home() {
                               <img
                                 src={screening}
                                 alt="Screening"
-                                className="rounded-circle mb-3"
+                                className="rounded mb-3"
                                 style={{
-                                  height: "100px",
-                                  width: "100px",
+                                  height: "200px",
+                                  width: "100%",
                                   objectFit: "cover",
                                   border: "2px solid #E9BE5F"
                                 }}
@@ -1815,10 +1815,10 @@ function Home() {
                               <img
                                 src={roses}
                                 alt="Bouquets"
-                                className="rounded-circle mb-3"
+                                className="rounded mb-3"
                                 style={{
-                                  height: "100px",
-                                  width: "100px",
+                                  height: "200px",
+                                  width: "100%",
                                   objectFit: "cover",
                                   border: "2px solid #E9BE5F"
                                 }}
@@ -2545,13 +2545,13 @@ function Home() {
                 {/* Gallery */}
                 <section className="pb-3 gradient45">
                   <div className="container-md">
-                    <div className="section-wraper row d-flex align-items-center">
+                    <div className="section-wraper row d-flex align-items-center justify-content-center">
                       <div className="col-md-12 section-header mb-0 mt-3">
                         <h2 className="text-center fw-bold mb-3 dark-text">Gallery</h2>
                         <p className="text-center mb-5 fs-5 light-text">See how our guests made memories at Carnival Castle.</p>
                       </div>
 
-                      <div className="row justify-content-center">
+                      <div className="row align-items-center justify-content-center">
                         <div className="container-md">
                           <div>
                             <Galleria
@@ -2573,11 +2573,11 @@ function Home() {
                                 {images.map((image, index) => {
                                   return (
                                     <div
-                                      className="col-lg-4 col-md-4 mt-3 mb-4"
+                                      className="col-lg-4 col-md-4 col-sm-6 col-12 mt-3 mb-4"
                                       key={index}
                                     >
                                       <div
-                                        className="zoom-container"
+                                        className="zoom-container gallery-img-wrapper"
                                         style={{ cursor: "pointer" }}
                                         onClick={() => {
                                           setActiveIndex(index);
@@ -2587,12 +2587,9 @@ function Home() {
                                         <img
                                           src={URLS.Base + image.image}
                                           alt={image.alt}
-                                          style={{
-                                            width: "100%",
-                                            height: "300px",
-                                            border: "1px solid #F5E7B6",
-                                          }}
+                                          className="img-fluid gallery-img"
                                         />
+
                                         {/* Zoom Icon */}
                                         <span className="zoom-icon">
                                           <i className="fas fa-search-plus"></i>
@@ -2613,7 +2610,7 @@ function Home() {
                         {/* View Gallery Button */}
                         <a
                           href="/gallery"
-                          className="btn btn-primary fw-bold dark-back responsive-btn"
+                          className="btn light-back fw-bold dark-back responsive-btn"
                         >
                           View Gallery <i className="bi bi-arrow-right ms-2"></i>
                         </a>
@@ -2634,6 +2631,42 @@ function Home() {
                   </div>
                   <style>
                     {`
+                    .gallery-img-wrapper{
+                      width:100%;
+                      height:400px;
+                      overflow:hidden;
+                      position:relative;
+                      border:1px solid #F5E7B6;
+                    }
+
+                    .gallery-img{
+                      width:100%;
+                      height:100%;
+                      object-fit:cover;
+                      transition:transform 0.4s ease;
+                    }
+
+                    .gallery-img-wrapper:hover .gallery-img{
+                      transform:scale(1.08);
+                    }
+
+                    /* Zoom Icon */
+                    .zoom-icon{
+                      position:absolute;
+                      top:50%;
+                      left:50%;
+                      transform:translate(-50%,-50%);
+                      background:rgba(0,0,0,0.5);
+                      color:#fff;
+                      padding:10px 12px;
+                      border-radius:50%;
+                      opacity:0;
+                      transition:0.3s;
+                    }
+
+                    .gallery-img-wrapper:hover .zoom-icon{
+                      opacity:1;
+                    }
                     .responsive-btn {
                       padding: 12px 26px;
                       border-radius: 40px;

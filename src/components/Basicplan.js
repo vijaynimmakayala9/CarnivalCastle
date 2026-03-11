@@ -121,8 +121,18 @@ const Basicplan = () => {
     setModalPop(false);
   };
 
+  const [planError, setPlanError] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!couponData.couponCode) {
+      setPlanError(true);
+
+      // auto remove animation after 2 sec
+      setTimeout(() => setPlanError(false), 2000);
+      return;
+    }
 
     const dataArray = {
       userName: data.userName,
@@ -376,170 +386,252 @@ const Basicplan = () => {
             <div className="container-fluid mt-4">
               <form onSubmit={handleSubmit}>
                 <div className="row mb-4">
+
                   <div className="col-md-8 bg-white shadow-sm rounded">
+
                     <div className="mb-3 mt-4">
-                      <div className="">
-                        <h5 className="card-title">Booking Details</h5>
-                        <div className="row mb-3 mt-3">
-                          <div className="col-md-6">
-                            <label htmlFor="userName" className="form-label">
-                              Your Name <span className="text-danger">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="userName"
-                              name="userName"
-                              value={data.userName}
-                              onChange={handleChange}
-                              required
-                              placeholder="Enter Your Name"
-                            />
-                          </div>
-                          <div className="col-md-6">
-                            <label htmlFor="numPersons" className="form-label">
-                              Number of Persons <span className="text-danger">*</span>
-                            </label>
-                            <select
-                              className="form-select"
-                              id="numPersons"
-                              name="noOfPersons"
-                              value={data.noOfPersons}
-                              onChange={handleChange}
-                              required
-                            >
-                              <option value="">No. of Persons</option>
-                              {Array.from(
-                                { length: theatermaxseats },
-                                (_, index) => (
-                                  <option key={index} value={index + 1}>
-                                    {index + 1}
-                                  </option>
-                                )
-                              )}
-                            </select>
-                          </div>
+                      <h5 className="card-title">Booking Details</h5>
+
+                      {/* USER DETAILS */}
+
+                      <div className="row mb-3 mt-3">
+
+                        <div className="col-md-6">
+                          <label className="form-label">
+                            Your Name <span className="text-danger">*</span>
+                          </label>
+
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="userName"
+                            value={data.userName}
+                            onChange={handleChange}
+                            required
+                            placeholder="Enter Your Name"
+                          />
                         </div>
 
-                        <div className="row mb-3">
-                          <div className="col-md-6">
-                            <label htmlFor="userPhone" className="form-label">
-                              WhatsApp Number <span className="text-danger">*</span>
-                            </label>
-                            <input
-                              type="tel"
-                              className="form-control"
-                              maxLength={10}
-                              minLength={10}
-                              pattern="[6789][0-9]{9}"
-                              required
-                              onInput={(e) => {
-                                e.target.value = e.target.value.replace(
-                                  /[^0-9]/g,
-                                  ""
-                                );
-                              }}
-                              id="userPhone"
-                              name="userPhone"
-                              value={data.userPhone}
-                              placeholder="Enter your Whatsapp number"
-                              onChange={handleChange}
-                            />
-                          </div>
-                          <div className="col-md-6">
-                            <label htmlFor="userEmail" className="form-label">
-                              Email Id <span className="text-danger">*</span>
-                            </label>
-                            <input
-                              type="email"
-                              className="form-control"
-                              id="userEmail"
-                              required
-                              value={data.userEmail}
-                              name="userEmail"
-                              placeholder="Enter your email"
-                              onChange={handleChange}
-                            />
-                          </div>
+                        <div className="col-md-6">
+                          <label className="form-label">
+                            Number of Persons <span className="text-danger">*</span>
+                          </label>
+
+                          <select
+                            className="form-select"
+                            name="noOfPersons"
+                            value={data.noOfPersons}
+                            onChange={handleChange}
+                            required
+                          >
+                            <option value="">No. of Persons</option>
+
+                            {Array.from({ length: theatermaxseats }, (_, index) => (
+                              <option key={index} value={index + 1}>
+                                {index + 1}
+                              </option>
+                            ))}
+                          </select>
                         </div>
 
-                        <div className="row mb-3">
-                          <div className="col-md-12 mt-3 mb-5">
-                            <label
-                              htmlFor="discountCoupon"
-                              className="form-label fw-semibold px-3 py-2 rounded-3 d-inline-flex align-items-center gap-2"
-                              style={{
-                                backgroundColor: "rgba(157,77,255,0.12)",
-                                borderLeft: "5px solid #9D4DFF",
-                                color: "#5a2bbf",
-                              }}
-                            >
-                              <i
-                                className="bi bi-ticket-perforated-fill"
-                                style={{ color: "#9D4DFF" }}
-                              ></i>
-
-                              Select Plan <span className="text-danger">*</span>
-                            </label>
-
-                            <div className="row gx-3 gy-3">
-                              <div className="col-md-6">
-                                <div
-                                  className={`coupon-box ${couponData.couponCode === "FLAT400BASIC" ? "selected" : ""}`}
-                                  onClick={() => handleCouponChange("FLAT400BASIC")}
-                                >
-                                  <div className="coupon-header">
-                                    <i className="bi bi-gift-fill me-2 text-warning"></i>
-                                    BASIC PLAN
-                                  </div>
-                                  <div className="coupon-details">Price Starts from 1748/-</div>
-                                  <div className="coupon-details">Includes Theatre and Decoration</div>
-                                  <div className="coupon-details">Add-ons At additional Prices : Cakes , Photography etc</div>
-
-
-                                  <div className="coupon-minimum">
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="col-md-6">
-                                <div
-                                  className={`coupon-box ${couponData.couponCode === "FLAT700COMBO" ? "selected" : ""}`}
-                                  onClick={() => handleCouponChange("FLAT700COMBO")}
-                                >
-                                  <div className="coupon-header">
-                                    <i className="bi bi-gift-fill me-2 text-warning"></i>
-                                    COMBO PLAN
-                                  </div>
-                                  <div className="coupon-details">10% off on Plans</div>
-                                  <div className="coupon-details">Prices starts from 5999/-</div>
-                                  <div className="coupon-details">Price vary based on Theatre, Number of people..</div>
-                                  <div className="coupon-details">Includes: Cake , photography upto 12-14 Services</div>
-                                  <div className="coupon-code">
-                                  </div>
-                                  <div className="coupon-minimum">
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="input-group mt-4">
-                              <button
-                                className="btn btn-outline-primary w-100 d-flex align-items-center justify-content-center"
-                                style={{
-                                  background: isCouponApplied ? "#330C5F" : "#330C5F",
-                                  border: "none",
-                                  color: "white",
-                                  fontWeight: "600",
-                                }}
-                                type="submit"
-                                disabled={isCouponApplied || !couponData.couponCode}
-                              >
-                                Proceed
-                              </button>
-                            </div>
-                          </div>
-                        </div>
                       </div>
+
+                      <div className="row mb-3">
+
+                        <div className="col-md-6">
+                          <label className="form-label">
+                            WhatsApp Number <span className="text-danger">*</span>
+                          </label>
+
+                          <input
+                            type="tel"
+                            className="form-control"
+                            maxLength={10}
+                            pattern="[6789][0-9]{9}"
+                            required
+                            name="userPhone"
+                            value={data.userPhone}
+                            onChange={handleChange}
+                            placeholder="Enter your Whatsapp number"
+                          />
+                        </div>
+
+                        <div className="col-md-6">
+                          <label className="form-label">
+                            Email Id <span className="text-danger">*</span>
+                          </label>
+
+                          <input
+                            type="email"
+                            className="form-control"
+                            name="userEmail"
+                            value={data.userEmail}
+                            onChange={handleChange}
+                            required
+                            placeholder="Enter your email"
+                          />
+                        </div>
+
+                      </div>
+
+                      {/* PLAN SELECTION */}
+
+                      <div className="row mb-3">
+
+                        <div className="col-md-12 mt-3 mb-5">
+
+                          <label
+                            className="form-label fw-semibold px-3 py-2 rounded-3 d-inline-flex align-items-center gap-2"
+                            style={{
+                              backgroundColor: "rgba(157,77,255,0.12)",
+                              borderLeft: "5px solid #9D4DFF",
+                              color: "#5a2bbf"
+                            }}
+                          >
+                            <i className="bi bi-ticket-perforated-fill"></i>
+
+                            Select Plan <span className="text-danger">*</span>
+                          </label>
+
+                          <div className="row gx-3 gy-3">
+
+                            {/* BASIC PLAN */}
+
+                            <div className="col-md-6">
+
+                              <div
+                                className={`p-4 rounded-4 shadow-sm h-100 
+                                ${couponData.couponCode === "FLAT400BASIC" ? "light-back text-white" : "lighter-back"} 
+                                ${planError ? "plan-attention" : ""}`}
+                                role="button"
+                                onClick={() => {
+                                  handleCouponChange("FLAT400BASIC");
+                                  setPlanError(false);
+                                }}
+                              >
+
+                                <h5 className={`fw-bold mb-2 ${couponData.couponCode === "FLAT400BASIC" ? "text-white" : "dark-text"}`}>
+                                  <i className="bi bi-gift-fill me-2 text-warning"></i>
+                                  BASIC PLAN
+                                </h5>
+
+                                <div className="fs-5 mb-3">
+                                  Starts from  <span className="fs-5 fw-bold text-warning mb-3">₹1,748+</span>
+                                </div>
+
+                                <ol className={`ps-3 small ${couponData.couponCode === "FLAT400BASIC" ? "text-white" : "light-text"}`}>
+
+                                  <li className="mb-2">
+                                    <span className="fw-bold">Includes</span>
+                                    <ol type="a" className="ps-3 mt-1">
+                                      <li>Theatre Experience</li>
+                                      <li>Decoration Setup</li>
+                                    </ol>
+                                  </li>
+
+                                  <li>
+                                    <span className="fw-bold">Add-ons available</span>
+                                    <ol type="a" className="ps-3 mt-1">
+                                      <li>Cakes</li>
+                                      <li>Photography</li>
+                                      <li>Other services</li>
+                                    </ol>
+                                  </li>
+
+                                </ol>
+
+                              </div>
+
+                            </div>
+
+
+                            {/* COMBO PLAN */}
+
+                            <div className="col-md-6">
+
+                              <div
+                                className={`p-4 rounded-4 shadow-sm h-100 
+                                ${couponData.couponCode === "FLAT700COMBO" ? "light-back text-white" : "lighter-back"} 
+                                ${planError ? "plan-attention" : ""}`}
+                                role="button"
+                                onClick={() => {
+                                  handleCouponChange("FLAT700COMBO");
+                                  setPlanError(false);
+                                }}
+                              >
+
+                                <h5 className={`fw-bold mb-2 ${couponData.couponCode === "FLAT700COMBO" ? "text-white" : "dark-text"}`}>
+                                  <i className="bi bi-gift-fill me-2 text-warning"></i>
+                                  COMBO PLAN
+                                </h5>
+
+                                <div className="fs-5 mb-3">
+                                  Starts from  <span className="fs-5 fw-bold text-warning mb-3">₹5,999+</span>
+                                </div>
+
+                                <ol className={`ps-3 small ${couponData.couponCode === "FLAT700COMBO" ? "text-white" : "light-text"}`}>
+
+                                  <li className="mb-2">
+                                    <span className="fw-bold">Plan Benefits</span>
+                                    <ol type="a" className="ps-3 mt-1">
+                                      <li>10% Discount on Plans</li>
+                                      <li>Private Theatre Experience</li>
+                                      <li>Cake Included</li>
+                                      <li>Photography Service</li>
+                                      <li>Price varies by theatre, No of Peoples</li>
+                                    </ol>
+                                  </li>
+
+
+                                  <li>
+                                    <span className="fw-bold">Add-ons included</span>
+                                    <ol type="a" className="ps-3 mt-1">
+                                      <li>Cakes</li>
+                                      <li>Photography</li>
+                                      <li>Upto 12-14 services</li>
+                                    </ol>
+                                  </li>
+
+                                </ol>
+
+                              </div>
+
+                            </div>
+
+                          </div>
+
+                          {/* ERROR MESSAGE */}
+
+                          {planError && (
+                            <div className="text-danger mt-3 fw-semibold">
+                              Please select a plan before proceeding
+                            </div>
+                          )}
+
+                          {/* PROCEED BUTTON */}
+
+                          <div className="input-group mt-4">
+
+                            <button
+                              className="btn w-100"
+                              style={{
+                                background: "#330C5F",
+                                color: "white",
+                                fontWeight: "600"
+                              }}
+                              type="submit"
+                            >
+                              Proceed
+                            </button>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
                     </div>
+
                   </div>
 
                   <div className="col-lg-4 col-md-4 mt-4 mt-md-0">

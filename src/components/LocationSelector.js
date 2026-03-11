@@ -38,7 +38,16 @@ const LocationSelector = () => {
   };
 
   const handleCityChange = (e) => { setSelectedCity(e.target.value); setSelectedLocation(null); };
-  const handleBranchChange = (e) => setSelectedLocation(addresses.find((a) => a._id === e.target.value) || null);
+  const handleBranchChange = (e) => {
+    const selected = addresses.find((a) => a._id === e.target.value) || null;
+    setSelectedLocation(selected);
+
+    if (selected) {
+      const slug = selected.name.toLowerCase().replace(/\s+/g, "-");
+      sessionStorage.setItem("selectedAddress", JSON.stringify(selected));
+      navigate(`/theaters/${slug}`, { state: { address: selected } });
+    }
+  };
   const handleBookNow = (address) => {
     const slug = address.name.toLowerCase().replace(/\s+/g, "-");
     sessionStorage.setItem("selectedAddress", JSON.stringify(address));
@@ -144,8 +153,8 @@ const LocationSelector = () => {
                       {!selectedCity
                         ? "Start by selecting a city ↑"
                         : !selectedLocation
-                        ? "Now pick a branch ↑"
-                        : "✓ Location selected — see details below"}
+                          ? "Now pick a branch ↑"
+                          : "✓ Location selected — see details below"}
                     </p>
                   </div>
                 </div>
@@ -153,7 +162,7 @@ const LocationSelector = () => {
             </section>
 
             {/* ── LOCATION CARD ── */}
-            {loading ? (
+            {/* {loading ? (
               <div className="text-center py-4">
                 <div className="spinner-border text-light" role="status" />
               </div>
@@ -173,7 +182,7 @@ const LocationSelector = () => {
                     }}
                   >
                     <div className="row g-0">
-                      {/* IMAGE */}
+             
                       <div className="col-12 col-md-4 position-relative">
                         <img
                           src={BaseUrl + selectedLocation.image}
@@ -193,15 +202,15 @@ const LocationSelector = () => {
                           padding: "3px 11px", fontSize: "11px", fontWeight: 700,
                           boxShadow: "0 2px 8px rgba(109,40,217,0.4)",
                         }}>
-                          4.9 <FaStar color="#fff703"/>
+                          4.9 <FaStar color="#fff703" />
                         </span>
                       </div>
 
-                      {/* DETAILS */}
+                 
                       <div className="col-12 col-md-8">
                         <div style={{ padding: "20px 24px", height: "100%", display: "flex", flexDirection: "column" }}>
 
-                          {/* accent pill inside card */}
+                  
                           <div style={{
                             height: "4px",
                             background: "linear-gradient(90deg,#6d28d9,#a855f7,#c084fc,#a855f7,#6d28d9)",
@@ -213,10 +222,10 @@ const LocationSelector = () => {
                             {selectedLocation.name}
                           </h5>
 
-                          {/* <div className="d-flex align-items-start gap-2 mb-2" style={{ fontSize: "13px", color: "#555" }}>
+                       <div className="d-flex align-items-start gap-2 mb-2" style={{ fontSize: "13px", color: "#555" }}>
                             <FaMapMarkerAlt color="#a855f7" style={{ marginTop: "2px", flexShrink: 0 }} />
                             <span><strong>Address:</strong> {selectedLocation.addressLine1}</span>
-                          </div> */}
+                          </div> 
                           <div className="d-flex align-items-start gap-2 mb-3" style={{ fontSize: "13px", color: "#555" }}>
                             <span style={{ color: "#a855f7", flexShrink: 0 }}>🏁</span>
                             <span><strong>Landmark:</strong> {selectedLocation.landmark}</span>
@@ -296,7 +305,7 @@ const LocationSelector = () => {
                   </div>
                 </div>
               </section>
-            )}
+            )} */}
 
           </div>
         </main>
