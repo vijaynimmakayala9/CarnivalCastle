@@ -480,19 +480,21 @@ const Basicplan = () => {
 
                         <div className="col-md-12 mt-3 mb-5">
 
-                          <label
-                            className="form-label fw-semibold px-3 py-2 rounded-3 d-inline-flex align-items-center gap-2"
-                            style={{
-                              backgroundColor: "rgba(157,77,255,0.12)",
-                              borderLeft: "5px solid #9D4DFF",
-                              color: "#5a2bbf"
-                            }}
-                          >
-                            <i className="bi bi-ticket-perforated-fill"></i>
+                          <div className="text-center">
+                            <label
+                              className="form-label fw-semibold px-3 py-2 rounded-3 d-inline-flex align-items-center justify-content-center gap-2"
+                              style={{
+                                backgroundColor: "rgba(157,77,255,0.12)",
+                                borderLeft: "5px solid #9D4DFF",
+                                color: "#5a2bbf"
+                              }}
+                            >
+                              <i className="bi bi-ticket-perforated-fill"></i>
 
-                            Select Plan <span className="text-danger">*</span>
-                          </label>
+                              Select Plan <span className="text-danger">*</span>
+                            </label>
 
+                          </div>
                           <div className="row gx-3 gy-3">
 
                             {/* BASIC PLAN */}
@@ -510,10 +512,12 @@ const Basicplan = () => {
                                 }}
                               >
 
-                                <h5 className={`fw-bold mb-2 ${couponData.couponCode === "FLAT400BASIC" ? "text-white" : "dark-text"}`}>
-                                  <i className="bi bi-gift-fill me-2 text-warning"></i>
-                                  BASIC PLAN
-                                </h5>
+                                <div className="text-center">
+                                  <h5 className={`fw-bold mb-2 ${couponData.couponCode === "FLAT400BASIC" ? "text-white" : "dark-text"}`}>
+                                    <i className="bi bi-gift-fill me-2 text-warning"></i>
+                                    BASIC PLAN
+                                  </h5>
+                                </div>
 
                                 <div className="fs-5 mb-3">
                                   Starts from  <span className="fs-5 fw-bold text-warning mb-3">₹1,748+</span>
@@ -559,11 +563,12 @@ const Basicplan = () => {
                                   setPlanError(false);
                                 }}
                               >
-
-                                <h5 className={`fw-bold mb-2 ${couponData.couponCode === "FLAT700COMBO" ? "text-white" : "dark-text"}`}>
-                                  <i className="bi bi-gift-fill me-2 text-warning"></i>
-                                  COMBO PLAN
-                                </h5>
+                                <div className="text-center">
+                                  <h5 className={`fw-bold mb-2 ${couponData.couponCode === "FLAT700COMBO" ? "text-white" : "dark-text"}`}>
+                                    <i className="bi bi-gift-fill me-2 text-warning"></i>
+                                    COMBO PLAN
+                                  </h5>
+                                </div>
 
                                 <div className="fs-5 mb-3">
                                   Starts from  <span className="fs-5 fw-bold text-warning mb-3">₹5,999+</span>
